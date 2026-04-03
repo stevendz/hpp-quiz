@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "728593011073",
+    "project_id": "hpp-quiz",
+    "storage_bucket": "hpp-quiz.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728593011073:android:cd2d920d5a8b8624295880",
+        "android_client_info": {
+          "package_name": "dev.webrabbits.hpp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7Grtrx_2uRDcPYTeuWPHuLYzEDGNjNoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
