@@ -253,7 +253,7 @@ const List<Question> questions2023 = [
   Question(
     id: 18,
     exam: 'März 2023',
-    q: 'Welche der genannten Aussagen zu Zwangsstörungen treffen zu?\n1. Bei Zwangshandlungen beobachtet man häufig Spontanremissionen\n2. Eine Zwangsstörung beginnt in der Regel vor dem\n6. Lebensjahr\n3. Aufgrund des hohen Leidensdruckes kommt es meist zu einer raschen Diagnosestellung\n4. Eine Kombination aus Psychotherapie und Medikation hat sich bewährt.\n5. Zwangssymptome können im Rahmen einer Demenz auftreten.',
+    q: 'Welche der genannten Aussagen zu Zwangsstörungen treffen zu?\n1. Bei Zwangshandlungen beobachtet man häufig Spontanremissionen\n2. Eine Zwangsstörung beginnt in der Regel vor dem 6. Lebensjahr\n3. Aufgrund des hohen Leidensdruckes kommt es meist zu einer raschen Diagnosestellung\n4. Eine Kombination aus Psychotherapie und Medikation hat sich bewährt.\n5. Zwangssymptome können im Rahmen einer Demenz auftreten.',
     options: [
       'Nur die Aussagen 1 und 2 sind richtig',
       'Nur die Aussagen 4 und 5 sind richtig',

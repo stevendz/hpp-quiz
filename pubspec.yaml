@@ -1,7 +1,7 @@
 name: hpp_quiz
 description: "Heilpraktiker Psychotherapie"
 
-version: 1.0.1+3
+version: 1.0.4+4
 
 environment:
   sdk: ^3.11.1

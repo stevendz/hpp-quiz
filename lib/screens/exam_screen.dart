@@ -6,6 +6,7 @@ import '../models/question.dart';
 import '../data/all_questions.dart';
 import '../services/storage_service.dart';
 import '../theme/app_theme.dart';
+import '../data/glossary_data.dart';
 
 class ExamScreen extends StatefulWidget {
   final QuizState state;
@@ -358,10 +359,28 @@ class _ExamScreenState extends State<ExamScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Question number
-                              Text(
-                                'FRAGE $examProgress${isMultiple ? ' · MEHRFACHAUSWAHL' : ''}',
-                                style: tt.labelSmall,
+                              // Question number + glossary icon
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'FRAGE $examProgress${isMultiple ? ' · MEHRFACHAUSWAHL' : ''}',
+                                    style: tt.labelSmall,
+                                  ),
+                                  if (_findGlossaryTerms(question).isNotEmpty)
+                                    GestureDetector(
+                                      onTap: () => _showGlossaryDialog(context, _findGlossaryTerms(question)),
+                                      child: Container(
+                                        padding: const EdgeInsets.all(AppSpacing.sm),
+                                        decoration: BoxDecoration(
+                                          color: AppColors.indigoSubtle,
+                                          border: Border.all(color: AppColors.indigoBorder),
+                                          borderRadius: BorderRadius.circular(AppSpacing.md),
+                                        ),
+                                        child: const Icon(Icons.help_outline_rounded, color: AppColors.tealLighter, size: 20),
+                                      ),
+                                    ),
+                                ],
                               ),
                               const SizedBox(height: AppSpacing.lg),
                               // Question text
@@ -417,6 +436,59 @@ class _ExamScreenState extends State<ExamScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  List<MapEntry<String, String>> _findGlossaryTerms(Question question) {
+    final text = '${question.q} ${question.options.join(' ')}'.toLowerCase();
+    return glossary.entries
+        .where((e) => text.contains(e.key.toLowerCase()))
+        .toList()
+      ..sort((a, b) => a.key.toLowerCase().compareTo(b.key.toLowerCase()));
+  }
+
+  void _showGlossaryDialog(BuildContext context, List<MapEntry<String, String>> terms) {
+    final tt = Theme.of(context).textTheme;
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        backgroundColor: AppColors.bgMid,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSpacing.lg)),
+        title: Text('Fachbegriffe in dieser Frage', style: tt.titleMedium),
+        content: SizedBox(
+          width: double.maxFinite,
+          child: ListView.separated(
+            shrinkWrap: true,
+            itemCount: terms.length,
+            separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.md),
+            itemBuilder: (_, i) {
+              final term = terms[i];
+              return Container(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                decoration: BoxDecoration(
+                  color: AppColors.indigoSubtle,
+                  borderRadius: BorderRadius.circular(AppSpacing.lg),
+                  border: Border.all(color: AppColors.indigoBorder.withValues(alpha: 0.3)),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(term.key, style: tt.titleSmall),
+                    const SizedBox(height: 2),
+                    Text(term.value, style: tt.bodyMedium?.copyWith(color: AppColors.textMuted)),
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(ctx).pop(),
+            child: Text('Schließen', style: TextStyle(color: AppColors.tealLighter)),
+          ),
+        ],
       ),
     );
   }

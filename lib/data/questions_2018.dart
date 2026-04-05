@@ -358,7 +358,7 @@ const List<Question> questions2018 = [
   Question(
     id: 25,
     exam: 'Oktober 2018',
-    q: 'Welche der folgenden Aussagen treffen zu? Typische Symptome der Schizophrenie sind: 1.Ambivalenz\n2. Zerfahrenheit des Denkens\n3. Katatoner Stupor\n4. Gedankenentzug\n5. Intelligenzminderung',
+    q: 'Welche der folgenden Aussagen treffen zu? Typische Symptome der Schizophrenie sind:n\1.Ambivalenz\n2. Zerfahrenheit des Denkens\n3. Katatoner Stupor\n4. Gedankenentzug\n5. Intelligenzminderung',
     options: [
       'A) Nur die Aussagen 2 und 4 sind richtig',
       'B) Nur die Aussagen 1, 3 und 4 sind richtig',
