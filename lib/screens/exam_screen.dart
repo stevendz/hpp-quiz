@@ -68,7 +68,7 @@ class _ExamScreenState extends State<ExamScreen> {
         elapsedSeconds: _elapsedSeconds,
       ),
       examHistory: widget.state.examHistory,
-      allAnswered: widget.state.allAnswered,
+
     );
     await widget.onPersist(newState);
   }
@@ -131,8 +131,17 @@ class _ExamScreenState extends State<ExamScreen> {
     // Single choice — immediate evaluation
     final isCorrect = optIdx == question.correctIndex;
     final prev = widget.state.questionStats[qId] ?? QuestionStats();
+    final newStreak = isCorrect ? prev.correctStreak + 1 : 0;
+    final bool newLastCorrect;
+    if (!isCorrect) {
+      newLastCorrect = false;
+    } else if (prev.attempts == 0 || prev.lastCorrect) {
+      newLastCorrect = true;
+    } else {
+      newLastCorrect = newStreak >= 2;
+    }
     final newStats = Map<int, QuestionStats>.from(widget.state.questionStats);
-    newStats[qId] = QuestionStats(attempts: prev.attempts + 1, correctCount: prev.correctCount + (isCorrect ? 1 : 0));
+    newStats[qId] = QuestionStats(attempts: prev.attempts + 1, correctCount: prev.correctCount + (isCorrect ? 1 : 0), lastCorrect: newLastCorrect, correctStreak: newStreak);
     final newAnswers = Map<int, AnswerRecord>.from(exam.answers);
     newAnswers[qId] = AnswerRecord(selected: [optIdx], correct: isCorrect);
     final newScore = exam.score + (isCorrect ? 1 : 0);
@@ -147,7 +156,7 @@ class _ExamScreenState extends State<ExamScreen> {
         elapsedSeconds: _elapsedSeconds,
       ),
       examHistory: widget.state.examHistory,
-      allAnswered: widget.state.allAnswered,
+
     );
 
     setState(() {
@@ -170,8 +179,17 @@ class _ExamScreenState extends State<ExamScreen> {
         List.generate(selectedArr.length, (i) => selectedArr[i] == correctArr[i]).every((v) => v);
 
     final prev = widget.state.questionStats[qId] ?? QuestionStats();
+    final newStreak = isCorrect ? prev.correctStreak + 1 : 0;
+    final bool newLastCorrect;
+    if (!isCorrect) {
+      newLastCorrect = false;
+    } else if (prev.attempts == 0 || prev.lastCorrect) {
+      newLastCorrect = true;
+    } else {
+      newLastCorrect = newStreak >= 2;
+    }
     final newStats = Map<int, QuestionStats>.from(widget.state.questionStats);
-    newStats[qId] = QuestionStats(attempts: prev.attempts + 1, correctCount: prev.correctCount + (isCorrect ? 1 : 0));
+    newStats[qId] = QuestionStats(attempts: prev.attempts + 1, correctCount: prev.correctCount + (isCorrect ? 1 : 0), lastCorrect: newLastCorrect, correctStreak: newStreak);
     final newAnswers = Map<int, AnswerRecord>.from(exam.answers);
     newAnswers[qId] = AnswerRecord(selected: selectedArr, correct: isCorrect);
     final newScore = exam.score + (isCorrect ? 1 : 0);
@@ -186,7 +204,7 @@ class _ExamScreenState extends State<ExamScreen> {
         elapsedSeconds: _elapsedSeconds,
       ),
       examHistory: widget.state.examHistory,
-      allAnswered: widget.state.allAnswered,
+
     );
 
     setState(() {
@@ -210,7 +228,7 @@ class _ExamScreenState extends State<ExamScreen> {
         questionStats: widget.state.questionStats,
         currentExam: newExam,
         examHistory: widget.state.examHistory,
-        allAnswered: widget.state.allAnswered,
+  
       );
       setState(() {
         answered = false;
@@ -228,7 +246,7 @@ class _ExamScreenState extends State<ExamScreen> {
         questionStats: widget.state.questionStats,
         currentExam: null,
         examHistory: newHistory,
-        allAnswered: widget.state.allAnswered,
+  
       );
       await widget.onPersist(newState);
       widget.onExamFinished();

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'data/all_questions.dart';
+import 'data/flashcards_data.dart';
 import 'services/storage_service.dart';
 import 'theme/app_theme.dart';
 import 'screens/home_screen.dart';
@@ -41,9 +42,7 @@ const int reviewRight = 5;
 
 bool isQuestionMastered(QuestionStats? stats) {
   if (stats == null || stats.attempts == 0) return false;
-  if (stats.attempts == 1 && stats.correctCount == 1) return true;
-  if (stats.attempts >= 3 && stats.correctCount >= 2) return true;
-  return false;
+  return stats.lastCorrect;
 }
 
 List<int> generateExam(QuizState state) {
@@ -72,12 +71,23 @@ List<int> generateExam(QuizState state) {
     wrong.shuffle(random);
     final needed = examSize - unanswered.length;
     final fill = wrong.take(needed).toList();
+
+    // Fill remaining slots with mastered questions if not enough wrong
+    if (unanswered.length + fill.length < examSize) {
+      final usedIds = {...unanswered.map((q) => q.id), ...fill.map((q) => q.id)};
+      final mastered = questions
+          .where((q) => !usedIds.contains(q.id) && isQuestionMastered(questionStats[q.id]))
+          .toList();
+      mastered.shuffle(random);
+      fill.addAll(mastered.take(examSize - unanswered.length - fill.length));
+    }
+
     final combined = [...unanswered, ...fill];
     combined.shuffle(random);
     return combined.map((q) => q.id).toList();
   }
 
-  // All answered → 25 wrong + 5 right
+  // All answered → up to 25 wrong, fill rest with right to reach 30
   final wrong = questions
       .where((q) => !isQuestionMastered(questionStats[q.id]))
       .toList();
@@ -87,17 +97,8 @@ List<int> generateExam(QuizState state) {
   wrong.shuffle(random);
   right.shuffle(random);
   final wrongPick = wrong.take(min(reviewWrong, wrong.length)).toList();
-  final rightPick = right.take(min(reviewRight, right.length)).toList();
-  final needed = examSize - wrongPick.length - rightPick.length;
-  final usedIds = {
-    ...wrongPick.map((q) => q.id),
-    ...rightPick.map((q) => q.id),
-  };
-  final remaining =
-      questions.where((q) => !usedIds.contains(q.id)).toList();
-  remaining.shuffle(random);
-  final extra = remaining.take(needed).toList();
-  final combined = [...wrongPick, ...rightPick, ...extra];
+  final rightPick = right.take(examSize - wrongPick.length).toList();
+  final combined = [...wrongPick, ...rightPick];
   combined.shuffle(random);
   return combined.map((q) => q.id).toList();
 }
@@ -113,6 +114,7 @@ class _QuizControllerState extends State<QuizController> {
   QuizState? _state;
   bool _loading = true;
   String _view = 'home';
+  Set<String> _selectedTags = {};
 
   @override
   void initState() {
@@ -172,7 +174,6 @@ class _QuizControllerState extends State<QuizController> {
         score: 0,
       ),
       examHistory: _state!.examHistory,
-      allAnswered: _state!.allAnswered,
     );
     await _persist(newState);
     setState(() => _view = 'exam');
@@ -193,6 +194,26 @@ class _QuizControllerState extends State<QuizController> {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Lernkarten zurückgesetzt')),
       );
+    }
+  }
+
+  Future<void> _showTagFilterAndNavigate() async {
+    final allTags = <String>{};
+    for (final card in allFlashcards) {
+      allTags.addAll(card.tags);
+    }
+    final sortedTags = allTags.toList()..sort();
+    final selected = Set<String>.from(sortedTags);
+
+    final result = await showDialog<Set<String>>(
+      context: context,
+      builder: (ctx) => _TagFilterDialog(allTags: sortedTags, initialSelected: selected),
+    );
+    if (result != null && result.isNotEmpty) {
+      setState(() {
+        _selectedTags = result;
+        _view = 'flashcards';
+      });
     }
   }
 
@@ -280,6 +301,7 @@ class _QuizControllerState extends State<QuizController> {
       case 'flashcards':
         return Scaffold(
           body: FlashcardScreen(
+            selectedTags: _selectedTags,
             onGoHome: () => setState(() => _view = 'home'),
           ),
         );
@@ -302,11 +324,154 @@ class _QuizControllerState extends State<QuizController> {
             state: _state!,
             onStartExam: _startExam,
             onResumeExam: _resumeExam,
-            onShowFlashcards: () => setState(() => _view = 'flashcards'),
+            onShowFlashcards: _showTagFilterAndNavigate,
             onShowGlossary: () => setState(() => _view = 'glossary'),
             onShowProfile: () => setState(() => _view = 'profile'),
           ),
         );
     }
+  }
+}
+
+class _TagFilterDialog extends StatefulWidget {
+  final List<String> allTags;
+  final Set<String> initialSelected;
+
+  const _TagFilterDialog({required this.allTags, required this.initialSelected});
+
+  @override
+  State<_TagFilterDialog> createState() => _TagFilterDialogState();
+}
+
+class _TagFilterDialogState extends State<_TagFilterDialog> {
+  late Set<String> _selected;
+
+  @override
+  void initState() {
+    super.initState();
+    _selected = Set<String>.from(widget.initialSelected);
+  }
+
+  bool get _allSelected => _selected.length == widget.allTags.length;
+
+  void _toggleAll() {
+    setState(() {
+      if (_allSelected) {
+        _selected.clear();
+      } else {
+        _selected = Set<String>.from(widget.allTags);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final tt = Theme.of(context).textTheme;
+    return AlertDialog(
+      backgroundColor: AppColors.bgMid,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSpacing.lg)),
+      title: Text('Themen auswählen', style: tt.headlineMedium),
+      content: SizedBox(
+        width: double.maxFinite,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GestureDetector(
+              onTap: _toggleAll,
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.lg),
+                margin: const EdgeInsets.only(bottom: AppSpacing.md),
+                decoration: BoxDecoration(
+                  color: _allSelected ? AppColors.indigoSubtle : AppColors.surfaceDark,
+                  borderRadius: BorderRadius.circular(AppSpacing.lg),
+                  border: Border.all(color: _allSelected ? AppColors.indigoBorder : Colors.transparent),
+                ),
+                child: Row(
+                  children: [
+                    _Checkbox(checked: _allSelected),
+                    const SizedBox(width: AppSpacing.lg),
+                    Text('Alle auswählen', style: tt.titleSmall),
+                  ],
+                ),
+              ),
+            ),
+            Divider(color: AppColors.indigoBorder.withValues(alpha: 0.3), height: 1),
+            const SizedBox(height: AppSpacing.md),
+            Flexible(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: widget.allTags.length,
+                itemBuilder: (_, i) {
+                  final tag = widget.allTags[i];
+                  final isSelected = _selected.contains(tag);
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (isSelected) {
+                          _selected.remove(tag);
+                        } else {
+                          _selected.add(tag);
+                        }
+                      });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.lg),
+                      margin: const EdgeInsets.only(bottom: AppSpacing.sm),
+                      decoration: BoxDecoration(
+                        color: isSelected ? AppColors.indigoSubtle : Colors.transparent,
+                        borderRadius: BorderRadius.circular(AppSpacing.lg),
+                      ),
+                      child: Row(
+                        children: [
+                          _Checkbox(checked: isSelected),
+                          const SizedBox(width: AppSpacing.lg),
+                          Expanded(child: Text(tag, style: tt.bodyMedium)),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(null),
+          child: Text('Abbrechen', style: TextStyle(color: AppColors.textMuted)),
+        ),
+        TextButton(
+          onPressed: _selected.isEmpty ? null : () => Navigator.of(context).pop(_selected),
+          child: Text(
+            'Starten (${_selected.length})',
+            style: TextStyle(color: _selected.isEmpty ? AppColors.textDark : AppColors.tealLighter),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _Checkbox extends StatelessWidget {
+  final bool checked;
+  const _Checkbox({required this.checked});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 22,
+      height: 22,
+      decoration: BoxDecoration(
+        color: checked ? AppColors.indigo : Colors.transparent,
+        border: Border.all(color: checked ? AppColors.indigo : AppColors.textDark, width: 2),
+        borderRadius: BorderRadius.circular(AppSpacing.sm),
+      ),
+      child: checked
+          ? const FittedBox(
+              child: Text('✓', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700)),
+            )
+          : null,
+    );
   }
 }

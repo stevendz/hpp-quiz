@@ -5,20 +5,17 @@ class QuizState {
   Map<int, QuestionStats> questionStats;
   ExamState? currentExam;
   List<ExamRecord> examHistory;
-  bool allAnswered;
 
   QuizState({
     required this.questionStats,
     this.currentExam,
     required this.examHistory,
-    this.allAnswered = false,
   });
 
   factory QuizState.defaultState() => QuizState(
         questionStats: {},
         currentExam: null,
         examHistory: [],
-        allAnswered: false,
       );
 
   Map<String, dynamic> toJson() => {
@@ -27,7 +24,6 @@ class QuizState {
         ),
         'currentExam': currentExam?.toJson(),
         'examHistory': examHistory.map((e) => e.toJson()).toList(),
-        'allAnswered': allAnswered,
       };
 
   factory QuizState.fromJson(Map<String, dynamic> json) {
@@ -46,7 +42,6 @@ class QuizState {
               ?.map((e) => ExamRecord.fromJson(e))
               .toList() ??
           [],
-      allAnswered: json['allAnswered'] ?? false,
     );
   }
 }
@@ -54,18 +49,47 @@ class QuizState {
 class QuestionStats {
   int attempts;
   int correctCount;
+  bool lastCorrect;
+  int correctStreak;
 
-  QuestionStats({this.attempts = 0, this.correctCount = 0});
+  QuestionStats({this.attempts = 0, this.correctCount = 0, this.lastCorrect = false, this.correctStreak = 0});
 
   Map<String, dynamic> toJson() => {
         'attempts': attempts,
         'correctCount': correctCount,
+        'lastCorrect': lastCorrect,
+        'correctStreak': correctStreak,
       };
 
-  factory QuestionStats.fromJson(Map<String, dynamic> json) => QuestionStats(
-        attempts: json['attempts'] ?? 0,
-        correctCount: json['correctCount'] ?? 0,
-      );
+  factory QuestionStats.fromJson(Map<String, dynamic> json) {
+    final attempts = json['attempts'] ?? 0;
+    final correctCount = json['correctCount'] ?? 0;
+
+    // Migration: infer lastCorrect from old data when field is missing
+    final bool lastCorrect;
+    if (json.containsKey('lastCorrect')) {
+      lastCorrect = json['lastCorrect'] ?? false;
+    } else {
+      // Old mastery logic: 1 attempt + 1 correct, or 3+ attempts + 2+ correct
+      lastCorrect = (attempts == 1 && correctCount == 1) ||
+          (attempts >= 3 && correctCount >= 2);
+    }
+
+    // Migration: assume stable streak if mastered under old logic
+    final int correctStreak;
+    if (json.containsKey('correctStreak')) {
+      correctStreak = json['correctStreak'] ?? 0;
+    } else {
+      correctStreak = lastCorrect ? 2 : 0;
+    }
+
+    return QuestionStats(
+      attempts: attempts,
+      correctCount: correctCount,
+      lastCorrect: lastCorrect,
+      correctStreak: correctStreak,
+    );
+  }
 }
 
 class ExamState {

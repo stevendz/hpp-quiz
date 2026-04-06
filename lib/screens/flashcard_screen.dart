@@ -4,13 +4,13 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/flashcard.dart';
 import '../data/flashcards_data.dart';
-import '../data/glossary_data.dart';
 import '../theme/app_theme.dart';
 
 class FlashcardScreen extends StatefulWidget {
+  final Set<String> selectedTags;
   final VoidCallback onGoHome;
 
-  const FlashcardScreen({super.key, required this.onGoHome});
+  const FlashcardScreen({super.key, required this.selectedTags, required this.onGoHome});
 
   static Future<void> resetRemovedCards() async {
     final prefs = await SharedPreferences.getInstance();
@@ -47,8 +47,10 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
     final filteredCards = <Flashcard>[];
     final filteredIndices = <int>[];
     for (int i = 0; i < allFlashcards.length; i++) {
-      if (!_removedIndices.contains(i)) {
-        filteredCards.add(allFlashcards[i]);
+      if (_removedIndices.contains(i)) continue;
+      final card = allFlashcards[i];
+      if (card.tags.any((t) => widget.selectedTags.contains(t))) {
+        filteredCards.add(card);
         filteredIndices.add(i);
       }
     }
@@ -235,6 +237,22 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              if (card.tags.isNotEmpty) ...[
+                                Wrap(
+                                  spacing: AppSpacing.xs,
+                                  runSpacing: AppSpacing.xs,
+                                  children: card.tags.map((tag) => Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.indigoSubtle,
+                                      borderRadius: BorderRadius.circular(AppSpacing.md),
+                                      border: Border.all(color: AppColors.indigoBorder.withValues(alpha: 0.3)),
+                                    ),
+                                    child: Text(tag, style: tt.labelSmall?.copyWith(color: AppColors.textMuted)),
+                                  )).toList(),
+                                ),
+                                const SizedBox(height: AppSpacing.md),
+                              ],
                               Text(card.text, style: tt.bodyMedium),
                               if (card.terms.isNotEmpty) ...[
                                 const SizedBox(height: AppSpacing.lg),
@@ -252,14 +270,15 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                                     itemCount: card.terms.length,
                                     separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.lg),
                                     itemBuilder: (_, i) {
-                                      final termName = card.terms[i];
-                                      final definition = glossary[termName] ?? '';
+                                      final t = card.terms[i];
                                       return Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(termName, style: tt.titleSmall),
-                                          const SizedBox(height: 2),
-                                          Text(definition, style: tt.bodyMedium?.copyWith(color: AppColors.textMuted)),
+                                          Text(t.term, style: tt.titleSmall),
+                                          if (t.definition.isNotEmpty) ...[
+                                            const SizedBox(height: 2),
+                                            Text(t.definition, style: tt.bodyMedium?.copyWith(color: AppColors.textMuted)),
+                                          ],
                                         ],
                                       );
                                     },

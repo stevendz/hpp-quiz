@@ -24,9 +24,16 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final total = allQuestions.length;
-    final answeredCount = state.questionStats.values.where((s) => s.attempts > 0).length;
-    final masteredCount = state.questionStats.entries.where((e) => _isQuestionMastered(e.value)).length;
+    final uniqueIds = allQuestions.map((q) => q.id).toSet();
+    final total = uniqueIds.length;
+    final answeredCount = uniqueIds.where((id) {
+      final s = state.questionStats[id];
+      return s != null && s.attempts > 0;
+    }).length;
+    final masteredCount = uniqueIds.where((id) {
+      final s = state.questionStats[id];
+      return s != null && _isQuestionMastered(s);
+    }).length;
     final unansweredCount = total - answeredCount;
     final allAnsweredNow = unansweredCount == 0 && answeredCount > 0;
     final exam = state.currentExam;
@@ -219,9 +226,7 @@ class HomeScreen extends StatelessWidget {
 
   bool _isQuestionMastered(QuestionStats stats) {
     if (stats.attempts == 0) return false;
-    if (stats.attempts == 1 && stats.correctCount == 1) return true;
-    if (stats.attempts >= 3 && stats.correctCount >= 2) return true;
-    return false;
+    return stats.lastCorrect;
   }
 }
 

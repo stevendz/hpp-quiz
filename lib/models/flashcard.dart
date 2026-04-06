@@ -10,10 +10,12 @@ class Term {
 
 class Flashcard {
   final String text;
-  final List<String> terms;
+  final List<Term> terms;
+  final List<String> tags;
 
   const Flashcard({
     required this.text,
     this.terms = const [],
+    this.tags = const [],
   });
 }
