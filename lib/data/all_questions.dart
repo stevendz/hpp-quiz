@@ -1,4 +1,5 @@
 import '../models/question.dart';
+import 'questions_2016.dart';
 import 'questions_2017.dart';
 import 'questions_2018.dart';
 import 'questions_2019.dart';
@@ -8,8 +9,19 @@ import 'questions_2022.dart';
 import 'questions_2023.dart';
 import 'questions_2024.dart';
 import 'questions_2025.dart';
+import 'questions_2026.dart';
 
 final List<Question> allQuestions = [
+  ...questions2016.map(
+    (q) => Question(
+      id: int.parse('2016${q.id}'),
+      exam: q.exam,
+      q: q.q,
+      options: q.options,
+      correct: q.correct,
+      explanation: q.explanation,
+    ),
+  ),
   ...questions2017.map(
     (q) => Question(
       id: int.parse('2017${q.id}'),
@@ -93,6 +105,16 @@ final List<Question> allQuestions = [
   ...questions2025.map(
     (q) => Question(
       id: int.parse('2025${q.id}'),
+      exam: q.exam,
+      q: q.q,
+      options: q.options,
+      correct: q.correct,
+      explanation: q.explanation,
+    ),
+  ),
+  ...questions2026.map(
+    (q) => Question(
+      id: int.parse('2026${q.id}'),
       exam: q.exam,
       q: q.q,
       options: q.options,

@@ -177,10 +177,11 @@ const List<Flashcard> allFlashcards = [
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
-    text: 'Cannabis-Intoxikation: Gerötete Augen, Mydriasis (weite Pupillen, NICHT Miosis!), Konzentrationsverschlechterung, veränderte Sinneswahrnehmung, ideenflüchtiges Denken, gesteigerter Appetit. Nach chronischem Hochdosiskonsum: Entzugssymptome möglich (Angst, Tremor, Schlafstörungen, Reizbarkeit).',
+    text: 'Cannabis-Intoxikation: Gerötete Augen, Mydriasis (weite Pupillen, NICHT Miosis!), Konzentrationsverschlechterung, veränderte Sinneswahrnehmung, ideenflüchtiges Denken, gesteigerter Appetit. Nach chronischem Hochdosiskonsum: Entzugssymptome möglich (Angst, Tremor, Schlafstörungen, Reizbarkeit). Chronischer Konsum führt zum amotivationalen Syndrom mit Antriebsminderung und Leistungsabfall – NICHT zu Antriebssteigerung. Cannabis kann außerdem Psychosen auslösen; synthetische Cannabinoide ("Kräutermischungen", "Spice") können akute psychotische Zustände mit Selbstgefährdung hervorrufen.',
     tags: ['F1 – Substanzstörungen'],
     terms: [
       Term(term: 'Mydriasis', definition: 'Pupillenerweiterung – typisch bei Cannabis, Stimulanzien, Halluzinogenen'),
+      Term(term: 'Amotivationales Syndrom', definition: 'Antriebsminderung und Leistungsabfall bei chronischem Cannabiskonsum'),
     ],
   ),
   Flashcard(
@@ -1392,6 +1393,118 @@ const List<Flashcard> allFlashcards = [
     tags: ['Recht & Berufskunde'],
     terms: [
       Term(term: 'Erforderlichkeitsgrundsatz', definition: 'Betreuung nur wenn nötig und keine mildere Maßnahme verfügbar (§1814 BGB)'),
+    ],
+  ),
+
+  // ============================================================
+  // TEIL 18: THEMEN AUS DEN PRÜFUNGEN 2016 & 2026 (225-237)
+  // ============================================================
+  Flashcard(
+    text: 'Vulnerabilitäts-Stress-Modell: Eine psychische Erkrankung entsteht aus dem Zusammenspiel individueller Verwundbarkeit (genetische Disposition, frühe Erfahrungen, Persönlichkeit) und aktueller Belastung. Je höher die Vulnerabilität, desto weniger Stress genügt zum Ausbruch – umgekehrt können bei sehr schweren Belastungen oder Substanzmissbrauch auch wenig vulnerable Menschen erkranken. Stressoren sind nicht nur Krisen, sondern auch normative Übergänge wie Adoleszenz, Menopause oder Berentung. Bei den meisten psychischen Erkrankungen wird eine multifaktorielle Genese angenommen.',
+    tags: ['Psychopathologie'],
+    terms: [
+      Term(term: 'Vulnerabilität', definition: 'Individuelle Verwundbarkeit gegenüber psychischer Erkrankung'),
+      Term(term: 'Multifaktorielle Genese', definition: 'Entstehung durch Zusammenwirken biologischer, psychischer und sozialer Faktoren'),
+    ],
+  ),
+  Flashcard(
+    text: 'AMDP-System: Standardisiertes System zur Dokumentation des psychopathologischen Befundes. Orientierung hat VIER Dimensionen: zeitlich, örtlich, situativ und zur eigenen Person – in dieser Reihenfolge gehen sie typischerweise verloren, die Orientierung zur Person bleibt am längsten erhalten. Weitere Merksätze: Grübeln zählt zu den FORMALEN Denkstörungen, Ratlosigkeit zur Affektivität. Die Auffassungsstörung betrifft das Verstehen von Äußerungen und Texten in ihrer Bedeutung.',
+    tags: ['Psychopathologie'],
+    terms: [
+      Term(term: 'AMDP-System', definition: 'Standard zur methodischen Dokumentation psychiatrischer Befunde'),
+      Term(term: 'Auffassungsstörung', definition: 'Gestörtes Erfassen der Bedeutung von Äußerungen und Texten'),
+    ],
+  ),
+  Flashcard(
+    text: 'Wahninhalte und ihre Zuordnung: Synthym (stimmungskongruent) bei der schweren Depression sind Verarmungswahn, Versündigungs-/Schuldwahn, hypochondrischer und nihilistischer Wahn. Zur Manie passt der Größenwahn, zur Schizophrenie Verfolgungs-, Beziehungs- und Abstammungswahn. Der Dermatozoenwahn (Insekten unter der Haut) spricht für eine organische Ursache oder Kokainkonsum. Beim systematisierten Wahn sind die Inhalte zu einem Gebäude verknüpft – logisch oder paralogisch.',
+    tags: ['Psychopathologie', 'F3 – Affektive Störungen'],
+    terms: [
+      Term(term: 'Synthymer Wahn', definition: 'Wahninhalt passt zur Stimmungslage (stimmungskongruent)'),
+      Term(term: 'Versündigungswahn', definition: 'Wahnhafte Schuldüberzeugung bei schwerer Depression'),
+      Term(term: 'Dermatozoenwahn', definition: 'Wahn eines Insektenbefalls der Haut – organisch oder bei Kokain'),
+    ],
+  ),
+  Flashcard(
+    text: 'Denkstörungen sicher trennen – der Prüfungsklassiker: FORMAL (Ablauf des Denkens) sind Perseveration, Denkhemmung, Gedankenabriss, Grübeln, Ideenflucht, Zerfahrenheit und Logorrhoe. INHALTLICH sind Wahn und Zwangsgedanken. Eine ICH-STÖRUNG ist der Gedankenentzug, ebenso Gedankeneingebung, Gedankenausbreitung und Willensbeeinflussung. Kernunterscheidung: Beim Gedankenabriss reißt der Gedanke ohne Fremdeinwirkung ab (formal), beim Gedankenentzug erlebt der Patient, dass ihm jemand die Gedanken wegnimmt (Ich-Störung).',
+    tags: ['Psychopathologie', 'F2 – Schizophrenie'],
+    terms: [
+      Term(term: 'Gedankenabriss', definition: 'Plötzliches Abreißen des Gedankengangs ohne Fremdeinwirkung – formal'),
+      Term(term: 'Gedankenentzug', definition: 'Erleben, dass Gedanken von außen weggenommen werden – Ich-Störung'),
+      Term(term: 'Logorrhoe', definition: 'Rededrang mit vermehrtem, kaum unterbrechbarem Sprechen'),
+    ],
+  ),
+  Flashcard(
+    text: 'Psychomotorik und Antrieb – ähnlich klingende Begriffe: Akathisie = quälende Sitzunruhe mit Bewegungsdrang (typisch als Neuroleptika-Nebenwirkung). Adynamie = Antriebs- und Kraftlosigkeit (das Gegenteil). Bradyphrenie = Verlangsamung von Denken und geistigen Abläufen, typisch bei Morbus Parkinson. Manierismen = sonderbar verschrobene, gekünstelte Bewegungen, typisch bei katatoner Schizophrenie. Parathymie = Affekt passt nicht zum Gedankeninhalt.',
+    tags: ['Psychopathologie'],
+    terms: [
+      Term(term: 'Akathisie', definition: 'Sitzunruhe mit quälendem Bewegungsdrang'),
+      Term(term: 'Adynamie', definition: 'Antriebs- und Kraftlosigkeit'),
+      Term(term: 'Bradyphrenie', definition: 'Verlangsamung des Denkens – typisch bei Morbus Parkinson'),
+      Term(term: 'Manierismen', definition: 'Sonderbar verschrobene, gekünstelte Bewegungen'),
+    ],
+  ),
+  Flashcard(
+    text: 'Dopaminhypothese und Parkinsonoid: Der Schizophrenie liegt laut Dopaminhypothese eine ÜBERaktivität des dopaminergen Systems zugrunde – deshalb wirken Antipsychotika als Dopamin-Antagonisten (historisch früh: Haloperidol). Dem Morbus Parkinson liegt umgekehrt ein Dopamin-MANGEL zugrunde. Das Parkinsonoid ist eine extrapyramidal-motorische Nebenwirkung von Antipsychotika mit Rigor, Tremor und Akinese: verursacht durch Antipsychotika, behandelt durch Dosisreduktion, Präparatewechsel oder Anticholinergika wie Biperiden. Auch eine Lithiumintoxikation kann parkinsonoide Symptome auslösen.',
+    tags: ['F2 – Schizophrenie', 'Therapieverfahren'],
+    terms: [
+      Term(term: 'Dopaminhypothese', definition: 'Positivsymptomatik durch dopaminerge Überaktivität im mesolimbischen System'),
+      Term(term: 'Parkinsonoid', definition: 'Medikamentös induziertes, reversibles Parkinson-Syndrom'),
+      Term(term: 'Biperiden', definition: 'Anticholinergikum gegen neuroleptika-induzierte EPMS'),
+    ],
+  ),
+  Flashcard(
+    text: 'Larvierte (maskierte) Depression: Körperliche Beschwerden wie Erschöpfung, Kopf- und Rückenschmerzen, Obstipation oder Herzbeschwerden stehen so im Vordergrund, dass die depressive Kernsymptomatik verdeckt wird. Besonders häufig bei älteren Patienten und in der hausärztlichen Praxis. Abzugrenzen ist die depressive Pseudodemenz, bei der kognitive Defizite im Vordergrund stehen: Betroffene klagen aktiv über ihre Gedächtnisstörung und antworten oft mit "Ich weiß nicht" – bei der echten Demenz wird die Störung eher bagatellisiert.',
+    tags: ['F3 – Affektive Störungen', 'Differentialdiagnosen'],
+    terms: [
+      Term(term: 'Larvierte Depression', definition: 'Depression, deren Kernsymptomatik hinter körperlichen Beschwerden verborgen ist'),
+    ],
+  ),
+  Flashcard(
+    text: 'Bipolare Störung – Verlauf und Prophylaxe: Für die Diagnose genügen zwei Episoden, von denen eine manisch oder hypomanisch sein muss. Das Rezidivrisiko ist sehr hoch, deshalb ist eine Phasenprophylaxe (z.B. Lithium) zu erwägen – eine Behandlung nur in der Akutphase reicht nicht. Rapid Cycling = mindestens vier affektive Episoden pro Jahr, unabhängig von deren Polarität. Depressive Episoden dauern in der Regel länger als manische; manische Episoden beginnen meist abrupt. Merke: Bei jeder Depression nach früheren Hochphasen fragen – das entscheidet über unipolar oder bipolar.',
+    tags: ['F3 – Affektive Störungen'],
+    terms: [
+      Term(term: 'Rapid Cycling', definition: 'Mindestens 4 affektive Episoden pro Jahr'),
+      Term(term: 'Phasenprophylaxe', definition: 'Langzeitmedikation zur Verhinderung erneuter Episoden'),
+    ],
+  ),
+  Flashcard(
+    text: 'Messie-Syndrom (pathologisches Horten): Anhäufen und Sammeln wertloser oder verbrauchter Dinge in der EIGENEN Wohnung, häufig begleitet von Zwangssymptomen. Aus Scham reagieren die Betroffenen typischerweise mit sozialem Rückzug und vermeiden Besuch. Betroffen sind überwiegend Erwachsene, die Symptomatik nimmt mit dem Alter zu – nicht Kinder und Jugendliche.',
+    tags: ['F4 – Neurotische Störungen'],
+    terms: [
+      Term(term: 'Pathologisches Horten', definition: 'Zwanghaftes Anhäufen wertloser Gegenstände in der eigenen Wohnung'),
+    ],
+  ),
+  Flashcard(
+    text: 'Suizidalität – Risiko und Prävention: Hochrisikogruppe sind ältere, alleinstehende Männer; etwa drei Viertel der vollendeten Suizide entfallen auf Männer. Der stärkste Einzelprädiktor ist ein früherer Suizidversuch, besonders gefährlich ist die Zeit direkt nach Klinikentlassung. Bei etwa 90% liegt eine psychische Erkrankung vor. Präsuizidales Syndrom nach Ringel: Einengung, gehemmte und gegen sich gerichtete Aggression, Suizidfantasien – häufig, aber nicht obligat. Verhältnisprävention verändert die Umstände (Brückengeländer, Fangnetze), Verhaltensprävention das individuelle Verhalten (Aufklärung).',
+    tags: ['Psychopathologie'],
+    terms: [
+      Term(term: 'Präsuizidales Syndrom', definition: 'Einengung, gehemmte Aggression, Suizidfantasien (nach Ringel)'),
+      Term(term: 'Verhältnisprävention', definition: 'Prävention durch Veränderung der äußeren Umstände'),
+    ],
+  ),
+  Flashcard(
+    text: 'Abwehrmechanismen (Psychoanalyse) sind unbewusste Strategien des Ichs zur Konfliktbewältigung: Verdrängung, Projektion (eigene abgelehnte Impulse werden anderen zugeschrieben), Regression (Rückfall auf frühere Entwicklungsstufen), Identifikation, Reaktionsbildung, Sublimierung, Verleugnung und Rationalisierung. ACHTUNG Abgrenzung: Amnesie ist eine Gedächtnisstörung und Perseveration eine formale Denkstörung – beides psychopathologische Symptome, KEINE Abwehrmechanismen. Auch die erlernte Hilflosigkeit (Seligman) ist ein lerntheoretisches Konzept.',
+    tags: ['Therapieverfahren'],
+    terms: [
+      Term(term: 'Projektion', definition: 'Zuschreibung eigener abgelehnter Impulse an andere'),
+      Term(term: 'Regression', definition: 'Rückfall auf frühere Entwicklungsstufen'),
+      Term(term: 'Identifikation', definition: 'Übernahme von Eigenschaften einer anderen Person'),
+    ],
+  ),
+  Flashcard(
+    text: 'Kognitive Verfahren im Überblick: Kognitive Triade nach Beck = negative Sicht auf sich selbst, die Welt und die Zukunft (Depressionsmodell). Rational-emotive Therapie (RET) nach Ellis = Bearbeitung irrationaler Grundannahmen nach dem ABC-Modell; diese lassen sich NICHT durch einmaliges Aufdecken beheben, sondern erfordern wiederholtes Üben. Kognitive Umstrukturierung ist das Basisverfahren kognitiver Therapien und zielt auf die Neubewertung von Gedanken, Gefühlen und Körperreaktionen – typische Methode ist der sokratische Dialog, nicht die Hypnotherapie. Bei Demenz ist der sokratische Dialog ungeeignet.',
+    tags: ['Therapieverfahren', 'F3 – Affektive Störungen'],
+    terms: [
+      Term(term: 'Kognitive Triade', definition: 'Negative Sicht auf Selbst, Welt und Zukunft (Beck)'),
+      Term(term: 'RET', definition: 'Rational-emotive Therapie nach Ellis mit ABC-Modell'),
+    ],
+  ),
+  Flashcard(
+    text: 'Alkoholabhängigkeit – Behandlungsphasen in der richtigen Reihenfolge: 1. Kontakt-/Motivationsphase, 2. Entgiftung (körperlicher Entzug – hier drohen lebensbedrohliche Komplikationen wie Delirium tremens und Entzugskrampfanfälle), 3. Entwöhnung (psychotherapeutische Bearbeitung, Grundlagen dauerhafter Abstinenz), 4. Rehabilitation/Nachsorge (psychosoziale Maßnahmen, Selbsthilfegruppen). Merke: Entgiftung und Entwöhnung sind NICHT dasselbe, und die Motivationsphase steht am Anfang, nicht am Ende.',
+    tags: ['F1 – Substanzstörungen'],
+    terms: [
+      Term(term: 'Entgiftung', definition: 'Körperlicher Entzug unter medizinischer Überwachung'),
+      Term(term: 'Entwöhnung', definition: 'Psychotherapeutische Phase zur Sicherung der Abstinenz'),
     ],
   ),
 ];

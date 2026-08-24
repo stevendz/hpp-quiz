@@ -1,0 +1,23 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Anonymes App-Feedback: darf nur angelegt werden – kein Lesen, Ändern, Löschen
+    // durch die App. Auswertung ausschließlich über die Firebase Console.
+    match /feedback/{docId} {
+      allow create: if request.resource.data.keys().hasOnly(['satisfied', 'text', 'createdAt', 'appVersion'])
+        && request.resource.data.satisfied is bool
+        && request.resource.data.text is string
+        && request.resource.data.text.size() <= 500
+        && request.resource.data.appVersion is string
+        && request.resource.data.appVersion.size() <= 20
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

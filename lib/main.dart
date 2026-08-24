@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'data/all_questions.dart';
 import 'data/flashcards_data.dart';
+import 'services/feedback_service.dart';
 import 'services/storage_service.dart';
 import 'theme/app_theme.dart';
 import 'screens/home_screen.dart';
@@ -13,6 +15,7 @@ import 'screens/stats_screen.dart';
 import 'screens/flashcard_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/glossary_screen.dart';
+import 'screens/feedback_sheet.dart';
 
 final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
@@ -111,15 +114,37 @@ class QuizController extends StatefulWidget {
 }
 
 class _QuizControllerState extends State<QuizController> {
+  static const _feedbackPromptDelay = Duration(seconds: 1);
+
   QuizState? _state;
   bool _loading = true;
   String _view = 'home';
   Set<String> _selectedTags = {};
+  Timer? _feedbackPromptTimer;
 
   @override
   void initState() {
     super.initState();
     _loadState();
+    _scheduleFeedbackPrompt();
+  }
+
+  @override
+  void dispose() {
+    _feedbackPromptTimer?.cancel();
+    super.dispose();
+  }
+
+  Future<void> _scheduleFeedbackPrompt() async {
+    final shouldPrompt = await FeedbackService.registerStartAndCheckPrompt();
+    if (!shouldPrompt || !mounted) return;
+    _feedbackPromptTimer = Timer(_feedbackPromptDelay, () async {
+      // Nicht in eine laufende Prüfung hineinplatzen.
+      if (!mounted || _loading || _view != 'home') return;
+      await FeedbackService.markPromptShown();
+      if (!mounted) return;
+      await FeedbackSheet.show(context);
+    });
   }
 
   Future<void> _loadState() async {
@@ -311,6 +336,7 @@ class _QuizControllerState extends State<QuizController> {
           body: ProfileScreen(
             onGoHome: () => setState(() => _view = 'home'),
             onShowStats: () => setState(() => _view = 'stats'),
+            onShowFeedback: () => FeedbackSheet.show(context),
             onResetProgress: _handleReset,
             onResetFlashcards: _handleResetFlashcards,
             hasExamHistory: _state!.examHistory.isNotEmpty,

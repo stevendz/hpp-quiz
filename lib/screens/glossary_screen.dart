@@ -1,4 +1,6 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import '../data/glossary_data.dart';
 import '../theme/app_theme.dart';
 
@@ -13,6 +15,45 @@ class GlossaryScreen extends StatefulWidget {
 
 class _GlossaryScreenState extends State<GlossaryScreen> {
   String _search = '';
+  Timer? _searchDebounce;
+  late DateTime _openedAt;
+
+  @override
+  void initState() {
+    super.initState();
+    _openedAt = DateTime.now();
+    _logEvent('glossary_opened', {'term_count': glossary.length});
+  }
+
+  @override
+  void dispose() {
+    _searchDebounce?.cancel();
+    _logEvent('glossary_closed', {'duration_seconds': DateTime.now().difference(_openedAt).inSeconds});
+    super.dispose();
+  }
+
+  void _logEvent(String name, Map<String, Object> params) {
+    debugPrint('[Analytics] $name: $params');
+    FirebaseAnalytics.instance.logEvent(name: name, parameters: params);
+  }
+
+  void _onSearchChanged(String value) {
+    setState(() => _search = value);
+    _searchDebounce?.cancel();
+    if (value.trim().isEmpty) return;
+    // Erst loggen, wenn die Eingabe steht – sonst ein Event pro Tastendruck.
+    _searchDebounce = Timer(const Duration(milliseconds: 800), _logSearch);
+  }
+
+  void _logSearch() {
+    final results = _filteredEntries;
+    _logEvent('glossary_searched', {
+      // Kein Roh-Suchtext: nur Länge und der getroffene Begriff aus dem Glossar.
+      'query_length': _search.trim().length,
+      'result_count': results.length,
+      'top_result': results.isEmpty ? 'none' : results.first.key,
+    });
+  }
 
   List<MapEntry<String, String>> get _filteredEntries {
     final entries = glossary.entries.toList()..sort((a, b) => a.key.toLowerCase().compareTo(b.key.toLowerCase()));
@@ -51,7 +92,7 @@ class _GlossaryScreenState extends State<GlossaryScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
               child: TextField(
-                onChanged: (v) => setState(() => _search = v),
+                onChanged: _onSearchChanged,
                 style: tt.bodyMedium,
                 decoration: InputDecoration(
                   hintText: 'Begriff suchen…',

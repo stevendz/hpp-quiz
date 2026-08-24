@@ -604,7 +604,7 @@ const List<Question> questions2025 = [
   Question(
     id: 43,
     exam: 'Oktober 2025',
-    q: 'Welche Aussagen zu Psychotherapieverfahren treffen zu?\n1. Bei CBASP wird positive Verstärkung als Motivierungsstrategie eingesetzt.\n2. CBASP ist auf chronisch depressive Patienten zugeschnitten.\n3. Sorgenkontrollbasierte KVT ist bei GAS wirksam.\n4. KVT mit Exposition und Reaktionsmanagement ist Methode der\n1. Wahl bei Zwangsstörungen.\n5. Bei PTBS-Behandlungsbeginn ist Retraumatisierung durch Exposition notwendig.',
+    q: 'Welche Aussagen zu Psychotherapieverfahren treffen zu?\n1. Bei CBASP wird positive Verstärkung als Motivierungsstrategie eingesetzt.\n2. CBASP ist auf chronisch depressive Patienten zugeschnitten.\n3. Sorgenkontrollbasierte KVT ist bei GAS wirksam.\n4. KVT mit Exposition und Reaktionsmanagement ist Methode der 1. Wahl bei Zwangsstörungen.\n5. Bei PTBS-Behandlungsbeginn ist Retraumatisierung durch Exposition notwendig.',
     options: [
       'Nur die Aussagen 1, 2 und 3 sind richtig',
       'Nur die Aussagen 2, 3 und 4 sind richtig',

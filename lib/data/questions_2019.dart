@@ -422,7 +422,7 @@ const List<Question> questions2019 = [
         'Die kognitive Umstrukturierung (nach Beck) nutzt die empirische Überprüfung verzerrter Wahrnehmungen/Kognitionen (A richtig) – der Patient prüft seine automatischen Gedanken auf Realitätsgehalt – und den sokratischen Dialog (C richtig) – durch gezieltes Fragen wird der Patient angeleitet, seine dysfunktionalen Überzeugungen selbst zu hinterfragen. Traumdeutung (B) ist eine psychoanalytische Methode. Motivierende Gesprächsführung (D) ist ein eigenständiges Verfahren (Miller & Rollnick). Empathisches Validieren (E) gehört zur DBT bzw. Gesprächstherapie.',
   ),
   Question(
-    id: 1,
+    id: 29,
     exam: 'Oktober 2019',
     q: 'Empathie ist eine zentrale Komponente im therapeutischen Kontakt der Gesprächspsychotherapie (nach Rogers). Welche Aussage zur Empathie trifft zu?',
     options: [
@@ -437,7 +437,7 @@ const List<Question> questions2019 = [
         'Nach Rogers bedeutet Empathie, den inneren Bezugsrahmen des Klienten möglichst genau wahrzunehmen – mit all seinen emotionalen Komponenten, gerade so als ob man die andere Person wäre, ohne die \'als ob\'-Position aufzugeben (B richtig). Empathie bedeutet nicht, die Gefühle des anderen zu übernehmen (A falsch) – das wäre Identifikation. Empathie ist kein billigendes Verständnis (C falsch) und keine Bewertung (D falsch). Sie fördert die Selbstexploration, verhindert sie nicht (E falsch).',
   ),
   Question(
-    id: 2,
+    id: 30,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen zum Störungsbild einer sozialen Phobie treffen zu?\n1. Die Ängste treten vorwiegend in größeren Menschenmengen auf\n2. Die Störung tritt ganz überwiegend bei Männern auf\n3. Soziale Phobien sind in der Regel mit einem niedrigen Selbstwertgefühl verbunden\n4. Die Symptome können sich bis hin zu Panikattacken verstärken\n5. Soziale Phobien können sich in Beschwerden wie Händezittern, Übelkeit und Drang zum Wasserlassen äußern',
     options: [
@@ -452,7 +452,7 @@ const List<Question> questions2019 = [
         'Soziale Phobien sind typischerweise mit niedrigem Selbstwertgefühl verbunden (3 richtig). Die Symptome können sich bis zu Panikattacken steigern (4 richtig). Körperliche Symptome wie Händezittern, Übelkeit und Harndrang sind typisch (5 richtig). Die Ängste beziehen sich auf soziale Bewertungssituationen, nicht auf Menschenmengen – das wäre Agoraphobie (1 falsch). Soziale Phobien betreffen beide Geschlechter etwa gleich häufig (2 falsch).',
   ),
   Question(
-    id: 3,
+    id: 31,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen zu Antipsychotika (Neuroleptika) treffen zu?\n1. Antipsychotika sind zur Behandlung schizophrener Störungen geeignet\n2. Antipsychotika werden auch zur Behandlung schwerer depressiver Episoden eingesetzt\n3. Antipsychotika werden nach \'typischen\' und atypischen Antipsychotika unterschieden\n4. Bei Einnahme von Antipsychotika sollten regelmäßige Kontrolluntersuchungen (z.B. EKG) durchgeführt werden\n5. Bei Antipsychotika kann als typische Nebenwirkung ein Parkinsonoid auftreten',
     options: [
@@ -467,7 +467,7 @@ const List<Question> questions2019 = [
         'Alle Aussagen sind richtig: Antipsychotika sind Standardtherapie bei Schizophrenie (1). Sie werden auch bei schwerer Depression eingesetzt, z.B. atypische Antipsychotika als Augmentation (2). Die Einteilung in typische und atypische Antipsychotika ist grundlegend (3). Regelmäßige Kontrolluntersuchungen (EKG, Blutbild, Leberwerte) sind erforderlich (4). Parkinsonoid (medikamentöses Parkinson-Syndrom) ist eine häufige extrapyramidale Nebenwirkung, besonders bei typischen Antipsychotika (5).',
   ),
   Question(
-    id: 4,
+    id: 32,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen zu psychischen Störungen im Wochenbett treffen zu?\n1. Die postpartale Depression hat meist eine günstige Prognose\n2. Bei einer schweren postpartalen Depression empfiehlt sich eine Behandlung mit einem Antidepressivum\n3. Bei ersten Anzeichen für eine postpartale Depression sollte die Mutter vom Kind getrennt werden\n4. Im Wochenbett treten psychische Erkrankungen gehäuft auf\n5. Eine postpartale Depression kann sich innerhalb von Stunden nach der Entbindung entwickeln',
     options: [
@@ -482,7 +482,7 @@ const List<Question> questions2019 = [
         'Die postpartale Depression hat bei adäquater Behandlung meist eine günstige Prognose (1 richtig). Bei schwerer Ausprägung ist eine medikamentöse Behandlung mit Antidepressiva indiziert (2 richtig). Psychische Erkrankungen treten im Wochenbett gehäuft auf (4 richtig). Postpartale affektive Störungen können sich sehr rasch nach der Entbindung entwickeln (5 richtig). Eine Trennung von Mutter und Kind bei ersten Anzeichen einer Depression ist kontraproduktiv und wird nicht empfohlen (3 falsch).',
   ),
   Question(
-    id: 5,
+    id: 33,
     exam: 'Oktober 2019',
     q: 'Welche Aussage trifft zu? Grübeln gehört im psychopathologischen Befund zur Gruppe der',
     options: [
@@ -497,7 +497,7 @@ const List<Question> questions2019 = [
         'Grübeln (Rumination) wird im psychopathologischen Befund den formalen Denkstörungen zugeordnet (B richtig). Es handelt sich um eingeengtes, perseverierendes Denken, bei dem die Gedanken ständig um bestimmte Themen kreisen. Es ist keine Aufmerksamkeits-/Gedächtnisstörung (A), keine Befürchtung/Zwang (C), keine Ich-Störung (D) und keine inhaltliche Denkstörung wie Wahn (E).',
   ),
   Question(
-    id: 6,
+    id: 34,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen treffen zu? Inhaber einer auf das Gebiet der Psychotherapie beschränkten Heilpraktikererlaubnis sind grundsätzlich berechtigt zur selbstständigen Anwendung\n1. der kognitiven Verhaltenstherapie\n2. der tiefenpsychologisch fundierten Psychotherapie\n3. der Psychoanalyse\n4. von Intelligenztests\n5. der Osteopathie',
     options: [
@@ -512,7 +512,7 @@ const List<Question> questions2019 = [
         'Der Heilpraktiker für Psychotherapie darf alle psychotherapeutischen Verfahren anwenden: kognitive VT (1 richtig), tiefenpsychologisch fundierte PT (2 richtig) und Psychoanalyse (3 richtig). Auch die Anwendung psychologischer Testverfahren wie Intelligenztests ist erlaubt (4 richtig). Die Osteopathie (5) ist ein körperliches Verfahren und fällt nicht unter die Psychotherapie-Erlaubnis – hierfür wäre die große Heilpraktikererlaubnis erforderlich.',
   ),
   Question(
-    id: 7,
+    id: 35,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen treffen zu? Wählen Sie zwei Antworten! Sie wollen mit Ihrem Patienten im Rahmen eines sozialen Kompetenztrainings einüben, dass dieser angemessen für seine Rechte eintritt. Sie geben dem Patienten die Instruktionen',
     options: [
@@ -527,7 +527,7 @@ const List<Question> questions2019 = [
         'Im sozialen Kompetenztraining (Assertiveness-Training) lernt der Patient, laut und deutlich zu reden (A richtig) und Verständnis für die Position des Gegenübers zu äußern (E richtig) – beides sind Merkmale selbstsicheren (assertiven) Verhaltens. Der Gebrauch von \'Ich\'-Botschaften wird ausdrücklich empfohlen, nicht vermieden (B falsch). Sich für Forderungen zu entschuldigen schwächt die eigene Position (C falsch). Die Reihenfolge \'erst warum, dann was\' ist nicht die optimale Technik des assertiven Verhaltens (D falsch).',
   ),
   Question(
-    id: 8,
+    id: 36,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen zur Psychotherapie treffen zu?\n1. \'Erlernte Hilflosigkeit\' ist ein in der psychoanalytischen Therapie verwendeter Begriff eines Abwehrmechanismus\n2. Bei einer akuten schweren depressiven Episode ist eine ambulante psychodynamisch orientierte Psychotherapie der ersten Wahl\n3. In der kognitiven Therapie wird der sokratische Dialog angewendet\n4. Beim SORKC-Modell handelt es sich um ein in der verhaltenstherapeutischen Diagnostik anwendbares Modell zur Problem-, Situations- und Verhaltensanalyse\n5. Psychodynamisch orientierte Psychotherapiemethoden spielen in der Kindertherapie keine wesentliche Rolle',
     options: [
@@ -542,7 +542,7 @@ const List<Question> questions2019 = [
         'Der sokratische Dialog ist eine zentrale Methode der kognitiven Therapie nach Beck (3 richtig). Das SORKC-Modell (Stimulus-Organismus-Reaktion-Kontingenz-Konsequenz) ist ein verhaltenstherapeutisches Analysemodell (4 richtig). \'Erlernte Hilflosigkeit\' stammt von Seligman aus der Lerntheorie, nicht aus der Psychoanalyse (1 falsch). Bei akuter schwerer Depression ist zunächst medikamentöse Behandlung indiziert, nicht ambulante Psychodynamik (2 falsch). Psychodynamische Methoden (z.B. Spieltherapie) spielen durchaus eine wichtige Rolle in der Kindertherapie (5 falsch).',
   ),
   Question(
-    id: 9,
+    id: 37,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen zu Anpassungsstörungen (nach ICD-10) treffen zu? Wählen Sie zwei Antworten!',
     options: [
@@ -557,7 +557,7 @@ const List<Question> questions2019 = [
         'Anpassungsstörungen treten definitionsgemäß nach einer identifizierbaren psychosozialen Belastung auf (B richtig). Bei Kindern können regressive Symptome wie sekundäre Enuresis (Wiederauftreten von Einnässen) auftreten (C richtig). Die Auslöser sind gerade nicht undefinierbar, sondern identifizierbar (A falsch). Die Dauer überschreitet in der Regel nicht 6 Monate nach Ende der Belastung (D falsch). Individuelle Vulnerabilität spielt eine wichtige Rolle bei der Entstehung (E falsch).',
   ),
   Question(
-    id: 10,
+    id: 38,
     exam: 'Oktober 2019',
     q: 'Welche Aussage trifft zu? Ein 60-jähriger Patient berichtet Ihnen von einer quälenden Unruhe, verstärkt im Sitzen und Liegen, mit ausgeprägtem Bewegungsdrang, der den ganzen Körper betrifft. Während des Gesprächs ist er unfähig, still zu sitzen, tritt von einem Bein auf das andere oder wippt hin und her. Dies spricht am ehesten für ein/eine',
     options: [
@@ -572,7 +572,7 @@ const List<Question> questions2019 = [
         'Die beschriebene Symptomatik – quälende innere Unruhe mit Unfähigkeit stillzusitzen und ständigem Bewegungsdrang – ist das klassische Bild einer Akathisie (Sitzunruhe) (E richtig). Dies ist eine häufige extrapyramidal-motorische Nebenwirkung von Antipsychotika. Eine dissoziative Bewegungsstörung (A) zeigt andere Symptome. Schilddrüsenunterfunktion (B) führt eher zu Verlangsamung. Das Tourette-Syndrom (C) ist durch Tics gekennzeichnet. Adynamie (D) bezeichnet Antriebslosigkeit – das Gegenteil.',
   ),
   Question(
-    id: 11,
+    id: 39,
     exam: 'Oktober 2019',
     q: 'Welche Aussage trifft zu? Die Substitutionsbehandlung von Opioidabhängigen mit Methadon',
     options: [
@@ -587,7 +587,7 @@ const List<Question> questions2019 = [
         'Die Methadon-Substitution ist eine Erhaltungstherapie (Maintenance-Therapie), bei der die Opioidabhängigkeit pharmakologisch aufrechterhalten wird, jedoch unter kontrollierten Bedingungen (C richtig). Die Durchführung ist Ärzten mit Zusatzqualifikation vorbehalten, nicht Heilpraktikern (A falsch). Vollständige Abstinenz wird damit in der Regel nicht erreicht (B falsch). Begleitende Psychotherapie ist ausdrücklich erwünscht und Teil des Gesamtkonzepts (D falsch). Die Substitution kann auch ambulant erfolgen (E falsch).',
   ),
   Question(
-    id: 12,
+    id: 40,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen treffen zu? Wählen Sie zwei Antworten! Demenzerkrankungen',
     options: [
@@ -602,7 +602,7 @@ const List<Question> questions2019 = [
         'Demenzerkrankungen führen zu einer Abnahme des Gedächtnisses und des Denkvermögens (C richtig). Bildgebende Verfahren (cCT, cMRT) sind wichtig für die Differentialdiagnostik (D richtig). Demenz ist ein Oberbegriff für verschiedene Erkrankungen (Alzheimer, vaskulär, Lewy-Körperchen etc.), nicht nur Alzheimer (A falsch). Demenzen können auch vor dem 75. Lebensjahr auftreten (B falsch). Die meisten Demenzen haben einen langsamen Verlauf über Jahre, nicht innerhalb von 12 Monaten (E falsch).',
   ),
   Question(
-    id: 13,
+    id: 41,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen treffen zu? Wählen Sie zwei Antworten! Bei Menschen, die an einer hebephrenen Schizophrenie leiden, sind nach ICD-10 folgende Symptome am ehesten typisch:',
     options: ['A) Miosis', 'B) Antriebsverlust', 'C) Trance', 'D) Besessenheitszustände', 'E) Affektverflachung'],
@@ -611,7 +611,7 @@ const List<Question> questions2019 = [
         'Die hebephrene Schizophrenie (F20.1) ist durch Antriebsverlust (B richtig) und Affektverflachung (E richtig) gekennzeichnet, zusammen mit läppischem, unvorhersehbarem Verhalten. Miosis (A, Pupillenverengung) ist ein somatisches Symptom, z.B. bei Opioidintoxikation. Trance (C) und Besessenheitszustände (D) gehören zu den dissoziativen Störungen (F44), nicht zur hebephrenen Schizophrenie.',
   ),
   Question(
-    id: 14,
+    id: 42,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen zu Wahrnehmungsstörungen treffen zu? Wählen Sie zwei Antworten!',
     options: [
@@ -626,7 +626,7 @@ const List<Question> questions2019 = [
         'Illusionäre Verkennungen (Fehlinterpretation realer Sinnesreize) treten typischerweise beim Delir auf (A richtig). Eine Halluzination ist definitionsgemäß eine Sinneswahrnehmung ohne entsprechenden äußeren Reiz (B richtig). Optische Halluzinationen sprechen gerade für eine organische/körperlich begründbare Psychose, nicht dagegen (C falsch). Die hebephrene Schizophrenie ist nicht primär durch optische Halluzinationen gekennzeichnet (D falsch). Akustische Halluzinationen treten bei der paranoiden Schizophrenie auf, nicht bei der paranoiden Persönlichkeitsstörung (E falsch).',
   ),
   Question(
-    id: 15,
+    id: 43,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Techniken zählen am ehesten zu den Konfrontationstherapien? Wählen Sie zwei Antworten!',
     options: [
@@ -641,7 +641,7 @@ const List<Question> questions2019 = [
         'Flooding (Reizüberflutung) ist eine klassische Konfrontationstherapie, bei der der Patient direkt mit dem angstauslösenden Reiz konfrontiert wird (A richtig). Die systematische Desensibilisierung ist ebenfalls eine Konfrontationsmethode, bei der die Konfrontation graduell in entspanntem Zustand erfolgt (D richtig). Time-out (B) ist eine Methode der operanten Konditionierung. Selbstmanagement (C) und Shaping (E, schrittweise Verhaltensformung) zählen nicht zu den Konfrontationsverfahren.',
   ),
   Question(
-    id: 16,
+    id: 44,
     exam: 'Oktober 2019',
     q: 'Bei einer 25-jährigen Frau, die wegen depressiver Verstimmungen in Ihre psychotherapeutische Behandlung kommt, vermuten Sie eine Bulimia nervosa mit selbstinduziertem Erbrechen. Welche der folgenden Befunde stützen im Rahmen der Differenzialdiagnose am ehesten Ihren Verdacht? Wählen Sie zwei Antworten!',
     options: [
@@ -656,7 +656,7 @@ const List<Question> questions2019 = [
         'Speicheldrüsenschwellung (B richtig, besonders der Parotis, sog. \'Hamsterbacken\') und Zahnschäden (C richtig, Erosion des Zahnschmelzes durch wiederholten Kontakt mit Magensäure) sind typische körperliche Folgen des selbstinduzierten Erbrechens bei Bulimia nervosa. Adipositas Grad 3 (A) ist untypisch – Bulimikerinnen sind meist normalgewichtig. Chloasma (D, Pigmentflecken) und Akne (E) stehen nicht im Zusammenhang mit Bulimie.',
   ),
   Question(
-    id: 17,
+    id: 45,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen zu Zwangsstörungen treffen zu?\n1. Bei Zwangsstörungen beobachtet man sehr häufig Spontanremissionen\n2. Eine Zwangsstörung beginnt in der Regel im mittleren bis höheren Erwachsenenalter\n3. Aufgrund des hohen Leidensdruckes kommt es meist zu einer raschen Diagnosestellung\n4. Eine Kombination aus Psychotherapie und medikamentöser Behandlung hat sich bewährt\n5. Zwangssymptome können bei einer Depression auftreten',
     options: [
@@ -671,7 +671,7 @@ const List<Question> questions2019 = [
         'Die Kombination aus KVT (mit Exposition und Reaktionsverhinderung) und SSRI hat sich bei Zwangsstörungen bewährt (4 richtig). Zwangssymptome können als Begleitsymptom einer Depression auftreten (5 richtig). Spontanremissionen bei Zwangsstörungen sind selten (1 falsch). Der Beginn liegt meist in der Adoleszenz oder im frühen Erwachsenenalter (2 falsch). Trotz hohem Leidensdruck dauert es oft viele Jahre bis zur Diagnose, wegen Scham und Verheimlichung (3 falsch).',
   ),
   Question(
-    id: 18,
+    id: 46,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen treffen zu? In der Verhaltenstherapie\n1. sind experimentelle Befunde zur klassischen und operanten Konditionierung eine wichtige Grundlage von Modellen zur Entstehung psychischer Störungen sowie von Interventionsmethoden\n2. gilt das Prinzip der klassischen Konditionierung inzwischen als veraltet und ist nur noch von untergeordneter Rolle\n3. bezeichnet operante Konditionierung einen Lernprozess, bei dem die Auftretenswahrscheinlichkeit von Verhalten durch seine Konsequenzen erhöht oder erniedrigt wird\n4. ist der Begriff \'negative Verstärkung\' innerhalb des operanten Konditionierens mit \'Bestrafung\' gleichzusetzen\n5. kommen Verstärkerpläne zum Aufbau neuen Verhaltens zum Einsatz',
     options: [
@@ -686,7 +686,7 @@ const List<Question> questions2019 = [
         'Klassische und operante Konditionierung bilden wichtige Grundlagen der VT (1 richtig). Operante Konditionierung beschreibt die Veränderung der Auftretenswahrscheinlichkeit durch Konsequenzen (3 richtig). Verstärkerpläne werden zum systematischen Verhaltensaufbau eingesetzt (5 richtig). Die klassische Konditionierung ist keineswegs veraltet (2 falsch). Negative Verstärkung ist nicht gleich Bestrafung – negative Verstärkung erhöht die Verhaltenshäufigkeit durch Wegfall eines unangenehmen Reizes, Bestrafung senkt sie (4 falsch).',
   ),
   Question(
-    id: 19,
+    id: 47,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen treffen zu? Mögliche Ursachen einer organischen depressiven Störung (nach ICD-10) sind:\n1. Maligne Hirnerkrankungen\n2. Zwangsstörungen\n3. Hypothyreose\n4. Morbus Parkinson\n5. Hypochondrische Störung',
     options: [
@@ -701,7 +701,7 @@ const List<Question> questions2019 = [
         'Organische depressive Störungen haben definitionsgemäß eine nachweisbare körperliche Ursache: maligne Hirnerkrankungen (1 richtig, z.B. Hirntumore), Hypothyreose (3 richtig, Schilddrüsenunterfunktion) und Morbus Parkinson (4 richtig). Zwangsstörungen (2) und hypochondrische Störungen (5) sind psychische Störungen und keine organischen Ursachen einer Depression.',
   ),
   Question(
-    id: 20,
+    id: 48,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen treffen zu? Typische Charakteristika der anankastischen (zwanghaften) Persönlichkeitsstörung nach ICD-10 sind: Wählen Sie zwei Antworten!',
     options: [
@@ -716,7 +716,7 @@ const List<Question> questions2019 = [
         'Übertriebene Gewissenhaftigkeit und Leistungsbezogenheit auf Kosten von Vergnügen (B richtig) sowie Rigidität und Eigensinn (E richtig) sind typische Merkmale der anankastischen PS. Im Mittelpunkt stehen wollen (A) gehört zur histrionischen PS. Verantwortung an andere überlassen (C) ist typisch für die abhängige (dependente) PS. Phantasie und einzelgängerisches Verhalten (D) kennzeichnen die schizoide PS.',
   ),
   Question(
-    id: 21,
+    id: 49,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen zur Suizidalität treffen zu? Wählen Sie zwei Antworten!',
     options: [
@@ -731,7 +731,7 @@ const List<Question> questions2019 = [
         'Suchtkranke haben ein deutlich erhöhtes Suizidrisiko (B richtig). In Deutschland sterben mehr Menschen durch Suizid als durch Verkehrsunfälle (E richtig). Fragen nach Suizidalität erhöhen das Risiko nicht, sondern sind therapeutisch notwendig (A falsch). Plötzliche Ruhe nach Verzweiflung kann darauf hindeuten, dass der Entschluss zum Suizid gefasst wurde – dies ist ein Warnzeichen, keine Besserung (C falsch). Die meisten suizidalen Menschen kündigen ihre Absicht direkt oder indirekt an (D falsch).',
   ),
   Question(
-    id: 22,
+    id: 50,
     exam: 'Oktober 2019',
     q: 'Welche Aussage über die bipolare affektive Störung (nach ICD-10) trifft zu?',
     options: [
@@ -746,7 +746,7 @@ const List<Question> questions2019 = [
         'Eine manische Episode kann einer akuten Schizophrenie ähneln und ist manchmal erst im Verlauf sicher zu unterscheiden (D richtig). Akustische Halluzinationen können bei schwerer Manie auftreten und sind damit vereinbar (A falsch). Rapid Cycling bezeichnet mindestens 4 affektive Episoden pro Jahr, nicht motorische Unruhe (B falsch). Die depressive Phase der bipolaren Störung unterscheidet sich klinisch kaum von der unipolaren Depression (C falsch). Dysthymia schließt eine bipolare Störung nicht aus (E falsch).',
   ),
   Question(
-    id: 23,
+    id: 51,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen zum Delir treffen zu? Wählen Sie zwei Antworten!',
     options: [
@@ -761,7 +761,7 @@ const List<Question> questions2019 = [
         'Ein Delir ist ein ätiologisch unspezifisches Syndrom (kann verschiedene Ursachen haben) mit Bewusstseins-, Kognitions- und Psychomotorikstörungen (B richtig). Es ist eine organisch bedingte psychische Störung (D richtig). Ein Delir ist ein medizinischer Notfall und muss stationär behandelt werden, nicht ambulant (A falsch). Es ist keineswegs asymptomatisch, sondern zeigt vielfältige Symptome (C falsch). Halluzinationen – auch akustische – können beim Delir auftreten (E falsch).',
   ),
   Question(
-    id: 24,
+    id: 52,
     exam: 'Oktober 2019',
     q: 'Welche Aussage trifft zu? Verantwortlich für die öffentlich-rechtliche Unterbringung eines psychisch Kranken im psychiatrischen Krankenhaus für eine Zeitdauer von 6 Wochen gemäß Unterbringungsrecht der Länder (z.B. Psychisch-Kranken-Gesetz) ist',
     options: [
@@ -776,7 +776,7 @@ const List<Question> questions2019 = [
         'Für eine Unterbringung von 6 Wochen Dauer nach PsychKG ist eine richterliche Genehmigung erforderlich (B richtig). Das Ordnungsamt (A) kann bei Gefahr im Verzug eine sofortige, kurzfristige Unterbringung veranlassen, aber für eine längere Dauer ist das Gericht zuständig. Das Gesundheitsamt (C), die Ärztekammer (D) und die Kriminalpolizei (E) sind nicht für Unterbringungsentscheidungen zuständig.',
   ),
   Question(
-    id: 25,
+    id: 53,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen treffen zu? Typische Symptome einer depressiven Episode (nach ICD-10) sind:\n1. Ideenflucht\n2. Interessensverlust\n3. Vermindertes Selbstbewusstsein\n4. Suizidgedanken\n5. Verminderter Antrieb',
     options: [
@@ -791,7 +791,7 @@ const List<Question> questions2019 = [
         'Typische Symptome einer depressiven Episode nach ICD-10: Interessensverlust (2 richtig, Zusatzsymptom), vermindertes Selbstwertgefühl/Selbstvertrauen (3 richtig, Zusatzsymptom), Suizidgedanken (4 richtig, Zusatzsymptom) und verminderter Antrieb (5 richtig, Hauptsymptom). Ideenflucht (1) ist ein Symptom der Manie, nicht der Depression – bei Depression findet sich eher gehemmtes oder eingeengtes Denken.',
   ),
   Question(
-    id: 26,
+    id: 54,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen treffen zu? Die emotional instabile Persönlichkeitsstörung vom Borderline-Typ (nach ICD-10)\n1. neigt zu suizidalem und präsuizidalem Verhalten\n2. ist gleichbedeutend mit einer schweren Depression\n3. neigt selten zu Wutanfällen und aggressiven Durchbrüchen\n4. zeigt eine ausgeprägte und andauernde Instabilität des Selbstbildes oder der Selbstwahrnehmung\n5. ist gekennzeichnet durch ein intensives Bemühen, tatsächliches oder vermutetes Verlassenwerden zu vermeiden',
     options: [
@@ -806,7 +806,7 @@ const List<Question> questions2019 = [
         'Die Borderline-PS ist gekennzeichnet durch: Neigung zu suizidalem und selbstverletzendem Verhalten (1 richtig), Instabilität des Selbstbildes (4 richtig) und intensives Bemühen, Verlassenwerden zu vermeiden (5 richtig). Borderline ist nicht gleichbedeutend mit Depression, obwohl komorbide Depression häufig ist (2 falsch). Wutanfälle und aggressive Durchbrüche treten häufig, nicht selten auf (3 falsch).',
   ),
   Question(
-    id: 27,
+    id: 55,
     exam: 'Oktober 2019',
     q: 'Welche der folgenden Aussagen zur Aufmerksamkeitsdefizit-/Hyperaktivitätsstörung (ADHS) treffen zu?\n1. Typische Kennzeichen des ADHS im Kindesalter sind u.a. Hypermotorik und impulshafte Ausbrüche\n2. Typische Kennzeichen des ADHS im Erwachsenenalter sind u.a. Desorganisation und fehlendes Durchhaltevermögen\n3. Häufige komorbide Störungen bei ADHS im Kindesalter sind Tic-Störungen und Störungen des Sozialverhaltens\n4. Häufige komorbide Störungen bei ADHS im Erwachsenenalter sind Abhängigkeitserkrankungen, depressive Störungen und Angststörungen\n5. Bei der Behandlung eines ADHS im Erwachsenenalter ist die Gabe von Methylphenidat kontraindiziert',
     options: [
@@ -821,7 +821,7 @@ const List<Question> questions2019 = [
         'ADHS im Kindesalter zeigt sich durch Hypermotorik und Impulsivität (1 richtig). Im Erwachsenenalter stehen Desorganisation und mangelndes Durchhaltevermögen im Vordergrund (2 richtig). Typische Komorbiditäten im Kindesalter: Tic-Störungen und Störungen des Sozialverhaltens (3 richtig). Im Erwachsenenalter: Sucht, Depression und Angststörungen (4 richtig). Methylphenidat ist auch im Erwachsenenalter ein Mittel der Wahl und keineswegs kontraindiziert (5 falsch).',
   ),
   Question(
-    id: 28,
+    id: 56,
     exam: 'Oktober 2019',
     q: 'Welche Aussage trifft zu? Charakteristisch für eine histrionische Persönlichkeitsstörung (nach ICD-10) ist/sind:',
     options: [
