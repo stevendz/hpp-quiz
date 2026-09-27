@@ -163,21 +163,38 @@ class ExamRecord {
   final int score;
   final int total;
   final int elapsedSeconds;
+  final List<int> questionIds;
+  final Map<int, AnswerRecord> answers;
 
-  ExamRecord({required this.date, required this.score, required this.total, this.elapsedSeconds = 0});
+  ExamRecord({
+    required this.date,
+    required this.score,
+    required this.total,
+    this.elapsedSeconds = 0,
+    this.questionIds = const [],
+    this.answers = const {},
+  });
 
   Map<String, dynamic> toJson() => {
         'date': date,
         'score': score,
         'total': total,
         'elapsedSeconds': elapsedSeconds,
+        'questionIds': questionIds,
+        'answers': answers.map((k, v) => MapEntry(k.toString(), v.toJson())),
       };
 
+  // Ältere Einträge (vor der Auswertungsansicht) haben keine Fragen/Antworten gespeichert.
   factory ExamRecord.fromJson(Map<String, dynamic> json) => ExamRecord(
         date: json['date'] ?? '',
         score: json['score'] ?? 0,
         total: json['total'] ?? 0,
         elapsedSeconds: json['elapsedSeconds'] ?? 0,
+        questionIds: (json['questionIds'] as List?)?.cast<int>() ?? const [],
+        answers: {
+          for (final e in ((json['answers'] as Map<String, dynamic>?) ?? {}).entries)
+            int.parse(e.key): AnswerRecord.fromJson(e.value),
+        },
       );
 }
 
