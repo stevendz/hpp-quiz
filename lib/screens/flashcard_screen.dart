@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/flashcard.dart';
 import '../data/flashcards_data.dart';
 import '../services/glossary_lookup.dart';
+import 'glossary_terms_dialog.dart';
 import '../theme/app_theme.dart';
 
 class FlashcardScreen extends StatefulWidget {
@@ -239,52 +240,34 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              if (card.tags.isNotEmpty) ...[
-                                Wrap(
-                                  spacing: AppSpacing.xs,
-                                  runSpacing: AppSpacing.xs,
-                                  children: card.tags.map((tag) => Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                    decoration: BoxDecoration(
-                                      color: AppColors.indigoSubtle,
-                                      borderRadius: BorderRadius.circular(AppSpacing.md),
-                                      border: Border.all(color: AppColors.indigoBorder.withValues(alpha: 0.3)),
+                              if (card.tags.isNotEmpty || terms.isNotEmpty) ...[
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Expanded(
+                                      child: Wrap(
+                                        spacing: AppSpacing.xs,
+                                        runSpacing: AppSpacing.xs,
+                                        children: card.tags.map((tag) => Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                          decoration: BoxDecoration(
+                                            color: AppColors.indigoSubtle,
+                                            borderRadius: BorderRadius.circular(AppSpacing.md),
+                                            border: Border.all(color: AppColors.indigoBorder.withValues(alpha: 0.3)),
+                                          ),
+                                          child: Text(tag, style: tt.labelSmall?.copyWith(color: AppColors.textMuted)),
+                                        )).toList(),
+                                      ),
                                     ),
-                                    child: Text(tag, style: tt.labelSmall?.copyWith(color: AppColors.textMuted)),
-                                  )).toList(),
+                                    if (terms.isNotEmpty) ...[
+                                      const SizedBox(width: AppSpacing.md),
+                                      GlossaryTermsButton(terms: terms, title: 'Fachbegriffe auf dieser Karte'),
+                                    ],
+                                  ],
                                 ),
                                 const SizedBox(height: AppSpacing.md),
                               ],
                               Text(card.text, style: tt.bodyMedium),
-                              if (terms.isNotEmpty) ...[
-                                const SizedBox(height: AppSpacing.lg),
-                                Container(
-                                  width: double.infinity,
-                                  padding: const EdgeInsets.all(AppSpacing.lg),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.indigoSubtle,
-                                    borderRadius: BorderRadius.circular(AppSpacing.lg),
-                                    border: Border.all(color: AppColors.indigoBorder.withValues(alpha: 0.3)),
-                                  ),
-                                  child: ListView.separated(
-                                    shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
-                                    itemCount: terms.length,
-                                    separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.lg),
-                                    itemBuilder: (_, i) {
-                                      final t = terms[i];
-                                      return Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(t.key, style: tt.titleSmall),
-                                          const SizedBox(height: 2),
-                                          Text(t.value, style: tt.bodyMedium?.copyWith(color: AppColors.textMuted)),
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ],
                             ],
                           ),
                         ),

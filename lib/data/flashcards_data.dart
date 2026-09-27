@@ -6,27 +6,27 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'ICD-10 – Aufbau und Geltung: Die ICD-10 (International Classification of Diseases, 10. Revision) ist das weltweit anerkannte Klassifikationssystem der WHO. Kapitel V (Buchstabe F) umfasst psychische und Verhaltensstörungen (F00-F99). Sie ist phänomenologisch-deskriptiv: Beschreibt Symptome, Verlauf, Dauer und Schweregrad, nicht Ursachen. In Deutschland gilt die ICD-10-GM seit 01.01.2000. Die HPP-Prüfung basiert weiterhin auf ICD-10, nicht ICD-11.',
+        'ICD-10 – Aufbau und Geltung:\nDie ICD-10 (International Classification of Diseases, 10. Revision) ist das weltweit anerkannte Klassifikationssystem der WHO.\nKapitel V (Buchstabe F) umfasst psychische und Verhaltensstörungen (F00-F99).\nSie ist phänomenologisch-deskriptiv: Beschreibt Symptome, Verlauf, Dauer und Schweregrad, nicht Ursachen.\nIn Deutschland gilt die ICD-10-GM seit 01.01.2000.\nDie HPP-Prüfung basiert weiterhin auf ICD-10, nicht ICD-11.',
     tags: ['ICD-10 Grundlagen'],
   ),
   Flashcard(
     text:
-        'Aufbau des ICD-10-Codes: F = psychische Störung. 1. Ziffer = Störungsgruppe (z.B. F2 = Schizophrenie). Weitere Ziffern = Spezifizierung. Beispiel: F20.0 = Paranoide Schizophrenie. Die ICD-10 nutzt ein multiaxiales System für mehrdimensionale Diagnostik.',
+        'Aufbau des ICD-10-Codes:\nF = psychische Störung.\n1. Ziffer = Störungsgruppe (z.B. F2 = Schizophrenie).\nWeitere Ziffern = Spezifizierung.\nBeispiel: F20.0 = Paranoide Schizophrenie.\nDie ICD-10 nutzt ein multiaxiales System für mehrdimensionale Diagnostik.',
     tags: ['ICD-10 Grundlagen'],
   ),
   Flashcard(
     text:
-        'Die 10 Störungsgruppen F0-F9 im Überblick (Teil 1): F0 = Organische psychische Störungen (Demenzen, Delir). F1 = Störungen durch psychotrope Substanzen (Alkohol, Drogen). F2 = Schizophrenie, schizotype und wahnhafte Störungen. F3 = Affektive Störungen (Depression, Manie, bipolar). F4 = Neurotische, Belastungs- und somatoforme Störungen.',
+        'Die 10 Störungsgruppen F0-F9 im Überblick (Teil 1):\nF0 = Organische psychische Störungen (Demenzen, Delir).\nF1 = Störungen durch psychotrope Substanzen (Alkohol, Drogen).\nF2 = Schizophrenie, schizotype und wahnhafte Störungen.\nF3 = Affektive Störungen (Depression, Manie, bipolar).\nF4 = Neurotische, Belastungs- und somatoforme Störungen.',
     tags: ['ICD-10 Grundlagen'],
   ),
   Flashcard(
     text:
-        'Die 10 Störungsgruppen F0-F9 im Überblick (Teil 2): F5 = Verhaltensauffälligkeiten mit körperlichen Faktoren (Essstörungen, Schlafstörungen). F6 = Persönlichkeits- und Verhaltensstörungen. F7 = Intelligenzminderung. F8 = Entwicklungsstörungen (Autismus). F9 = Verhaltens-/emotionale Störungen der Kindheit (ADHS).',
+        'Die 10 Störungsgruppen F0-F9 im Überblick (Teil 2):\nF5 = Verhaltensauffälligkeiten mit körperlichen Faktoren (Essstörungen, Schlafstörungen).\nF6 = Persönlichkeits- und Verhaltensstörungen.\nF7 = Intelligenzminderung.\nF8 = Entwicklungsstörungen (Autismus).\nF9 = Verhaltens-/emotionale Störungen der Kindheit (ADHS).',
     tags: ['ICD-10 Grundlagen'],
   ),
   Flashcard(
     text:
-        'Prüfungsrelevanz der Störungsgruppen: Hohe Relevanz (3 Sterne): F0 (Organisch), F1 (Substanzen), F2 (Schizophrenie), F3 (Affektiv), F4 (Neurotisch/Belastung), F6 (Persönlichkeit). Mittlere Relevanz: F5 (Verhaltensauffälligkeiten), F8 (Entwicklung), F9 (Kindheit). Geringere Relevanz: F7 (Intelligenzminderung).',
+        'Prüfungsrelevanz der Störungsgruppen:\nHohe Relevanz (3 Sterne): F0 (Organisch), F1 (Substanzen), F2 (Schizophrenie), F3 (Affektiv), F4 (Neurotisch/Belastung), F6 (Persönlichkeit).\nMittlere Relevanz: F5 (Verhaltensauffälligkeiten), F8 (Entwicklung), F9 (Kindheit).\nGeringere Relevanz: F7 (Intelligenzminderung).',
     tags: ['ICD-10 Grundlagen'],
   ),
 
@@ -35,67 +35,67 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'F0 – Organische psychische Störungen (F00-F09): Kernmerkmal ist eine nachweisbare organische Ursache (Hirnerkrankung, -verletzung, -funktionsstörung). Wichtig: Immer somatische Abklärung veranlassen! Bei JEDER psychischen Störung muss zuerst eine organische Ursache ausgeschlossen werden.',
+        'F0 – Organische psychische Störungen (F00-F09):\nKernmerkmal ist eine nachweisbare organische Ursache (Hirnerkrankung, -verletzung, -funktionsstörung).\nWichtig: Immer somatische Abklärung veranlassen!\nBei JEDER psychischen Störung muss zuerst eine organische Ursache ausgeschlossen werden.',
     tags: ['F0 – Organische Störungen'],
   ),
   Flashcard(
     text:
-        'F00 – Demenz bei Alzheimer-Krankheit: Schleichender Beginn mit progredientem Verlauf. Gedächtnis und kognitive Funktionen nehmen ab. Unterscheidung: Früher Beginn (<65 Jahre) vs. später Beginn (>65 Jahre). Häufigste Demenzform (ca. 60-70%). Neuropathologisch: Amyloid-Plaques und Tau-Fibrillen.',
+        'F00 – Demenz bei Alzheimer-Krankheit:\nSchleichender Beginn mit progredientem Verlauf.\nGedächtnis und kognitive Funktionen nehmen ab.\nUnterscheidung: Früher Beginn (<65 Jahre) vs. später Beginn (>65 Jahre).\nHäufigste Demenzform (ca. 60-70%).\nNeuropathologisch: Amyloid-Plaques und Tau-Fibrillen.',
     tags: ['F0 – Organische Störungen'],
   ),
   Flashcard(
     text:
-        'F01 – Vaskuläre Demenz: Plötzlicher oder stufenweiser Beginn (im Gegensatz zum schleichenden Beginn bei Alzheimer). Ursachen: Multiinfarkt oder subkortikale Durchblutungsstörungen. Behandlung: Kardiovaskuläre Risikofaktoren kontrollieren. Zweithäufigste Demenzform.',
+        'F01 – Vaskuläre Demenz:\nPlötzlicher oder stufenweiser Beginn (im Gegensatz zum schleichenden Beginn bei Alzheimer).\nUrsachen: Multiinfarkt oder subkortikale Durchblutungsstörungen.\nBehandlung: Kardiovaskuläre Risikofaktoren kontrollieren.\nZweithäufigste Demenzform.',
     tags: ['F0 – Organische Störungen'],
   ),
   Flashcard(
     text:
-        'F02 – Demenz bei anderen Erkrankungen: Pick-Krankheit (frontotemporale Demenz), Creutzfeldt-Jakob-Krankheit (rapid progredient), Huntington-Krankheit (autosomal-dominant, Chorea), Parkinson-Krankheit, HIV-Enzephalopathie. Jede dieser Erkrankungen hat ein eigenes klinisches Profil.',
+        'F02 – Demenz bei anderen Erkrankungen:\nPick-Krankheit (frontotemporale Demenz), Creutzfeldt-Jakob-Krankheit (rapid progredient), Huntington-Krankheit (autosomal-dominant, Chorea), Parkinson-Krankheit, HIV-Enzephalopathie.\nJede dieser Erkrankungen hat ein eigenes klinisches Profil.',
     tags: ['F0 – Organische Störungen'],
   ),
   Flashcard(
     text:
-        'F04 – Organisches amnestisches Syndrom: Schwere Gedächtnisstörung (Kurz- und Langzeitgedächtnis). Wichtig: Bewusstsein ist NICHT getrübt (Abgrenzung zum Delir). Typisches Beispiel: Korsakow-Syndrom bei chronischem Alkoholismus. Konfabulationen (Erinnerungslücken werden unbewusst mit erfundenen Inhalten gefüllt) sind charakteristisch.',
+        'F04 – Organisches amnestisches Syndrom:\nSchwere Gedächtnisstörung (Kurz- und Langzeitgedächtnis).\nWichtig: Bewusstsein ist NICHT getrübt (Abgrenzung zum Delir).\nTypisches Beispiel: Korsakow-Syndrom bei chronischem Alkoholismus.\nKonfabulationen (Erinnerungslücken werden unbewusst mit erfundenen Inhalten gefüllt) sind charakteristisch.',
     tags: ['F0 – Organische Störungen'],
   ),
   Flashcard(
     text:
-        'F05 – Delir: Akuter Beginn mit Bewusstseinsstörung, Fluktuation der Symptome und Orientierungsstörung. NOTFALL! Typische Symptome: Optische Halluzinationen, motorische Unruhe, vegetative Störungen, erhöhte Suggestibilität. Dauer meist 3-5 Tage. Kann lebensbedrohlich sein (z.B. Delirium tremens bei Alkoholentzug).',
+        'F05 – Delir:\nAkuter Beginn mit Bewusstseinsstörung, Fluktuation der Symptome und Orientierungsstörung.\nNOTFALL!\nTypische Symptome: Optische Halluzinationen, motorische Unruhe, vegetative Störungen, erhöhte Suggestibilität.\nDauer meist 3-5 Tage.\nKann lebensbedrohlich sein (z.B. Delirium tremens bei Alkoholentzug).',
     tags: ['F0 – Organische Störungen'],
   ),
   Flashcard(
     text:
-        'Merke Demenz vs. Delir: Demenz = chronisch, schleichender Beginn, Bewusstsein KLAR, progredient. Delir = akut, plötzlicher Beginn, Bewusstsein GETRÜBT, fluktuierend. Beide können gleichzeitig auftreten (Delir auf dem Boden einer Demenz). Das Delir ist immer ein Notfall!',
+        'Merke Demenz vs. Delir:\nDemenz = chronisch, schleichender Beginn, Bewusstsein KLAR, progredient.\nDelir = akut, plötzlicher Beginn, Bewusstsein GETRÜBT, fluktuierend.\nBeide können gleichzeitig auftreten (Delir auf dem Boden einer Demenz).\nDas Delir ist immer ein Notfall!',
     tags: ['F0 – Organische Störungen', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'F06 – Sonstige organische psychische Störungen: Organisch bedingte Halluzinose, katatone Störung, wahnhafte Störung, affektive Störung, Angststörung oder dissoziative Störung. Entscheidend: Die Symptome sind durch eine nachweisbare Hirnfunktionsstörung verursacht, nicht primär psychisch bedingt.',
+        'F06 – Sonstige organische psychische Störungen:\nOrganisch bedingte Halluzinose, katatone Störung, wahnhafte Störung, affektive Störung, Angststörung oder dissoziative Störung.\nEntscheidend: Die Symptome sind durch eine nachweisbare Hirnfunktionsstörung verursacht, nicht primär psychisch bedingt.',
     tags: ['F0 – Organische Störungen'],
   ),
   Flashcard(
     text:
-        'F07 – Organische Persönlichkeitsveränderung: Persönlichkeitsveränderung nach Hirnschädigung (z.B. nach Schädel-Hirn-Trauma, Enzephalitis). Änderung des Verhaltens, der Emotionalität und der Impulskontrolle. Nicht als Persönlichkeitsstörung (F60) zu klassifizieren, da organisch bedingt.',
+        'F07 – Organische Persönlichkeitsveränderung:\nPersönlichkeitsveränderung nach Hirnschädigung (z.B. nach Schädel-Hirn-Trauma, Enzephalitis).\nÄnderung des Verhaltens, der Emotionalität und der Impulskontrolle.\nNicht als Persönlichkeitsstörung (F60) zu klassifizieren, da organisch bedingt.',
     tags: ['F0 – Organische Störungen'],
   ),
   Flashcard(
     text:
-        'Demenz vs. Depression (Pseudodemenz): Bei Depression klagt der Patient aktiv über Vergesslichkeit und antwortet mit "weiß nicht". Bei echten Demenzen: Patient bagatellisiert Defizite und zeigt Konfabulationen. Die "Pseudodemenz" ist eine Depression im höheren Alter mit kognitiven Symptomen und hat keinen eigenen ICD-10-Schlüssel.',
+        'Demenz vs. Depression (Pseudodemenz):\nBei Depression klagt der Patient aktiv über Vergesslichkeit und antwortet mit "weiß nicht".\nBei echten Demenzen: Patient bagatellisiert Defizite und zeigt Konfabulationen.\nDie "Pseudodemenz" ist eine Depression im höheren Alter mit kognitiven Symptomen und hat keinen eigenen ICD-10-Schlüssel.',
     tags: ['F0 – Organische Störungen', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'Quantitative Bewusstseinsstörungen betreffen die Wachheit (Vigilanz): Benommenheit → Somnolenz → Sopor → Koma (zunehmende Schwere). Qualitative Bewusstseinsstörungen: Bewusstseinstrübung (Verwirrtheit), Bewusstseinseinengung (z.B. Dämmerzustand), Bewusstseinsverschiebung (z.B. Drogenrausch). Halluzinationen gehören zu den Wahrnehmungsstörungen.',
+        'Quantitative Bewusstseinsstörungen betreffen die Wachheit (Vigilanz):\nBenommenheit → Somnolenz → Sopor → Koma (zunehmende Schwere).\nQualitative Bewusstseinsstörungen: Bewusstseinstrübung (Verwirrtheit), Bewusstseinseinengung (z.B. Dämmerzustand), Bewusstseinsverschiebung (z.B. Drogenrausch).\nHalluzinationen gehören zu den Wahrnehmungsstörungen.',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Nichtmedikamentöse Interventionen bei Demenz: Körperliche Aktivierung (Bewegungstherapie), basale Stimulation (sensorische Anregung), Ergotherapie (Alltagskompetenz), Realitätsorientierungstraining (zeitliche, örtliche, personelle Orientierung), supportive Psychotherapie. Demenz-Screening: MMST (Mini-Mental-Status-Test), Uhrentest.',
+        'Nichtmedikamentöse Interventionen bei Demenz:\nKörperliche Aktivierung (Bewegungstherapie), basale Stimulation (sensorische Anregung), Ergotherapie (Alltagskompetenz), Realitätsorientierungstraining (zeitliche, örtliche, personelle Orientierung), supportive Psychotherapie.\nDemenz-Screening: MMST (Mini-Mental-Status-Test), Uhrentest.',
     tags: ['F0 – Organische Störungen', 'Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Frühsymptome einer beginnenden Demenz: Affektive Veränderungen (Reizbarkeit, Stimmungsschwankungen, Apathie, depressive Verstimmung) treten oft als erste Symptome auf, noch vor ausgeprägten kognitiven Defiziten. Gangstörungen und Inkontinenz treten eher in fortgeschrittenen Stadien auf. Die Symptome müssen nach ICD-10 mindestens 6 Monate vorliegen.',
+        'Frühsymptome einer beginnenden Demenz:\nAffektive Veränderungen (Reizbarkeit, Stimmungsschwankungen, Apathie, depressive Verstimmung) treten oft als erste Symptome auf, noch vor ausgeprägten kognitiven Defiziten.\nGangstörungen und Inkontinenz treten eher in fortgeschrittenen Stadien auf.\nDie Symptome müssen nach ICD-10 mindestens 6 Monate vorliegen.',
     tags: ['F0 – Organische Störungen'],
   ),
 
@@ -104,87 +104,87 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'F1 – Aufbau der Codierung: Die 3. Stelle codiert die Substanz: F10=Alkohol, F11=Opioide, F12=Cannabinoide, F13=Sedativa/Hypnotika, F14=Kokain, F15=Stimulanzien, F16=Halluzinogene, F17=Tabak, F18=Lösungsmittel, F19=multipel/andere.',
+        'F1 – Aufbau der Codierung:\nDie 3. Stelle codiert die Substanz: F10=Alkohol, F11=Opioide, F12=Cannabinoide, F13=Sedativa/Hypnotika, F14=Kokain, F15=Stimulanzien, F16=Halluzinogene, F17=Tabak, F18=Lösungsmittel, F19=multipel/andere.',
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
     text:
-        'F1x – Die 4. Stelle codiert das klinische Bild: .0 = Akute Intoxikation (Rausch). .1 = Schädlicher Gebrauch (Schaden, keine Abhängigkeit). .2 = Abhängigkeitssyndrom. .3 = Entzugssyndrom. .4 = Entzug mit Delir. .5 = Psychotische Störung. .6 = Amnestisches Syndrom (Korsakow). .7 = Restzustand/verzögerte psychotische Störung.',
+        'F1x – Die 4. Stelle codiert das klinische Bild:\n.0 = Akute Intoxikation (Rausch). .1 = Schädlicher Gebrauch (Schaden, keine Abhängigkeit). .2 = Abhängigkeitssyndrom. .3 = Entzugssyndrom. .4 = Entzug mit Delir. .5 = Psychotische Störung. .6 = Amnestisches Syndrom (Korsakow). .7 = Restzustand/verzögerte psychotische Störung.',
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
     text:
-        '6 Kriterien für Abhängigkeit nach ICD-10 (mind. 3 über 1 Monat): (1) Starkes Verlangen/Craving. (2) Kontrollverlust. (3) Entzugssymptome. (4) Toleranzentwicklung. (5) Vernachlässigung anderer Interessen. (6) Fortgesetzter Konsum trotz nachweisbarer Schäden. Merke: 3 Kernkriterien: Craving, Kontrollverlust, Toleranzentwicklung.',
+        '6 Kriterien für Abhängigkeit nach ICD-10 (mind. 3 über 1 Monat):\n(1) Starkes Verlangen/Craving.\n(2) Kontrollverlust.\n(3) Entzugssymptome.\n(4) Toleranzentwicklung.\n(5) Vernachlässigung anderer Interessen.\n(6) Fortgesetzter Konsum trotz nachweisbarer Schäden.\nMerke: 3 Kernkriterien: Craving, Kontrollverlust, Toleranzentwicklung.',
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
     text:
-        'Abhängigkeit vs. Schädlicher Gebrauch: Abhängigkeit = mind. 3 von 6 Kriterien über 1 Monat. Schädlicher Gebrauch (.1) = nachweisbare körperliche oder psychische Schädigung durch Substanzkonsum, OHNE dass ein Abhängigkeitssyndrom vorliegt. Eine bestimmte Konsumhäufigkeit in Prozent ist KEIN Abhängigkeitskriterium.',
+        'Abhängigkeit vs. Schädlicher Gebrauch:\nAbhängigkeit = mind. 3 von 6 Kriterien über 1 Monat.\nSchädlicher Gebrauch (.1) = nachweisbare körperliche oder psychische Schädigung durch Substanzkonsum, OHNE dass ein Abhängigkeitssyndrom vorliegt.\nEine bestimmte Konsumhäufigkeit in Prozent ist KEIN Abhängigkeitskriterium.',
     tags: ['F1 – Substanzstörungen', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'Delirium tremens (F10.4): Tritt Stunden bis Tage nach Alkoholkarenz auf, dauert meist 3-5 Tage. Leitsymptom: Bewusstseinsstörung (Abgrenzung zur Alkoholhalluzinose mit klarem Bewusstsein). Weitere Symptome: Tremor (Kardinalsymptom), motorische Unruhe, optische Halluzinationen, vegetative Störungen, Orientierungsstörungen. NOTFALL – Koma als lebensbedrohliche Komplikation möglich.',
+        'Delirium tremens (F10.4):\nTritt Stunden bis Tage nach Alkoholkarenz auf, dauert meist 3-5 Tage.\nLeitsymptom: Bewusstseinsstörung (Abgrenzung zur Alkoholhalluzinose mit klarem Bewusstsein).\nWeitere Symptome: Tremor (Kardinalsymptom), motorische Unruhe, optische Halluzinationen, vegetative Störungen, Orientierungsstörungen.\nNOTFALL – Koma als lebensbedrohliche Komplikation möglich.',
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
     text:
-        'Alkoholhalluzinose vs. Alkoholdelir: Alkoholhalluzinose = vorwiegend akustische Halluzinationen bei KLAREM Bewusstsein. Delirium tremens = Bewusstseinsstörung + Tremor + optische Halluzinationen + vegetative Störungen. Die Bewusstseinslage ist das entscheidende Unterscheidungsmerkmal!',
+        'Alkoholhalluzinose vs. Alkoholdelir:\nAlkoholhalluzinose = vorwiegend akustische Halluzinationen bei KLAREM Bewusstsein.\nDelirium tremens = Bewusstseinsstörung + Tremor + optische Halluzinationen + vegetative Störungen.\nDie Bewusstseinslage ist das entscheidende Unterscheidungsmerkmal!',
     tags: ['F1 – Substanzstörungen', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'Korsakow-Syndrom (F10.6): Amnestisches Syndrom bei chronischem Alkoholismus. Schwere Störung des Kurzzeitgedächtnisses, Konfabulationen (Füllen von Erinnerungslücken mit erfundenen Inhalten), Merkfähigkeitsstörung, Zeitgitterstörung. Prophylaxe: Vitamin B1 (Thiamin) zur Verhinderung der Wernicke-Enzephalopathie.',
+        'Korsakow-Syndrom (F10.6):\nAmnestisches Syndrom bei chronischem Alkoholismus.\nSchwere Störung des Kurzzeitgedächtnisses, Konfabulationen (Füllen von Erinnerungslücken mit erfundenen Inhalten), Merkfähigkeitsstörung, Zeitgitterstörung.\nProphylaxe: Vitamin B1 (Thiamin) zur Verhinderung der Wernicke-Enzephalopathie.',
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
     text:
-        'Alkoholentzug: Vegetative Symptome wie Schwitzen, Tremor, Tachykardie, Hypertonie. Kann zu Krampfanfällen und Delirium tremens führen – daher stationäre Überwachung oft notwendig. Vitamin B1 (Thiamin) und Folsäure als Prophylaxe. 5 Trinkertypen nach Jellinek: Alpha bis Epsilon (Beta = Gelegenheitstrinker, nicht abhängig).',
+        'Alkoholentzug:\nVegetative Symptome wie Schwitzen, Tremor, Tachykardie, Hypertonie.\nKann zu Krampfanfällen und Delirium tremens führen – daher stationäre Überwachung oft notwendig.\nVitamin B1 (Thiamin) und Folsäure als Prophylaxe.\n5 Trinkertypen nach Jellinek: Alpha bis Epsilon (Beta = Gelegenheitstrinker, nicht abhängig).',
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
     text:
-        'Cannabis-Intoxikation: Gerötete Augen, Mydriasis (weite Pupillen, NICHT Miosis!), Konzentrationsverschlechterung, veränderte Sinneswahrnehmung, ideenflüchtiges Denken, gesteigerter Appetit. Nach chronischem Hochdosiskonsum: Entzugssymptome möglich (Angst, Tremor, Schlafstörungen, Reizbarkeit). Chronischer Konsum führt zum amotivationalen Syndrom mit Antriebsminderung und Leistungsabfall – NICHT zu Antriebssteigerung. Cannabis kann außerdem Psychosen auslösen; synthetische Cannabinoide ("Kräutermischungen", "Spice") können akute psychotische Zustände mit Selbstgefährdung hervorrufen.',
+        'Cannabis-Intoxikation:\nGerötete Augen, Mydriasis (weite Pupillen, NICHT Miosis!), Konzentrationsverschlechterung, veränderte Sinneswahrnehmung, ideenflüchtiges Denken, gesteigerter Appetit.\nNach chronischem Hochdosiskonsum: Entzugssymptome möglich (Angst, Tremor, Schlafstörungen, Reizbarkeit).\nChronischer Konsum führt zum amotivationalen Syndrom mit Antriebsminderung und Leistungsabfall – NICHT zu Antriebssteigerung.\nCannabis kann außerdem Psychosen auslösen; synthetische Cannabinoide ("Kräutermischungen", "Spice") können akute psychotische Zustände mit Selbstgefährdung hervorrufen.',
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
     text:
-        'Pupillenreaktionen bei Substanzen: Mydriasis (weite Pupillen) = Stimulanzien (Kokain, Amphetamine), Cannabis, Halluzinogene. Miosis (enge Pupillen / "Stecknadelpupillen") = Opioide (Morphin, Heroin). Merke: Mydriasis = Stimulanzien. Miosis = Opioide.',
+        'Pupillenreaktionen bei Substanzen:\nMydriasis (weite Pupillen) = Stimulanzien (Kokain, Amphetamine), Cannabis, Halluzinogene.\nMiosis (enge Pupillen / "Stecknadelpupillen") = Opioide (Morphin, Heroin).\nMerke: Mydriasis = Stimulanzien.\nMiosis = Opioide.',
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
     text:
-        'Benzodiazepine: Kumulationsgefahr durch aktive Metaboliten, sedierende Wirkung, Abhängigkeitspotenzial. Entzug über Wochen ausschleichen! NIEMALS abrupt absetzen bei Hochdosis – Gefahr von Krampfanfällen! Opiate, Benzodiazepine und Nikotin führen zu ausgeprägter körperlicher Abhängigkeit. LSD und MDMA verursachen keine körperliche, nur psychische Abhängigkeit.',
+        'Benzodiazepine:\nKumulationsgefahr durch aktive Metaboliten, sedierende Wirkung, Abhängigkeitspotenzial.\nEntzug über Wochen ausschleichen!\nNIEMALS abrupt absetzen bei Hochdosis – Gefahr von Krampfanfällen!\nOpiate, Benzodiazepine und Nikotin führen zu ausgeprägter körperlicher Abhängigkeit.\nLSD und MDMA verursachen keine körperliche, nur psychische Abhängigkeit.',
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
     text:
-        '4 Phasen der Suchttherapie: 1. Kontakt- und Motivationsphase. 2. Entgiftungsphase. 3. Entwöhnungsphase. 4. Nachsorgephase. Die "Remissionsphase" ist KEINE eigenständige Therapiephase, sondern beschreibt den Zustand nach erfolgreicher Behandlung.',
+        '4 Phasen der Suchttherapie:\n1. Kontakt- und Motivationsphase.\n2. Entgiftungsphase.\n3. Entwöhnungsphase.\n4. Nachsorgephase.\nDie "Remissionsphase" ist KEINE eigenständige Therapiephase, sondern beschreibt den Zustand nach erfolgreicher Behandlung.',
     tags: ['F1 – Substanzstörungen', 'Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Methadon-Substitution: Erhaltungstherapie (Maintenance-Therapie) bei Opioidabhängigkeit. Durchführung ist Ärzten mit Zusatzqualifikation vorbehalten, NICHT Heilpraktikern. Vollständige Abstinenz wird in der Regel nicht erreicht. Begleitende Psychotherapie ist erwünscht. In der Schwangerschaft ist Substitution Erstlinientherapie, da unkontrollierter Entzug das Kind gefährdet.',
+        'Methadon-Substitution:\nErhaltungstherapie (Maintenance-Therapie) bei Opioidabhängigkeit.\nDurchführung ist Ärzten mit Zusatzqualifikation vorbehalten, NICHT Heilpraktikern.\nVollständige Abstinenz wird in der Regel nicht erreicht.\nBegleitende Psychotherapie ist erwünscht.\nIn der Schwangerschaft ist Substitution Erstlinientherapie, da unkontrollierter Entzug das Kind gefährdet.',
     tags: ['F1 – Substanzstörungen', 'Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Pathologischer Rausch: Atypischer Rauschzustand nach relativ geringer Alkoholmenge. Symptome: Situationsverkennung, Erregungszustände, ggf. aggressives Verhalten. Geht nicht regelhaft in ein Delir über. Abgrenzung zum normalen Rausch: überproportionale Symptomatik zur aufgenommenen Menge.',
+        'Pathologischer Rausch:\nAtypischer Rauschzustand nach relativ geringer Alkoholmenge.\nSymptome: Situationsverkennung, Erregungszustände, ggf. aggressives Verhalten.\nGeht nicht regelhaft in ein Delir über.\nAbgrenzung zum normalen Rausch: überproportionale Symptomatik zur aufgenommenen Menge.',
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
     text:
-        'Substanzinduzierte psychotische Störungen (F1x.5): Halluzinationen und/oder Wahn während oder kurz nach Substanzgebrauch. Können bei praktisch allen Substanzen auftreten. Symptome wie Stupor, Personenverkennung, akustische Halluzinationen, Ekstase und Verfolgungsideen sind möglich. Abgrenzung: Drogen können Schizophrenie-ähnliche Symptome auslösen.',
+        'Substanzinduzierte psychotische Störungen (F1x.5):\nHalluzinationen und/oder Wahn während oder kurz nach Substanzgebrauch.\nKönnen bei praktisch allen Substanzen auftreten.\nSymptome wie Stupor, Personenverkennung, akustische Halluzinationen, Ekstase und Verfolgungsideen sind möglich.\nAbgrenzung: Drogen können Schizophrenie-ähnliche Symptome auslösen.',
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
     text:
-        'Opioidintoxikation: Miosis (Stecknadelpupillen), Atemdepression, Bewusstseinsminderung, Euphorie. Bei Überdosis: lebensbedrohliche Atemdepression. Gegenmittel: Naloxon. Abgrenzung: Kokainintoxikation zeigt Mydriasis, Tachykardie, Euphorie, mögliche Halluzinationen. Amphetamine: ähnlich Kokain, aber länger wirkend.',
+        'Opioidintoxikation:\nMiosis (Stecknadelpupillen), Atemdepression, Bewusstseinsminderung, Euphorie.\nBei Überdosis: lebensbedrohliche Atemdepression.\nGegenmittel: Naloxon.\nAbgrenzung: Kokainintoxikation zeigt Mydriasis, Tachykardie, Euphorie, mögliche Halluzinationen.\nAmphetamine: ähnlich Kokain, aber länger wirkend.',
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
     text:
-        'Alkoholintoxikation: Kann auch unter 1,0 Promille diagnostiziert werden (individuelle Toleranz variiert). Schwere Intoxikation: Atemdepression und Hypothermie möglich. Binge-Drinking: 5+ Standardgläser (Männer) bzw. 4+ (Frauen) bei einer Gelegenheit. Riskanter Gebrauch: >24g/Tag (Männer), >12g/Tag (Frauen). Ein Standardglas = ca. 10-12g reiner Alkohol.',
+        'Alkoholintoxikation:\nKann auch unter 1,0 Promille diagnostiziert werden (individuelle Toleranz variiert).\nSchwere Intoxikation: Atemdepression und Hypothermie möglich.\nBinge-Drinking: 5+ Standardgläser (Männer) bzw. 4+ (Frauen) bei einer Gelegenheit.\nRiskanter Gebrauch: >24g/Tag (Männer), >12g/Tag (Frauen).\nEin Standardglas = ca. 10-12g reiner Alkohol.',
     tags: ['F1 – Substanzstörungen'],
   ),
 
@@ -193,102 +193,102 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'Symptome 1. Ranges nach Kurt Schneider (pathognomonisch für Schizophrenie): Gedankenlautwerden, Gedankenentzug, Gedankeneingebung, Gedankenausbreitung, Stimmenhören (dialogisch/kommentierend), leibliche Beeinflussungserlebnisse, Wahnwahrnehmung, Gefühl des Gemachten. Diese Symptome sind ein häufiger Prüfungsklassiker!',
+        'Symptome 1. Ranges nach Kurt Schneider (pathognomonisch für Schizophrenie):\nGedankenlautwerden, Gedankenentzug, Gedankeneingebung, Gedankenausbreitung, Stimmenhören (dialogisch/kommentierend), leibliche Beeinflussungserlebnisse, Wahnwahrnehmung, Gefühl des Gemachten.\nDiese Symptome sind ein häufiger Prüfungsklassiker!',
     tags: ['F2 – Schizophrenie'],
   ),
   Flashcard(
     text:
-        'Symptome 2. Ranges nach Schneider: Sonstige Halluzinationen, Wahneinfälle, Ratlosigkeit, depressive oder frohe Verstimmung, erlebte Gefühlsverarmung, andere Sinnestäuschungen. Diese sind weniger spezifisch als Erstrangsymptome und können auch bei anderen Störungen auftreten.',
+        'Symptome 2. Ranges nach Schneider:\nSonstige Halluzinationen, Wahneinfälle, Ratlosigkeit, depressive oder frohe Verstimmung, erlebte Gefühlsverarmung, andere Sinnestäuschungen.\nDiese sind weniger spezifisch als Erstrangsymptome und können auch bei anderen Störungen auftreten.',
     tags: ['F2 – Schizophrenie'],
   ),
   Flashcard(
     text:
-        'Positivsymptome der Schizophrenie (Überschuss): Wahn, Halluzinationen, Ich-Störungen (Gedankeneingebung, -entzug, -ausbreitung), formale Denkstörungen (Zerfahrenheit), psychomotorische Störungen (Katatonie). Positivsymptome sprechen besser auf Neuroleptika an als Negativsymptome.',
+        'Positivsymptome der Schizophrenie (Überschuss):\nWahn, Halluzinationen, Ich-Störungen (Gedankeneingebung, -entzug, -ausbreitung), formale Denkstörungen (Zerfahrenheit), psychomotorische Störungen (Katatonie).\nPositivsymptome sprechen besser auf Neuroleptika an als Negativsymptome.',
     tags: ['F2 – Schizophrenie'],
   ),
   Flashcard(
     text:
-        'Negativsymptome der Schizophrenie (Defizit) – Merke "6 A": Affektverflachung, Antriebsarmut/Apathie, Alogie (Sprachverarmung), Anhedonie (Freudlosigkeit), Aufmerksamkeitsstörung, Asozialität (sozialer Rückzug). Negativsymptome sind schwerer zu behandeln als Positivsymptome.',
+        'Negativsymptome der Schizophrenie (Defizit) – Merke "6 A":\nAffektverflachung, Antriebsarmut/Apathie, Alogie (Sprachverarmung), Anhedonie (Freudlosigkeit), Aufmerksamkeitsstörung, Asozialität (sozialer Rückzug).\nNegativsymptome sind schwerer zu behandeln als Positivsymptome.',
     tags: ['F2 – Schizophrenie'],
   ),
   Flashcard(
     text:
-        'F20.0 – Paranoide Schizophrenie: Häufigste Form der Schizophrenie. Wahn und Halluzinationen dominieren das klinische Bild. Typisch: Verfolgungswahn, Beziehungswahn, akustische Halluzinationen (Stimmenhören). Ich-Störungen (Gedankeneingebung, -entzug, -ausbreitung) und Denkstörungen (Zerfahrenheit) sind pathognomonisch.',
+        'F20.0 – Paranoide Schizophrenie:\nHäufigste Form der Schizophrenie.\nWahn und Halluzinationen dominieren das klinische Bild.\nTypisch: Verfolgungswahn, Beziehungswahn, akustische Halluzinationen (Stimmenhören).\nIch-Störungen (Gedankeneingebung, -entzug, -ausbreitung) und Denkstörungen (Zerfahrenheit) sind pathognomonisch.',
     tags: ['F2 – Schizophrenie'],
   ),
   Flashcard(
     text:
-        'F20.1 – Hebephrene Schizophrenie: Affektstörung und Antriebsstörung stehen im Vordergrund. Typisch: Läppischer, inadäquater Affekt, unberechenbares Verhalten, oberflächliche Stimmung. Beginn meist bei Jugendlichen und jungen Erwachsenen (15-25 Jahre). Prognose ungünstiger als bei paranoider Form.',
+        'F20.1 – Hebephrene Schizophrenie:\nAffektstörung und Antriebsstörung stehen im Vordergrund.\nTypisch: Läppischer, inadäquater Affekt, unberechenbares Verhalten, oberflächliche Stimmung.\nBeginn meist bei Jugendlichen und jungen Erwachsenen (15-25 Jahre).\nPrognose ungünstiger als bei paranoider Form.',
     tags: ['F2 – Schizophrenie'],
   ),
   Flashcard(
     text:
-        'F20.2 – Katatone Schizophrenie: Psychomotorische Störungen stehen im Vordergrund. Stupor ↔ Erregung im Wechsel, Flexibilitas cerea (wächserne Biegsamkeit), Katalepsie (Erstarrung), Befehlsautomatie, Negativismus, Mutismus, Echolalie, Haltungs-, Bewegungs- und Sprachstereotypien. Die paranoide Form ist häufiger als die katatone.',
+        'F20.2 – Katatone Schizophrenie:\nPsychomotorische Störungen stehen im Vordergrund.\nStupor ↔ Erregung im Wechsel, Flexibilitas cerea (wächserne Biegsamkeit), Katalepsie (Erstarrung), Befehlsautomatie, Negativismus, Mutismus, Echolalie, Haltungs-, Bewegungs- und Sprachstereotypien.\nDie paranoide Form ist häufiger als die katatone.',
     tags: ['F2 – Schizophrenie', 'Psychopathologie'],
   ),
   Flashcard(
     text:
-        'F20.5 – Schizophrenes Residuum: Chronische Negativsymptomatik nach akuter psychotischer Phase. Psychomotorische Verlangsamung, Affektverflachung, Passivität mit Initiativemangel. Positivsymptome sind abgeklungen oder deutlich reduziert. Akustische Halluzinationen wären Positivsymptome, keine typischen Residualsymptome.',
+        'F20.5 – Schizophrenes Residuum:\nChronische Negativsymptomatik nach akuter psychotischer Phase.\nPsychomotorische Verlangsamung, Affektverflachung, Passivität mit Initiativemangel.\nPositivsymptome sind abgeklungen oder deutlich reduziert.\nAkustische Halluzinationen wären Positivsymptome, keine typischen Residualsymptome.',
     tags: ['F2 – Schizophrenie'],
   ),
   Flashcard(
     text:
-        'F20.6 – Schizophrenia simplex: Schleichender Beginn ohne akute psychotische Episode. Negativsymptome ohne vorhergehende Positivsymptome. Zunehmender sozialer Rückzug, Antriebsarmut, Leistungsabfall. Schwierige Diagnose wegen fehlender dramatischer Symptomatik.',
+        'F20.6 – Schizophrenia simplex:\nSchleichender Beginn ohne akute psychotische Episode.\nNegativsymptome ohne vorhergehende Positivsymptome.\nZunehmender sozialer Rückzug, Antriebsarmut, Leistungsabfall.\nSchwierige Diagnose wegen fehlender dramatischer Symptomatik.',
     tags: ['F2 – Schizophrenie'],
   ),
   Flashcard(
     text:
-        'F21 – Schizotype Störung: Exzentrisches Verhalten, magisches Denken, kaltes/unnahbares Auftreten, Misstrauen, umständliches Denken und Sprechen. KEINE vollständige Psychose (keine Halluzinationen oder ausgeprägten Wahnphänomene). Nicht mit Schizophrenie gleichzusetzen.',
+        'F21 – Schizotype Störung:\nExzentrisches Verhalten, magisches Denken, kaltes/unnahbares Auftreten, Misstrauen, umständliches Denken und Sprechen.\nKEINE vollständige Psychose (keine Halluzinationen oder ausgeprägten Wahnphänomene).\nNicht mit Schizophrenie gleichzusetzen.',
     tags: ['F2 – Schizophrenie'],
   ),
   Flashcard(
     text:
-        'F22 – Anhaltende wahnhafte Störung: Isolierter, systematisierter Wahn über mehr als 3 Monate. OHNE Halluzinationen. Persönlichkeit und Funktionsfähigkeit sind ansonsten weitgehend erhalten. Abgrenzung zur Schizophrenie: Kein bizarrer Wahn, keine Halluzinationen, keine formalen Denkstörungen.',
+        'F22 – Anhaltende wahnhafte Störung:\nIsolierter, systematisierter Wahn über mehr als 3 Monate.\nOHNE Halluzinationen.\nPersönlichkeit und Funktionsfähigkeit sind ansonsten weitgehend erhalten.\nAbgrenzung zur Schizophrenie: Kein bizarrer Wahn, keine Halluzinationen, keine formalen Denkstörungen.',
     tags: ['F2 – Schizophrenie', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'F23 – Akute vorübergehende psychotische Störung: Akuter Beginn innerhalb von 2 Wochen. Polymorphes, wechselhaftes klinisches Bild. Vollständige Remission innerhalb weniger Monate. Oft durch akute Belastung getriggert. Abgrenzung: Bei Schizophrenie dauern Symptome mindestens 1 Monat.',
+        'F23 – Akute vorübergehende psychotische Störung:\nAkuter Beginn innerhalb von 2 Wochen.\nPolymorphes, wechselhaftes klinisches Bild.\nVollständige Remission innerhalb weniger Monate.\nOft durch akute Belastung getriggert.\nAbgrenzung: Bei Schizophrenie dauern Symptome mindestens 1 Monat.',
     tags: ['F2 – Schizophrenie'],
   ),
   Flashcard(
     text:
-        'F25 – Schizoaffektive Störung: Gleichzeitiges Vorliegen schizophrener UND affektiver (depressiver oder manischer) Symptome in derselben Episode. Abgrenzung: Bei Schizophrenie stehen psychotische Symptome im Vordergrund. Bei affektiven Störungen fehlen typische schizophrene Symptome.',
+        'F25 – Schizoaffektive Störung:\nGleichzeitiges Vorliegen schizophrener UND affektiver (depressiver oder manischer) Symptome in derselben Episode.\nAbgrenzung: Bei Schizophrenie stehen psychotische Symptome im Vordergrund.\nBei affektiven Störungen fehlen typische schizophrene Symptome.',
     tags: ['F2 – Schizophrenie', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'Prodromalphase der Schizophrenie: Unspezifische Symptome vor der akuten Phase – Interessenverlust, sozialer Rückzug, Vernachlässigung der Hygiene, depressive Verstimmung. Ein ausgestaltetes Wahnsystem gehört zur aktiven Krankheitsphase, NICHT zur Prodromalphase.',
+        'Prodromalphase der Schizophrenie:\nUnspezifische Symptome vor der akuten Phase – Interessenverlust, sozialer Rückzug, Vernachlässigung der Hygiene, depressive Verstimmung.\nEin ausgestaltetes Wahnsystem gehört zur aktiven Krankheitsphase, NICHT zur Prodromalphase.',
     tags: ['F2 – Schizophrenie'],
   ),
   Flashcard(
     text:
-        'Prognose der Schizophrenie: Günstige Faktoren: Weibliches Geschlecht, akuter Beginn, gute prämorbide Anpassung. Ungünstige Faktoren: Schleichender Beginn, männliches Geschlecht, Cannabiskonsum, familiäre Belastung. Männer erkranken im Schnitt früher (20-25 J) als Frauen (25-30 J). Bei 10-30% heilt die Erkrankung aus.',
+        'Prognose der Schizophrenie:\nGünstige Faktoren: Weibliches Geschlecht, akuter Beginn, gute prämorbide Anpassung.\nUngünstige Faktoren: Schleichender Beginn, männliches Geschlecht, Cannabiskonsum, familiäre Belastung.\nMänner erkranken im Schnitt früher (20-25 J) als Frauen (25-30 J).\nBei 10-30% heilt die Erkrankung aus.',
     tags: ['F2 – Schizophrenie'],
   ),
   Flashcard(
     text:
-        'Ich-Störungen bei Schizophrenie: Gedankeneingebung (fremde Gedanken werden eingegeben), Gedankenentzug (Gedanken werden entzogen), Gedankenausbreitung (andere können Gedanken lesen), Gedankenlautwerden. Dazu: Depersonalisation (Entfremdung vom eigenen Ich) und Derealisation (Umwelt erscheint unwirklich).',
+        'Ich-Störungen bei Schizophrenie:\nGedankeneingebung (fremde Gedanken werden eingegeben), Gedankenentzug (Gedanken werden entzogen), Gedankenausbreitung (andere können Gedanken lesen), Gedankenlautwerden.\nDazu: Depersonalisation (Entfremdung vom eigenen Ich) und Derealisation (Umwelt erscheint unwirklich).',
     tags: ['F2 – Schizophrenie', 'Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Formale vs. inhaltliche Denkstörungen: Formale = Störung des Denkablaufs: Ideenflucht, Zerfahrenheit, Denkhemmung, Perseveration, Neologismen, Konkretismus. Inhaltliche = Störung des Denkinhalts: Wahn (unkorrigierbar, subjektiv gewiss, realitätswidrig), überwertige Ideen. Merke: Konkretismus = Sprichwörter werden wörtlich genommen.',
+        'Formale vs. inhaltliche Denkstörungen:\nFormale = Störung des Denkablaufs: Ideenflucht, Zerfahrenheit, Denkhemmung, Perseveration, Neologismen, Konkretismus.\nInhaltliche = Störung des Denkinhalts: Wahn (unkorrigierbar, subjektiv gewiss, realitätswidrig), überwertige Ideen.\nMerke: Konkretismus = Sprichwörter werden wörtlich genommen.',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Wahn – Definition und Merkmale: (1) Widerspruch zur Realität. (2) Subjektive Gewissheit (Patient ist absolut überzeugt). (3) Unkorrigierbarkeit (Gegenargumente helfen nicht). Wahn ist ich-SYNTON (wird als Teil des eigenen Erlebens empfunden). Wahnformen: Verfolgungswahn, Größenwahn, Beziehungswahn, Verarmungswahn, Eifersuchtswahn.',
+        'Wahn – Definition und Merkmale:\n(1) Widerspruch zur Realität.\n(2) Subjektive Gewissheit (Patient ist absolut überzeugt).\n(3) Unkorrigierbarkeit (Gegenargumente helfen nicht).\nWahn ist ich-SYNTON (wird als Teil des eigenen Erlebens empfunden).\nWahnformen: Verfolgungswahn, Größenwahn, Beziehungswahn, Verarmungswahn, Eifersuchtswahn.',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Schizophrenie vs. wahnhafte Störung (F22): Wahnhafte Störung: Isolierter Wahn OHNE Halluzinationen, Persönlichkeit sonst erhalten, Dauer >3 Monate. Schizophrenie: Halluzinationen, Ich-Störungen, formale Denkstörungen, Negativsymptome zusätzlich zum Wahn. Die Differenzierung ist ein häufiger Prüfungsklassiker!',
+        'Schizophrenie vs. wahnhafte Störung (F22):\nWahnhafte Störung: Isolierter Wahn OHNE Halluzinationen, Persönlichkeit sonst erhalten, Dauer >3 Monate.\nSchizophrenie: Halluzinationen, Ich-Störungen, formale Denkstörungen, Negativsymptome zusätzlich zum Wahn.\nDie Differenzierung ist ein häufiger Prüfungsklassiker!',
     tags: ['Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'Beziehungsideen (überwertige Ideen) sind ein Hinweis auf Schizophrenie: Der Patient bezieht alles auf sich selbst. Überwertige Ideen und der symbiontische Wahn/Folie à deux (induzierte wahnhafte Störung) sind inhaltliche Denkstörungen. Konkretismus, Paralogik und Kontamination sind hingegen formale Denkstörungen.',
+        'Beziehungsideen (überwertige Ideen) sind ein Hinweis auf Schizophrenie:\nDer Patient bezieht alles auf sich selbst.\nÜberwertige Ideen und der symbiontische Wahn/Folie à deux (induzierte wahnhafte Störung) sind inhaltliche Denkstörungen.\nKonkretismus, Paralogik und Kontamination sind hingegen formale Denkstörungen.',
     tags: ['F2 – Schizophrenie', 'Psychopathologie'],
   ),
 
@@ -297,72 +297,72 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'F30 – Manische Episode: Gehobene Stimmung, Antriebssteigerung, vermindertes Schlafbedürfnis, Größenideen, Rededrang, gesteigerte Geselligkeit, Enthemmung. Wahnideen bei Manie sind typischerweise stimmungskongruent (Größenwahn). Formale Denkstörungen: Ideenflucht, Gedankenrasen.',
+        'F30 – Manische Episode:\nGehobene Stimmung, Antriebssteigerung, vermindertes Schlafbedürfnis, Größenideen, Rededrang, gesteigerte Geselligkeit, Enthemmung.\nWahnideen bei Manie sind typischerweise stimmungskongruent (Größenwahn).\nFormale Denkstörungen: Ideenflucht, Gedankenrasen.',
     tags: ['F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'F31 – Bipolare affektive Störung: Wechsel manischer und depressiver Episoden. F31.6 = Gemischte Episode (gleichzeitig manische und depressive Symptome). Depressive Phasen überwiegen zeitlich. Manifestation oft vor dem 25. Lebensjahr. Beide Geschlechter etwa gleich betroffen.',
+        'F31 – Bipolare affektive Störung:\nWechsel manischer und depressiver Episoden.\nF31.6 = Gemischte Episode (gleichzeitig manische und depressive Symptome).\nDepressive Phasen überwiegen zeitlich.\nManifestation oft vor dem 25. Lebensjahr.\nBeide Geschlechter etwa gleich betroffen.',
     tags: ['F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'F32 – Depressive Episode: 3 Hauptsymptome: (1) Gedrückte Stimmung, (2) Interessenverlust, (3) Antriebsminderung. Zusatzsymptome: Konzentration↓, Selbstwert↓, Schuldgefühle, Zukunftspessimismus, Suizidgedanken, Schlafstörung, Appetitveränderung. Dauer: mind. 2 Wochen.',
+        'F32 – Depressive Episode:\n3 Hauptsymptome: (1) Gedrückte Stimmung, (2) Interessenverlust, (3) Antriebsminderung.\nZusatzsymptome: Konzentration↓, Selbstwert↓, Schuldgefühle, Zukunftspessimismus, Suizidgedanken, Schlafstörung, Appetitveränderung.\nDauer: mind. 2 Wochen.',
     tags: ['F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'Schweregrade der Depression: Leicht = 2 Hauptsymptome + 2 Zusatzsymptome. Mittel = 2 Hauptsymptome + 3-4 Zusatzsymptome. Schwer = 3 Hauptsymptome + ≥4 Zusatzsymptome. Schwer mit psychotischen Symptomen = zusätzlich Wahn und/oder Halluzinationen (z.B. Verarmungswahn, nihilistischer Wahn); hier kann zusätzlich ein Neuroleptikum erforderlich sein.',
+        'Schweregrade der Depression:\nLeicht = 2 Hauptsymptome + 2 Zusatzsymptome.\nMittel = 2 Hauptsymptome + 3-4 Zusatzsymptome.\nSchwer = 3 Hauptsymptome + ≥4 Zusatzsymptome.\nSchwer mit psychotischen Symptomen = zusätzlich Wahn und/oder Halluzinationen (z.B. Verarmungswahn, nihilistischer Wahn); hier kann zusätzlich ein Neuroleptikum erforderlich sein.',
     tags: ['F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'F33 – Rezidivierende depressive Störung: Wiederholte depressive Episoden OHNE manische oder hypomanische Episode in der Vorgeschichte. Abgrenzung zu bipolar: Tritt auch nur EINE manische/hypomanische Episode auf, wird bipolar diagnostiziert. Unipolare Verläufe sind häufiger als bipolare.',
+        'F33 – Rezidivierende depressive Störung:\nWiederholte depressive Episoden OHNE manische oder hypomanische Episode in der Vorgeschichte.\nAbgrenzung zu bipolar: Tritt auch nur EINE manische/hypomanische Episode auf, wird bipolar diagnostiziert.\nUnipolare Verläufe sind häufiger als bipolare.',
     tags: ['F3 – Affektive Störungen', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'F34.0 – Zyklothymia: Chronische Stimmungsinstabilität mit leichten Schwankungen (nicht schwer genug für F31). Dauer ≥2 Jahre. Wechsel zwischen leicht gehobener und leicht gedrückter Stimmung. F34.1 – Dysthymia: Chronische depressive Verstimmung ≥2 Jahre, nicht schwer genug für F33. Betroffene können meist den Alltag bewältigen.',
+        'F34.0 – Zyklothymia:\nChronische Stimmungsinstabilität mit leichten Schwankungen (nicht schwer genug für F31).\nDauer ≥2 Jahre.\nWechsel zwischen leicht gehobener und leicht gedrückter Stimmung.\nF34.1 – Dysthymia: Chronische depressive Verstimmung ≥2 Jahre, nicht schwer genug für F33.\nBetroffene können meist den Alltag bewältigen.',
     tags: ['F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'Depression vs. Dysthymia: Depression = episodisch, schwerere Symptomatik, klarer Beginn/Ende. Dysthymia = chronisch ≥2 Jahre, leichtere Symptomatik, keine klaren Episoden. Bipolar vs. rezidivierende Depression: Bipolar = mind. 1 manische/hypomanische Episode. Rezidivierende Depression = NUR depressive Episoden.',
+        'Depression vs. Dysthymia:\nDepression = episodisch, schwerere Symptomatik, klarer Beginn/Ende.\nDysthymia = chronisch ≥2 Jahre, leichtere Symptomatik, keine klaren Episoden.\nBipolar vs. rezidivierende Depression: Bipolar = mind. 1 manische/hypomanische Episode.\nRezidivierende Depression = NUR depressive Episoden.',
     tags: ['Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'Somatisches Syndrom bei Depression: Frühes Erwachen (2+ Stunden vor üblicher Zeit), Morgentief, Appetit- und Gewichtsverlust, Libidoverlust, psychomotorische Hemmung oder Agitiertheit. Merke: Das somatische Syndrom beschreibt körperliche Begleiterscheinungen – nicht zu verwechseln mit den Kernsymptomen.',
+        'Somatisches Syndrom bei Depression:\nFrühes Erwachen (2+ Stunden vor üblicher Zeit), Morgentief, Appetit- und Gewichtsverlust, Libidoverlust, psychomotorische Hemmung oder Agitiertheit.\nMerke: Das somatische Syndrom beschreibt körperliche Begleiterscheinungen – nicht zu verwechseln mit den Kernsymptomen.',
     tags: ['F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'Suizidalität bei Depression: Bei Neueinstellung auf antriebssteigerndes Antidepressivum besteht in den ersten Wochen erhöhte Suizidgefahr (Antrieb steigt vor Stimmungsaufhellung). Antidepressiva wirken dreistufig: 1. sedierend → 2. antriebssteigernd → 3. stimmungsaufhellend. Depressive MÜSSEN direkt auf Suizidgedanken angesprochen werden.',
+        'Suizidalität bei Depression:\nBei Neueinstellung auf antriebssteigerndes Antidepressivum besteht in den ersten Wochen erhöhte Suizidgefahr (Antrieb steigt vor Stimmungsaufhellung).\nAntidepressiva wirken dreistufig:\n1. sedierend → 2. antriebssteigernd → 3. stimmungsaufhellend.\nDepressive MÜSSEN direkt auf Suizidgedanken angesprochen werden.',
     tags: ['F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'Suizidalität – Stufen nach Pöldinger: 1. Erwägungsphase (Suizid wird als Möglichkeit erwogen). 2. Ambivalenzphase (Schwanken zwischen Leben und Tod). 3. Entschlussphase (Patient hat sich entschieden, wirkt oft "ruhiger"). Merke: „EAE" – Erwägung, Ambivalenz, Entschluss. Die scheinbare Ruhe in Phase 3 ist besonders gefährlich!',
+        'Suizidalität – Stufen nach Pöldinger:\n1. Erwägungsphase (Suizid wird als Möglichkeit erwogen).\n2. Ambivalenzphase (Schwanken zwischen Leben und Tod).\n3. Entschlussphase (Patient hat sich entschieden, wirkt oft "ruhiger").\nMerke: „EAE" – Erwägung, Ambivalenz, Entschluss.\nDie scheinbare Ruhe in Phase 3 ist besonders gefährlich!',
     tags: ['F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'Suizidalität – Merksätze: Akute Suizidalität = NOTFALL → zwangsweise Unterbringung möglich. "Weiche" Methoden seltener tödlich als "harte" → vollendete Suizide bei Männern häufiger. Imperative (befehlende) Stimmen bei Schizophrenie können zum Suizid aufrufen. 90% der Suizidopfer hatten eine psychische Erkrankung.',
+        'Suizidalität – Merksätze:\nAkute Suizidalität = NOTFALL → zwangsweise Unterbringung möglich.\n"Weiche" Methoden seltener tödlich als "harte" → vollendete Suizide bei Männern häufiger.\nImperative (befehlende) Stimmen bei Schizophrenie können zum Suizid aufrufen.\n90% der Suizidopfer hatten eine psychische Erkrankung.',
     tags: ['F3 – Affektive Störungen', 'Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Lithium – Phasenprophylaxe bei bipolarer Störung: Sowohl in manischen als auch in depressiven Phasen können psychotische Symptome auftreten. Phasenprophylaktika: Lithium, Valproat, Carbamazepin. Lithium hat eine enge therapeutische Breite (regelmäßige Spiegelkontrollen nötig). Hypomanie = leichtere Form der Manie, ohne Psychose.',
+        'Lithium – Phasenprophylaxe bei bipolarer Störung:\nSowohl in manischen als auch in depressiven Phasen können psychotische Symptome auftreten.\nPhasenprophylaktika: Lithium, Valproat, Carbamazepin.\nLithium hat eine enge therapeutische Breite (regelmäßige Spiegelkontrollen nötig).\nHypomanie = leichtere Form der Manie, ohne Psychose.',
     tags: ['F3 – Affektive Störungen', 'Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Zeitkriterien affektiver Störungen merken: Depressive Episode ≥2 Wochen. Dysthymia ≥2 Jahre (chronisch, leichter). Zyklothymia ≥2 Jahre (Schwankungen). Bei schwerer Depression: Kombinationsbehandlung (Pharmako- + Psychotherapie) leitliniengerecht. Lichttherapie besonders bei saisonaler Depression indiziert.',
+        'Zeitkriterien affektiver Störungen merken:\nDepressive Episode ≥2 Wochen.\nDysthymia ≥2 Jahre (chronisch, leichter).\nZyklothymia ≥2 Jahre (Schwankungen).\nBei schwerer Depression: Kombinationsbehandlung (Pharmako- + Psychotherapie) leitliniengerecht.\nLichttherapie besonders bei saisonaler Depression indiziert.',
     tags: ['F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'Organischer Ausschluss bei affektiven Störungen: Vor Behandlungsbeginn einer affektiven Störung muss eine organische Ursache ausgeschlossen werden (z.B. Hypothyreose, Vitamin-B12-Mangel, Hirntumore). Hypothyreose führt häufig zu depressiver Symptomatik. Merke: Hypothyreose = "alles gedrosselt" (Depression, Müdigkeit, Gewichtszunahme, Bradykardie). Hyperthyreose = "alles auf Hochtouren".',
+        'Organischer Ausschluss bei affektiven Störungen:\nVor Behandlungsbeginn einer affektiven Störung muss eine organische Ursache ausgeschlossen werden (z.B. Hypothyreose, Vitamin-B12-Mangel, Hirntumore).\nHypothyreose führt häufig zu depressiver Symptomatik.\nMerke: Hypothyreose = "alles gedrosselt" (Depression, Müdigkeit, Gewichtszunahme, Bradykardie).\nHyperthyreose = "alles auf Hochtouren".',
     tags: ['F3 – Affektive Störungen'],
   ),
 
@@ -371,87 +371,87 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'F40.0 – Agoraphobie: Angst vor Menschenmengen, öffentlichen Plätzen, Reisen, Situationen ohne Fluchtmöglichkeit. Mit oder ohne Panikstörung. Typisches Vermeidungsverhalten. Abgrenzung: Soziale Phobie = Angst vor Bewertung. Spezifische Phobie = Angst vor einzelnem Objekt/Situation.',
+        'F40.0 – Agoraphobie:\nAngst vor Menschenmengen, öffentlichen Plätzen, Reisen, Situationen ohne Fluchtmöglichkeit.\nMit oder ohne Panikstörung.\nTypisches Vermeidungsverhalten.\nAbgrenzung: Soziale Phobie = Angst vor Bewertung.\nSpezifische Phobie = Angst vor einzelnem Objekt/Situation.',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'F40.1 – Soziale Phobien: Angst vor kritischer Bewertung durch andere in sozialen Situationen. Symptome: Erröten, Zittern, Übelkeit, Angst zu erbrechen. Vermeidungsverhalten. Erkrankungsbeginn meist vor dem 25. LJ. Erhöhtes Risiko für Substanzmissbrauch. Niedriges Selbstwertgefühl. Symptome treten nur in Gesellschaft auf, nicht allein.',
+        'F40.1 – Soziale Phobien:\nAngst vor kritischer Bewertung durch andere in sozialen Situationen.\nSymptome: Erröten, Zittern, Übelkeit, Angst zu erbrechen.\nVermeidungsverhalten.\nErkrankungsbeginn meist vor dem 25. LJ.\nErhöhtes Risiko für Substanzmissbrauch.\nNiedriges Selbstwertgefühl.\nSymptome treten nur in Gesellschaft auf, nicht allein.',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'F40.2 – Spezifische (isolierte) Phobien: Isolierte Angst vor einem bestimmten Objekt oder einer Situation (z.B. Tiere, Höhe, Blut, Fliegen). Betroffene wissen, dass ihre Angst übertrieben ist. Behandlung der Wahl: Expositionstherapie (systematische Desensibilisierung oder Flooding).',
+        'F40.2 – Spezifische (isolierte) Phobien:\nIsolierte Angst vor einem bestimmten Objekt oder einer Situation (z.B. Tiere, Höhe, Blut, Fliegen).\nBetroffene wissen, dass ihre Angst übertrieben ist.\nBehandlung der Wahl: Expositionstherapie (systematische Desensibilisierung oder Flooding).',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'F41.0 – Panikstörung: Wiederkehrende, unerwartete Panikattacken, NICHT an bestimmte Situationen gebunden. Abrupt beginnend, begleitet von vegetativen Symptomen (Herzrasen, Schwitzen, Zittern, Schwindel). Depersonalisation/Derealisation können auftreten. Erwartungsangst ("Angst vor der Angst"). Bewusstsein bleibt klar!',
+        'F41.0 – Panikstörung:\nWiederkehrende, unerwartete Panikattacken, NICHT an bestimmte Situationen gebunden.\nAbrupt beginnend, begleitet von vegetativen Symptomen (Herzrasen, Schwitzen, Zittern, Schwindel).\nDepersonalisation/Derealisation können auftreten.\nErwartungsangst ("Angst vor der Angst").\nBewusstsein bleibt klar!',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'F41.1 – Generalisierte Angststörung (GAD): Frei flottierende, anhaltende Angst und Sorgen über ≥6 Monate. Nicht an bestimmte Situationen gebunden. Multiple Symptome: Muskelanspannung, Schwitzen, Benommenheit, Reizbarkeit. Panikstörung vs. GAD: Panik = episodisch, attackenartig. GAD = anhaltend, frei flottierend.',
+        'F41.1 – Generalisierte Angststörung (GAD):\nFrei flottierende, anhaltende Angst und Sorgen über ≥6 Monate.\nNicht an bestimmte Situationen gebunden.\nMultiple Symptome: Muskelanspannung, Schwitzen, Benommenheit, Reizbarkeit.\nPanikstörung vs. GAD: Panik = episodisch, attackenartig.\nGAD = anhaltend, frei flottierend.',
     tags: ['F4 – Neurotische Störungen', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'F42 – Zwangsstörung: Zwangsgedanken und/oder Zwangshandlungen. Zwangsgedanken: wiederkehrend, stereotyp, als quälend empfunden, können aggressiver Natur sein. Häufigste Formen: Kontroll-, Wasch- und Zählzwänge. ICH-DYSTON: Patient erkennt die Unsinnigkeit, kann aber nicht aufhören. Tendenz zur Generalisierung.',
+        'F42 – Zwangsstörung:\nZwangsgedanken und/oder Zwangshandlungen.\nZwangsgedanken: wiederkehrend, stereotyp, als quälend empfunden, können aggressiver Natur sein.\nHäufigste Formen: Kontroll-, Wasch- und Zählzwänge.\nICH-DYSTON: Patient erkennt die Unsinnigkeit, kann aber nicht aufhören.\nTendenz zur Generalisierung.',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'Zwang vs. Wahn: Zwang = ICH-DYSTON (als fremd, quälend, sinnlos erlebt, Patient leistet Widerstand). Wahn = ICH-SYNTON (unerschütterliche Überzeugung, als Teil des eigenen Erlebens). Zwanghafte PS (F60.5) ist ich-synton (als Persönlichkeitsmerkmal erlebt). Therapie der Wahl bei Zwangsstörung: VT mit Exposition und Reaktionsverhinderung (ERP).',
+        'Zwang vs. Wahn:\nZwang = ICH-DYSTON (als fremd, quälend, sinnlos erlebt, Patient leistet Widerstand).\nWahn = ICH-SYNTON (unerschütterliche Überzeugung, als Teil des eigenen Erlebens).\nZwanghafte PS (F60.5) ist ich-synton (als Persönlichkeitsmerkmal erlebt).\nTherapie der Wahl bei Zwangsstörung: VT mit Exposition und Reaktionsverhinderung (ERP).',
     tags: ['Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'F43.0 – Akute Belastungsreaktion: Unmittelbare Reaktion auf ein Trauma oder außergewöhnliche Belastung. Beginn innerhalb von Minuten, klingt innerhalb von Stunden bis Tagen ab. Symptome: Betäubungsgefühl, Desorientiertheit, vegetative Zeichen. Abgrenzung zu PTBS: Akute Belastungsreaktion ist kurzfristig, PTBS entwickelt sich mit Latenz.',
+        'F43.0 – Akute Belastungsreaktion:\nUnmittelbare Reaktion auf ein Trauma oder außergewöhnliche Belastung.\nBeginn innerhalb von Minuten, klingt innerhalb von Stunden bis Tagen ab.\nSymptome: Betäubungsgefühl, Desorientiertheit, vegetative Zeichen.\nAbgrenzung zu PTBS: Akute Belastungsreaktion ist kurzfristig, PTBS entwickelt sich mit Latenz.',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'F43.1 – PTBS (Posttraumatische Belastungsstörung): Entwickelt sich nach schwerem Trauma mit Latenz von Wochen bis Monaten. PTBS-Trias: (1) Wiedererleben/Intrusionen (Flashbacks, Albträume), (2) Vermeidung von Triggern, (3) Übererregung/Hyperarousal. Therapie: Zuerst Stabilisierung, dann Konfrontation. Frühe Konfrontation kann retraumatisieren!',
+        'F43.1 – PTBS (Posttraumatische Belastungsstörung):\nEntwickelt sich nach schwerem Trauma mit Latenz von Wochen bis Monaten.\nPTBS-Trias: (1) Wiedererleben/Intrusionen (Flashbacks, Albträume), (2) Vermeidung von Triggern, (3) Übererregung/Hyperarousal.\nTherapie: Zuerst Stabilisierung, dann Konfrontation.\nFrühe Konfrontation kann retraumatisieren!',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'F43.2 – Anpassungsstörung: Reaktion auf ein belastendes Lebensereignis (muss KEIN schweres Trauma sein). Beginn innerhalb von 1 Monat nach Belastung, Dauer max. 6 Monate. PTBS vs. Anpassungsstörung: PTBS = nach schwerem Trauma, Flashbacks, Vermeidung. Anpassungsstörung = nach beliebigem Lebensereignis, keine Flashbacks.',
+        'F43.2 – Anpassungsstörung:\nReaktion auf ein belastendes Lebensereignis (muss KEIN schweres Trauma sein).\nBeginn innerhalb von 1 Monat nach Belastung, Dauer max. 6 Monate.\nPTBS vs. Anpassungsstörung: PTBS = nach schwerem Trauma, Flashbacks, Vermeidung.\nAnpassungsstörung = nach beliebigem Lebensereignis, keine Flashbacks.',
     tags: ['F4 – Neurotische Störungen', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'F44 – Dissoziative Störungen: Dissoziative Amnesie (partielle/vollständige Gedächtnislücke für belastende Ereignisse), dissoziative Fugue (plötzliches Wegreisen + Amnesie), dissoziativer Stupor, dissoziative Bewegungsstörungen, Konversionsstörungen, multiple Persönlichkeitsstörung. Keine hirnorganische Ursache!',
+        'F44 – Dissoziative Störungen:\nDissoziative Amnesie (partielle/vollständige Gedächtnislücke für belastende Ereignisse), dissoziative Fugue (plötzliches Wegreisen + Amnesie), dissoziativer Stupor, dissoziative Bewegungsstörungen, Konversionsstörungen, multiple Persönlichkeitsstörung.\nKeine hirnorganische Ursache!',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'F45 – Somatoforme Störungen: Körperliche Beschwerden ohne ausreichenden organischen Befund. F45.0 Somatisierungsstörung: multiple wechselnde Beschwerden ≥2 Jahre, Beginn vor 30 Jahren. F45.2 Hypochondrie: Überzeugung, an schwerer Krankheit zu leiden. F45.4 Anhaltende Schmerzstörung. Patienten sind oft schwer für Psychotherapie zu motivieren.',
+        'F45 – Somatoforme Störungen:\nKörperliche Beschwerden ohne ausreichenden organischen Befund.\nF45.0 Somatisierungsstörung: multiple wechselnde Beschwerden ≥2 Jahre, Beginn vor 30 Jahren.\nF45.2 Hypochondrie: Überzeugung, an schwerer Krankheit zu leiden.\nF45.4 Anhaltende Schmerzstörung.\nPatienten sind oft schwer für Psychotherapie zu motivieren.',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'Somatisierungsstörung: Beginn meist im frühen Erwachsenenalter (<30 Jahre), häufiger bei Frauen. Mind. 2 Jahre multiple, wechselnde körperliche Beschwerden ohne organischen Befund. Patienten glauben an körperliche Ursachen. Erhöhtes Risiko für Medikamentenmissbrauch durch häufige Arztbesuche. Wichtig: Biopsychosoziales Störungsmodell erarbeiten.',
+        'Somatisierungsstörung:\nBeginn meist im frühen Erwachsenenalter (<30 Jahre), häufiger bei Frauen.\nMind. 2 Jahre multiple, wechselnde körperliche Beschwerden ohne organischen Befund.\nPatienten glauben an körperliche Ursachen.\nErhöhtes Risiko für Medikamentenmissbrauch durch häufige Arztbesuche.\nWichtig: Biopsychosoziales Störungsmodell erarbeiten.',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'Dissoziative Fugue: Plötzliches, unerwartetes Wegreisen von zu Hause mit Unfähigkeit, sich an die eigene Vergangenheit zu erinnern, bei äußerlich geordnetem Verhalten. Dissoziative Amnesie: Charakteristisch ist eine partielle oder vollständige Amnesie für belastende Ereignisse bei gleichzeitigem Fehlen hirnorganischer Störungen.',
+        'Dissoziative Fugue:\nPlötzliches, unerwartetes Wegreisen von zu Hause mit Unfähigkeit, sich an die eigene Vergangenheit zu erinnern, bei äußerlich geordnetem Verhalten.\nDissoziative Amnesie: Charakteristisch ist eine partielle oder vollständige Amnesie für belastende Ereignisse bei gleichzeitigem Fehlen hirnorganischer Störungen.',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'Zur ICD-10-Kategorie F4 gehören: Angststörungen (F40-F41), Zwangsstörungen (F42), Belastungs-/Anpassungsstörungen (F43), dissoziative Störungen (F44), somatoforme Störungen (F45). NICHT dazu gehören: Schizophrenien (F2), Depressionen (F3), Persönlichkeitsstörungen (F6).',
+        'Zur ICD-10-Kategorie F4 gehören:\nAngststörungen (F40-F41), Zwangsstörungen (F42), Belastungs-/Anpassungsstörungen (F43), dissoziative Störungen (F44), somatoforme Störungen (F45).\nNICHT dazu gehören: Schizophrenien (F2), Depressionen (F3), Persönlichkeitsstörungen (F6).',
     tags: ['F4 – Neurotische Störungen', 'ICD-10 Grundlagen'],
   ),
   Flashcard(
     text:
-        'Krankheitsgewinn: Primärer Krankheitsgewinn = innerpsychischer Gewinn (z.B. Angstreduktion durch Symptombildung). Sekundärer Krankheitsgewinn = äußere Vorteile aus der Krankenrolle (Zuwendung, Entlastung, Berentung). Sekundärer Krankheitsgewinn ist oft unbewusst. Bewusstes Täuschen wäre Simulation!',
+        'Krankheitsgewinn:\nPrimärer Krankheitsgewinn = innerpsychischer Gewinn (z.B. Angstreduktion durch Symptombildung).\nSekundärer Krankheitsgewinn = äußere Vorteile aus der Krankenrolle (Zuwendung, Entlastung, Berentung).\nSekundärer Krankheitsgewinn ist oft unbewusst.\nBewusstes Täuschen wäre Simulation!',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Somatoforme Störungen – richtige Zuordnung: Das Da-Costa-Syndrom (Herzneurose) ist eine somatoforme autonome Funktionsstörung des kardiovaskulären Systems (F45.30). Die Hypochondrie gehört zu den somatoformen Störungen (F45.2). Die körperdysmorphe Störung gehört ebenfalls zu den somatoformen Störungen, NICHT zu den Essstörungen.',
+        'Somatoforme Störungen – richtige Zuordnung:\nDas Da-Costa-Syndrom (Herzneurose) ist eine somatoforme autonome Funktionsstörung des kardiovaskulären Systems (F45.30).\nDie Hypochondrie gehört zu den somatoformen Störungen (F45.2).\nDie körperdysmorphe Störung gehört ebenfalls zu den somatoformen Störungen, NICHT zu den Essstörungen.',
     tags: ['F4 – Neurotische Störungen'],
   ),
 
@@ -460,47 +460,47 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'F50.0 – Anorexia nervosa: BMI ≤17,5 kg/m², selbst herbeigeführter Gewichtsverlust, Körperschema-Störung (Betroffene halten sich für zu dick trotz Untergewicht), Amenorrhö. Höchste Mortalitätsrate aller psychischen Erkrankungen (ca. 5-10%). Refeeding-Syndrom als gefährliche Komplikation bei Wiederernährung.',
+        'F50.0 – Anorexia nervosa:\nBMI ≤17,5 kg/m², selbst herbeigeführter Gewichtsverlust, Körperschema-Störung (Betroffene halten sich für zu dick trotz Untergewicht), Amenorrhö.\nHöchste Mortalitätsrate aller psychischen Erkrankungen (ca. 5-10%).\nRefeeding-Syndrom als gefährliche Komplikation bei Wiederernährung.',
     tags: ['F5 – Verhaltensauffälligkeiten'],
   ),
   Flashcard(
     text:
-        'F50.2 – Bulimia nervosa: Essanfälle mit Kontrollverlust + kompensatorische Maßnahmen (Erbrechen, Laxantien, Fasten). Gewicht oft normal. Übertriebene Gewichtssorge. Typisch: depressive Symptome. In der Vorgeschichte häufig Anorexia nervosa. Ca. 90% Frauen betroffen. Erbrechen/Diuretika → Elektrolytstörungen (Hypokaliämie).',
+        'F50.2 – Bulimia nervosa:\nEssanfälle mit Kontrollverlust + kompensatorische Maßnahmen (Erbrechen, Laxantien, Fasten).\nGewicht oft normal.\nÜbertriebene Gewichtssorge.\nTypisch: depressive Symptome.\nIn der Vorgeschichte häufig Anorexia nervosa.\nCa. 90% Frauen betroffen.\nErbrechen/Diuretika → Elektrolytstörungen (Hypokaliämie).',
     tags: ['F5 – Verhaltensauffälligkeiten'],
   ),
   Flashcard(
     text:
-        'Binge-Eating-Störung: Wiederkehrende Essanfälle mit Kontrollverlust und nachfolgenden Schuldgefühlen. Häufig Übergewicht. Im Gegensatz zur Bulimie werden KEINE gewichtsregulierenden Gegenmaßnahmen eingesetzt. Essen erfolgt hastig, oft allein aus Scham, nicht mit Genuss.',
+        'Binge-Eating-Störung:\nWiederkehrende Essanfälle mit Kontrollverlust und nachfolgenden Schuldgefühlen.\nHäufig Übergewicht.\nIm Gegensatz zur Bulimie werden KEINE gewichtsregulierenden Gegenmaßnahmen eingesetzt.\nEssen erfolgt hastig, oft allein aus Scham, nicht mit Genuss.',
     tags: ['F5 – Verhaltensauffälligkeiten'],
   ),
   Flashcard(
     text:
-        'F51 – Nichtorganische Schlafstörungen: Insomnie (Einschlaf-/Durchschlafstörung), Hypersomnie (übermäßige Schläfrigkeit), Schlafwandeln (Somnambulismus), Alpträume. Nicht organisch bedingt. Schlafhygiene-Regeln: Kein Mittagsschlaf, regelmäßiger Aufstehzeitpunkt, kein intensiver Sport vor dem Schlafen, keine sichtbare Uhr.',
+        'F51 – Nichtorganische Schlafstörungen:\nInsomnie (Einschlaf-/Durchschlafstörung), Hypersomnie (übermäßige Schläfrigkeit), Schlafwandeln (Somnambulismus), Alpträume.\nNicht organisch bedingt.\nSchlafhygiene-Regeln: Kein Mittagsschlaf, regelmäßiger Aufstehzeitpunkt, kein intensiver Sport vor dem Schlafen, keine sichtbare Uhr.',
     tags: ['F5 – Verhaltensauffälligkeiten'],
   ),
   Flashcard(
     text:
-        'F52 – Sexuelle Funktionsstörungen: Appetenzstörung (Mangel an sexuellem Verlangen), Erregungsstörung, Orgasmusstörung, Vaginismus. Nicht organisch bedingt. Abgrenzung: Geschlechtsinkongruenz = Störung der Geschlechtsidentität, KEINE Störung der Sexualpräferenz. Fetischismus, Sadismus, Pädophilie = Paraphilien.',
+        'F52 – Sexuelle Funktionsstörungen:\nAppetenzstörung (Mangel an sexuellem Verlangen), Erregungsstörung, Orgasmusstörung, Vaginismus.\nNicht organisch bedingt.\nAbgrenzung: Geschlechtsinkongruenz = Störung der Geschlechtsidentität, KEINE Störung der Sexualpräferenz.\nFetischismus, Sadismus, Pädophilie = Paraphilien.',
     tags: ['F5 – Verhaltensauffälligkeiten'],
   ),
   Flashcard(
     text:
-        'Narkolepsie: Imperative Einschlafattacken, Kataplexie (plötzliche Muskelschwäche bei Emotionen), hypnagoge Halluzinationen, Schlafparalyse. Familiäre Häufung. Erfrischung nach kurzem Schlaf. Abgrenzung: Absencen = kurze Bewusstseinsaussetzer bei Epilepsie. Schlafapnoe führt nicht zu Kataplexie.',
+        'Narkolepsie:\nImperative Einschlafattacken, Kataplexie (plötzliche Muskelschwäche bei Emotionen), hypnagoge Halluzinationen, Schlafparalyse.\nFamiliäre Häufung.\nErfrischung nach kurzem Schlaf.\nAbgrenzung: Absencen = kurze Bewusstseinsaussetzer bei Epilepsie.\nSchlafapnoe führt nicht zu Kataplexie.',
     tags: ['F5 – Verhaltensauffälligkeiten'],
   ),
   Flashcard(
     text:
-        'Pavor nocturnus (Nachtangst): Plötzlicher Panikschrei mit vegetativen Symptomen (Tachykardie, Schwitzen). Tritt im ersten Drittel des Nachtschlafs auf (Tiefschlaf). Kind hat typischerweise keine Erinnerung (Amnesie). Gehört zu den Parasomnien. Therapie: Aufklärung und Beruhigung der Eltern, keine Medikamente als Standard.',
+        'Pavor nocturnus (Nachtangst):\nPlötzlicher Panikschrei mit vegetativen Symptomen (Tachykardie, Schwitzen).\nTritt im ersten Drittel des Nachtschlafs auf (Tiefschlaf).\nKind hat typischerweise keine Erinnerung (Amnesie).\nGehört zu den Parasomnien.\nTherapie: Aufklärung und Beruhigung der Eltern, keine Medikamente als Standard.',
     tags: ['F5 – Verhaltensauffälligkeiten', 'F7-F9 – Entwicklung & Kindheit'],
   ),
   Flashcard(
     text:
-        'Differentialdiagnosen bei Untergewicht: Anorexia nervosa, Leukämie und konsumierende Erkrankungen, Hyperthyreose (erhöhter Stoffwechsel), körperdysmorphe Störung, Zwangserkrankungen mit Nahrungsritualen, Diabetes mellitus Typ 1. Vor Diagnose Anorexie müssen organische Ursachen ausgeschlossen werden.',
+        'Differentialdiagnosen bei Untergewicht:\nAnorexia nervosa, Leukämie und konsumierende Erkrankungen, Hyperthyreose (erhöhter Stoffwechsel), körperdysmorphe Störung, Zwangserkrankungen mit Nahrungsritualen, Diabetes mellitus Typ 1. Vor Diagnose Anorexie müssen organische Ursachen ausgeschlossen werden.',
     tags: ['F5 – Verhaltensauffälligkeiten', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'FASD (Fetales Alkoholsyndrom): Typische Gesichtsmerkmale – schmale Oberlippe, glattes Philtrum, kurze Lidspalten. Minderwuchs. Störungen der Exekutivfunktionen. Kein sicherer Alkoholkonsum in der Schwangerschaft – Schädigung in jedem Trimenon möglich.',
+        'FASD (Fetales Alkoholsyndrom):\nTypische Gesichtsmerkmale – schmale Oberlippe, glattes Philtrum, kurze Lidspalten.\nMinderwuchs.\nStörungen der Exekutivfunktionen.\nKein sicherer Alkoholkonsum in der Schwangerschaft – Schädigung in jedem Trimenon möglich.',
     tags: ['F7-F9 – Entwicklung & Kindheit'],
   ),
 
@@ -509,67 +509,67 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'Allgemeine Kriterien Persönlichkeitsstörungen (F60): Tief verwurzelte, anhaltende Verhaltensmuster, die deutlich von kulturell erwarteten Normen abweichen. Beginn in Kindheit/Adoleszenz, stabil im Erwachsenenalter. Betreffen: Kognition, Affektivität, Impulskontrolle und Beziehungsgestaltung. PS vs. Akzentuierung: PS = tiefgreifend, unflexibel, Leidensdruck. Akzentuierung = noch flexibel.',
+        'Allgemeine Kriterien Persönlichkeitsstörungen (F60):\nTief verwurzelte, anhaltende Verhaltensmuster, die deutlich von kulturell erwarteten Normen abweichen.\nBeginn in Kindheit/Adoleszenz, stabil im Erwachsenenalter.\nBetreffen: Kognition, Affektivität, Impulskontrolle und Beziehungsgestaltung.\nPS vs. Akzentuierung: PS = tiefgreifend, unflexibel, Leidensdruck.\nAkzentuierung = noch flexibel.',
     tags: ['F6 – Persönlichkeitsstörungen'],
   ),
   Flashcard(
     text:
-        'F60.0 – Paranoide PS: Misstrauen, Empfindlichkeit gegenüber Zurückweisung, Streitsucht, Überbewertung, Selbstbezogenheit. Paranoide sind NICHT von anderen abhängig, sondern eher misstrauisch und eigenbrötlerisch. Beharren auf eigenen Rechten. Cluster A (sonderbar).',
+        'F60.0 – Paranoide PS:\nMisstrauen, Empfindlichkeit gegenüber Zurückweisung, Streitsucht, Überbewertung, Selbstbezogenheit.\nParanoide sind NICHT von anderen abhängig, sondern eher misstrauisch und eigenbrötlerisch.\nBeharren auf eigenen Rechten.\nCluster A (sonderbar).',
     tags: ['F6 – Persönlichkeitsstörungen'],
   ),
   Flashcard(
     text:
-        'F60.1 – Schizoide PS: Emotionale Kühle, Distanziertheit, Anhedonie, Einzelgänger. Wenig Interesse an sozialen oder sexuellen Kontakten. Mangel an engen Freunden. Gleichgültigkeit gegenüber Lob und Kritik. Cluster A (sonderbar). Nicht zu verwechseln mit Schizophrenie!',
+        'F60.1 – Schizoide PS:\nEmotionale Kühle, Distanziertheit, Anhedonie, Einzelgänger.\nWenig Interesse an sozialen oder sexuellen Kontakten.\nMangel an engen Freunden.\nGleichgültigkeit gegenüber Lob und Kritik.\nCluster A (sonderbar).\nNicht zu verwechseln mit Schizophrenie!',
     tags: ['F6 – Persönlichkeitsstörungen'],
   ),
   Flashcard(
     text:
-        'F60.2 – Dissoziale (antisoziale) PS: Missachtung sozialer Normen und Rechte anderer. Fehlende Empathie, fehlendes Schuldbewusstsein. Sehr niedrige Frustrationstoleranz mit Neigung zu aggressivem Verhalten. Cluster B (dramatisch). Abgrenzung: Schizoide PS = emotionale Distanz, NICHT aggressiv.',
+        'F60.2 – Dissoziale (antisoziale) PS:\nMissachtung sozialer Normen und Rechte anderer.\nFehlende Empathie, fehlendes Schuldbewusstsein.\nSehr niedrige Frustrationstoleranz mit Neigung zu aggressivem Verhalten.\nCluster B (dramatisch).\nAbgrenzung: Schizoide PS = emotionale Distanz, NICHT aggressiv.',
     tags: ['F6 – Persönlichkeitsstörungen'],
   ),
   Flashcard(
     text:
-        'F60.3 – Emotional instabile PS: .30 Impulsiver Typ: Affektlabilität, mangelnde Impulskontrolle, emotionale Instabilität. .31 Borderline-Typ: ZUSÄTZLICH gestörtes Selbstbild, chronisches Gefühl der Leere, instabile intensive Beziehungen, Selbstschädigung. Cluster B (dramatisch). 3 Kernmerkmale Borderline: Leere, Impulsivität, Selbstschädigung.',
+        'F60.3 – Emotional instabile PS:\n.30 Impulsiver Typ: Affektlabilität, mangelnde Impulskontrolle, emotionale Instabilität. .31 Borderline-Typ: ZUSÄTZLICH gestörtes Selbstbild, chronisches Gefühl der Leere, instabile intensive Beziehungen, Selbstschädigung.\nCluster B (dramatisch).\n3 Kernmerkmale Borderline: Leere, Impulsivität, Selbstschädigung.',
     tags: ['F6 – Persönlichkeitsstörungen'],
   ),
   Flashcard(
     text:
-        'F60.4 – Histrionische PS: Dramatisierung, Theatralik, übertriebener Gefühlsausdruck, Suggestibilität, Aufmerksamkeitssuche, flache und labile Affektivität. Bedürfnis im Mittelpunkt zu stehen. Cluster B (dramatisch). Abgrenzung: Bedürfnis nach Bewunderung = eher narzisstische PS.',
+        'F60.4 – Histrionische PS:\nDramatisierung, Theatralik, übertriebener Gefühlsausdruck, Suggestibilität, Aufmerksamkeitssuche, flache und labile Affektivität.\nBedürfnis im Mittelpunkt zu stehen.\nCluster B (dramatisch).\nAbgrenzung: Bedürfnis nach Bewunderung = eher narzisstische PS.',
     tags: ['F6 – Persönlichkeitsstörungen'],
   ),
   Flashcard(
     text:
-        'F60.5 – Anankastische (zwanghafte) PS: Perfektionismus, Zweifel, Rigidität, übermäßige Gewissenhaftigkeit, Pedanterie. ICH-SYNTON (wird als Teil der Persönlichkeit erlebt). Cluster C (ängstlich). Abgrenzung zur Zwangsstörung (F42): Zwangsstörung = ICH-DYSTON (wird als fremd/quälend erlebt).',
+        'F60.5 – Anankastische (zwanghafte) PS:\nPerfektionismus, Zweifel, Rigidität, übermäßige Gewissenhaftigkeit, Pedanterie.\nICH-SYNTON (wird als Teil der Persönlichkeit erlebt).\nCluster C (ängstlich).\nAbgrenzung zur Zwangsstörung (F42): Zwangsstörung = ICH-DYSTON (wird als fremd/quälend erlebt).',
     tags: ['F6 – Persönlichkeitsstörungen', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'F60.6 – Ängstliche (vermeidende) PS: Anspannung, Unsicherheit, Überempfindlichkeit gegen Kritik. Vermeidung sozialer Kontakte aus Angst vor Ablehnung. WÜNSCHT sich aber Kontakte (im Gegensatz zur schizoiden PS). Cluster C (ängstlich).',
+        'F60.6 – Ängstliche (vermeidende) PS:\nAnspannung, Unsicherheit, Überempfindlichkeit gegen Kritik.\nVermeidung sozialer Kontakte aus Angst vor Ablehnung.\nWÜNSCHT sich aber Kontakte (im Gegensatz zur schizoiden PS).\nCluster C (ängstlich).',
     tags: ['F6 – Persönlichkeitsstörungen'],
   ),
   Flashcard(
     text:
-        'F60.7 – Abhängige (asthenische) PS: Überlässt Entscheidungen anderen, Trennungsangst, Hilflosigkeit, Unterordnung eigener Bedürfnisse. Kann nicht allein entscheiden. Ausgeprägte Angst vor Alleinsein/Verlassenwerden. Cluster C (ängstlich). Abgrenzung: Streitsucht = paranoide PS. Perfektionismus = anankastische PS.',
+        'F60.7 – Abhängige (asthenische) PS:\nÜberlässt Entscheidungen anderen, Trennungsangst, Hilflosigkeit, Unterordnung eigener Bedürfnisse.\nKann nicht allein entscheiden.\nAusgeprägte Angst vor Alleinsein/Verlassenwerden.\nCluster C (ängstlich).\nAbgrenzung: Streitsucht = paranoide PS.\nPerfektionismus = anankastische PS.',
     tags: ['F6 – Persönlichkeitsstörungen'],
   ),
   Flashcard(
     text:
-        'PS-Cluster: Cluster A (sonderbar/exzentrisch): Paranoid, schizoid, [schizotyp]. Cluster B (dramatisch/emotional): Dissozial, emotional instabil (Borderline), histrionisch, [narzisstisch]. Cluster C (ängstlich/furchtsam): Vermeidend (ängstlich), abhängig, anankastisch (zwanghaft).',
+        'PS-Cluster:\nCluster A (sonderbar/exzentrisch): Paranoid, schizoid, [schizotyp].\nCluster B (dramatisch/emotional): Dissozial, emotional instabil (Borderline), histrionisch, [narzisstisch].\nCluster C (ängstlich/furchtsam): Vermeidend (ängstlich), abhängig, anankastisch (zwanghaft).',
     tags: ['F6 – Persönlichkeitsstörungen'],
   ),
   Flashcard(
     text:
-        'F61 – Kombinierte und sonstige PS: Mischbild mehrerer PS-Züge, das keiner einzelnen Kategorie zugeordnet werden kann. F62 – Andauernde Persönlichkeitsänderung: Nach Extrembelastung (z.B. KZ, Geiselnahme) oder schwerer psychiatrischer Krankheit. Nicht als PS (F60) klassifizierbar, da erworben, nicht angeboren.',
+        'F61 – Kombinierte und sonstige PS:\nMischbild mehrerer PS-Züge, das keiner einzelnen Kategorie zugeordnet werden kann.\nF62 – Andauernde Persönlichkeitsänderung: Nach Extrembelastung (z.B. KZ, Geiselnahme) oder schwerer psychiatrischer Krankheit.\nNicht als PS (F60) klassifizierbar, da erworben, nicht angeboren.',
     tags: ['F6 – Persönlichkeitsstörungen'],
   ),
   Flashcard(
     text:
-        'Ich-synton vs. ich-dyston: Persönlichkeitsstörungen sind definitionsgemäß ich-synton (als zum Selbst gehörig). In der Manie fühlt sich der Patient großartig (ich-synton). Bei Schizophrenie werden Halluzinationen als real erlebt (ich-synton). Zwänge bei Zwangsstörung (F42) sind typischerweise ich-DYSTON. Wahn wird als real erlebt (ich-synton).',
+        'Ich-synton vs. ich-dyston:\nPersönlichkeitsstörungen sind definitionsgemäß ich-synton (als zum Selbst gehörig).\nIn der Manie fühlt sich der Patient großartig (ich-synton).\nBei Schizophrenie werden Halluzinationen als real erlebt (ich-synton).\nZwänge bei Zwangsstörung (F42) sind typischerweise ich-DYSTON.\nWahn wird als real erlebt (ich-synton).',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Störungen der Impulskontrolle und Geschlechtsidentität: Pathologisches Spielen, Pyromanie, Kleptomanie gehören zu F63. Geschlechtsinkongruenz ist eine Störung der Geschlechtsidentität (F64), KEINE Störung der Sexualpräferenz. Paraphilien (Fetischismus, Sadismus, Pädophilie) = Störungen der Sexualpräferenz (F65).',
+        'Störungen der Impulskontrolle und Geschlechtsidentität:\nPathologisches Spielen, Pyromanie, Kleptomanie gehören zu F63.\nGeschlechtsinkongruenz ist eine Störung der Geschlechtsidentität (F64), KEINE Störung der Sexualpräferenz.\nParaphilien (Fetischismus, Sadismus, Pädophilie) = Störungen der Sexualpräferenz (F65).',
     tags: ['F6 – Persönlichkeitsstörungen'],
   ),
 
@@ -578,62 +578,62 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'F7 – Intelligenzminderung nach IQ: F70 Leicht (IQ 50-69, mentales Alter 9-12 Jahre). F71 Mittelgradig (IQ 35-49, 6-9 Jahre). F72 Schwer (IQ 20-34, 3-6 Jahre). F73 Schwerst (IQ <20, <3 Jahre). Merke: IQ-Stufen "70-50-35-20". Durchschnittlicher IQ = 100 (Normalbereich 85-115, 68% der Bevölkerung).',
+        'F7 – Intelligenzminderung nach IQ:\nF70 Leicht (IQ 50-69, mentales Alter 9-12 Jahre).\nF71 Mittelgradig (IQ 35-49, 6-9 Jahre).\nF72 Schwer (IQ 20-34, 3-6 Jahre).\nF73 Schwerst (IQ <20, <3 Jahre).\nMerke: IQ-Stufen "70-50-35-20".\nDurchschnittlicher IQ = 100 (Normalbereich 85-115, 68% der Bevölkerung).',
     tags: ['F7-F9 – Entwicklung & Kindheit'],
   ),
   Flashcard(
     text:
-        'Intelligenzminderung – Merksätze: Beginnt ab IQ <70. Genetische Faktoren (z.B. Down-Syndrom) sind gesicherte Ursachen. Keine Heilung möglich, aber frühe Förderung kann Selbständigkeit verbessern. Erhöhtes Risiko für psychische und physische Komorbiditäten. VT oder medikamentöse Behandlung ist möglich. Demenz kann zusätzlich auftreten.',
+        'Intelligenzminderung – Merksätze:\nBeginnt ab IQ <70.\nGenetische Faktoren (z.B. Down-Syndrom) sind gesicherte Ursachen.\nKeine Heilung möglich, aber frühe Förderung kann Selbständigkeit verbessern.\nErhöhtes Risiko für psychische und physische Komorbiditäten.\nVT oder medikamentöse Behandlung ist möglich.\nDemenz kann zusätzlich auftreten.',
     tags: ['F7-F9 – Entwicklung & Kindheit'],
   ),
   Flashcard(
     text:
-        'F80 – Umschriebene Sprachentwicklungsstörungen: Artikulationsstörung, expressive und rezeptive Sprachstörung. F81 – Umschriebene schulische Entwicklungsstörungen: Lese-Rechtschreibstörung (Legasthenie) und Rechenstörung (Dyskalkulie). Legasthenie: Normaler IQ, kann jede Schulform besuchen, gezielt behandelbar.',
+        'F80 – Umschriebene Sprachentwicklungsstörungen:\nArtikulationsstörung, expressive und rezeptive Sprachstörung.\nF81 – Umschriebene schulische Entwicklungsstörungen: Lese-Rechtschreibstörung (Legasthenie) und Rechenstörung (Dyskalkulie).\nLegasthenie: Normaler IQ, kann jede Schulform besuchen, gezielt behandelbar.',
     tags: ['F7-F9 – Entwicklung & Kindheit'],
   ),
   Flashcard(
     text:
-        'F82 – Umschriebene motorische Entwicklungsstörung: Koordinationsstörung, nicht durch Intelligenzmangel erklärbar. F84.0 – Frühkindlicher Autismus (Kanner-Syndrom): Beginn vor dem 3. Lebensjahr. Trias: Soziale Interaktion↓, Kommunikation↓, stereotype Verhaltensweisen. Jungen häufiger betroffen. Tiefgreifende Entwicklungsstörung.',
+        'F82 – Umschriebene motorische Entwicklungsstörung:\nKoordinationsstörung, nicht durch Intelligenzmangel erklärbar.\nF84.0 – Frühkindlicher Autismus (Kanner-Syndrom): Beginn vor dem 3. Lebensjahr.\nTrias: Soziale Interaktion↓, Kommunikation↓, stereotype Verhaltensweisen.\nJungen häufiger betroffen.\nTiefgreifende Entwicklungsstörung.',
     tags: ['F7-F9 – Entwicklung & Kindheit'],
   ),
   Flashcard(
     text:
-        'F84.5 – Asperger-Syndrom: Soziale Interaktion eingeschränkt, OHNE Sprach- oder Kognitionsverzögerung. Spezialinteressen, motorische Unbeholfenheit. Abgrenzung zum frühkindlichen Autismus: Asperger hat normale Sprachentwicklung und normale/überdurchschnittliche Intelligenz. Beide gehören zum Autismus-Spektrum.',
+        'F84.5 – Asperger-Syndrom:\nSoziale Interaktion eingeschränkt, OHNE Sprach- oder Kognitionsverzögerung.\nSpezialinteressen, motorische Unbeholfenheit.\nAbgrenzung zum frühkindlichen Autismus: Asperger hat normale Sprachentwicklung und normale/überdurchschnittliche Intelligenz.\nBeide gehören zum Autismus-Spektrum.',
     tags: ['F7-F9 – Entwicklung & Kindheit'],
   ),
   Flashcard(
     text:
-        'F90 – Hyperkinetische Störungen (ADHS): Aufmerksamkeitsdefizit + Hyperaktivität + Impulsivität. Beginn vor dem 7. Lebensjahr, Symptome ≥6 Monate, in ≥2 Situationen (z.B. Schule und Zuhause). Jungen häufiger betroffen (ca. 3:1). Erhöhtes Unfallrisiko. Kann bis ins Erwachsenenalter fortbestehen. ADS = ohne Hyperaktivität.',
+        'F90 – Hyperkinetische Störungen (ADHS):\nAufmerksamkeitsdefizit + Hyperaktivität + Impulsivität.\nBeginn vor dem 7. Lebensjahr, Symptome ≥6 Monate, in ≥2 Situationen (z.B. Schule und Zuhause).\nJungen häufiger betroffen (ca. 3:1).\nErhöhtes Unfallrisiko.\nKann bis ins Erwachsenenalter fortbestehen.\nADS = ohne Hyperaktivität.',
     tags: ['F7-F9 – Entwicklung & Kindheit'],
   ),
   Flashcard(
     text:
-        'ADHS – Therapie und Komorbiditäten: Therapie der Wahl: Stimulanzien (z.B. Methylphenidat), KEINE Beruhigungsmittel. Verhaltenstherapie ist leitliniengemäß. Komorbiditäten: Tic-Störungen, Störungen des Sozialverhaltens. Ich-Störungen gehören NICHT zu den ADHS-Symptomen.',
+        'ADHS – Therapie und Komorbiditäten:\nTherapie der Wahl: Stimulanzien (z.B. Methylphenidat), KEINE Beruhigungsmittel.\nVerhaltenstherapie ist leitliniengemäß.\nKomorbiditäten: Tic-Störungen, Störungen des Sozialverhaltens.\nIch-Störungen gehören NICHT zu den ADHS-Symptomen.',
     tags: ['F7-F9 – Entwicklung & Kindheit', 'Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'F91 – Störung des Sozialverhaltens: Dissoziales Verhalten: Aggressivität, Regelverstöße, Tierquälerei, Stehlen, Lügen. Abgrenzung zur dissozialen PS (F60.2): Kinder/Jugendliche erhalten F91, Erwachsene F60.2. F93 – Emotionale Störungen des Kindesalters: Trennungsangst, phobische Störung, soziale Ängstlichkeit (altertypische Verstärkung normaler Emotionen).',
+        'F91 – Störung des Sozialverhaltens:\nDissoziales Verhalten: Aggressivität, Regelverstöße, Tierquälerei, Stehlen, Lügen.\nAbgrenzung zur dissozialen PS (F60.2): Kinder/Jugendliche erhalten F91, Erwachsene F60.2.\nF93 – Emotionale Störungen des Kindesalters: Trennungsangst, phobische Störung, soziale Ängstlichkeit (altertypische Verstärkung normaler Emotionen).',
     tags: ['F7-F9 – Entwicklung & Kindheit'],
   ),
   Flashcard(
     text:
-        'F94 – Störungen sozialer Funktionen: Elektiver Mutismus (Kind spricht nur in bestimmten Situationen), reaktive Bindungsstörung (im Kontext von Vernachlässigung/Misshandlung, vor 5. LJ), Bindungsstörung mit Enthemmung. Abgrenzung: Reaktive Bindungsstörung hat keine autismusvergleichbaren kognitiven Defizite.',
+        'F94 – Störungen sozialer Funktionen:\nElektiver Mutismus (Kind spricht nur in bestimmten Situationen), reaktive Bindungsstörung (im Kontext von Vernachlässigung/Misshandlung, vor 5. LJ), Bindungsstörung mit Enthemmung.\nAbgrenzung: Reaktive Bindungsstörung hat keine autismusvergleichbaren kognitiven Defizite.',
     tags: ['F7-F9 – Entwicklung & Kindheit'],
   ),
   Flashcard(
     text:
-        'F95 – Ticstörungen: Motorische und/oder vokale Tics. F95.2 = Tourette-Syndrom (kombiniert): Multiple motorische + mind. 1 vokaler Tic über ≥12 Monate. Hauptmanifestationsalter 6-8 Jahre. Koprolalie (zwanghaftes Aussprechen obszöner Wörter) und Echolalie können auftreten. Gehört zu den Ticstörungen, NICHT zu den Epilepsien.',
+        'F95 – Ticstörungen:\nMotorische und/oder vokale Tics.\nF95.2 = Tourette-Syndrom (kombiniert): Multiple motorische + mind. 1 vokaler Tic über ≥12 Monate.\nHauptmanifestationsalter 6-8 Jahre.\nKoprolalie (zwanghaftes Aussprechen obszöner Wörter) und Echolalie können auftreten.\nGehört zu den Ticstörungen, NICHT zu den Epilepsien.',
     tags: ['F7-F9 – Entwicklung & Kindheit'],
   ),
   Flashcard(
     text:
-        'F98 – Sonstige Verhaltens-/emotionale Störungen: Enuresis (Einnässen – vor 5. LJ entwicklungsbedingt normal), Enkopresis (Einkoten), Fütterstörung, Stereotypien. Sekundäre Enuresis (nach ≥6 Monaten Trockenheit) ist häufiger mit psychischen Komorbiditäten assoziiert als primäre. Nächtliches Einnässen ist häufiger als tagsüber.',
+        'F98 – Sonstige Verhaltens-/emotionale Störungen:\nEnuresis (Einnässen – vor 5. LJ entwicklungsbedingt normal), Enkopresis (Einkoten), Fütterstörung, Stereotypien.\nSekundäre Enuresis (nach ≥6 Monaten Trockenheit) ist häufiger mit psychischen Komorbiditäten assoziiert als primäre.\nNächtliches Einnässen ist häufiger als tagsüber.',
     tags: ['F7-F9 – Entwicklung & Kindheit'],
   ),
   Flashcard(
     text:
-        'Parkinson-Trias (nicht F-Diagnose, aber prüfungsrelevant): „RAT" – Rigor (Muskelsteifheit), Akinese (Bewegungsarmut), Ruhetremor (Zittern in Ruhe, NICHT Intentionstremor). Dazu: Mikrografie (verkleinertes Schriftbild), monotone Stimme, Maskengesicht. Intentionstremor = Kleinhirnläsion.',
+        'Parkinson-Trias (nicht F-Diagnose, aber prüfungsrelevant):\n„RAT" – Rigor (Muskelsteifheit), Akinese (Bewegungsarmut), Ruhetremor (Zittern in Ruhe, NICHT Intentionstremor).\nDazu: Mikrografie (verkleinertes Schriftbild), monotone Stimme, Maskengesicht.\nIntentionstremor = Kleinhirnläsion.',
     tags: ['Psychopathologie'],
   ),
 
@@ -642,62 +642,62 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'Prüfungsklassiker – Differentialdiagnosen (Teil 1): Demenz vs. Delir: Demenz = chronisch, klares Bewusstsein. Delir = akut, getrübtes Bewusstsein. Demenz vs. Depression (Pseudodemenz): Depression = klagt aktiv, "weiß nicht". Demenz = bagatellisiert, Konfabulationen. Schizophrenie vs. wahnhafte Störung: F22 = isolierter Wahn OHNE Halluzinationen, Persönlichkeit erhalten.',
+        'Prüfungsklassiker – Differentialdiagnosen (Teil 1):\nDemenz vs. Delir: Demenz = chronisch, klares Bewusstsein.\nDelir = akut, getrübtes Bewusstsein.\nDemenz vs. Depression (Pseudodemenz): Depression = klagt aktiv, "weiß nicht".\nDemenz = bagatellisiert, Konfabulationen.\nSchizophrenie vs. wahnhafte Störung: F22 = isolierter Wahn OHNE Halluzinationen, Persönlichkeit erhalten.',
     tags: ['Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'Prüfungsklassiker – Differentialdiagnosen (Teil 2): Schizophrenie vs. schizoaffektiv: Schizoaffektiv = gleichzeitig schizophrene UND affektive Symptome. Depression vs. Dysthymia: Depression = episodisch, schwerer. Dysthymia = chronisch ≥2J, leichter. Bipolar vs. rezidivierende Depression: Bipolar = mind. 1 manische Episode. Rezidivierend = NUR depressive Episoden.',
+        'Prüfungsklassiker – Differentialdiagnosen (Teil 2):\nSchizophrenie vs. schizoaffektiv: Schizoaffektiv = gleichzeitig schizophrene UND affektive Symptome.\nDepression vs. Dysthymia: Depression = episodisch, schwerer.\nDysthymia = chronisch ≥2J, leichter.\nBipolar vs. rezidivierende Depression: Bipolar = mind. 1 manische Episode.\nRezidivierend = NUR depressive Episoden.',
     tags: ['Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'Prüfungsklassiker – Differentialdiagnosen (Teil 3): Zwang vs. Wahn: Zwang = ICH-DYSTON (als sinnlos erkannt). Wahn = ICH-SYNTON (unerschütterliche Überzeugung). Panikstörung vs. GAD: Panik = episodisch, attackenartig. GAD = anhaltend, ≥6 Monate, frei flottierend. Anpassungsstörung vs. PTBS: PTBS = nach schwerem Trauma, Flashbacks. Anpassungsstörung = nach beliebigem Ereignis.',
+        'Prüfungsklassiker – Differentialdiagnosen (Teil 3):\nZwang vs. Wahn: Zwang = ICH-DYSTON (als sinnlos erkannt).\nWahn = ICH-SYNTON (unerschütterliche Überzeugung).\nPanikstörung vs. GAD: Panik = episodisch, attackenartig.\nGAD = anhaltend, ≥6 Monate, frei flottierend.\nAnpassungsstörung vs. PTBS: PTBS = nach schwerem Trauma, Flashbacks.\nAnpassungsstörung = nach beliebigem Ereignis.',
     tags: ['Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'Ausschluss organischer Ursachen: Bei JEDER psychischen Störung muss zuerst eine organische Ursache ausgeschlossen werden – das ist HPP-Kernkompetenz! Vor jeder Psychotherapie ist eine somatische Abklärung notwendig. Beispiele: Hypothyreose → Depression, Hirntumor → Persönlichkeitsveränderung, Hypoglykämie → Angst.',
+        'Ausschluss organischer Ursachen:\nBei JEDER psychischen Störung muss zuerst eine organische Ursache ausgeschlossen werden – das ist HPP-Kernkompetenz!\nVor jeder Psychotherapie ist eine somatische Abklärung notwendig.\nBeispiele: Hypothyreose → Depression, Hirntumor → Persönlichkeitsveränderung, Hypoglykämie → Angst.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Notfälle erkennen: Delir, akute Psychose, schwere Intoxikation/Entzug, akute Suizidalität → sofort Notarzt/Einweisung! Ein psychiatrischer Notfall erfordert sofortiges Handeln zur Abwendung von Lebensgefahr. Therapie muss sofort und symptomorientiert erfolgen. HPP muss Notfälle erkennen und angemessen reagieren!',
+        'Notfälle erkennen:\nDelir, akute Psychose, schwere Intoxikation/Entzug, akute Suizidalität → sofort Notarzt/Einweisung!\nEin psychiatrischer Notfall erfordert sofortiges Handeln zur Abwendung von Lebensgefahr.\nTherapie muss sofort und symptomorientiert erfolgen.\nHPP muss Notfälle erkennen und angemessen reagieren!',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'HPP-Grenzen: HPP darf KEINE organischen Erkrankungen diagnostizieren, KEINE Medikamente verordnen, KEINE Suchtbehandlung (z.B. Methadon-Substitution) durchführen. Bei Verdacht auf organische Ursache → Überweisung an Arzt! Die Verordnung von Betäubungsmitteln unterliegt dem BtMG und bedarf eines Arztes.',
+        'HPP-Grenzen:\nHPP darf KEINE organischen Erkrankungen diagnostizieren, KEINE Medikamente verordnen, KEINE Suchtbehandlung (z.B. Methadon-Substitution) durchführen.\nBei Verdacht auf organische Ursache → Überweisung an Arzt!\nDie Verordnung von Betäubungsmitteln unterliegt dem BtMG und bedarf eines Arztes.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Wahrnehmungsstörungen: Halluzination = Wahrnehmung OHNE realen Reiz (akustisch, optisch, taktil, olfaktorisch, gustatorisch). Illusionäre Verkennung = Fehldeutung eines REAL vorhandenen Reizes (z.B. Sitzsack wird für Einbrecher gehalten). Illusionäre Verkennungen können auch bei Gesunden auftreten.',
+        'Wahrnehmungsstörungen:\nHalluzination = Wahrnehmung OHNE realen Reiz (akustisch, optisch, taktil, olfaktorisch, gustatorisch).\nIllusionäre Verkennung = Fehldeutung eines REAL vorhandenen Reizes (z.B. Sitzsack wird für Einbrecher gehalten).\nIllusionäre Verkennungen können auch bei Gesunden auftreten.',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Depersonalisation vs. Derealisation: Depersonalisation = Gefühl der Entfremdung vom eigenen Ich (man fühlt sich losgelöst vom eigenen Körper, Gedanken oder Gefühlen). Derealisation = Wahrnehmung der Umwelt als unwirklich/fremd. Können bei PTBS, dissoziativen Störungen, Panikattacken und Schizophrenie auftreten. Sind Ich-Störungen.',
+        'Depersonalisation vs. Derealisation:\nDepersonalisation = Gefühl der Entfremdung vom eigenen Ich (man fühlt sich losgelöst vom eigenen Körper, Gedanken oder Gefühlen).\nDerealisation = Wahrnehmung der Umwelt als unwirklich/fremd.\nKönnen bei PTBS, dissoziativen Störungen, Panikattacken und Schizophrenie auftreten.\nSind Ich-Störungen.',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Hypoglykämie – psychische Symptome (prüfungsrelevant): Zittern, Unruhe, Reizbarkeit (adrenerge Gegenregulation). Weitere: Schwitzen, Herzklopfen, Heißhunger, Konzentrationsstörungen. Kann psychische Störungen imitieren! Abgrenzung: Hypothyreose = "alles gedrosselt" (Antriebsmangel, Depression). Hyperthyreose = "alles auf Hochtouren" (Unruhe, Tachykardie).',
+        'Hypoglykämie – psychische Symptome (prüfungsrelevant):\nZittern, Unruhe, Reizbarkeit (adrenerge Gegenregulation).\nWeitere: Schwitzen, Herzklopfen, Heißhunger, Konzentrationsstörungen.\nKann psychische Störungen imitieren!\nAbgrenzung: Hypothyreose = "alles gedrosselt" (Antriebsmangel, Depression).\nHyperthyreose = "alles auf Hochtouren" (Unruhe, Tachykardie).',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Epilepsie (prüfungsrelevant): Kann in jedem Alter auftreten. Absencen = kurze Bewusstseinsaussetzer (vor allem bei Kindern). EEG zur Diagnose. Benzodiazepinabrupt-Absetzen kann Krampfanfälle auslösen. Nach Gelegenheitskrampf: Fahrtauglichkeit beeinträchtigt. Abgrenzung: Dissoziative Krampfanfälle = keine epileptischen Veränderungen im EEG.',
+        'Epilepsie (prüfungsrelevant):\nKann in jedem Alter auftreten.\nAbsencen = kurze Bewusstseinsaussetzer (vor allem bei Kindern).\nEEG zur Diagnose.\nBenzodiazepinabrupt-Absetzen kann Krampfanfälle auslösen.\nNach Gelegenheitskrampf: Fahrtauglichkeit beeinträchtigt.\nAbgrenzung: Dissoziative Krampfanfälle = keine epileptischen Veränderungen im EEG.',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Psychopathologischer Befund – Orientierung: Orientierungsstörungen betreffen 4 Qualitäten: zeitlich, örtlich, situativ, zur Person (ZOSP). Zeitliche Orientierung ist meist zuerst gestört. Orientierung zur eigenen Person ist am tiefsten verankert und zuletzt betroffen. Prüfung: Datum, Ort, Situation und Name erfragen.',
+        'Psychopathologischer Befund – Orientierung:\nOrientierungsstörungen betreffen 4 Qualitäten: zeitlich, örtlich, situativ, zur Person (ZOSP).\nZeitliche Orientierung ist meist zuerst gestört.\nOrientierung zur eigenen Person ist am tiefsten verankert und zuletzt betroffen.\nPrüfung: Datum, Ort, Situation und Name erfragen.',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Psychopathologischer Befund – Affekt: Affektverflachung (reduzierte emotionale Schwingungsfähigkeit). Parathymie (inadäquater Affekt, z.B. Lachen bei traurigem Inhalt). Affektinkontinenz (unkontrollierte Gefühlsausbrüche). Affektlabilität (rasche Stimmungswechsel). Ambivalenz (gleichzeitig widersprüchliche Gefühle). Alle können bei Schizophrenie auftreten.',
+        'Psychopathologischer Befund – Affekt:\nAffektverflachung (reduzierte emotionale Schwingungsfähigkeit).\nParathymie (inadäquater Affekt, z.B. Lachen bei traurigem Inhalt).\nAffektinkontinenz (unkontrollierte Gefühlsausbrüche).\nAffektlabilität (rasche Stimmungswechsel).\nAmbivalenz (gleichzeitig widersprüchliche Gefühle).\nAlle können bei Schizophrenie auftreten.',
     tags: ['Psychopathologie'],
   ),
 
@@ -706,102 +706,102 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'Kognitive Verhaltenstherapie (KVT) nach Beck: Tagesprotokolle zur Selbstbeobachtung, Erkennen automatischer dysfunktionaler Gedanken, kognitive Umstrukturierung (z.B. Reattribuierung). Denkfehler nach Beck: Generalisierung, Katastrophisierung, Schwarz-Weiß-Denken, willkürliches Schlussfolgern. Grundprinzip VT: Abweichendes Verhalten durch Lernprozesse erworben – und änderbar.',
+        'Kognitive Verhaltenstherapie (KVT) nach Beck:\nTagesprotokolle zur Selbstbeobachtung, Erkennen automatischer dysfunktionaler Gedanken, kognitive Umstrukturierung (z.B. Reattribuierung).\nDenkfehler nach Beck: Generalisierung, Katastrophisierung, Schwarz-Weiß-Denken, willkürliches Schlussfolgern.\nGrundprinzip VT: Abweichendes Verhalten durch Lernprozesse erworben – und änderbar.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Exposition/Konfrontation: Flooding (Reizüberflutung) und systematische Desensibilisierung sind Expositionsverfahren. Wirkmechanismus: Habituation (Gewöhnung). Wichtig: Angstkurve vollständig durchlaufen lassen! Tranquilizer würden Exposition unwirksam machen. Bei Zwängen: Exposition + Reaktionsverhinderung (ERP) = Goldstandard.',
+        'Exposition/Konfrontation:\nFlooding (Reizüberflutung) und systematische Desensibilisierung sind Expositionsverfahren.\nWirkmechanismus: Habituation (Gewöhnung).\nWichtig: Angstkurve vollständig durchlaufen lassen!\nTranquilizer würden Exposition unwirksam machen.\nBei Zwängen: Exposition + Reaktionsverhinderung (ERP) = Goldstandard.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Psychoanalyse: Grundregel = Freies Assoziieren (alles aussprechen, was einfällt). Techniken: Deutung (Aufdecken unbewusster Bedeutung), Traumdeutung, Bearbeitung von Übertragung und Widerstand. Widerstand = alle Verhaltensweisen, die den therapeutischen Prozess behindern (Zuspätkommen, Vergessen, Schweigen). Therapeutische Ich-Spaltung ist eine Voraussetzung.',
+        'Psychoanalyse:\nGrundregel = Freies Assoziieren (alles aussprechen, was einfällt).\nTechniken: Deutung (Aufdecken unbewusster Bedeutung), Traumdeutung, Bearbeitung von Übertragung und Widerstand.\nWiderstand = alle Verhaltensweisen, die den therapeutischen Prozess behindern (Zuspätkommen, Vergessen, Schweigen).\nTherapeutische Ich-Spaltung ist eine Voraussetzung.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Gesprächspsychotherapie nach Carl Rogers: 3 Grundhaltungen: (1) Empathie (einfühlendes Verstehen), (2) Akzeptanz (unbedingte Wertschätzung), (3) Kongruenz (Echtheit). Basiert auf der Aktualisierungstendenz. Nicht-direktiver Ansatz. Suggestivfragen und rhetorische Fragen sind NICHT vereinbar mit Rogers.',
+        'Gesprächspsychotherapie nach Carl Rogers:\n3 Grundhaltungen: (1) Empathie (einfühlendes Verstehen), (2) Akzeptanz (unbedingte Wertschätzung), (3) Kongruenz (Echtheit).\nBasiert auf der Aktualisierungstendenz.\nNicht-direktiver Ansatz.\nSuggestivfragen und rhetorische Fragen sind NICHT vereinbar mit Rogers.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Systemische Therapie: Befasst sich mit Beziehungsmustern und dysfunktionalen familiären Interaktionen. Technik: Zirkuläres Fragen (ein Familienmitglied wird über Beziehung/Verhalten anderer befragt). Delegation (Stierlin) = Kinder erfüllen unbewusst Wünsche der Eltern. Parentifizierung = Rollenumkehr Kind↔Elternteil.',
+        'Systemische Therapie:\nBefasst sich mit Beziehungsmustern und dysfunktionalen familiären Interaktionen.\nTechnik: Zirkuläres Fragen (ein Familienmitglied wird über Beziehung/Verhalten anderer befragt).\nDelegation (Stierlin) = Kinder erfüllen unbewusst Wünsche der Eltern.\nParentifizierung = Rollenumkehr Kind↔Elternteil.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'EMDR (Eye Movement Desensitization and Reprocessing): Evidenzbasierte Methode zur Traumaverarbeitung. Bilaterale Stimulation (Augenbewegungen). Patient bleibt wach und bewusst (KEINE Hypnose). Ziel: Verarbeitung und Umstrukturierung dysfunktionaler Kognitionen. Nebenwirkungen möglich (emotionale Belastung).',
+        'EMDR (Eye Movement Desensitization and Reprocessing):\nEvidenzbasierte Methode zur Traumaverarbeitung.\nBilaterale Stimulation (Augenbewegungen).\nPatient bleibt wach und bewusst (KEINE Hypnose).\nZiel: Verarbeitung und Umstrukturierung dysfunktionaler Kognitionen.\nNebenwirkungen möglich (emotionale Belastung).',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'DBT (Dialektisch-Behaviorale Therapie): Speziell für Borderline-PS entwickelt. Emotionsregulationstraining: Gefühle wahrnehmen und regulieren, NICHT vermeiden oder unterdrücken. Achtsamkeit bezieht sich auf gegenwärtige Gefühle. Stresstoleranz-Skills. CBASP wurde speziell für chronische Depression entwickelt.',
+        'DBT (Dialektisch-Behaviorale Therapie):\nSpeziell für Borderline-PS entwickelt.\nEmotionsregulationstraining: Gefühle wahrnehmen und regulieren, NICHT vermeiden oder unterdrücken.\nAchtsamkeit bezieht sich auf gegenwärtige Gefühle.\nStresstoleranz-Skills.\nCBASP wurde speziell für chronische Depression entwickelt.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Neuroleptika/Antipsychotika: Antipsychotische, anxiolytische und sedierende Wirkung. Nebenwirkungen: Extrapyramidale Störungen (Dyskinesien, Akathisie, Frühdyskinesien), Gewichtszunahme, QT-Verlängerung. KEIN Abhängigkeitspotenzial (Unterschied zu Benzodiazepinen). Anticholinerge NW: Miktionsstörungen, Mydriasis.',
+        'Neuroleptika/Antipsychotika:\nAntipsychotische, anxiolytische und sedierende Wirkung.\nNebenwirkungen: Extrapyramidale Störungen (Dyskinesien, Akathisie, Frühdyskinesien), Gewichtszunahme, QT-Verlängerung.\nKEIN Abhängigkeitspotenzial (Unterschied zu Benzodiazepinen).\nAnticholinerge NW: Miktionsstörungen, Mydriasis.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Serotoninsyndrom: Lebensbedrohliche Überaktivierung des Serotoninsystems, meist durch Kombination serotonerger Substanzen (SSRI + MAO-Hemmer, Triptane oder Johanniskraut). Leitsymptome: Ruhelosigkeit und Bewusstseinsstörung, neuromuskuläre Zeichen (Tremor, Muskelzuckungen, gesteigerte Reflexe) sowie vegetative Zeichen (Fieber, Schwitzen, Tachykardie, Übelkeit). NOTFALL – auslösende Substanz absetzen, sofort ärztliche Behandlung.',
+        'Serotoninsyndrom:\nLebensbedrohliche Überaktivierung des Serotoninsystems, meist durch Kombination serotonerger Substanzen (SSRI + MAO-Hemmer, Triptane oder Johanniskraut).\nLeitsymptome: Ruhelosigkeit und Bewusstseinsstörung, neuromuskuläre Zeichen (Tremor, Muskelzuckungen, gesteigerte Reflexe) sowie vegetative Zeichen (Fieber, Schwitzen, Tachykardie, Übelkeit).\nNOTFALL – auslösende Substanz absetzen, sofort ärztliche Behandlung.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Johanniskraut (Hypericum perforatum): Phytopharmakon – KEIN Biologikum und KEIN Neuroleptikum. Nachgewiesene antidepressive Wirkung bei leichten bis mittelschweren depressiven Episoden, dafür auch zugelassen. Bei älteren Menschen nicht generell kontraindiziert. Cave: erhebliche Wechselwirkungen durch CYP-Enzym-Induktion – schwächt u.a. Kontrazeptiva, Antikoagulanzien und Immunsuppressiva ab. Zusammen mit SSRI droht ein Serotoninsyndrom. Weitere Nebenwirkung: Photosensibilisierung.',
+        'Johanniskraut (Hypericum perforatum):\nPhytopharmakon – KEIN Biologikum und KEIN Neuroleptikum.\nNachgewiesene antidepressive Wirkung bei leichten bis mittelschweren depressiven Episoden, dafür auch zugelassen.\nBei älteren Menschen nicht generell kontraindiziert.\nCave: erhebliche Wechselwirkungen durch CYP-Enzym-Induktion – schwächt u.a. Kontrazeptiva, Antikoagulanzien und Immunsuppressiva ab.\nZusammen mit SSRI droht ein Serotoninsyndrom.\nWeitere Nebenwirkung: Photosensibilisierung.',
     tags: ['Therapieverfahren', 'F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'Lerntheorie – Verstärkung und Bestrafung: Positive Verstärkung = angenehmer Reiz wird hinzugefügt → Verhalten nimmt zu. Negative Verstärkung = unangenehmer Reiz wird entfernt → Verhalten nimmt zu (z.B. Kratzen → Juckreiz weg). Direkte Bestrafung = aversiver Reiz hinzugefügt. Indirekte Bestrafung (Typ II) = angenehmer Reiz entzogen.',
+        'Lerntheorie – Verstärkung und Bestrafung:\nPositive Verstärkung = angenehmer Reiz wird hinzugefügt → Verhalten nimmt zu.\nNegative Verstärkung = unangenehmer Reiz wird entfernt → Verhalten nimmt zu (z.B. Kratzen → Juckreiz weg).\nDirekte Bestrafung = aversiver Reiz hinzugefügt.\nIndirekte Bestrafung (Typ II) = angenehmer Reiz entzogen.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Klassische vs. operante Konditionierung: Klassische Konditionierung (Pawlow) = ein neutraler Reiz wird durch wiederholte Kopplung mit einem unkonditionierten Reiz selbst zum Auslöser der Reaktion – unwillkürlich, Lernen am Reiz. Operante Konditionierung (Skinner) = Verhalten wird durch seine Konsequenzen gesteuert; Verstärkung erhöht, Bestrafung senkt die Auftretenswahrscheinlichkeit – Lernen am Erfolg. Merke: klassisch = Reiz VOR der Reaktion, operant = Konsequenz NACH dem Verhalten.',
+        'Klassische vs. operante Konditionierung:\nKlassische Konditionierung (Pawlow) = ein neutraler Reiz wird durch wiederholte Kopplung mit einem unkonditionierten Reiz selbst zum Auslöser der Reaktion – unwillkürlich, Lernen am Reiz.\nOperante Konditionierung (Skinner) = Verhalten wird durch seine Konsequenzen gesteuert; Verstärkung erhöht, Bestrafung senkt die Auftretenswahrscheinlichkeit – Lernen am Erfolg.\nMerke: klassisch = Reiz VOR der Reaktion, operant = Konsequenz NACH dem Verhalten.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Löschung (Extinktion) und Verstärkerpläne: Löschung = ein konditioniertes Verhalten nimmt ab, wenn die Verstärkung bzw. der unkonditionierte Reiz ausbleibt. Sie dient dem ABBAU, nicht dem Aufbau von Verhalten. Kontinuierliche Verstärkung (jedes Mal) führt zu schnellem Lernen, aber auch zu schneller Löschung. Intermittierende Verstärkung (nur gelegentlich) baut Verhalten langsamer auf, macht es aber besonders löschungsresistent – Erklärung für die Hartnäckigkeit von Spielsucht.',
+        'Löschung (Extinktion) und Verstärkerpläne:\nLöschung = ein konditioniertes Verhalten nimmt ab, wenn die Verstärkung bzw. der unkonditionierte Reiz ausbleibt.\nSie dient dem ABBAU, nicht dem Aufbau von Verhalten.\nKontinuierliche Verstärkung (jedes Mal) führt zu schnellem Lernen, aber auch zu schneller Löschung.\nIntermittierende Verstärkung (nur gelegentlich) baut Verhalten langsamer auf, macht es aber besonders löschungsresistent – Erklärung für die Hartnäckigkeit von Spielsucht.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Verhaltensaufbau in der Verhaltenstherapie: Shaping = Verstärkung schrittweiser Annäherungen an das Zielverhalten. Chaining = Verkettung einzelner beherrschter Teilschritte zu einer Handlungskette. Prompting = gezielte verbale, gestische oder körperliche Hilfestellung. Fading = allmähliches Ausblenden dieser Hilfen. Premack-Prinzip = ein häufig gezeigtes Verhalten verstärkt ein selten gezeigtes. Token-System = symbolische Verstärker werden gesammelt und später eingetauscht.',
+        'Verhaltensaufbau in der Verhaltenstherapie:\nShaping = Verstärkung schrittweiser Annäherungen an das Zielverhalten.\nChaining = Verkettung einzelner beherrschter Teilschritte zu einer Handlungskette.\nPrompting = gezielte verbale, gestische oder körperliche Hilfestellung.\nFading = allmähliches Ausblenden dieser Hilfen.\nPremack-Prinzip = ein häufig gezeigtes Verhalten verstärkt ein selten gezeigtes.\nToken-System = symbolische Verstärker werden gesammelt und später eingetauscht.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Modelllernen nach Bandura: Lernen durch Beobachtung und Nachahmung eines Modells – ohne eigene Verstärkungserfahrung. Vier Phasen: (1) Aufmerksamkeit auf das Modell, (2) Behalten im Gedächtnis, (3) motorische Reproduktion, (4) Motivation/Verstärkung. Nachahmung ist wahrscheinlicher, wenn das Modell hohen Status hat oder für sein Verhalten belohnt wird (stellvertretende Verstärkung). Grundlage von Rollenspiel und Modellvorgabe in der Verhaltenstherapie.',
+        'Modelllernen nach Bandura:\nLernen durch Beobachtung und Nachahmung eines Modells – ohne eigene Verstärkungserfahrung.\nVier Phasen: (1) Aufmerksamkeit auf das Modell, (2) Behalten im Gedächtnis, (3) motorische Reproduktion, (4) Motivation/Verstärkung.\nNachahmung ist wahrscheinlicher, wenn das Modell hohen Status hat oder für sein Verhalten belohnt wird (stellvertretende Verstärkung).\nGrundlage von Rollenspiel und Modellvorgabe in der Verhaltenstherapie.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Reizverarbeitung – vier Begriffe zum Verwechseln: Reizgeneralisierung = die konditionierte Reaktion tritt auch bei ähnlichen Reizen auf (so weitet sich eine Phobie aus). Reizdiskriminierung = Unterscheidung ähnlicher Reize, nur der konditionierte Reiz löst die Reaktion aus. Habituation = Abnahme der Reaktion bei wiederholter Reizdarbietung – das Wirkprinzip der Exposition. Sensitivierung = Zunahme der Reaktion bei wiederholtem Reiz, das Gegenstück zur Habituation.',
+        'Reizverarbeitung – vier Begriffe zum Verwechseln:\nReizgeneralisierung = die konditionierte Reaktion tritt auch bei ähnlichen Reizen auf (so weitet sich eine Phobie aus).\nReizdiskriminierung = Unterscheidung ähnlicher Reize, nur der konditionierte Reiz löst die Reaktion aus.\nHabituation = Abnahme der Reaktion bei wiederholter Reizdarbietung – das Wirkprinzip der Exposition.\nSensitivierung = Zunahme der Reaktion bei wiederholtem Reiz, das Gegenstück zur Habituation.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Therapieverfahren richtig zuordnen: Katathymes Bilderleben gehört zu den tiefenpsychologisch fundierten Verfahren. Biofeedback und Flooding gehören zur Verhaltenstherapie. Das SORKC-Modell ist ein zentrales verhaltenstherapeutisches Analysemodell. Autogenes Training und Progressive Muskelrelaxation (PMR) sind Entspannungsverfahren. Bei akuter Psychose sind Entspannungsverfahren KONTRAINDIZIERT.',
+        'Therapieverfahren richtig zuordnen:\nKatathymes Bilderleben gehört zu den tiefenpsychologisch fundierten Verfahren.\nBiofeedback und Flooding gehören zur Verhaltenstherapie.\nDas SORKC-Modell ist ein zentrales verhaltenstherapeutisches Analysemodell.\nAutogenes Training und Progressive Muskelrelaxation (PMR) sind Entspannungsverfahren.\nBei akuter Psychose sind Entspannungsverfahren KONTRAINDIZIERT.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Ähnlich klingende Konzepte: Resilienz = psychische Widerstandsfähigkeit trotz belastender Umstände. Reaktanz = Widerstand gegen wahrgenommene Einschränkung der Freiheit. Compliance = Therapietreue. Kognitive Dissonanz = innere Widersprüche zwischen Einstellungen/Verhalten. Erlernte Hilflosigkeit (Seligman) = lerntheoretisches Konzept, KEIN psychoanalytischer Abwehrmechanismus.',
+        'Ähnlich klingende Konzepte:\nResilienz = psychische Widerstandsfähigkeit trotz belastender Umstände.\nReaktanz = Widerstand gegen wahrgenommene Einschränkung der Freiheit.\nCompliance = Therapietreue.\nKognitive Dissonanz = innere Widersprüche zwischen Einstellungen/Verhalten.\nErlernte Hilflosigkeit (Seligman) = lerntheoretisches Konzept, KEIN psychoanalytischer Abwehrmechanismus.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Serotonin: Kommt zu ca. 90% im Darm vor, beeinflusst Stimmung, Temperatur, Schmerz und Schlaf-Wach-Rhythmus. Kann die Blut-Hirn-Schranke NICHT passieren. SSRI wirken auch peripher → gastrointestinale Nebenwirkungen. Johanniskraut: Bei leichten bis mittelschweren Depressionen zugelassen, aber erhebliche Wechselwirkungen (CYP-Induktion).',
+        'Serotonin:\nKommt zu ca. 90% im Darm vor, beeinflusst Stimmung, Temperatur, Schmerz und Schlaf-Wach-Rhythmus.\nKann die Blut-Hirn-Schranke NICHT passieren.\nSSRI wirken auch peripher → gastrointestinale Nebenwirkungen.\nJohanniskraut: Bei leichten bis mittelschweren Depressionen zugelassen, aber erhebliche Wechselwirkungen (CYP-Induktion).',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Selbstbeurteilungsbögen (z.B. BDI-II) erfassen: Stimmung, Antrieb, Schlaf, Appetit, Suizidgedanken. NICHT erfassbar: Wahnerleben (Betroffene erkennen Wahn nicht als solchen → Fremdbeurteilung nötig). Vor Therapiebeginn: Offene Fragen stellen, Suggestivfragen vermeiden, bei vagen Aussagen nachfragen.',
+        'Selbstbeurteilungsbögen (z.B. BDI-II) erfassen:\nStimmung, Antrieb, Schlaf, Appetit, Suizidgedanken.\nNICHT erfassbar: Wahnerleben (Betroffene erkennen Wahn nicht als solchen → Fremdbeurteilung nötig).\nVor Therapiebeginn: Offene Fragen stellen, Suggestivfragen vermeiden, bei vagen Aussagen nachfragen.',
     tags: ['Therapieverfahren'],
   ),
 
@@ -810,22 +810,22 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'Neuroanatomie (prüfungsrelevant): Corpus callosum = verbindet Großhirnhemisphären. Hippocampus = Gedächtnisbildung. Kleinhirn = motorische Koordination, Feinmotorik. Hirnstamm = Atmung, Kreislauf. Hypothalamus = steuert autonomes NS. Sympathikus = Fight-or-Flight. Parasympathikus = Rest-and-Digest. Limbisches System = Emotionen.',
+        'Neuroanatomie (prüfungsrelevant):\nCorpus callosum = verbindet Großhirnhemisphären.\nHippocampus = Gedächtnisbildung.\nKleinhirn = motorische Koordination, Feinmotorik.\nHirnstamm = Atmung, Kreislauf.\nHypothalamus = steuert autonomes NS.\nSympathikus = Fight-or-Flight.\nParasympathikus = Rest-and-Digest.\nLimbisches System = Emotionen.',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'MS (Multiple Sklerose) – psychische Symptome: Euphorie, Affektverflachung, kognitive Beeinträchtigungen bis zur Demenz, selten paranoide Symptome. Sehstörungen durch Optikusneuritis. Flashbacks sind NICHT typisch für MS (sondern für PTBS). MS kann psychiatrische Symptome verursachen → organische Ursache ausschließen!',
+        'MS (Multiple Sklerose) – psychische Symptome:\nEuphorie, Affektverflachung, kognitive Beeinträchtigungen bis zur Demenz, selten paranoide Symptome.\nSehstörungen durch Optikusneuritis.\nFlashbacks sind NICHT typisch für MS (sondern für PTBS).\nMS kann psychiatrische Symptome verursachen → organische Ursache ausschließen!',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Migräne (prüfungsrelevant): Lichtempfindlichkeit, Übelkeit/Erbrechen. Auraphase: Flimmerskotome (Sehstörungen). Körperliche Betätigung verschlechtert die Kopfschmerzen. Bestimmte Lebensmittel können triggern. Am häufigsten bei Frauen im gebärfähigen Alter. Bessert sich oft nach der Menopause.',
+        'Migräne (prüfungsrelevant):\nLichtempfindlichkeit, Übelkeit/Erbrechen.\nAuraphase: Flimmerskotome (Sehstörungen).\nKörperliche Betätigung verschlechtert die Kopfschmerzen.\nBestimmte Lebensmittel können triggern.\nAm häufigsten bei Frauen im gebärfähigen Alter.\nBessert sich oft nach der Menopause.',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Fibromyalgie: Chronische Schmerzen in mehreren Körperregionen, Schlafstörungen, Müdigkeit. KVT ist wirksamer Behandlungsansatz. NICHT gleichzusetzen mit somatoformer Schmerzstörung. Rheumafaktoren sind nicht typisch. Betrifft ca. 2-4% der Bevölkerung.',
+        'Fibromyalgie:\nChronische Schmerzen in mehreren Körperregionen, Schlafstörungen, Müdigkeit.\nKVT ist wirksamer Behandlungsansatz.\nNICHT gleichzusetzen mit somatoformer Schmerzstörung.\nRheumafaktoren sind nicht typisch.\nBetrifft ca. 2-4% der Bevölkerung.',
     tags: ['Psychopathologie'],
   ),
 
@@ -834,152 +834,152 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'Unterbringung – wer entscheidet: Es kann immer nur der Richter rechtlich über die zwangsweise Unterbringung und Behandlung gegen den Willen des Betroffenen entscheiden. Weder Ärzte, noch Heilpraktiker, noch Angehörige können allein eine Unterbringung anordnen.',
+        'Unterbringung – wer entscheidet:\nEs kann immer nur der Richter rechtlich über die zwangsweise Unterbringung und Behandlung gegen den Willen des Betroffenen entscheiden.\nWeder Ärzte, noch Heilpraktiker, noch Angehörige können allein eine Unterbringung anordnen.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Rechtsgrundlagen für eine geschlossene Unterbringung: (1) StGB §63 (Maßregelvollzug bei Straftaten), (2) PsychKG (öffentlich-rechtlich bei Fremd-/Selbstgefährdung), (3) BGB-Betreuungsrecht (zivilrechtlich mit Gerichtsgenehmigung), (4) Freiwillige Aufnahme. Die Ärztekammer hat KEINE Anordnungskompetenz. Merke: 4 Rechtsgrundlagen: StGB, PsychKG, BGB, freiwillig.',
+        'Rechtsgrundlagen für eine geschlossene Unterbringung:\n(1) StGB §63 (Maßregelvollzug bei Straftaten), (2) PsychKG (öffentlich-rechtlich bei Fremd-/Selbstgefährdung), (3) BGB-Betreuungsrecht (zivilrechtlich mit Gerichtsgenehmigung), (4) Freiwillige Aufnahme.\nDie Ärztekammer hat KEINE Anordnungskompetenz.\nMerke: 4 Rechtsgrundlagen: StGB, PsychKG, BGB, freiwillig.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Unterbringung nach PsychKG: Zulässig zur Abwehr akuter erheblicher Gefahren für Gesundheit/Leben des Betroffenen oder bedeutende Rechtsgüter anderer. Das Amtsgericht ordnet an. Ordnungsamt kann bei Gefahr im Verzug sofortige kurzfristige Unterbringung veranlassen. Zeitlich befristet. Behandlungsunwilligkeit allein, Gesetzesverstöße oder HP-Attest reichen NICHT aus.',
+        'Unterbringung nach PsychKG:\nZulässig zur Abwehr akuter erheblicher Gefahren für Gesundheit/Leben des Betroffenen oder bedeutende Rechtsgüter anderer.\nDas Amtsgericht ordnet an.\nOrdnungsamt kann bei Gefahr im Verzug sofortige kurzfristige Unterbringung veranlassen.\nZeitlich befristet.\nBehandlungsunwilligkeit allein, Gesetzesverstöße oder HP-Attest reichen NICHT aus.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Unterbringung nach Betreuungsrecht: Muss zum Wohl des Betreuten erforderlich sein. Bedarf der Genehmigung des Betreuungsgerichts (bei Gefahr im Verzug: nachträgliche Genehmigung). Sachverständigengutachten erforderlich. Auch in Pflegeheimen möglich. Patientenverfügung schließt Unterbringung nicht grundsätzlich aus. Zeitlich befristet, regelmäßige Überprüfung.',
+        'Unterbringung nach Betreuungsrecht:\nMuss zum Wohl des Betreuten erforderlich sein.\nBedarf der Genehmigung des Betreuungsgerichts (bei Gefahr im Verzug: nachträgliche Genehmigung).\nSachverständigengutachten erforderlich.\nAuch in Pflegeheimen möglich.\nPatientenverfügung schließt Unterbringung nicht grundsätzlich aus.\nZeitlich befristet, regelmäßige Überprüfung.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Unterbringung – Voraussetzungen: Die Unterbringung ist bei Suizidgefahr oder drohendem Gesundheitsschaden zulässig. Auch ohne akute psychiatrische Diagnose möglich (z.B. bei Demenz). Kann auch in Pflegeheimen erfolgen. Das offene Ansprechen von Suizidalität erhöht NICHT das Suizidrisiko. Bei passiver Suizidalität ist eine sofortige Unterbringung nicht angemessen.',
+        'Unterbringung – Voraussetzungen:\nDie Unterbringung ist bei Suizidgefahr oder drohendem Gesundheitsschaden zulässig.\nAuch ohne akute psychiatrische Diagnose möglich (z.B. bei Demenz).\nKann auch in Pflegeheimen erfolgen.\nDas offene Ansprechen von Suizidalität erhöht NICHT das Suizidrisiko.\nBei passiver Suizidalität ist eine sofortige Unterbringung nicht angemessen.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Unterbringung Minderjähriger (§1631b BGB): Sie bedarf der Genehmigung des Familiengerichts. Erziehungsberechtigte können den Antrag stellen. Auch Fremdgefährdung kann ein Grund sein. Bei Kindeswohlgefährdung kann auch ohne Einverständnis der Eltern eine Unterbringung erfolgen.',
+        'Unterbringung Minderjähriger (§1631b BGB):\nSie bedarf der Genehmigung des Familiengerichts.\nErziehungsberechtigte können den Antrag stellen.\nAuch Fremdgefährdung kann ein Grund sein.\nBei Kindeswohlgefährdung kann auch ohne Einverständnis der Eltern eine Unterbringung erfolgen.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Rechtliche Betreuung: Voraussetzung ist, dass der Betroffene aufgrund psychischer Erkrankung oder geistiger/seelischer Behinderung seine Angelegenheiten nicht selbst besorgen kann. Nur für Volljährige (Minderjährige: Vormundschaft). Angehörige können beim Gericht anregen. Überprüfung mind. alle 7 Jahre. Führt NICHT automatisch zur Geschäftsunfähigkeit.',
+        'Rechtliche Betreuung:\nVoraussetzung ist, dass der Betroffene aufgrund psychischer Erkrankung oder geistiger/seelischer Behinderung seine Angelegenheiten nicht selbst besorgen kann.\nNur für Volljährige (Minderjährige: Vormundschaft).\nAngehörige können beim Gericht anregen.\nÜberprüfung mind. alle 7 Jahre.\nFührt NICHT automatisch zur Geschäftsunfähigkeit.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Betreuer – Befugnisse und Grenzen: Der Aufgabenkreis des Betreuers kann auf bestimmte Bereiche beschränkt werden (z.B. Gesundheitsfürsorge). Zwangsweise Behandlung ist mit richterlicher Genehmigung möglich. Der Betreuer kann die Unterbringung NICHT eigenständig anordnen – Genehmigung des Betreuungsgerichts erforderlich. Keine gesetzliche Methodenbeschränkung für HP bei Behandlung von Betreuten.',
+        'Betreuer – Befugnisse und Grenzen:\nDer Aufgabenkreis des Betreuers kann auf bestimmte Bereiche beschränkt werden (z.B. Gesundheitsfürsorge).\nZwangsweise Behandlung ist mit richterlicher Genehmigung möglich.\nDer Betreuer kann die Unterbringung NICHT eigenständig anordnen – Genehmigung des Betreuungsgerichts erforderlich.\nKeine gesetzliche Methodenbeschränkung für HP bei Behandlung von Betreuten.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Betreuung – Anlässe und Genehmigungen: Organische psychische Störungen (Demenz) sind ein häufiger Anlass für Betreuung. Auch Geschäftsunfähige können eine Betreuung beantragen. Psychotherapie erfordert keine gerichtliche Genehmigung. Nach Betreuungsrecht kann eine Unterbringung auch zum Zwecke einer notwendigen ärztlichen Untersuchung erfolgen (§1831 BGB, bis 2022 §1906 BGB).',
+        'Betreuung – Anlässe und Genehmigungen:\nOrganische psychische Störungen (Demenz) sind ein häufiger Anlass für Betreuung.\nAuch Geschäftsunfähige können eine Betreuung beantragen.\nPsychotherapie erfordert keine gerichtliche Genehmigung.\nNach Betreuungsrecht kann eine Unterbringung auch zum Zwecke einer notwendigen ärztlichen Untersuchung erfolgen (§1831 BGB, bis 2022 §1906 BGB).',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Einwilligungsvorbehalt (§1825 BGB): Bestimmte Rechtsgeschäfte des Betreuten werden ohne Zustimmung des Betreuers nicht wirksam. Höchstpersönliche Rechtsgeschäfte (Eheschließung, Testament) sind ausgenommen. Dient dem Schutz des Betreuten. Wird befristet und regelmäßig überprüft.',
+        'Einwilligungsvorbehalt (§1825 BGB):\nBestimmte Rechtsgeschäfte des Betreuten werden ohne Zustimmung des Betreuers nicht wirksam.\nHöchstpersönliche Rechtsgeschäfte (Eheschließung, Testament) sind ausgenommen.\nDient dem Schutz des Betreuten.\nWird befristet und regelmäßig überprüft.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Einwilligungsfähigkeit und Zwangsmaßnahmen: Ist der Patient einwilligungsfähig, hat sein Wille Vorrang (Selbstbestimmungsrecht). Ist er nicht einwilligungsfähig und besteht ein Gesundheitsrisiko, muss der Betreuer die Genehmigung beim Betreuungsgericht beantragen (ärztliche Zwangsmaßnahme). Der Betreuer kann NICHT einfach einwilligen, sondern muss zum Wohl des Betreuten handeln.',
+        'Einwilligungsfähigkeit und Zwangsmaßnahmen:\nIst der Patient einwilligungsfähig, hat sein Wille Vorrang (Selbstbestimmungsrecht).\nIst er nicht einwilligungsfähig und besteht ein Gesundheitsrisiko, muss der Betreuer die Genehmigung beim Betreuungsgericht beantragen (ärztliche Zwangsmaßnahme).\nDer Betreuer kann NICHT einfach einwilligen, sondern muss zum Wohl des Betreuten handeln.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Geschäftsunfähigkeit nach §104 BGB: Geschäftsunfähig ist, wer das 7. Lebensjahr nicht vollendet hat ODER sich in einem die freie Willensbestimmung ausschließenden Zustand krankhafter Störung der Geistestätigkeit befindet (sofern nicht vorübergehend). Nicht jeder akute psychische Zustand führt zur Geschäftsunfähigkeit. Rechenstörung und Analphabetismus begründen KEINE Geschäftsunfähigkeit.',
+        'Geschäftsunfähigkeit nach §104 BGB:\nGeschäftsunfähig ist, wer das 7. Lebensjahr nicht vollendet hat ODER sich in einem die freie Willensbestimmung ausschließenden Zustand krankhafter Störung der Geistestätigkeit befindet (sofern nicht vorübergehend).\nNicht jeder akute psychische Zustand führt zur Geschäftsunfähigkeit.\nRechenstörung und Analphabetismus begründen KEINE Geschäftsunfähigkeit.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Erlaubnis zur Psychotherapie in Deutschland: Ärzte, unbeschränkter Heilpraktiker, Heilpraktiker für Psychotherapie (HPP), Psychologische Psychotherapeuten. Ein Psychologiestudium allein befähigt NICHT zur Behandlung – erst mit therapeutischer Ausbildung + Approbation darf man sich "Psychologischer Psychotherapeut" nennen.',
+        'Erlaubnis zur Psychotherapie in Deutschland:\nÄrzte, unbeschränkter Heilpraktiker, Heilpraktiker für Psychotherapie (HPP), Psychologische Psychotherapeuten.\nEin Psychologiestudium allein befähigt NICHT zur Behandlung – erst mit therapeutischer Ausbildung + Approbation darf man sich "Psychologischer Psychotherapeut" nennen.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Der HPP darf alle psychotherapeutischen Verfahren anwenden: kognitive VT, tiefenpsychologisch fundierte PT, Psychoanalyse, Gruppentherapie, Einzelhypnose, psychologische Testverfahren (Intelligenztests). NICHT erlaubt: Osteopathie (körperliches Verfahren → große HP-Erlaubnis nötig), Akupunktur (invasiv), Medikamentenverordnung.',
+        'Der HPP darf alle psychotherapeutischen Verfahren anwenden:\nkognitive VT, tiefenpsychologisch fundierte PT, Psychoanalyse, Gruppentherapie, Einzelhypnose, psychologische Testverfahren (Intelligenztests).\nNICHT erlaubt: Osteopathie (körperliches Verfahren → große HP-Erlaubnis nötig), Akupunktur (invasiv), Medikamentenverordnung.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'HPP-Tätigkeitsverbote: Substitutionstherapie mit Methadon (ärztliche Maßnahme), Medikamente verordnen (nur HP Vollzulassung oder Arzt), LSD-gestützte Therapie (Verstoß gegen BtMG), organische Erkrankungen diagnostizieren, Suchtbehandlung mit Substitution. Erlaubt: Gruppentherapie, EMDR, Expositionstherapie, tiefenpsychologische Therapie.',
+        'HPP-Tätigkeitsverbote:\nSubstitutionstherapie mit Methadon (ärztliche Maßnahme), Medikamente verordnen (nur HP Vollzulassung oder Arzt), LSD-gestützte Therapie (Verstoß gegen BtMG), organische Erkrankungen diagnostizieren, Suchtbehandlung mit Substitution.\nErlaubt: Gruppentherapie, EMDR, Expositionstherapie, tiefenpsychologische Therapie.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'HeilprG-Verbote: Verbot der Geburtshilfe (außer Notfall), Verbot der Behandlung von Mund-/Zahn-/Kiefererkrankungen (eigenes Zahnheilkundegesetz), Verbot der Heilkunde im Umherziehen (§3 HPG). Das HeilprG stammt von 1939. Ärzte benötigen keine HP-Erlaubnis. Die Hilfeleistungspflicht im Notfall ergibt sich aus StGB (§323c), NICHT aus dem HeilprG.',
+        'HeilprG-Verbote:\nVerbot der Geburtshilfe (außer Notfall), Verbot der Behandlung von Mund-/Zahn-/Kiefererkrankungen (eigenes Zahnheilkundegesetz), Verbot der Heilkunde im Umherziehen (§3 HPG).\nDas HeilprG stammt von 1939.\nÄrzte benötigen keine HP-Erlaubnis.\nDie Hilfeleistungspflicht im Notfall ergibt sich aus StGB (§323c), NICHT aus dem HeilprG.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Wichtige Gesetze für HPP: HeilprG = regelt Berufsbezeichnung Heilpraktiker. BOH = Weiterbildungspflicht. IfSG = Meldung von Infektionskrankheiten (z.B. Masern). BtMG = Betäubungsmittel (z.B. Fentanyl). AMG = Arzneimittel. HWG = Verbot von Heilversprechen (Heilmittelwerbegesetz). Der sektorale HP wird durch das HeilprG geregelt, NICHT PsychThG.',
+        'Wichtige Gesetze für HPP:\nHeilprG = regelt Berufsbezeichnung Heilpraktiker.\nBOH = Weiterbildungspflicht.\nIfSG = Meldung von Infektionskrankheiten (z.B. Masern).\nBtMG = Betäubungsmittel (z.B. Fentanyl).\nAMG = Arzneimittel.\nHWG = Verbot von Heilversprechen (Heilmittelwerbegesetz).\nDer sektorale HP wird durch das HeilprG geregelt, NICHT PsychThG.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Patientenrechtegesetz (§§630a-630h BGB): Aufklärungspflicht, Aufbewahrungspflicht der Patientenakte (10 Jahre nach §630f BGB), Dokumentationspflicht, Informationspflicht. Die Meldepflicht ist NICHT im Patientenrechtegesetz, sondern im IfSG geregelt. Elektronische Dokumentation ist zulässig. Arztbriefe sind Teil der Patientenakte.',
+        'Patientenrechtegesetz (§§630a-630h BGB):\nAufklärungspflicht, Aufbewahrungspflicht der Patientenakte (10 Jahre nach §630f BGB), Dokumentationspflicht, Informationspflicht.\nDie Meldepflicht ist NICHT im Patientenrechtegesetz, sondern im IfSG geregelt.\nElektronische Dokumentation ist zulässig.\nArztbriefe sind Teil der Patientenakte.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Akteneinsicht (§630g BGB): Patienten haben grundsätzlich Recht auf Einsicht. Verweigerung nur bei erheblichen therapeutischen Gründen (z.B. Suizidgefahr durch Diagnosekenntnis) oder wenn Rechte Dritter verletzt würden. Verweigerung muss begründet sein. Die Form des Antrags ist kein Verweigerungsgrund.',
+        'Akteneinsicht (§630g BGB):\nPatienten haben grundsätzlich Recht auf Einsicht.\nVerweigerung nur bei erheblichen therapeutischen Gründen (z.B. Suizidgefahr durch Diagnosekenntnis) oder wenn Rechte Dritter verletzt würden.\nVerweigerung muss begründet sein.\nDie Form des Antrags ist kein Verweigerungsgrund.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Schweigepflicht und Durchbrechung: Schriftliche Entbindung durch den Patienten erlaubt Weitergabe. HP haben KEIN Zeugnisverweigerungsrecht im Strafverfahren (nur Ärzte, Psychotherapeuten nach §53 StPO) und müssen aussagen. Durchbrechung der Schweigepflicht bei: geplanten schweren Straftaten (§34 StGB, rechtfertigender Notstand), akuter Suizidalität.',
+        'Schweigepflicht und Durchbrechung:\nSchriftliche Entbindung durch den Patienten erlaubt Weitergabe.\nHP haben KEIN Zeugnisverweigerungsrecht im Strafverfahren (nur Ärzte, Psychotherapeuten nach §53 StPO) und müssen aussagen.\nDurchbrechung der Schweigepflicht bei: geplanten schweren Straftaten (§34 StGB, rechtfertigender Notstand), akuter Suizidalität.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Meldepflicht nach IfSG: Bestimmte Infektionskrankheiten müssen gemeldet werden (z.B. Masern). Nicht im Patientenrechtegesetz geregelt, sondern im Infektionsschutzgesetz. Heilpraktiker unterliegen der Meldepflicht. Die Meldung geht an das zuständige Gesundheitsamt.',
+        'Meldepflicht nach IfSG:\nBestimmte Infektionskrankheiten müssen gemeldet werden (z.B. Masern).\nNicht im Patientenrechtegesetz geregelt, sondern im Infektionsschutzgesetz.\nHeilpraktiker unterliegen der Meldepflicht.\nDie Meldung geht an das zuständige Gesundheitsamt.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Praxisgründung HPP: Muss beim Gesundheitsamt angemeldet werden. Feste Praxisadresse erforderlich. Finanzamt-Anmeldung sofort bei Aufnahme der Tätigkeit. Angestellte müssen jährlich über Arbeitsschutz unterwiesen werden. Berufsgenossenschaft: Anmeldung als Arbeitgeber Pflicht.',
+        'Praxisgründung HPP:\nMuss beim Gesundheitsamt angemeldet werden.\nFeste Praxisadresse erforderlich.\nFinanzamt-Anmeldung sofort bei Aufnahme der Tätigkeit.\nAngestellte müssen jährlich über Arbeitsschutz unterwiesen werden.\nBerufsgenossenschaft: Anmeldung als Arbeitgeber Pflicht.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Berufskunde HPP: Nur approbierte Psychotherapeuten dürfen die Berufsbezeichnung "Psychotherapeut" führen. HP müssen über Kosten aufklären (wirtschaftliche Aufklärungspflicht). GebüH ist nur Orientierungshilfe, nicht verbindlich. Private Versicherungen können HP-Leistungen erstatten.',
+        'Berufskunde HPP:\nNur approbierte Psychotherapeuten dürfen die Berufsbezeichnung "Psychotherapeut" führen.\nHP müssen über Kosten aufklären (wirtschaftliche Aufklärungspflicht).\nGebüH ist nur Orientierungshilfe, nicht verbindlich.\nPrivate Versicherungen können HP-Leistungen erstatten.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Antisuizidvertrag (Non-Suizid-Vertrag): Bei nicht akuter Suizidalität ein sinnvolles therapeutisches Instrument. Die bloße Äußerung von Suizidgedanken entbindet nicht automatisch von der Schweigepflicht – erst bei konkreter Gefahr besteht Handlungspflicht. Auch latente Suizidgedanken erfordern therapeutische Aufmerksamkeit.',
+        'Antisuizidvertrag (Non-Suizid-Vertrag):\nBei nicht akuter Suizidalität ein sinnvolles therapeutisches Instrument.\nDie bloße Äußerung von Suizidgedanken entbindet nicht automatisch von der Schweigepflicht – erst bei konkreter Gefahr besteht Handlungspflicht.\nAuch latente Suizidgedanken erfordern therapeutische Aufmerksamkeit.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Akute Suizidalität – richtiges Vorgehen: Bei akuter Suizidalität muss ggf. eine beschützende stationäre Behandlung veranlasst werden. Der Patient darf nicht mehr alleine gelassen werden. Hopfen/Baldrian sind inadäquat. Nach Hause entlassen bei konkreten Suizidabsichten ist kontraindiziert. Die Frage nach Suizidalität dient der Risikoeinschätzung, nicht primär der Unterbringung.',
+        'Akute Suizidalität – richtiges Vorgehen:\nBei akuter Suizidalität muss ggf. eine beschützende stationäre Behandlung veranlasst werden.\nDer Patient darf nicht mehr alleine gelassen werden.\nHopfen/Baldrian sind inadäquat.\nNach Hause entlassen bei konkreten Suizidabsichten ist kontraindiziert.\nDie Frage nach Suizidalität dient der Risikoeinschätzung, nicht primär der Unterbringung.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Behandlung von Kindern – Einwilligung: Bei gemeinsamem Sorgerecht müssen BEIDE Elternteile einer Behandlung des Kindes zustimmen. Ein 9-jähriges Kind ist nicht geschäftsfähig und kann keinen eigenen Behandlungsvertrag abschließen. Eine Schulbescheinigung ersetzt nicht die Einwilligung beider Sorgeberechtigten.',
+        'Behandlung von Kindern – Einwilligung:\nBei gemeinsamem Sorgerecht müssen BEIDE Elternteile einer Behandlung des Kindes zustimmen.\nEin 9-jähriges Kind ist nicht geschäftsfähig und kann keinen eigenen Behandlungsvertrag abschließen.\nEine Schulbescheinigung ersetzt nicht die Einwilligung beider Sorgeberechtigten.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Betäubungsmittel und Substitution: Die Verordnung von Betäubungsmitteln unterliegt dem Betäubungsmittelgesetz (BtMG) und bedarf der Verordnung durch einen Arzt. Heilpraktiker dürfen keine Betäubungsmittel verordnen. Die Methadon-Substitution ist Ärzten mit Zusatzqualifikation vorbehalten.',
+        'Betäubungsmittel und Substitution:\nDie Verordnung von Betäubungsmitteln unterliegt dem Betäubungsmittelgesetz (BtMG) und bedarf der Verordnung durch einen Arzt.\nHeilpraktiker dürfen keine Betäubungsmittel verordnen.\nDie Methadon-Substitution ist Ärzten mit Zusatzqualifikation vorbehalten.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'HPP – erlaubte und verbotene Verfahren: HP Psychotherapie dürfen kognitive Umstrukturierung, berufsbezogenes Training, Kommunikationstraining und Einbeziehung von Angehörigen anbieten. LSD-gestützte Therapie ist VERBOTEN (Verstoß gegen BtMG). Einzelhypnose, Gruppenhypnose und KVT sind erlaubt. Akupunktur gehört NICHT zum Tätigkeitsbereich des HPP.',
+        'HPP – erlaubte und verbotene Verfahren:\nHP Psychotherapie dürfen kognitive Umstrukturierung, berufsbezogenes Training, Kommunikationstraining und Einbeziehung von Angehörigen anbieten.\nLSD-gestützte Therapie ist VERBOTEN (Verstoß gegen BtMG).\nEinzelhypnose, Gruppenhypnose und KVT sind erlaubt.\nAkupunktur gehört NICHT zum Tätigkeitsbereich des HPP.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Nebenwirkungen von Psychotherapie: Eine vorübergehende Symptomverschlechterung (z.B. kurzfristige Angstausweitung bei Exposition) kann eine Nebenwirkung einer korrekt durchgeführten Therapie sein. Es gibt Instrumente wie den INEP zur Erfassung negativer Psychotherapieeffekte. Nebenwirkungen können auch bei korrekter Therapie auftreten.',
+        'Nebenwirkungen von Psychotherapie:\nEine vorübergehende Symptomverschlechterung (z.B. kurzfristige Angstausweitung bei Exposition) kann eine Nebenwirkung einer korrekt durchgeführten Therapie sein.\nEs gibt Instrumente wie den INEP zur Erfassung negativer Psychotherapieeffekte.\nNebenwirkungen können auch bei korrekter Therapie auftreten.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'HPP bei Intelligenzminderung und Kindern: Bei Intelligenzminderung kann HP Psychotherapie eingesetzt werden. Auch die Anwendung psychologischer Testverfahren wie Intelligenztests ist dem HPP erlaubt. Es besteht kein generelles Behandlungsverbot für HP bei Kindern mit ADS/ADHS. Auch Kinder können mit analytischen Techniken und spieltherapeutischen Verfahren behandelt werden.',
+        'HPP bei Intelligenzminderung und Kindern:\nBei Intelligenzminderung kann HP Psychotherapie eingesetzt werden.\nAuch die Anwendung psychologischer Testverfahren wie Intelligenztests ist dem HPP erlaubt.\nEs besteht kein generelles Behandlungsverbot für HP bei Kindern mit ADS/ADHS.\nAuch Kinder können mit analytischen Techniken und spieltherapeutischen Verfahren behandelt werden.',
     tags: ['Recht & Berufskunde', 'F7-F9 – Entwicklung & Kindheit'],
   ),
 
@@ -988,87 +988,87 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'Akute Belastungsreaktion vs. Anpassungsstörung vs. PTBS: Akute Belastungsreaktion = sofort (Minuten), klingt in Stunden/Tagen ab. Anpassungsstörung = innerhalb 1 Monat nach Belastung, max. 6 Monate, nach beliebigem Lebensereignis. PTBS = nach schwerem Trauma, Latenz Wochen-Monate, Flashbacks + Vermeidung + Hyperarousal.',
+        'Akute Belastungsreaktion vs. Anpassungsstörung vs. PTBS:\nAkute Belastungsreaktion = sofort (Minuten), klingt in Stunden/Tagen ab.\nAnpassungsstörung = innerhalb 1 Monat nach Belastung, max. 6 Monate, nach beliebigem Lebensereignis.\nPTBS = nach schwerem Trauma, Latenz Wochen-Monate, Flashbacks + Vermeidung + Hyperarousal.',
     tags: ['Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'Neurasthenie (F48): Anhaltende Erschöpfbarkeit nach geringer Anstrengung. Abgrenzung: Fatigue = anhaltende Erschöpfung, häufig bei Krebserkrankungen, durch Ruhe nicht ausreichend gebessert. Fatigue und Neurasthenie sind NICHT synonym.',
+        'Neurasthenie (F48):\nAnhaltende Erschöpfbarkeit nach geringer Anstrengung.\nAbgrenzung: Fatigue = anhaltende Erschöpfung, häufig bei Krebserkrankungen, durch Ruhe nicht ausreichend gebessert.\nFatigue und Neurasthenie sind NICHT synonym.',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'Agoraphobie mit vs. ohne Panikstörung: F40.00 = Agoraphobie ohne Panikstörung. F40.01 = Agoraphobie mit Panikstörung. Panikstörung allein = F41.0. Wichtig: Agoraphobie kann auch ohne Panikattacken auftreten (reine Vermeidung). Die Kombination ist jedoch häufig.',
+        'Agoraphobie mit vs. ohne Panikstörung:\nF40.00 = Agoraphobie ohne Panikstörung.\nF40.01 = Agoraphobie mit Panikstörung.\nPanikstörung allein = F41.0.\nWichtig: Agoraphobie kann auch ohne Panikattacken auftreten (reine Vermeidung).\nDie Kombination ist jedoch häufig.',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'Therapie bei Angststörungen: Spezifische Phobie → Exposition (Flooding/systematische Desensibilisierung). Panikstörung → KVT mit Psychoedukation und Interoceptive Exposure. GAD → Sorgenexposition (Exposition in sensu). Soziale Phobie → KVT + soziales Kompetenztraining. Bei allen: Vor Therapie somatische Abklärung notwendig.',
+        'Therapie bei Angststörungen:\nSpezifische Phobie → Exposition (Flooding/systematische Desensibilisierung).\nPanikstörung → KVT mit Psychoedukation und Interoceptive Exposure.\nGAD → Sorgenexposition (Exposition in sensu).\nSoziale Phobie → KVT + soziales Kompetenztraining.\nBei allen: Vor Therapie somatische Abklärung notwendig.',
     tags: ['Therapieverfahren', 'F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'Bipolare Störung – Episodentypen: Manische Episode (gehobene Stimmung), depressive Episode, gemischte Episode (F31.6 = gleichzeitig manische und depressive Symptome), hypomanische Episode (leichtere Form der Manie, keine Psychose). Bei jeder depressiven Episode nach (hypo-)manischen Phasen fragen, um bipolare Störung nicht zu übersehen!',
+        'Bipolare Störung – Episodentypen:\nManische Episode (gehobene Stimmung), depressive Episode, gemischte Episode (F31.6 = gleichzeitig manische und depressive Symptome), hypomanische Episode (leichtere Form der Manie, keine Psychose).\nBei jeder depressiven Episode nach (hypo-)manischen Phasen fragen, um bipolare Störung nicht zu übersehen!',
     tags: ['F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'Wochenbettdepression vs. Wochenbettpsychose: Wochenbettdepression (postpartale Depression) = HPP darf behandeln, sofern keine Psychose vorliegt. Wochenbettpsychose = psychiatrischer Notfall, ärztliche Behandlung erforderlich. Postpartales Stimmungstief ("Baby Blues") = häufig, selbstlimitierend, keine Behandlung nötig.',
+        'Wochenbettdepression vs. Wochenbettpsychose:\nWochenbettdepression (postpartale Depression) = HPP darf behandeln, sofern keine Psychose vorliegt.\nWochenbettpsychose = psychiatrischer Notfall, ärztliche Behandlung erforderlich.\nPostpartales Stimmungstief ("Baby Blues") = häufig, selbstlimitierend, keine Behandlung nötig.',
     tags: ['F3 – Affektive Störungen', 'Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Schlafhygiene-Regeln (prüfungsrelevant): Kein Mittagsschlaf (erhöht den Schlafdruck). Regelmäßiger Aufstehzeitpunkt (stabilisiert zirkadianen Rhythmus). Kein intensiver Sport kurz vor dem Schlafen. Keine sichtbare Uhr (fördert Grübeln). Bei Schlaflosigkeit aufstehen und erst bei Müdigkeit zurückkehren (Stimuluskontrolle).',
+        'Schlafhygiene-Regeln (prüfungsrelevant):\nKein Mittagsschlaf (erhöht den Schlafdruck).\nRegelmäßiger Aufstehzeitpunkt (stabilisiert zirkadianen Rhythmus).\nKein intensiver Sport kurz vor dem Schlafen.\nKeine sichtbare Uhr (fördert Grübeln).\nBei Schlaflosigkeit aufstehen und erst bei Müdigkeit zurückkehren (Stimuluskontrolle).',
     tags: ['Therapieverfahren', 'F5 – Verhaltensauffälligkeiten'],
   ),
   Flashcard(
     text:
-        'Anorexia nervosa vs. Bulimia nervosa: Anorexia: BMI ≤17,5, Untergewicht, Körperschemastörung, Amenorrhö, höchste Mortalität. Bulimia: Normalgewicht, Essanfälle + Kompensation (Erbrechen, Laxantien), depressive Symptome. Binge-Eating: Übergewicht, Essanfälle OHNE Kompensation, Schuldgefühle.',
+        'Anorexia nervosa vs. Bulimia nervosa:\nAnorexia: BMI ≤17,5, Untergewicht, Körperschemastörung, Amenorrhö, höchste Mortalität.\nBulimia: Normalgewicht, Essanfälle + Kompensation (Erbrechen, Laxantien), depressive Symptome.\nBinge-Eating: Übergewicht, Essanfälle OHNE Kompensation, Schuldgefühle.',
     tags: ['Differentialdiagnosen', 'F5 – Verhaltensauffälligkeiten'],
   ),
   Flashcard(
     text:
-        'Borderline-PS – Therapie und Notfälle: DBT (Dialektisch-Behaviorale Therapie) = Therapie der Wahl. 3 Kernmerkmale: chronische Leere, Impulsivität, Selbstschädigung. In der mündlichen Prüfung wird erwartet, dass bei Borderline aktiv nach Suizidalität gefragt wird. Instabile, intensive Beziehungen sind typisch.',
+        'Borderline-PS – Therapie und Notfälle:\nDBT (Dialektisch-Behaviorale Therapie) = Therapie der Wahl.\n3 Kernmerkmale: chronische Leere, Impulsivität, Selbstschädigung.\nIn der mündlichen Prüfung wird erwartet, dass bei Borderline aktiv nach Suizidalität gefragt wird.\nInstabile, intensive Beziehungen sind typisch.',
     tags: ['F6 – Persönlichkeitsstörungen', 'Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Persönlichkeitsstörungen vs. Persönlichkeitsänderung: PS (F60) = tief verwurzelt, seit Kindheit/Adoleszenz, ich-synton. Persönlichkeitsänderung (F62) = erworben nach Extrembelastung oder schwerer psych. Krankheit. PS vs. Akzentuierung: PS = unflexibel, Leidensdruck/Funktionsbeeinträchtigung. Akzentuierung = ausgeprägte Züge, noch flexibel.',
+        'Persönlichkeitsstörungen vs. Persönlichkeitsänderung:\nPS (F60) = tief verwurzelt, seit Kindheit/Adoleszenz, ich-synton.\nPersönlichkeitsänderung (F62) = erworben nach Extrembelastung oder schwerer psych. Krankheit.\nPS vs. Akzentuierung: PS = unflexibel, Leidensdruck/Funktionsbeeinträchtigung.\nAkzentuierung = ausgeprägte Züge, noch flexibel.',
     tags: ['F6 – Persönlichkeitsstörungen', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'Abhängigkeit – körperlich vs. psychisch: Körperliche Abhängigkeit: Opiate, Benzodiazepine, Alkohol, Nikotin (Entzugssymptome). Psychische Abhängigkeit: Cannabis, Halluzinogene (LSD), MDMA, Kokain (vorwiegend psychisch). Stimulanzien (Kokain, Amphetamine): starke psychische, geringe körperliche Abhängigkeit.',
+        'Abhängigkeit – körperlich vs. psychisch:\nKörperliche Abhängigkeit: Opiate, Benzodiazepine, Alkohol, Nikotin (Entzugssymptome).\nPsychische Abhängigkeit: Cannabis, Halluzinogene (LSD), MDMA, Kokain (vorwiegend psychisch).\nStimulanzien (Kokain, Amphetamine): starke psychische, geringe körperliche Abhängigkeit.',
     tags: ['F1 – Substanzstörungen'],
   ),
   Flashcard(
     text:
-        'PTBS – Therapieansatz: 3-Phasen-Modell: 1. Stabilisierung (Sicherheit herstellen, Ressourcen aufbauen). 2. Traumakonfrontation (erst wenn stabil! z.B. EMDR, prolongierte Exposition). 3. Integration und Neuorientierung. Frühe Konfrontation kann retraumatisierend wirken! Stabilisierung hat immer Vorrang.',
+        'PTBS – Therapieansatz:\n3-Phasen-Modell:\n1. Stabilisierung (Sicherheit herstellen, Ressourcen aufbauen).\n2. Traumakonfrontation (erst wenn stabil! z.B. EMDR, prolongierte Exposition).\n3. Integration und Neuorientierung.\nFrühe Konfrontation kann retraumatisierend wirken!\nStabilisierung hat immer Vorrang.',
     tags: ['F4 – Neurotische Störungen', 'Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Denkstörungen bei Manie: Formale Denkstörungen dominieren: Ideenflucht (schnelle Abfolge von Einfällen), Gedankenrasen, Zerfahrenheit. Abgrenzung: Bei Depression = Denkhemmung (verlangsamtes Denken). Verfolgungswahn = inhaltliche Denkstörung (Schizophrenie). Grübelzwang = eher bei Angststörungen.',
+        'Denkstörungen bei Manie:\nFormale Denkstörungen dominieren: Ideenflucht (schnelle Abfolge von Einfällen), Gedankenrasen, Zerfahrenheit.\nAbgrenzung: Bei Depression = Denkhemmung (verlangsamtes Denken).\nVerfolgungswahn = inhaltliche Denkstörung (Schizophrenie).\nGrübelzwang = eher bei Angststörungen.',
     tags: ['F3 – Affektive Störungen', 'Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Delir bei verschiedenen Ursachen: Delirium tremens = Alkoholentzug. Anticholinerges Delir = Medikamentennebenwirkung. Delir bei Infektionen = besonders bei älteren Patienten. Postoperatives Delir. Drogeninduziertes Delir. Bei jedem Delir: Immer organische Ursache suchen! Akute organische Störungen sind immer als Notfall zu behandeln.',
+        'Delir bei verschiedenen Ursachen:\nDelirium tremens = Alkoholentzug.\nAnticholinerges Delir = Medikamentennebenwirkung.\nDelir bei Infektionen = besonders bei älteren Patienten.\nPostoperatives Delir.\nDrogeninduziertes Delir.\nBei jedem Delir: Immer organische Ursache suchen!\nAkute organische Störungen sind immer als Notfall zu behandeln.',
     tags: ['F0 – Organische Störungen'],
   ),
   Flashcard(
     text:
-        'Somatoforme autonome Funktionsstörung (F45.3): Bezieht sich auf ein bestimmtes Organsystem (kardiovaskulär = Da-Costa-Syndrom/Herzneurose, gastrointestinal = Reizdarmsyndrom, respiratorisch = Hyperventilationssyndrom). Patienten zeigen vegetative Symptome, die sie einem bestimmten Organ zuschreiben.',
+        'Somatoforme autonome Funktionsstörung (F45.3):\nBezieht sich auf ein bestimmtes Organsystem (kardiovaskulär = Da-Costa-Syndrom/Herzneurose, gastrointestinal = Reizdarmsyndrom, respiratorisch = Hyperventilationssyndrom).\nPatienten zeigen vegetative Symptome, die sie einem bestimmten Organ zuschreiben.',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'Dissoziative Konversionsstörungen im Detail: Neurologisch anmutende Symptome ohne organischen Befund – Lähmungen, Krampfanfälle, Sensibilitätsstörungen, Blindheit, Taubheit. Dissoziativer Stupor = Bewegungslosigkeit ohne organische Ursache. Alle dissoziativen Störungen: Keine hirnorganische Ursache nachweisbar.',
+        'Dissoziative Konversionsstörungen im Detail:\nNeurologisch anmutende Symptome ohne organischen Befund – Lähmungen, Krampfanfälle, Sensibilitätsstörungen, Blindheit, Taubheit.\nDissoziativer Stupor = Bewegungslosigkeit ohne organische Ursache.\nAlle dissoziativen Störungen: Keine hirnorganische Ursache nachweisbar.',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'Schizoaffektive Störung vs. Schizophrenie vs. affektive Störung: Schizoaffektiv = gleichzeitig schizophrene UND affektive Symptome in gleicher Episode. Bei Schizophrenie können depressive Symptome auftreten, dominieren aber nicht. Bei bipolarer Störung: psychotische Symptome möglich, aber schizophrene Erstrangsymptome fehlen.',
+        'Schizoaffektive Störung vs. Schizophrenie vs. affektive Störung:\nSchizoaffektiv = gleichzeitig schizophrene UND affektive Symptome in gleicher Episode.\nBei Schizophrenie können depressive Symptome auftreten, dominieren aber nicht.\nBei bipolarer Störung: psychotische Symptome möglich, aber schizophrene Erstrangsymptome fehlen.',
     tags: ['Differentialdiagnosen'],
   ),
 
@@ -1077,7 +1077,7 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'Konsolidierte Zeitkriterien – alle auf einen Blick: Minuten bis Tage = Akute Belastungsreaktion (F43.0). ≥2 Wochen = Depressive Episode (F32). ≥1 Monat = Abhängigkeitssyndrom (3/6 Kriterien). Innerhalb 1 Monat = Anpassungsstörung Beginn (F43.2). Latenz Wochen bis Monate = PTBS (F43.1). >3 Monate = Anhaltende wahnhafte Störung (F22). Max. 6 Monate = Anpassungsstörung Dauer. ≥6 Monate = GAD (F41.1), ADHS (F90), Demenz. ≥12 Monate = Tourette-Syndrom (F95.2). ≥2 Jahre = Dysthymia (F34.1), Zyklothymia (F34.0), Somatisierungsstörung (F45.0).',
+        'Konsolidierte Zeitkriterien – alle auf einen Blick:\nMinuten bis Tage = Akute Belastungsreaktion (F43.0). ≥2 Wochen = Depressive Episode (F32). ≥1 Monat = Abhängigkeitssyndrom (3/6 Kriterien).\nInnerhalb 1 Monat = Anpassungsstörung Beginn (F43.2).\nLatenz Wochen bis Monate = PTBS (F43.1). >3 Monate = Anhaltende wahnhafte Störung (F22).\nMax. 6 Monate = Anpassungsstörung Dauer. ≥6 Monate = GAD (F41.1), ADHS (F90), Demenz. ≥12 Monate = Tourette-Syndrom (F95.2). ≥2 Jahre = Dysthymia (F34.1), Zyklothymia (F34.0), Somatisierungsstörung (F45.0).',
     tags: [
       'Differentialdiagnosen',
       'ICD-10 Grundlagen',
@@ -1086,17 +1086,17 @@ const List<Flashcard> allFlashcards = [
   ),
   Flashcard(
     text:
-        'Wichtige Zahlenwerte für die Prüfung: BMI ≤17,5 = Anorexia nervosa. IQ <70 = Intelligenzminderung. Beginn vor 7. Lebensjahr = ADHS. Beginn vor 3. Lebensjahr = Frühkindlicher Autismus. 3 von 6 Kriterien = Abhängigkeit. 2 Haupt- + 2 Zusatzsymptome = leichte Depression. 90% Serotonin im Darm. Akute psychotische Störung = Beginn <2 Wochen.',
+        'Wichtige Zahlenwerte für die Prüfung:\nBMI ≤17,5 = Anorexia nervosa.\nIQ <70 = Intelligenzminderung.\nBeginn vor 7. Lebensjahr = ADHS.\nBeginn vor 3. Lebensjahr = Frühkindlicher Autismus.\n3 von 6 Kriterien = Abhängigkeit.\n2 Haupt- + 2 Zusatzsymptome = leichte Depression.\n90% Serotonin im Darm.\nAkute psychotische Störung = Beginn <2 Wochen.',
     tags: ['ICD-10 Grundlagen'],
   ),
   Flashcard(
     text:
-        'Psychiatrische Notfälle – Übersicht für HPP: (1) Delir (F05) – Bewusstseinssstörung, lebensbedrohlich. (2) Akute Psychose – Realitätsverlust, Eigen-/Fremdgefährdung. (3) Schwere Intoxikation/Entzug – Atemdepression, Krampfanfälle. (4) Akute Suizidalität – sofortige Sicherung. (5) Malignes Neuroleptisches Syndrom – hohes Fieber, Rigor. (6) Katatoner Stupor – lebensbedrohlich. Bei allen: Notarzt rufen, Patient nicht allein lassen!',
+        'Psychiatrische Notfälle – Übersicht für HPP:\n(1) Delir (F05) – Bewusstseinssstörung, lebensbedrohlich.\n(2) Akute Psychose – Realitätsverlust, Eigen-/Fremdgefährdung.\n(3) Schwere Intoxikation/Entzug – Atemdepression, Krampfanfälle.\n(4) Akute Suizidalität – sofortige Sicherung.\n(5) Malignes Neuroleptisches Syndrom – hohes Fieber, Rigor.\n(6) Katatoner Stupor – lebensbedrohlich.\nBei allen: Notarzt rufen, Patient nicht allein lassen!',
     tags: ['Recht & Berufskunde', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'HPP-Tätigkeitsumfang und -grenzen zusammengefasst: DARF: Alle psychotherapeutischen Verfahren anwenden (KVT, TP, PA, EMDR, Hypnose), psychologische Tests, Gruppentherapie, Kinder behandeln. DARF NICHT: Organische Diagnosen stellen, Medikamente/BtM verordnen, Suchtsubstitution durchführen, körperliche Verfahren (Akupunktur, Osteopathie), Berufsbezeichnung "Psychotherapeut" führen. MUSS: Somatische Abklärung veranlassen, Notfälle erkennen und überweisen, dokumentieren, Schweigepflicht wahren.',
+        'HPP-Tätigkeitsumfang und -grenzen zusammengefasst:\nDARF: Alle psychotherapeutischen Verfahren anwenden (KVT, TP, PA, EMDR, Hypnose), psychologische Tests, Gruppentherapie, Kinder behandeln.\nDARF NICHT: Organische Diagnosen stellen, Medikamente/BtM verordnen, Suchtsubstitution durchführen, körperliche Verfahren (Akupunktur, Osteopathie), Berufsbezeichnung "Psychotherapeut" führen.\nMUSS: Somatische Abklärung veranlassen, Notfälle erkennen und überweisen, dokumentieren, Schweigepflicht wahren.',
     tags: ['Recht & Berufskunde'],
   ),
 
@@ -1105,102 +1105,102 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'Schuldfähigkeit nach StGB: §20 StGB = Schuldunfähigkeit bei krankhafter seelischer Störung, tiefgreifender Bewusstseinsstörung, Schwachsinn oder schwerer anderer seelischer Abartigkeit zum Tatzeitpunkt. §21 StGB = verminderte Schuldfähigkeit (Strafmilderung möglich). Merke: Alkoholrausch kann zur vorübergehenden Schuldunfähigkeit führen (Vollrausch §323a StGB). Gutachter beurteilen die Schuldfähigkeit, nicht der Therapeut.',
+        'Schuldfähigkeit nach StGB:\n§20 StGB = Schuldunfähigkeit bei krankhafter seelischer Störung, tiefgreifender Bewusstseinsstörung, Schwachsinn oder schwerer anderer seelischer Abartigkeit zum Tatzeitpunkt. §21 StGB = verminderte Schuldfähigkeit (Strafmilderung möglich).\nMerke: Alkoholrausch kann zur vorübergehenden Schuldunfähigkeit führen (Vollrausch §323a StGB).\nGutachter beurteilen die Schuldfähigkeit, nicht der Therapeut.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Die 4 Eingangsmerkmale des §20 StGB (biologische Voraussetzungen): (1) Krankhafte seelische Störung (z.B. Psychose, schwere Depression, Manie, Delir). (2) Tiefgreifende Bewusstseinsstörung (z.B. Affekttat, hochgradiger Rausch). (3) Schwachsinn (Intelligenzminderung). (4) Schwere andere seelische Abartigkeit (z.B. schwere PS, Sucht, Paraphilien). Persönlichkeitsstörungen können unter Nr. 4 fallen, wenn sie schwer ausgeprägt sind.',
+        'Die 4 Eingangsmerkmale des §20 StGB (biologische Voraussetzungen):\n(1) Krankhafte seelische Störung (z.B. Psychose, schwere Depression, Manie, Delir).\n(2) Tiefgreifende Bewusstseinsstörung (z.B. Affekttat, hochgradiger Rausch).\n(3) Schwachsinn (Intelligenzminderung).\n(4) Schwere andere seelische Abartigkeit (z.B. schwere PS, Sucht, Paraphilien).\nPersönlichkeitsstörungen können unter Nr. 4 fallen, wenn sie schwer ausgeprägt sind.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Garantenstellung und Garantenpflicht des HPP: Der HPP übernimmt mit der Behandlung eine Garantenstellung für den Patienten. Daraus folgt: Pflicht zur Gefahrenabwehr bei erkennbarer Suizidalität oder Fremdgefährdung. Unterlassung kann zur Strafbarkeit führen (§13 StGB Unterlassen). Die Garantenstellung endet mit dem Ende der Behandlungsbeziehung.',
+        'Garantenstellung und Garantenpflicht des HPP:\nDer HPP übernimmt mit der Behandlung eine Garantenstellung für den Patienten.\nDaraus folgt: Pflicht zur Gefahrenabwehr bei erkennbarer Suizidalität oder Fremdgefährdung.\nUnterlassung kann zur Strafbarkeit führen (§13 StGB Unterlassen).\nDie Garantenstellung endet mit dem Ende der Behandlungsbeziehung.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Unterlassene Hilfeleistung (§323c StGB): Jeder ist verpflichtet, bei Unglücksfällen oder gemeiner Gefahr/Not Hilfe zu leisten, soweit dies zumutbar ist. Gilt auch für den HPP. Verstoß: Geldstrafe oder Freiheitsstrafe bis 1 Jahr. Die Hilfeleistungspflicht ergibt sich aus dem StGB, NICHT aus dem Heilpraktikergesetz. In der Prüfung: Wann MUSS der HPP handeln (Notfall) vs. wann DARF er nicht behandeln (organisch)?',
+        'Unterlassene Hilfeleistung (§323c StGB):\nJeder ist verpflichtet, bei Unglücksfällen oder gemeiner Gefahr/Not Hilfe zu leisten, soweit dies zumutbar ist.\nGilt auch für den HPP.\nVerstoß: Geldstrafe oder Freiheitsstrafe bis 1 Jahr.\nDie Hilfeleistungspflicht ergibt sich aus dem StGB, NICHT aus dem Heilpraktikergesetz.\nIn der Prüfung: Wann MUSS der HPP handeln (Notfall) vs. wann DARF er nicht behandeln (organisch)?',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Einwilligungsfähigkeit vs. Geschäftsfähigkeit: Einwilligungsfähigkeit = Fähigkeit, Art, Bedeutung und Tragweite einer Behandlung zu verstehen. Kein festes Mindestalter – wird individuell beurteilt. Auch Minderjährige können einwilligungsfähig sein. Geschäftsfähigkeit = rechtliche Fähigkeit, Willenserklärungen wirksam abzugeben (§§104ff BGB). Ab 18 Jahren voll geschäftsfähig. Wichtig: Einwilligungsfähigkeit ≠ Geschäftsfähigkeit. Ein geschäftsunfähiger Betreuter kann durchaus einwilligungsfähig sein.',
+        'Einwilligungsfähigkeit vs. Geschäftsfähigkeit:\nEinwilligungsfähigkeit = Fähigkeit, Art, Bedeutung und Tragweite einer Behandlung zu verstehen.\nKein festes Mindestalter – wird individuell beurteilt.\nAuch Minderjährige können einwilligungsfähig sein.\nGeschäftsfähigkeit = rechtliche Fähigkeit, Willenserklärungen wirksam abzugeben (§§104ff BGB).\nAb 18 Jahren voll geschäftsfähig.\nWichtig: Einwilligungsfähigkeit ≠ Geschäftsfähigkeit.\nEin geschäftsunfähiger Betreuter kann durchaus einwilligungsfähig sein.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Behandlungsvertrag nach §630a BGB (Patientenrechtegesetz): Vertrag zwischen HPP und Patient. Pflichten des HPP: (1) Behandlung nach fachlichem Standard, (2) Aufklärungspflicht über Diagnose, Therapie, Risiken und Alternativen (§630e BGB), (3) Dokumentationspflicht (§630f BGB), (4) Einsichtnahmerecht gewähren (§630g BGB). Pflicht des Patienten: Vergütung. Der Behandlungsvertrag ist ein Dienstvertrag (Schulden der Behandlung, NICHT des Erfolgs).',
+        'Behandlungsvertrag nach §630a BGB (Patientenrechtegesetz):\nVertrag zwischen HPP und Patient.\nPflichten des HPP: (1) Behandlung nach fachlichem Standard, (2) Aufklärungspflicht über Diagnose, Therapie, Risiken und Alternativen (§630e BGB), (3) Dokumentationspflicht (§630f BGB), (4) Einsichtnahmerecht gewähren (§630g BGB).\nPflicht des Patienten: Vergütung.\nDer Behandlungsvertrag ist ein Dienstvertrag (Schulden der Behandlung, NICHT des Erfolgs).',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Aufklärungspflicht des HPP (§630e BGB): Aufklärung muss VOR Behandlungsbeginn erfolgen. Inhalte: Diagnose, geplante Therapie, Risiken und Nebenwirkungen, Erfolgsaussichten, Alternativen. Form: Grundsätzlich mündlich, schriftliche Dokumentation empfohlen. Aufklärungsverzicht des Patienten möglich (muss dokumentiert werden). Bei fehlender/mangelhafter Aufklärung: Einwilligung unwirksam = Behandlung rechtswidrig.',
+        'Aufklärungspflicht des HPP (§630e BGB):\nAufklärung muss VOR Behandlungsbeginn erfolgen.\nInhalte: Diagnose, geplante Therapie, Risiken und Nebenwirkungen, Erfolgsaussichten, Alternativen.\nForm: Grundsätzlich mündlich, schriftliche Dokumentation empfohlen.\nAufklärungsverzicht des Patienten möglich (muss dokumentiert werden).\nBei fehlender/mangelhafter Aufklärung: Einwilligung unwirksam = Behandlung rechtswidrig.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Haftung und Sorgfaltspflicht des HPP: Zivilrechtlich: Schadensersatz und Schmerzensgeld bei Behandlungsfehlern (§280 BGB). Beweislast: Grundsätzlich beim Patienten. Bei Dokumentationsmängeln: Beweislastumkehr (§630h BGB) – was nicht dokumentiert ist, gilt als nicht geschehen. Strafrechtlich: Körperverletzung (§223 StGB), fahrlässige Tötung (§222 StGB). Berufshaftpflichtversicherung dringend empfohlen (keine gesetzliche Pflicht, aber faktisch unverzichtbar).',
+        'Haftung und Sorgfaltspflicht des HPP:\nZivilrechtlich: Schadensersatz und Schmerzensgeld bei Behandlungsfehlern (§280 BGB).\nBeweislast: Grundsätzlich beim Patienten.\nBei Dokumentationsmängeln: Beweislastumkehr (§630h BGB) – was nicht dokumentiert ist, gilt als nicht geschehen.\nStrafrechtlich: Körperverletzung (§223 StGB), fahrlässige Tötung (§222 StGB).\nBerufshaftpflichtversicherung dringend empfohlen (keine gesetzliche Pflicht, aber faktisch unverzichtbar).',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Datenschutz in der HPP-Praxis (DSGVO/BDSG): Patientendaten sind besonders schützenswerte personenbezogene Daten (Art. 9 DSGVO). Rechtsgrundlage der Verarbeitung: Behandlungsvertrag (Art. 9 Abs. 2h DSGVO). Pflichten: Verzeichnis der Verarbeitungstätigkeiten, technisch-organisatorische Maßnahmen (verschlossene Schränke, Passwortschutz), Auskunftsrecht des Patienten. Verstöße: Bußgelder nach DSGVO, Verletzung der Schweigepflicht (§203 StGB).',
+        'Datenschutz in der HPP-Praxis (DSGVO/BDSG):\nPatientendaten sind besonders schützenswerte personenbezogene Daten (Art. 9 DSGVO).\nRechtsgrundlage der Verarbeitung: Behandlungsvertrag (Art. 9 Abs. 2h DSGVO).\nPflichten: Verzeichnis der Verarbeitungstätigkeiten, technisch-organisatorische Maßnahmen (verschlossene Schränke, Passwortschutz), Auskunftsrecht des Patienten.\nVerstöße: Bußgelder nach DSGVO, Verletzung der Schweigepflicht (§203 StGB).',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Schweigepflicht des HPP – vertieft: Grundlage: §203 Abs. 1 Nr. 1 StGB (Verletzung von Privatgeheimnissen). Umfasst ALLES, was im Rahmen der Behandlung bekannt wird (auch die bloße Tatsache der Behandlung). Schweigepflicht gilt auch über den Tod des Patienten hinaus. Durchbrechung erlaubt bei: (1) Einwilligung des Patienten (schriftlich!), (2) Rechtfertigender Notstand §34 StGB (geplante schwere Straftat, akute Suizidalität), (3) Gesetzliche Meldepflichten (IfSG). KEIN Zeugnisverweigerungsrecht im Strafverfahren (anders als Ärzte/Psychotherapeuten).',
+        'Schweigepflicht des HPP – vertieft:\nGrundlage: §203 Abs. 1 Nr. 1 StGB (Verletzung von Privatgeheimnissen).\nUmfasst ALLES, was im Rahmen der Behandlung bekannt wird (auch die bloße Tatsache der Behandlung).\nSchweigepflicht gilt auch über den Tod des Patienten hinaus.\nDurchbrechung erlaubt bei: (1) Einwilligung des Patienten (schriftlich!), (2) Rechtfertigender Notstand §34 StGB (geplante schwere Straftat, akute Suizidalität), (3) Gesetzliche Meldepflichten (IfSG).\nKEIN Zeugnisverweigerungsrecht im Strafverfahren (anders als Ärzte/Psychotherapeuten).',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Heilmittelwerbegesetz (HWG) – Werberecht für HPP: Verboten: Werbung mit Heilversprechen oder Garantien, irreführende Werbung, Werbung mit Dankschreiben oder Gutachten, Werbung für verschreibungspflichtige Mittel. Erlaubt: Sachliche Information über Qualifikation und Behandlungsspektrum, Praxis-Website mit Leistungsbeschreibung. Merke: Keine Erfolgsversprechen, keine Vorher-Nachher-Vergleiche bei psychischen Störungen. Verstöße = Ordnungswidrigkeit bis Straftat.',
+        'Heilmittelwerbegesetz (HWG) – Werberecht für HPP:\nVerboten: Werbung mit Heilversprechen oder Garantien, irreführende Werbung, Werbung mit Dankschreiben oder Gutachten, Werbung für verschreibungspflichtige Mittel.\nErlaubt: Sachliche Information über Qualifikation und Behandlungsspektrum, Praxis-Website mit Leistungsbeschreibung.\nMerke: Keine Erfolgsversprechen, keine Vorher-Nachher-Vergleiche bei psychischen Störungen.\nVerstöße = Ordnungswidrigkeit bis Straftat.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Berufsordnung und Fortbildungspflicht: HPP unterliegen der Berufsordnung ihres Berufsverbandes (z.B. BOH). Fortbildungspflicht: Mindestens 15 Zeitstunden/Jahr Fortbildung (je nach Verband). Supervision wird empfohlen. Dokumentation der Fortbildungen aufbewahren. Kollegiale Umgangsformen (kein "Abwerben" von Patienten). Abstinenzregel: Keine privaten/sexuellen Beziehungen zu Patienten (auch nach Therapieende problematisch).',
+        'Berufsordnung und Fortbildungspflicht:\nHPP unterliegen der Berufsordnung ihres Berufsverbandes (z.B. BOH).\nFortbildungspflicht: Mindestens 15 Zeitstunden/Jahr Fortbildung (je nach Verband).\nSupervision wird empfohlen.\nDokumentation der Fortbildungen aufbewahren.\nKollegiale Umgangsformen (kein "Abwerben" von Patienten).\nAbstinenzregel: Keine privaten/sexuellen Beziehungen zu Patienten (auch nach Therapieende problematisch).',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'HPP und Kassenabrechnung: HPP können NICHT über die gesetzliche Krankenversicherung (GKV) abrechnen. GKV-Patienten zahlen selbst (Selbstzahler). Private Krankenversicherung (PKV) kann HPP-Leistungen erstatten – je nach Tarif. Beihilfe (Beamte) erstattet HPP-Leistungen in der Regel NICHT. Gebührenverzeichnis: GebüH (Gebührenverzeichnis für Heilpraktiker) als Orientierung – NICHT verbindlich. Wirtschaftliche Aufklärungspflicht VOR Behandlungsbeginn: Kosten pro Sitzung, voraussichtliche Dauer.',
+        'HPP und Kassenabrechnung:\nHPP können NICHT über die gesetzliche Krankenversicherung (GKV) abrechnen.\nGKV-Patienten zahlen selbst (Selbstzahler).\nPrivate Krankenversicherung (PKV) kann HPP-Leistungen erstatten – je nach Tarif.\nBeihilfe (Beamte) erstattet HPP-Leistungen in der Regel NICHT.\nGebührenverzeichnis: GebüH (Gebührenverzeichnis für Heilpraktiker) als Orientierung – NICHT verbindlich.\nWirtschaftliche Aufklärungspflicht VOR Behandlungsbeginn: Kosten pro Sitzung, voraussichtliche Dauer.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Praxisanmeldung und Gewerberecht: HPP-Tätigkeit ist ein freier Beruf (KEIN Gewerbe) → keine Gewerbeanmeldung nötig. Anmeldung beim Gesundheitsamt und Finanzamt erforderlich. Umsatzsteuerbefreiung nach §4 Nr. 14 UStG (Heilbehandlungen). Feste Praxisadresse erforderlich (kein "Umherziehen" nach §3 HeilprG). Berufshaftpflichtversicherung: Keine gesetzliche Pflicht, aber dringend empfohlen. Handelsregistereintrag: Nicht erforderlich.',
+        'Praxisanmeldung und Gewerberecht:\nHPP-Tätigkeit ist ein freier Beruf (KEIN Gewerbe) → keine Gewerbeanmeldung nötig.\nAnmeldung beim Gesundheitsamt und Finanzamt erforderlich.\nUmsatzsteuerbefreiung nach §4 Nr. 14 UStG (Heilbehandlungen).\nFeste Praxisadresse erforderlich (kein "Umherziehen" nach §3 HeilprG).\nBerufshaftpflichtversicherung: Keine gesetzliche Pflicht, aber dringend empfohlen.\nHandelsregistereintrag: Nicht erforderlich.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Heilpraktikergesetz (HeilprG) – Kernpunkte: Stammt von 1939, mehrfach geändert. §1: Wer Heilkunde ausüben will, ohne Arzt zu sein, braucht eine Erlaubnis. §2: Erlaubnis wird durch Überprüfung beim Gesundheitsamt erteilt. §3: Verbote (Umherziehen, Geschlechtskrankheiten [veraltet]). Der sektorale HPP darf NUR Psychotherapie ausüben. Die Erlaubnis ist nicht auf bestimmte Methoden beschränkt. HPP darf sich NICHT "Psychotherapeut" nennen (Titel geschützt nach PsychThG).',
+        'Heilpraktikergesetz (HeilprG) – Kernpunkte:\nStammt von 1939, mehrfach geändert. §1: Wer Heilkunde ausüben will, ohne Arzt zu sein, braucht eine Erlaubnis. §2: Erlaubnis wird durch Überprüfung beim Gesundheitsamt erteilt. §3: Verbote (Umherziehen, Geschlechtskrankheiten [veraltet]).\nDer sektorale HPP darf NUR Psychotherapie ausüben.\nDie Erlaubnis ist nicht auf bestimmte Methoden beschränkt.\nHPP darf sich NICHT "Psychotherapeut" nennen (Titel geschützt nach PsychThG).',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Überprüfung beim Gesundheitsamt (HPP-Prüfung): Zweiteilig: schriftliche Prüfung (28 MC-Fragen, 75% zum Bestehen) + mündliche Überprüfung. Zweck: Feststellung, ob eine Gefahr für die Volksgesundheit besteht. Geprüft werden: Psychopathologie, ICD-10-Kenntnisse, Differentialdiagnostik, Erkennen von Notfällen und Grenzen, rechtliche Grundlagen. Keine Methodenprüfung (therapeutische Verfahren werden nicht geprüft). Durchfallquote ca. 70-80%.',
+        'Überprüfung beim Gesundheitsamt (HPP-Prüfung):\nZweiteilig: schriftliche Prüfung (28 MC-Fragen, 75% zum Bestehen) + mündliche Überprüfung.\nZweck: Feststellung, ob eine Gefahr für die Volksgesundheit besteht.\nGeprüft werden: Psychopathologie, ICD-10-Kenntnisse, Differentialdiagnostik, Erkennen von Notfällen und Grenzen, rechtliche Grundlagen.\nKeine Methodenprüfung (therapeutische Verfahren werden nicht geprüft).\nDurchfallquote ca. 70-80%.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Kinderschutz und Kindeswohlgefährdung: §8a SGB VIII verpflichtet Fachkräfte (auch HPP), bei gewichtigen Anhaltspunkten für Kindeswohlgefährdung das Jugendamt einzuschalten. Vorrang hat zunächst der Versuch, die Eltern einzubeziehen. Die Schweigepflicht kann bei Kindeswohlgefährdung durchbrochen werden (§34 StGB, rechtfertigender Notstand). §4 KKG (Gesetz zur Kooperation und Information im Kinderschutz): Berufsgeheimnisträger dürfen bei dringenden Gefahren das Jugendamt informieren.',
+        'Kinderschutz und Kindeswohlgefährdung:\n§8a SGB VIII verpflichtet Fachkräfte (auch HPP), bei gewichtigen Anhaltspunkten für Kindeswohlgefährdung das Jugendamt einzuschalten.\nVorrang hat zunächst der Versuch, die Eltern einzubeziehen.\nDie Schweigepflicht kann bei Kindeswohlgefährdung durchbrochen werden (§34 StGB, rechtfertigender Notstand). §4 KKG (Gesetz zur Kooperation und Information im Kinderschutz): Berufsgeheimnisträger dürfen bei dringenden Gefahren das Jugendamt informieren.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Vorsorgevollmacht, Betreuungsverfügung, Patientenverfügung: Vorsorgevollmacht = Bevollmächtigung einer Vertrauensperson für den Fall der eigenen Entscheidungsunfähigkeit. Betreuungsverfügung = Wunsch, WER als Betreuer bestellt werden soll. Patientenverfügung (§1827 BGB) = vorherige Festlegung über medizinische Maßnahmen. Alle drei sind UNTERSCHIEDLICHE Instrumente. Patientenverfügung bindet den Betreuer und Arzt, sofern sie auf die konkrete Situation zutrifft.',
+        'Vorsorgevollmacht, Betreuungsverfügung, Patientenverfügung:\nVorsorgevollmacht = Bevollmächtigung einer Vertrauensperson für den Fall der eigenen Entscheidungsunfähigkeit.\nBetreuungsverfügung = Wunsch, WER als Betreuer bestellt werden soll.\nPatientenverfügung (§1827 BGB) = vorherige Festlegung über medizinische Maßnahmen.\nAlle drei sind UNTERSCHIEDLICHE Instrumente.\nPatientenverfügung bindet den Betreuer und Arzt, sofern sie auf die konkrete Situation zutrifft.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Rechtliche Stellung Minderjähriger in der Psychotherapie: Kinder unter 7 Jahren: geschäftsunfähig (§104 BGB), Eltern schließen Vertrag. 7-17 Jahre: beschränkt geschäftsfähig (§106 BGB), Einwilligung der Eltern nötig. Einwilligungsfähigkeit: Wird unabhängig vom Alter individuell beurteilt. Ab ca. 14 Jahren wird Einwilligungsfähigkeit häufig angenommen. Bei gemeinsamem Sorgerecht: BEIDE Elternteile müssen zustimmen. Schweigepflicht: Gilt auch gegenüber den Eltern, wenn der Minderjährige einwilligungsfähig ist.',
+        'Rechtliche Stellung Minderjähriger in der Psychotherapie:\nKinder unter 7 Jahren: geschäftsunfähig (§104 BGB), Eltern schließen Vertrag.\n7-17 Jahre: beschränkt geschäftsfähig (§106 BGB), Einwilligung der Eltern nötig.\nEinwilligungsfähigkeit: Wird unabhängig vom Alter individuell beurteilt.\nAb ca. 14 Jahren wird Einwilligungsfähigkeit häufig angenommen.\nBei gemeinsamem Sorgerecht: BEIDE Elternteile müssen zustimmen.\nSchweigepflicht: Gilt auch gegenüber den Eltern, wenn der Minderjährige einwilligungsfähig ist.',
     tags: ['Recht & Berufskunde'],
   ),
   Flashcard(
     text:
-        'Betreuungsrecht – Reform 2023: §1814 BGB neu: Betreuung nur wenn erforderlich und keine weniger einschneidende Maßnahme ausreicht (Erforderlichkeitsgrundsatz). Wünsche des Betreuten haben Vorrang (§1821 BGB). Betreuer muss den Willen des Betreuten respektieren, nicht nur sein Wohl. Unterstützte Entscheidungsfindung vor stellvertretender Entscheidung. Überprüfung der Betreuung: spätestens nach 7 Jahren, bei Erstbetreuung nach 2 Jahren.',
+        'Betreuungsrecht – Reform 2023:\n§1814 BGB neu: Betreuung nur wenn erforderlich und keine weniger einschneidende Maßnahme ausreicht (Erforderlichkeitsgrundsatz).\nWünsche des Betreuten haben Vorrang (§1821 BGB).\nBetreuer muss den Willen des Betreuten respektieren, nicht nur sein Wohl.\nUnterstützte Entscheidungsfindung vor stellvertretender Entscheidung.\nÜberprüfung der Betreuung: spätestens nach 7 Jahren, bei Erstbetreuung nach 2 Jahren.',
     tags: ['Recht & Berufskunde'],
   ),
 
@@ -1209,67 +1209,67 @@ const List<Flashcard> allFlashcards = [
   // ============================================================
   Flashcard(
     text:
-        'Vulnerabilitäts-Stress-Modell: Eine psychische Erkrankung entsteht aus dem Zusammenspiel individueller Verwundbarkeit (genetische Disposition, frühe Erfahrungen, Persönlichkeit) und aktueller Belastung. Je höher die Vulnerabilität, desto weniger Stress genügt zum Ausbruch – umgekehrt können bei sehr schweren Belastungen oder Substanzmissbrauch auch wenig vulnerable Menschen erkranken. Stressoren sind nicht nur Krisen, sondern auch normative Übergänge wie Adoleszenz, Menopause oder Berentung. Bei den meisten psychischen Erkrankungen wird eine multifaktorielle Genese angenommen.',
+        'Vulnerabilitäts-Stress-Modell:\nEine psychische Erkrankung entsteht aus dem Zusammenspiel individueller Verwundbarkeit (genetische Disposition, frühe Erfahrungen, Persönlichkeit) und aktueller Belastung.\nJe höher die Vulnerabilität, desto weniger Stress genügt zum Ausbruch – umgekehrt können bei sehr schweren Belastungen oder Substanzmissbrauch auch wenig vulnerable Menschen erkranken.\nStressoren sind nicht nur Krisen, sondern auch normative Übergänge wie Adoleszenz, Menopause oder Berentung.\nBei den meisten psychischen Erkrankungen wird eine multifaktorielle Genese angenommen.',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'AMDP-System: Standardisiertes System zur Dokumentation des psychopathologischen Befundes. Orientierung hat VIER Dimensionen: zeitlich, örtlich, situativ und zur eigenen Person – in dieser Reihenfolge gehen sie typischerweise verloren, die Orientierung zur Person bleibt am längsten erhalten. Weitere Merksätze: Grübeln zählt zu den FORMALEN Denkstörungen, Ratlosigkeit zur Affektivität. Die Auffassungsstörung betrifft das Verstehen von Äußerungen und Texten in ihrer Bedeutung.',
+        'AMDP-System:\nStandardisiertes System zur Dokumentation des psychopathologischen Befundes.\nOrientierung hat VIER Dimensionen: zeitlich, örtlich, situativ und zur eigenen Person – in dieser Reihenfolge gehen sie typischerweise verloren, die Orientierung zur Person bleibt am längsten erhalten.\nWeitere Merksätze: Grübeln zählt zu den FORMALEN Denkstörungen, Ratlosigkeit zur Affektivität.\nDie Auffassungsstörung betrifft das Verstehen von Äußerungen und Texten in ihrer Bedeutung.',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Wahninhalte und ihre Zuordnung: Synthym (stimmungskongruent) bei der schweren Depression sind Verarmungswahn, Versündigungs-/Schuldwahn, hypochondrischer und nihilistischer Wahn. Zur Manie passt der Größenwahn, zur Schizophrenie Verfolgungs-, Beziehungs- und Abstammungswahn. Der Dermatozoenwahn (Insekten unter der Haut) spricht für eine organische Ursache oder Kokainkonsum. Beim systematisierten Wahn sind die Inhalte zu einem Gebäude verknüpft – logisch oder paralogisch.',
+        'Wahninhalte und ihre Zuordnung:\nSynthym (stimmungskongruent) bei der schweren Depression sind Verarmungswahn, Versündigungs-/Schuldwahn, hypochondrischer und nihilistischer Wahn.\nZur Manie passt der Größenwahn, zur Schizophrenie Verfolgungs-, Beziehungs- und Abstammungswahn.\nDer Dermatozoenwahn (Insekten unter der Haut) spricht für eine organische Ursache oder Kokainkonsum.\nBeim systematisierten Wahn sind die Inhalte zu einem Gebäude verknüpft – logisch oder paralogisch.',
     tags: ['Psychopathologie', 'F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'Denkstörungen sicher trennen – der Prüfungsklassiker: FORMAL (Ablauf des Denkens) sind Perseveration, Denkhemmung, Gedankenabriss, Grübeln, Ideenflucht, Zerfahrenheit und Logorrhoe. INHALTLICH sind Wahn und Zwangsgedanken. Eine ICH-STÖRUNG ist der Gedankenentzug, ebenso Gedankeneingebung, Gedankenausbreitung und Willensbeeinflussung. Kernunterscheidung: Beim Gedankenabriss reißt der Gedanke ohne Fremdeinwirkung ab (formal), beim Gedankenentzug erlebt der Patient, dass ihm jemand die Gedanken wegnimmt (Ich-Störung).',
+        'Denkstörungen sicher trennen – der Prüfungsklassiker:\nFORMAL (Ablauf des Denkens) sind Perseveration, Denkhemmung, Gedankenabriss, Grübeln, Ideenflucht, Zerfahrenheit und Logorrhoe.\nINHALTLICH sind Wahn und Zwangsgedanken.\nEine ICH-STÖRUNG ist der Gedankenentzug, ebenso Gedankeneingebung, Gedankenausbreitung und Willensbeeinflussung.\nKernunterscheidung: Beim Gedankenabriss reißt der Gedanke ohne Fremdeinwirkung ab (formal), beim Gedankenentzug erlebt der Patient, dass ihm jemand die Gedanken wegnimmt (Ich-Störung).',
     tags: ['Psychopathologie', 'F2 – Schizophrenie'],
   ),
   Flashcard(
     text:
-        'Psychomotorik und Antrieb – ähnlich klingende Begriffe: Akathisie = quälende Sitzunruhe mit Bewegungsdrang (typisch als Neuroleptika-Nebenwirkung). Adynamie = Antriebs- und Kraftlosigkeit (das Gegenteil). Bradyphrenie = Verlangsamung von Denken und geistigen Abläufen, typisch bei Morbus Parkinson. Manierismen = sonderbar verschrobene, gekünstelte Bewegungen, typisch bei katatoner Schizophrenie. Parathymie = Affekt passt nicht zum Gedankeninhalt.',
+        'Psychomotorik und Antrieb – ähnlich klingende Begriffe:\nAkathisie = quälende Sitzunruhe mit Bewegungsdrang (typisch als Neuroleptika-Nebenwirkung).\nAdynamie = Antriebs- und Kraftlosigkeit (das Gegenteil).\nBradyphrenie = Verlangsamung von Denken und geistigen Abläufen, typisch bei Morbus Parkinson.\nManierismen = sonderbar verschrobene, gekünstelte Bewegungen, typisch bei katatoner Schizophrenie.\nParathymie = Affekt passt nicht zum Gedankeninhalt.',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Dopaminhypothese und Parkinsonoid: Der Schizophrenie liegt laut Dopaminhypothese eine ÜBERaktivität des dopaminergen Systems zugrunde – deshalb wirken Antipsychotika als Dopamin-Antagonisten (historisch früh: Haloperidol). Dem Morbus Parkinson liegt umgekehrt ein Dopamin-MANGEL zugrunde. Das Parkinsonoid ist eine extrapyramidal-motorische Nebenwirkung von Antipsychotika mit Rigor, Tremor und Akinese: verursacht durch Antipsychotika, behandelt durch Dosisreduktion, Präparatewechsel oder Anticholinergika wie Biperiden. Auch eine Lithiumintoxikation kann parkinsonoide Symptome auslösen.',
+        'Dopaminhypothese und Parkinsonoid:\nDer Schizophrenie liegt laut Dopaminhypothese eine ÜBERaktivität des dopaminergen Systems zugrunde – deshalb wirken Antipsychotika als Dopamin-Antagonisten (historisch früh: Haloperidol).\nDem Morbus Parkinson liegt umgekehrt ein Dopamin-MANGEL zugrunde.\nDas Parkinsonoid ist eine extrapyramidal-motorische Nebenwirkung von Antipsychotika mit Rigor, Tremor und Akinese: verursacht durch Antipsychotika, behandelt durch Dosisreduktion, Präparatewechsel oder Anticholinergika wie Biperiden.\nAuch eine Lithiumintoxikation kann parkinsonoide Symptome auslösen.',
     tags: ['F2 – Schizophrenie', 'Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Larvierte (maskierte) Depression: Körperliche Beschwerden wie Erschöpfung, Kopf- und Rückenschmerzen, Obstipation oder Herzbeschwerden stehen so im Vordergrund, dass die depressive Kernsymptomatik verdeckt wird. Besonders häufig bei älteren Patienten und in der hausärztlichen Praxis. Abzugrenzen ist die depressive Pseudodemenz, bei der kognitive Defizite im Vordergrund stehen: Betroffene klagen aktiv über ihre Gedächtnisstörung und antworten oft mit "Ich weiß nicht" – bei der echten Demenz wird die Störung eher bagatellisiert.',
+        'Larvierte (maskierte) Depression:\nKörperliche Beschwerden wie Erschöpfung, Kopf- und Rückenschmerzen, Obstipation oder Herzbeschwerden stehen so im Vordergrund, dass die depressive Kernsymptomatik verdeckt wird.\nBesonders häufig bei älteren Patienten und in der hausärztlichen Praxis.\nAbzugrenzen ist die depressive Pseudodemenz, bei der kognitive Defizite im Vordergrund stehen: Betroffene klagen aktiv über ihre Gedächtnisstörung und antworten oft mit "Ich weiß nicht" – bei der echten Demenz wird die Störung eher bagatellisiert.',
     tags: ['F3 – Affektive Störungen', 'Differentialdiagnosen'],
   ),
   Flashcard(
     text:
-        'Bipolare Störung – Verlauf und Prophylaxe: Für die Diagnose genügen zwei Episoden, von denen eine manisch oder hypomanisch sein muss. Das Rezidivrisiko ist sehr hoch, deshalb ist eine Phasenprophylaxe (z.B. Lithium) zu erwägen – eine Behandlung nur in der Akutphase reicht nicht. Rapid Cycling = mindestens vier affektive Episoden pro Jahr, unabhängig von deren Polarität. Depressive Episoden dauern in der Regel länger als manische; manische Episoden beginnen meist abrupt. Merke: Bei jeder Depression nach früheren Hochphasen fragen – das entscheidet über unipolar oder bipolar.',
+        'Bipolare Störung – Verlauf und Prophylaxe:\nFür die Diagnose genügen zwei Episoden, von denen eine manisch oder hypomanisch sein muss.\nDas Rezidivrisiko ist sehr hoch, deshalb ist eine Phasenprophylaxe (z.B. Lithium) zu erwägen – eine Behandlung nur in der Akutphase reicht nicht.\nRapid Cycling = mindestens vier affektive Episoden pro Jahr, unabhängig von deren Polarität.\nDepressive Episoden dauern in der Regel länger als manische; manische Episoden beginnen meist abrupt.\nMerke: Bei jeder Depression nach früheren Hochphasen fragen – das entscheidet über unipolar oder bipolar.',
     tags: ['F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'Messie-Syndrom (pathologisches Horten): Anhäufen und Sammeln wertloser oder verbrauchter Dinge in der EIGENEN Wohnung, häufig begleitet von Zwangssymptomen. Aus Scham reagieren die Betroffenen typischerweise mit sozialem Rückzug und vermeiden Besuch. Betroffen sind überwiegend Erwachsene, die Symptomatik nimmt mit dem Alter zu – nicht Kinder und Jugendliche.',
+        'Messie-Syndrom (pathologisches Horten):\nAnhäufen und Sammeln wertloser oder verbrauchter Dinge in der EIGENEN Wohnung, häufig begleitet von Zwangssymptomen.\nAus Scham reagieren die Betroffenen typischerweise mit sozialem Rückzug und vermeiden Besuch.\nBetroffen sind überwiegend Erwachsene, die Symptomatik nimmt mit dem Alter zu – nicht Kinder und Jugendliche.',
     tags: ['F4 – Neurotische Störungen'],
   ),
   Flashcard(
     text:
-        'Suizidalität – Risiko und Prävention: Hochrisikogruppe sind ältere, alleinstehende Männer; etwa drei Viertel der vollendeten Suizide entfallen auf Männer. Der stärkste Einzelprädiktor ist ein früherer Suizidversuch, besonders gefährlich ist die Zeit direkt nach Klinikentlassung. Bei etwa 90% liegt eine psychische Erkrankung vor. Präsuizidales Syndrom nach Ringel: Einengung, gehemmte und gegen sich gerichtete Aggression, Suizidfantasien – häufig, aber nicht obligat. Verhältnisprävention verändert die Umstände (Brückengeländer, Fangnetze), Verhaltensprävention das individuelle Verhalten (Aufklärung).',
+        'Suizidalität – Risiko und Prävention:\nHochrisikogruppe sind ältere, alleinstehende Männer; etwa drei Viertel der vollendeten Suizide entfallen auf Männer.\nDer stärkste Einzelprädiktor ist ein früherer Suizidversuch, besonders gefährlich ist die Zeit direkt nach Klinikentlassung.\nBei etwa 90% liegt eine psychische Erkrankung vor.\nPräsuizidales Syndrom nach Ringel: Einengung, gehemmte und gegen sich gerichtete Aggression, Suizidfantasien – häufig, aber nicht obligat.\nVerhältnisprävention verändert die Umstände (Brückengeländer, Fangnetze), Verhaltensprävention das individuelle Verhalten (Aufklärung).',
     tags: ['Psychopathologie'],
   ),
   Flashcard(
     text:
-        'Abwehrmechanismen – Übersicht und Abgrenzung: Unbewusste Strategien des Ichs zur Konfliktbewältigung sind Verdrängung, Projektion (eigene abgelehnte Impulse werden anderen zugeschrieben), Regression (Rückfall auf frühere Entwicklungsstufen), Identifikation, Reaktionsbildung, Sublimierung, Verleugnung und Rationalisierung. ACHTUNG Abgrenzung: Amnesie ist eine Gedächtnisstörung und Perseveration eine formale Denkstörung – beides psychopathologische Symptome, KEINE Abwehrmechanismen. Auch die erlernte Hilflosigkeit (Seligman) ist ein lerntheoretisches Konzept.',
+        'Abwehrmechanismen – Übersicht und Abgrenzung:\nUnbewusste Strategien des Ichs zur Konfliktbewältigung sind Verdrängung, Projektion (eigene abgelehnte Impulse werden anderen zugeschrieben), Regression (Rückfall auf frühere Entwicklungsstufen), Identifikation, Reaktionsbildung, Sublimierung, Verleugnung und Rationalisierung.\nACHTUNG Abgrenzung: Amnesie ist eine Gedächtnisstörung und Perseveration eine formale Denkstörung – beides psychopathologische Symptome, KEINE Abwehrmechanismen.\nAuch die erlernte Hilflosigkeit (Seligman) ist ein lerntheoretisches Konzept.',
     tags: ['Therapieverfahren'],
   ),
   Flashcard(
     text:
-        'Kognitive Verfahren im Überblick: Kognitive Triade nach Beck = negative Sicht auf sich selbst, die Welt und die Zukunft (Depressionsmodell). Rational-emotive Therapie (RET) nach Ellis = Bearbeitung irrationaler Grundannahmen nach dem ABC-Modell; diese lassen sich NICHT durch einmaliges Aufdecken beheben, sondern erfordern wiederholtes Üben. Kognitive Umstrukturierung ist das Basisverfahren kognitiver Therapien und zielt auf die Neubewertung von Gedanken, Gefühlen und Körperreaktionen – typische Methode ist der sokratische Dialog, nicht die Hypnotherapie. Bei Demenz ist der sokratische Dialog ungeeignet.',
+        'Kognitive Verfahren im Überblick:\nKognitive Triade nach Beck = negative Sicht auf sich selbst, die Welt und die Zukunft (Depressionsmodell).\nRational-emotive Therapie (RET) nach Ellis = Bearbeitung irrationaler Grundannahmen nach dem ABC-Modell; diese lassen sich NICHT durch einmaliges Aufdecken beheben, sondern erfordern wiederholtes Üben.\nKognitive Umstrukturierung ist das Basisverfahren kognitiver Therapien und zielt auf die Neubewertung von Gedanken, Gefühlen und Körperreaktionen – typische Methode ist der sokratische Dialog, nicht die Hypnotherapie.\nBei Demenz ist der sokratische Dialog ungeeignet.',
     tags: ['Therapieverfahren', 'F3 – Affektive Störungen'],
   ),
   Flashcard(
     text:
-        'Alkoholabhängigkeit – Behandlungsphasen in der richtigen Reihenfolge: 1. Kontakt-/Motivationsphase, 2. Entgiftung (körperlicher Entzug – hier drohen lebensbedrohliche Komplikationen wie Delirium tremens und Entzugskrampfanfälle), 3. Entwöhnung (psychotherapeutische Bearbeitung, Grundlagen dauerhafter Abstinenz), 4. Rehabilitation/Nachsorge (psychosoziale Maßnahmen, Selbsthilfegruppen). Merke: Entgiftung und Entwöhnung sind NICHT dasselbe, und die Motivationsphase steht am Anfang, nicht am Ende.',
+        'Alkoholabhängigkeit – Behandlungsphasen in der richtigen Reihenfolge:\n1. Kontakt-/Motivationsphase,\n2. Entgiftung (körperlicher Entzug – hier drohen lebensbedrohliche Komplikationen wie Delirium tremens und Entzugskrampfanfälle),\n3. Entwöhnung (psychotherapeutische Bearbeitung, Grundlagen dauerhafter Abstinenz),\n4. Rehabilitation/Nachsorge (psychosoziale Maßnahmen, Selbsthilfegruppen).\nMerke: Entgiftung und Entwöhnung sind NICHT dasselbe, und die Motivationsphase steht am Anfang, nicht am Ende.',
     tags: ['F1 – Substanzstörungen'],
   ),
 ];
