@@ -16,6 +16,7 @@ import 'screens/flashcard_screen.dart';
 import 'screens/profile_screen.dart';
 import 'screens/glossary_screen.dart';
 import 'screens/feedback_sheet.dart';
+import 'screens/rate_app_dialog.dart';
 
 final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
@@ -136,8 +137,28 @@ class _QuizControllerState extends State<QuizController> {
   }
 
   Future<void> _scheduleFeedbackPrompt() async {
-    final shouldPrompt = await FeedbackService.registerStartAndCheckPrompt();
-    if (!shouldPrompt || !mounted) return;
+    // Immer aufrufen: zählt den Start, aktualisiert die 30-Tage-Fälligkeit und
+    // die Update-Erkennung – unabhängig davon, welcher Dialog diesen Start
+    // ggf. angezeigt wird.
+    final pendingRating = await FeedbackService.checkAndConsumePendingRatingPrompt();
+    final postUpdateRating = await FeedbackService.checkAndConsumePostUpdateRatingPrompt();
+    final shouldPromptFeedback = await FeedbackService.registerStartAndCheckPrompt();
+    if (!mounted) return;
+
+    if (pendingRating || postUpdateRating) {
+      // Entweder: Nutzer war beim letzten Feedback zufrieden (pendingRating).
+      // Oder: Bestandsnutzer, der bereits vor einem App-Update am Feedback
+      // teilgenommen hat, ist jetzt beim 3. Start nach dem Update angekommen.
+      // In beiden Fällen direkt um Store-Bewertung bitten statt zusätzlich
+      // noch die reguläre Feedback-Abfrage draufzusetzen.
+      _feedbackPromptTimer = Timer(_feedbackPromptDelay, () async {
+        if (!mounted || _loading || _view != 'home') return;
+        await showRateAppDialog(context);
+      });
+      return;
+    }
+
+    if (!shouldPromptFeedback) return;
     _feedbackPromptTimer = Timer(_feedbackPromptDelay, () async {
       // Nicht in eine laufende Prüfung hineinplatzen.
       if (!mounted || _loading || _view != 'home') return;

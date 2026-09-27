@@ -94,7 +94,7 @@ const List<Question> questions2018 = [
   Question(
     id: 7,
     exam: 'Oktober 2018',
-    q: 'Welche der folgenden Aussagen zu Störungen des Sozialverhaltens (nach IDC-10) treffen zu? Wählen Sie zwei Antworten!',
+    q: 'Welche der folgenden Aussagen zu Störungen des Sozialverhaltens (nach ICD-10) treffen zu? Wählen Sie zwei Antworten!',
     options: [
       'A) Jugendliche Aufmüpfigkeit zählt zu den typischen Symptomen der Störungen des Sozialverhaltens',
       'B) Bei einem Jugendlichen, der seit zwei bis drei Monaten die Schule schwänzt, sollte die Diagnose einer Störung des Sozialverhaltens gestellt werden',
@@ -199,7 +199,7 @@ const List<Question> questions2018 = [
   Question(
     id: 14,
     exam: 'Oktober 2018',
-    q: 'Welche der folgenden Aussagen treffen zu? Bei einer substanzinduzierten psychotischen Störung (nach IDC-10) können folgenden Symptome auftreten:\n1. Stupor\n2. Personenverkennungen\n3. Akustische Halluzinationen\n4. Ekstase\n5. Verfolgungsideen',
+    q: 'Welche der folgenden Aussagen treffen zu? Bei einer substanzinduzierten psychotischen Störung (nach ICD-10) können folgenden Symptome auftreten:\n1. Stupor\n2. Personenverkennungen\n3. Akustische Halluzinationen\n4. Ekstase\n5. Verfolgungsideen',
     options: [
       'A) Nur die Aussagen 1 und 2 sind richtig',
       'B) Nur die Aussagen 1 und 4 sind richtig',
@@ -358,7 +358,7 @@ const List<Question> questions2018 = [
   Question(
     id: 25,
     exam: 'Oktober 2018',
-    q: 'Welche der folgenden Aussagen treffen zu? Typische Symptome der Schizophrenie sind:n\1.Ambivalenz\n2. Zerfahrenheit des Denkens\n3. Katatoner Stupor\n4. Gedankenentzug\n5. Intelligenzminderung',
+    q: 'Welche der folgenden Aussagen treffen zu? Typische Symptome der Schizophrenie sind:\n1.Ambivalenz\n2. Zerfahrenheit des Denkens\n3. Katatoner Stupor\n4. Gedankenentzug\n5. Intelligenzminderung',
     options: [
       'A) Nur die Aussagen 2 und 4 sind richtig',
       'B) Nur die Aussagen 1, 3 und 4 sind richtig',

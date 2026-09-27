@@ -4,6 +4,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/flashcard.dart';
 import '../data/flashcards_data.dart';
+import '../services/glossary_lookup.dart';
 import '../theme/app_theme.dart';
 
 class FlashcardScreen extends StatefulWidget {
@@ -162,6 +163,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
     }
 
     final card = _cards[_currentIndex];
+    final terms = findGlossaryTerms(card.text);
 
     return Container(
       decoration: const BoxDecoration(gradient: AppColors.gradientBg),
@@ -254,7 +256,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                                 const SizedBox(height: AppSpacing.md),
                               ],
                               Text(card.text, style: tt.bodyMedium),
-                              if (card.terms.isNotEmpty) ...[
+                              if (terms.isNotEmpty) ...[
                                 const SizedBox(height: AppSpacing.lg),
                                 Container(
                                   width: double.infinity,
@@ -267,18 +269,16 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                                   child: ListView.separated(
                                     shrinkWrap: true,
                                     physics: const NeverScrollableScrollPhysics(),
-                                    itemCount: card.terms.length,
+                                    itemCount: terms.length,
                                     separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.lg),
                                     itemBuilder: (_, i) {
-                                      final t = card.terms[i];
+                                      final t = terms[i];
                                       return Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(t.term, style: tt.titleSmall),
-                                          if (t.definition.isNotEmpty) ...[
-                                            const SizedBox(height: 2),
-                                            Text(t.definition, style: tt.bodyMedium?.copyWith(color: AppColors.textMuted)),
-                                          ],
+                                          Text(t.key, style: tt.titleSmall),
+                                          const SizedBox(height: 2),
+                                          Text(t.value, style: tt.bodyMedium?.copyWith(color: AppColors.textMuted)),
                                         ],
                                       );
                                     },

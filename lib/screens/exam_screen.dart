@@ -6,7 +6,7 @@ import '../models/question.dart';
 import '../data/all_questions.dart';
 import '../services/storage_service.dart';
 import '../theme/app_theme.dart';
-import '../data/glossary_data.dart';
+import '../services/glossary_lookup.dart';
 
 class ExamScreen extends StatefulWidget {
   final QuizState state;
@@ -68,7 +68,6 @@ class _ExamScreenState extends State<ExamScreen> {
         elapsedSeconds: _elapsedSeconds,
       ),
       examHistory: widget.state.examHistory,
-
     );
     await widget.onPersist(newState);
   }
@@ -141,7 +140,12 @@ class _ExamScreenState extends State<ExamScreen> {
       newLastCorrect = newStreak >= 2;
     }
     final newStats = Map<int, QuestionStats>.from(widget.state.questionStats);
-    newStats[qId] = QuestionStats(attempts: prev.attempts + 1, correctCount: prev.correctCount + (isCorrect ? 1 : 0), lastCorrect: newLastCorrect, correctStreak: newStreak);
+    newStats[qId] = QuestionStats(
+      attempts: prev.attempts + 1,
+      correctCount: prev.correctCount + (isCorrect ? 1 : 0),
+      lastCorrect: newLastCorrect,
+      correctStreak: newStreak,
+    );
     final newAnswers = Map<int, AnswerRecord>.from(exam.answers);
     newAnswers[qId] = AnswerRecord(selected: [optIdx], correct: isCorrect);
     final newScore = exam.score + (isCorrect ? 1 : 0);
@@ -156,7 +160,6 @@ class _ExamScreenState extends State<ExamScreen> {
         elapsedSeconds: _elapsedSeconds,
       ),
       examHistory: widget.state.examHistory,
-
     );
 
     setState(() {
@@ -189,7 +192,12 @@ class _ExamScreenState extends State<ExamScreen> {
       newLastCorrect = newStreak >= 2;
     }
     final newStats = Map<int, QuestionStats>.from(widget.state.questionStats);
-    newStats[qId] = QuestionStats(attempts: prev.attempts + 1, correctCount: prev.correctCount + (isCorrect ? 1 : 0), lastCorrect: newLastCorrect, correctStreak: newStreak);
+    newStats[qId] = QuestionStats(
+      attempts: prev.attempts + 1,
+      correctCount: prev.correctCount + (isCorrect ? 1 : 0),
+      lastCorrect: newLastCorrect,
+      correctStreak: newStreak,
+    );
     final newAnswers = Map<int, AnswerRecord>.from(exam.answers);
     newAnswers[qId] = AnswerRecord(selected: selectedArr, correct: isCorrect);
     final newScore = exam.score + (isCorrect ? 1 : 0);
@@ -204,7 +212,6 @@ class _ExamScreenState extends State<ExamScreen> {
         elapsedSeconds: _elapsedSeconds,
       ),
       examHistory: widget.state.examHistory,
-
     );
 
     setState(() {
@@ -228,7 +235,6 @@ class _ExamScreenState extends State<ExamScreen> {
         questionStats: widget.state.questionStats,
         currentExam: newExam,
         examHistory: widget.state.examHistory,
-  
       );
       setState(() {
         answered = false;
@@ -241,13 +247,15 @@ class _ExamScreenState extends State<ExamScreen> {
       // Exam finished
       _timer?.cancel();
       final newHistory = List<ExamRecord>.from(widget.state.examHistory)
-        ..add(ExamRecord(date: DateTime.now().toIso8601String(), score: exam.score, total: exam.questionIds.length, elapsedSeconds: _elapsedSeconds));
-      final newState = QuizState(
-        questionStats: widget.state.questionStats,
-        currentExam: null,
-        examHistory: newHistory,
-  
-      );
+        ..add(
+          ExamRecord(
+            date: DateTime.now().toIso8601String(),
+            score: exam.score,
+            total: exam.questionIds.length,
+            elapsedSeconds: _elapsedSeconds,
+          ),
+        );
+      final newState = QuizState(questionStats: widget.state.questionStats, currentExam: null, examHistory: newHistory);
       await widget.onPersist(newState);
       widget.onExamFinished();
     }
@@ -395,7 +403,11 @@ class _ExamScreenState extends State<ExamScreen> {
                                           border: Border.all(color: AppColors.indigoBorder),
                                           borderRadius: BorderRadius.circular(AppSpacing.md),
                                         ),
-                                        child: const Icon(Icons.help_outline_rounded, color: AppColors.tealLighter, size: 20),
+                                        child: const Icon(
+                                          Icons.help_outline_rounded,
+                                          color: AppColors.tealLighter,
+                                          size: 20,
+                                        ),
                                       ),
                                     ),
                                 ],
@@ -458,13 +470,8 @@ class _ExamScreenState extends State<ExamScreen> {
     );
   }
 
-  List<MapEntry<String, String>> _findGlossaryTerms(Question question) {
-    final text = '${question.q} ${question.options.join(' ')}'.toLowerCase();
-    return glossary.entries
-        .where((e) => text.contains(e.key.toLowerCase()))
-        .toList()
-      ..sort((a, b) => a.key.toLowerCase().compareTo(b.key.toLowerCase()));
-  }
+  List<MapEntry<String, String>> _findGlossaryTerms(Question question) =>
+      findGlossaryTerms('${question.q} ${question.options.join(' ')}');
 
   void _showGlossaryDialog(BuildContext context, List<MapEntry<String, String>> terms) {
     final tt = Theme.of(context).textTheme;
@@ -479,7 +486,7 @@ class _ExamScreenState extends State<ExamScreen> {
           child: ListView.separated(
             shrinkWrap: true,
             itemCount: terms.length,
-            separatorBuilder: (_, __) => const SizedBox(height: AppSpacing.md),
+            separatorBuilder: (_, _) => const SizedBox(height: AppSpacing.md),
             itemBuilder: (_, i) {
               final term = terms[i];
               return Container(

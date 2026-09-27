@@ -499,7 +499,7 @@ const List<Question> questions2022 = [
       'Nur die Aussagen 1, 4 und 5 sind richtig',
       'Nur die Aussagen 2, 3 und 5 sind richtig',
       'Nur die Aussagen 2, 4 und 5 sind richtig',
-      'Nur die Aussagen 1, 4 und 5 sind richtig',
+      'Nur die Aussagen 1, 2, 4 und 5 sind richtig',
     ],
     correct: 1,
     explanation:

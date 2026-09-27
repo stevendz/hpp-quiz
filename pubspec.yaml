@@ -1,7 +1,7 @@
 name: hpp_quiz
 description: "Heilpraktiker Psychotherapie"
 
-version: 1.1.0+10
+version: 1.1.1+11
 
 environment:
   sdk: ^3.11.1
@@ -16,6 +16,7 @@ dependencies:
   firebase_analytics: ^12.2.0
   cloud_firestore: ^6.8.0
   package_info_plus: ^10.2.1
+  in_app_review: ^2.0.12
 
 dev_dependencies:
   flutter_test:
