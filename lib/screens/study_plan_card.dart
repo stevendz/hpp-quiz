@@ -130,6 +130,7 @@ class _DailyGoal extends StatelessWidget {
               value: active ? '$examsDone/${status.examsPerDay}' : '–',
               label: 'Prüfungen',
               color: color,
+              align: CrossAxisAlignment.start,
             ),
             _StatItem(
               value: active ? '${status.answeredToday}/$goalQuestions' : '${status.answeredToday}',
@@ -141,23 +142,21 @@ class _DailyGoal extends StatelessWidget {
               label: streak == 1 ? 'Tag in Folge' : 'Tage in Folge',
               color: streak > 0 ? AppColors.amberLight : AppColors.textDim,
               icon: Icons.local_fire_department_rounded,
+              align: CrossAxisAlignment.end,
             ),
           ],
         ),
         if (active) ...[
           const SizedBox(height: AppSpacing.lg),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(AppSpacing.xs),
-              child: LinearProgressIndicator(
-                value: goalQuestions == 0
-                    ? 0
-                    : (status.answeredToday / goalQuestions).clamp(0.0, 1.0),
-                minHeight: 10,
-                color: color,
-                backgroundColor: AppColors.bgDark.withValues(alpha: 0.6),
-              ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(AppSpacing.xs),
+            child: LinearProgressIndicator(
+              value: goalQuestions == 0
+                  ? 0
+                  : (status.answeredToday / goalQuestions).clamp(0.0, 1.0),
+              minHeight: 10,
+              color: color,
+              backgroundColor: AppColors.bgDark.withValues(alpha: 0.6),
             ),
           ),
         ],
@@ -192,13 +191,22 @@ class _Reminder extends StatelessWidget {
   }
 }
 
+/// Großer Wert mit Beschriftung. [align]: links, mittig oder rechts – die äußeren Werte schließen bündig
+/// mit dem Rand der Box ab, wie Überschrift, Balken und Zähler.
 class _StatItem extends StatelessWidget {
   final String value;
   final String label;
   final Color color;
   final IconData? icon;
+  final CrossAxisAlignment align;
 
-  const _StatItem({required this.value, required this.label, required this.color, this.icon});
+  const _StatItem({
+    required this.value,
+    required this.label,
+    required this.color,
+    this.icon,
+    this.align = CrossAxisAlignment.center,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -206,9 +214,15 @@ class _StatItem extends StatelessWidget {
     final icon = this.icon;
     return Expanded(
       child: Column(
+        crossAxisAlignment: align,
         children: [
           FittedBox(
             fit: BoxFit.scaleDown,
+            alignment: switch (align) {
+              CrossAxisAlignment.start => Alignment.centerLeft,
+              CrossAxisAlignment.end => Alignment.centerRight,
+              _ => Alignment.center,
+            },
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
