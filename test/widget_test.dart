@@ -50,7 +50,8 @@ void main() {
     expect(find.text('0/2'), findsOneWidget); // Prüfungen
     expect(find.text('0/56'), findsOneWidget); // Fragen heute
     expect(find.text('Tage in Folge'), findsOneWidget);
-    expect(find.text('0/560 gesehen'), findsOneWidget);
+    expect(find.text('0/560'), findsOneWidget);
+    expect(find.byWidgetPredicate((w) => w is Semantics && w.properties.label == '0/560 gesehen'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 }

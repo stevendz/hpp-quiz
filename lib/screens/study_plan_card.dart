@@ -248,9 +248,24 @@ class _Counters extends StatelessWidget {
           spacing: AppSpacing.lg,
           runSpacing: AppSpacing.xs,
           children: [
-            _SmallStat(value: '${status.seen}/$total', label: 'gesehen', color: AppColors.tealLighter),
-            _SmallStat(value: '${status.mastered}', label: 'korrekt', color: AppColors.green),
-            _SmallStat(value: '${status.wrong}', label: 'falsch', color: AppColors.red),
+            _SmallStat(
+              value: '${status.seen}/$total',
+              icon: Icons.visibility_rounded,
+              label: 'gesehen',
+              color: AppColors.tealLighter,
+            ),
+            _SmallStat(
+              value: '${status.mastered}',
+              icon: Icons.check_circle_rounded,
+              label: 'korrekt',
+              color: AppColors.green,
+            ),
+            _SmallStat(
+              value: '${status.wrong}',
+              icon: Icons.cancel_rounded,
+              label: 'falsch',
+              color: AppColors.red,
+            ),
           ],
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -284,21 +299,28 @@ class _Counters extends StatelessWidget {
   }
 }
 
+/// Zahl mit Icon in derselben Farbe und Größe; [label] liest der Screenreader vor.
 class _SmallStat extends StatelessWidget {
   final String value;
+  final IconData icon;
   final String label;
   final Color color;
 
-  const _SmallStat({required this.value, required this.label, required this.color});
+  const _SmallStat({required this.value, required this.icon, required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {
-    final tt = Theme.of(context).textTheme;
-    return Text.rich(
-      TextSpan(
+    final style = Theme.of(context).textTheme.labelMedium!.copyWith(color: color.withValues(alpha: 0.85));
+    return Semantics(
+      label: '$value $label',
+      excludeSemantics: true,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          TextSpan(text: value, style: tt.labelMedium!.copyWith(color: color.withValues(alpha: 0.85))),
-          TextSpan(text: ' $label', style: tt.bodySmall!.copyWith(color: AppColors.textDim)),
+          Text(value, style: style),
+          const SizedBox(width: AppSpacing.xs),
+          // Material-Icons haben einen Innenrand – etwas größer wirken sie so hoch wie die Ziffern.
+          Icon(icon, size: style.fontSize! * 1.15, color: style.color),
         ],
       ),
     );

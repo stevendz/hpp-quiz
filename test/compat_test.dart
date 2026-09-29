@@ -92,7 +92,8 @@ void main() {
     await tester.pumpWidget(const HppQuizApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('6/560 gesehen'), findsOneWidget);
+    expect(find.text('6/560'), findsOneWidget);
+    expect(find.byWidgetPredicate((w) => w is Semantics && w.properties.label == '3 korrekt'), findsOneWidget);
     expect(find.byIcon(Icons.local_fire_department_rounded), findsOneWidget); // Lernserie in der Box
     expect(find.text('Prüfung fortsetzen (Frage 6/30)'), findsOneWidget);
     expect(find.text('Wann ist deine Prüfung?'), findsOneWidget);
