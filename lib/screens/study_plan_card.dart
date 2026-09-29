@@ -1,8 +1,57 @@
 import 'package:flutter/material.dart';
+import '../services/exam_modes.dart';
 import '../services/study_plan.dart';
 import '../theme/app_theme.dart';
 
-/// Die Box auf der Startseite: Prüfungstermin, Fortschritt über alle Fragen und das Tagesziel in Übungsprüfungen.
+/// Zeile unter dem App-Titel: „Prüfung in 15 Tagen · 14. Oktober“. Antippen ändert den Termin.
+class ExamCountdown extends StatelessWidget {
+  final StudyPlan? plan;
+  final int? daysLeft;
+  final VoidCallback onTap;
+
+  const ExamCountdown({super.key, required this.plan, required this.daysLeft, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final tt = Theme.of(context).textTheme;
+    final plan = this.plan;
+    final daysLeft = this.daysLeft;
+
+    final (String title, String? date) = switch (daysLeft) {
+      null => ('Prüfungsdatum festlegen', null),
+      < 0 => ('Prüfung vorbei? Neuen Termin festlegen', null),
+      0 => ('Heute ist Prüfungstag – viel Erfolg! 🍀', null),
+      1 => ('Prüfung morgen', formatDayMonth(plan!.examDate)),
+      _ => ('Prüfung in $daysLeft Tagen', formatDayMonth(plan!.examDate)),
+    };
+
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(AppSpacing.md),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.event_rounded, size: 16, color: AppColors.tealLighter),
+            const SizedBox(width: AppSpacing.sm),
+            Flexible(
+              child: Text(title, style: tt.titleSmall!.copyWith(color: AppColors.textSecondary)),
+            ),
+            if (date != null) ...[
+              Text(' · ', style: tt.bodyMedium!.copyWith(color: AppColors.textDim)),
+              Text(date, style: tt.bodyMedium!.copyWith(color: AppColors.textMuted)),
+            ],
+            const SizedBox(width: AppSpacing.sm),
+            const Icon(Icons.edit_rounded, size: 14, color: AppColors.textDim),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Die Box auf der Startseite: Tagesziel und Lernserie groß, darunter der Stand über alle Fragen.
 class StudyPlanCard extends StatelessWidget {
   final StudyPlan? plan;
   final StudyStatus status;
@@ -12,10 +61,6 @@ class StudyPlanCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final plan = this.plan;
-    final daysLeft = status.daysLeft;
-    final active = plan != null && daysLeft != null && daysLeft > 0;
-
     return Material(
       color: AppColors.surfaceDark,
       borderRadius: BorderRadius.circular(AppSpacing.lg),
@@ -23,19 +68,20 @@ class StudyPlanCard extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(AppSpacing.lg),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(AppSpacing.lg + 4, AppSpacing.lg + 4, AppSpacing.lg + 4, AppSpacing.lg * 2),
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.lg + 4,
+            AppSpacing.lg + 4,
+            AppSpacing.lg + 4,
+            AppSpacing.lg * 2,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _Header(plan: plan, daysLeft: daysLeft),
+              _DailyGoal(plan: plan, status: status),
               const SizedBox(height: AppSpacing.lg * 2),
+              Divider(height: 1, color: AppColors.indigoBorder.withValues(alpha: 0.4)),
+              const SizedBox(height: AppSpacing.lg + 4),
               _Counters(status: status),
-              if (active) ...[
-                const SizedBox(height: AppSpacing.lg * 2),
-                Divider(height: 1, color: AppColors.indigoBorder.withValues(alpha: 0.4)),
-                const SizedBox(height: AppSpacing.lg * 2),
-                _DailyGoal(plan: plan, status: status),
-              ],
             ],
           ),
         ),
@@ -44,43 +90,145 @@ class StudyPlanCard extends StatelessWidget {
   }
 }
 
-class _Header extends StatelessWidget {
+/// Tagesziel: erledigte Übungsprüfungen, Fragen heute und die Lernserie – mit Balken für den heutigen Stand.
+class _DailyGoal extends StatelessWidget {
   final StudyPlan? plan;
-  final int? daysLeft;
+  final StudyStatus status;
 
-  const _Header({required this.plan, required this.daysLeft});
+  const _DailyGoal({required this.plan, required this.status});
 
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
     final plan = this.plan;
-    final daysLeft = this.daysLeft;
+    final daysLeft = status.daysLeft;
+    final active = plan != null && daysLeft != null && daysLeft > 0;
+    final done = status.goalReached;
+    final goalQuestions = status.goalQuestions;
+    final examsDone = (status.answeredToday ~/ examSize).clamp(0, status.examsPerDay);
+    final color = done ? AppColors.green : AppColors.tealLighter;
+    final streak = status.streak;
 
-    final (IconData icon, String title, String? trailing) = switch (daysLeft) {
-      null => (Icons.event_rounded, 'Prüfungsdatum festlegen', null),
-      < 0 => (Icons.event_rounded, 'Prüfung vorbei? Neuen Termin festlegen', null),
-      0 => (Icons.emoji_events_rounded, 'Heute ist Prüfungstag – viel Erfolg! 🍀', null),
-      1 => (Icons.event_rounded, 'Prüfung morgen', formatDayMonth(plan!.examDate)),
-      _ => (Icons.event_rounded, 'Prüfung in $daysLeft Tagen', formatDayMonth(plan!.examDate)),
-    };
-
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Icon(icon, size: 18, color: AppColors.tealLighter),
-        const SizedBox(width: AppSpacing.md),
-        Expanded(child: Text(title, style: tt.titleSmall)),
-        if (trailing != null) ...[
-          Text(trailing, style: tt.bodySmall!.copyWith(color: AppColors.textMuted)),
-          const SizedBox(width: AppSpacing.xs),
-          const Icon(Icons.edit_rounded, size: 14, color: AppColors.textDim),
-        ] else
-          const Icon(Icons.chevron_right_rounded, color: AppColors.textMuted),
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                done ? 'TAGESZIEL ERREICHT ✓' : 'TAGESZIEL',
+                style: tt.labelSmall!.copyWith(color: done ? AppColors.greenLight : null),
+              ),
+            ),
+            if (plan != null && active) _Reminder(plan: plan),
+          ],
+        ),
+        const SizedBox(height: AppSpacing.lg),
+        Row(
+          children: [
+            _StatItem(
+              value: active ? '$examsDone/${status.examsPerDay}' : '–',
+              label: 'Prüfungen',
+              color: color,
+            ),
+            _StatItem(
+              value: active ? '${status.answeredToday}/$goalQuestions' : '${status.answeredToday}',
+              label: 'Fragen heute',
+              color: color,
+            ),
+            _StatItem(
+              value: '$streak',
+              label: streak == 1 ? 'Tag in Folge' : 'Tage in Folge',
+              color: streak > 0 ? AppColors.amberLight : AppColors.textDim,
+              icon: Icons.local_fire_department_rounded,
+            ),
+          ],
+        ),
+        if (active) ...[
+          const SizedBox(height: AppSpacing.lg),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(AppSpacing.xs),
+              child: LinearProgressIndicator(
+                value: goalQuestions == 0
+                    ? 0
+                    : (status.answeredToday / goalQuestions).clamp(0.0, 1.0),
+                minHeight: 10,
+                color: color,
+                backgroundColor: AppColors.bgDark.withValues(alpha: 0.6),
+              ),
+            ),
+          ),
+        ],
       ],
     );
   }
 }
 
-/// Gesehen, korrekt, falsch – mit Balken über alle Fragen.
+class _Reminder extends StatelessWidget {
+  final StudyPlan plan;
+
+  const _Reminder({required this.plan});
+
+  @override
+  Widget build(BuildContext context) {
+    final on = plan.remindersEnabled;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+          on ? Icons.notifications_rounded : Icons.notifications_off_rounded,
+          size: 14,
+          color: AppColors.textDim,
+        ),
+        const SizedBox(width: AppSpacing.xs),
+        Text(
+          on ? '${formatTime(plan.reminderMinutes)} Uhr' : 'Aus',
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(color: AppColors.textDim),
+        ),
+      ],
+    );
+  }
+}
+
+class _StatItem extends StatelessWidget {
+  final String value;
+  final String label;
+  final Color color;
+  final IconData? icon;
+
+  const _StatItem({required this.value, required this.label, required this.color, this.icon});
+
+  @override
+  Widget build(BuildContext context) {
+    final tt = Theme.of(context).textTheme;
+    final icon = this.icon;
+    return Expanded(
+      child: Column(
+        children: [
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (icon != null) ...[
+                  Icon(icon, size: 20, color: color),
+                  const SizedBox(width: 2),
+                ],
+                Text(value, style: tt.headlineMedium!.copyWith(color: color)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 2),
+          Text(label, style: tt.bodySmall!.copyWith(fontSize: 11, color: AppColors.textDim)),
+        ],
+      ),
+    );
+  }
+}
+
+/// Stand über alle Fragen – klein, mit schmalem Balken.
 class _Counters extends StatelessWidget {
   final StudyStatus status;
 
@@ -93,160 +241,66 @@ class _Counters extends StatelessWidget {
     final wrongPct = total > 0 ? status.wrong / total : 0.0;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Row(
+        Wrap(
+          alignment: WrapAlignment.spaceBetween,
+          spacing: AppSpacing.lg,
+          runSpacing: AppSpacing.xs,
           children: [
-            _StatItem(label: 'Gesehen', value: '${status.seen}/$total', color: AppColors.tealLighter),
-            _StatItem(label: 'Korrekt', value: '${status.mastered}', color: AppColors.green),
-            _StatItem(label: 'Falsch', value: '${status.wrong}', color: AppColors.red),
-          ],
-        ),
-        const SizedBox(height: AppSpacing.lg),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(AppSpacing.xs),
-            child: SizedBox(
-              height: 10,
-              child: Row(
-                children: [
-                  if (correctPct > 0) Flexible(flex: (correctPct * 1000).round(), child: Container(color: AppColors.green)),
-                  if (wrongPct > 0) Flexible(flex: (wrongPct * 1000).round(), child: Container(color: AppColors.red)),
-                  if (correctPct + wrongPct < 1)
-                    Flexible(
-                      flex: ((1 - correctPct - wrongPct) * 1000).round(),
-                      child: Container(color: AppColors.surfaceDark.withValues(alpha: 0.5)),
-                    ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _StatItem extends StatelessWidget {
-  final String label;
-  final String value;
-  final Color color;
-
-  const _StatItem({required this.label, required this.value, required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    final tt = Theme.of(context).textTheme;
-    return Expanded(
-      child: Column(
-        children: [
-          Text(value, style: tt.headlineMedium!.copyWith(color: color)),
-          const SizedBox(height: 2),
-          Text(label, style: tt.bodySmall!.copyWith(fontSize: 11, color: AppColors.textDim)),
-        ],
-      ),
-    );
-  }
-}
-
-/// Tagesziel in Übungsprüfungen, heutiger Stand in Fragen, dazu Serie und Erinnerung.
-class _DailyGoal extends StatelessWidget {
-  final StudyPlan plan;
-  final StudyStatus status;
-
-  const _DailyGoal({required this.plan, required this.status});
-
-  @override
-  Widget build(BuildContext context) {
-    final tt = Theme.of(context).textTheme;
-    final done = status.goalReached;
-    final goal = status.goalQuestions;
-    final progress = goal == 0 ? 0.0 : (status.answeredToday / goal).clamp(0.0, 1.0);
-    final barColor = done ? AppColors.green : AppColors.tealLighter;
-    final enough = examsPerDayEnough(status.examsPerDay);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Expanded(
-              child: Text(
-                done ? 'Tagesziel erreicht ✓' : 'Tagesziel: ${examsLabel(status.examsPerDay)}',
-                style: tt.titleSmall!.copyWith(color: done ? AppColors.greenLight : null),
-              ),
-            ),
-            Text.rich(
-              TextSpan(children: [
-                TextSpan(text: '${status.answeredToday}', style: tt.titleMedium!.copyWith(color: barColor)),
-                TextSpan(text: ' / $goal Fragen', style: tt.bodySmall!.copyWith(color: AppColors.textMuted)),
-              ]),
-            ),
+            _SmallStat(value: '${status.seen}/$total', label: 'gesehen', color: AppColors.tealLighter),
+            _SmallStat(value: '${status.mastered}', label: 'korrekt', color: AppColors.green),
+            _SmallStat(value: '${status.wrong}', label: 'falsch', color: AppColors.red),
           ],
         ),
         const SizedBox(height: AppSpacing.sm),
         ClipRRect(
           borderRadius: BorderRadius.circular(AppSpacing.xs),
-          child: LinearProgressIndicator(
-            value: progress,
-            minHeight: 8,
-            color: barColor,
-            backgroundColor: AppColors.bgDark.withValues(alpha: 0.6),
-          ),
-        ),
-        const SizedBox(height: AppSpacing.md),
-        Text(
-          status.remaining == 0
-              ? 'Alle Fragen sitzen. $enough, um dein Wissen frisch zu halten.'
-              : '$enough, damit du bis zum ${formatDayMonth(plan.examDate)} alle ${status.remaining} offenen Fragen '
-                  'sicher kannst.',
-          style: tt.bodySmall!.copyWith(fontSize: 13, height: 1.45, color: AppColors.textMuted),
-        ),
-        const SizedBox(height: AppSpacing.md),
-        Wrap(
-          spacing: AppSpacing.lg,
-          runSpacing: AppSpacing.xs,
-          children: [
-            if (status.streak > 0)
-              _Fact(
-                icon: Icons.local_fire_department_rounded,
-                text: '${daysLabel(status.streak)} in Folge',
-                color: AppColors.amberLight,
-              ),
-            _Fact(
-              icon: plan.remindersEnabled ? Icons.notifications_rounded : Icons.notifications_off_rounded,
-              text: plan.remindersEnabled ? 'Erinnerung ${formatTime(plan.reminderMinutes)} Uhr' : 'Keine Erinnerung',
+          child: SizedBox(
+            height: 5,
+            child: Row(
+              children: [
+                if (correctPct > 0)
+                  Flexible(
+                    flex: (correctPct * 1000).round(),
+                    child: Container(color: AppColors.green),
+                  ),
+                if (wrongPct > 0)
+                  Flexible(
+                    flex: (wrongPct * 1000).round(),
+                    child: Container(color: AppColors.red),
+                  ),
+                if (correctPct + wrongPct < 1)
+                  Flexible(
+                    flex: ((1 - correctPct - wrongPct) * 1000).round(),
+                    child: Container(color: AppColors.bgDark.withValues(alpha: 0.6)),
+                  ),
+              ],
             ),
-          ],
+          ),
         ),
       ],
     );
   }
 }
 
-class _Fact extends StatelessWidget {
-  final IconData icon;
-  final String text;
+class _SmallStat extends StatelessWidget {
+  final String value;
+  final String label;
   final Color color;
 
-  const _Fact({required this.icon, required this.text, this.color = AppColors.textMuted});
+  const _SmallStat({required this.value, required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 14, color: color),
-        const SizedBox(width: AppSpacing.xs),
-        Flexible(
-          child: Text(
-            text,
-            overflow: TextOverflow.ellipsis,
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(color: color),
-          ),
-        ),
-      ],
+    final tt = Theme.of(context).textTheme;
+    return Text.rich(
+      TextSpan(
+        children: [
+          TextSpan(text: value, style: tt.labelMedium!.copyWith(color: color.withValues(alpha: 0.85))),
+          TextSpan(text: ' $label', style: tt.bodySmall!.copyWith(color: AppColors.textDim)),
+        ],
+      ),
     );
   }
 }

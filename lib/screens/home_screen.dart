@@ -96,10 +96,9 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(height: AppSpacing.lg),
                       Text('HPP Prüfungstrainer', style: tt.headlineLarge!.copyWith(fontSize: 26, letterSpacing: -0.5)),
                       const SizedBox(height: AppSpacing.xs),
-                      Text('$total Fragen · $examSize pro Prüfung', style: tt.bodySmall),
+                      ExamCountdown(plan: studyPlan, daysLeft: status.daysLeft, onTap: onEditStudyPlan),
                       const SizedBox(height: AppSpacing.lg),
-                      const SizedBox(height: AppSpacing.lg),
-                      // Prüfungstermin, Fortschritt und Tagesziel
+                      // Tagesziel, Lernserie und Stand über alle Fragen
                       StudyPlanCard(plan: studyPlan, status: status, onTap: onEditStudyPlan),
                       const SizedBox(height: AppSpacing.lg),
                       const SizedBox(height: AppSpacing.lg),
@@ -303,7 +302,10 @@ class _MenuButton extends StatelessWidget {
             children: [
               Text(title, style: tt.labelLarge!.copyWith(color: prominent ? AppColors.onGold : null)),
               const SizedBox(height: 2),
-              Text(subtitle, style: tt.bodySmall!.copyWith(color: prominent ? AppColors.onGoldMuted : AppColors.textMuted)),
+              Text(
+                subtitle,
+                style: tt.bodySmall!.copyWith(color: prominent ? AppColors.onGoldMuted : AppColors.textMuted),
+              ),
             ],
           ),
         ),

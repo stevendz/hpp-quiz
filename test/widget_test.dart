@@ -27,12 +27,12 @@ void main() {
     expect(find.text('Wann ist deine Prüfung?'), findsOneWidget);
     expect(find.text('Abbrechen'), findsNothing);
     expect(find.text('Prüfungsdatum festlegen'), findsOneWidget);
-    expect(find.text('560 Fragen · 28 pro Prüfung'), findsOneWidget);
     // Ohne Fehler und ohne gemerkte Fragen gibt es noch nichts zu wiederholen.
     expect(find.text('Fehler & Merkliste üben'), findsNothing);
   });
 
-  testWidgets('Mit Lernplan: eine Box mit Termin, Zählern und Tagesziel – auch auf schmalen Handys', (tester) async {
+  testWidgets('Mit Lernplan: Termin unter dem Titel, Box mit Tagesziel, Serie und Zählern – auch auf schmalen Handys',
+      (tester) async {
     final exam = DateTime.now().add(const Duration(days: 15));
     SharedPreferences.setMockInitialValues({
       'hpp-study-plan': jsonEncode(StudyPlan(examDate: exam).toJson()),
@@ -46,9 +46,11 @@ void main() {
 
     expect(find.text('Wann ist deine Prüfung?'), findsNothing);
     expect(find.text('Prüfung in 15 Tagen'), findsOneWidget);
-    expect(find.text('0/560'), findsOneWidget);
-    expect(find.text('Tagesziel: 2 Prüfungen'), findsOneWidget);
-    expect(find.textContaining('2 Prüfungen am Tag reichen'), findsOneWidget);
+    expect(find.text('TAGESZIEL'), findsOneWidget);
+    expect(find.text('0/2'), findsOneWidget); // Prüfungen
+    expect(find.text('0/56'), findsOneWidget); // Fragen heute
+    expect(find.text('Tage in Folge'), findsOneWidget);
+    expect(find.text('0/560 gesehen'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 }
