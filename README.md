@@ -6,6 +6,10 @@ Flutter-App (iOS, Android) zur Vorbereitung auf die schriftliche Heilpraktiker-P
 - 560 Prüfungsfragen aus 20 Prüfungen (2016–2026), 277 Lernkarten, 359 Glossarbegriffe
 - Übungsprüfung (30 Fragen, 75 %) und Prüfungstag (28 Fragen, 55 Min., bestanden ab 21)
 - Merkliste, Fehler wiederholen, Frage melden, Fortschritt lokal auf dem Gerät
+- Lernplan: Prüfungsdatum, Tagesziel, Lernserie und tägliche Erinnerung
+  - Erinnerungen sind lokale Mitteilungen ohne Server, geplant bei jedem App-Start mit aktuellen Zahlen
+  - Wird die App nicht geöffnet: 14 Tage täglich, danach jeden 3. Tag; eine Woche und einen Tag vor der Prüfung sowie am Prüfungsmorgen immer
+  - Logik und Texte: `lib/services/study_plan.dart`, `lib/services/reminders.dart`
 
 ## Entwicklung
 

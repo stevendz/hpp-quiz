@@ -4,10 +4,15 @@ import 'package:flutter/material.dart';
 import '../data/all_questions.dart';
 import '../services/exam_modes.dart';
 import '../services/storage_service.dart';
+import '../services/study_plan.dart';
 import '../theme/app_theme.dart';
+import 'study_plan_card.dart';
 
 class HomeScreen extends StatelessWidget {
   final QuizState state;
+  final StudyPlan? studyPlan;
+  final StudyLog studyLog;
+  final VoidCallback onEditStudyPlan;
   final VoidCallback onStartExam;
   final VoidCallback onStartExamDay;
   final VoidCallback onStartReview;
@@ -19,6 +24,9 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({
     super.key,
     required this.state,
+    required this.studyPlan,
+    required this.studyLog,
+    required this.onEditStudyPlan,
     required this.onStartExam,
     required this.onStartExamDay,
     required this.onStartReview,
@@ -103,6 +111,12 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(height: AppSpacing.lg),
                       // Progress
                       _ProgressSection(total: total, masteredCount: masteredCount, answeredCount: answeredCount),
+                      const SizedBox(height: AppSpacing.lg),
+                      StudyPlanCard(
+                        plan: studyPlan,
+                        status: studyPlan == null ? null : StudyStatus.of(studyPlan!, studyLog, state, DateTime.now()),
+                        onTap: onEditStudyPlan,
+                      ),
                       const SizedBox(height: AppSpacing.lg),
                       const SizedBox(height: AppSpacing.lg),
                       // Review Banner

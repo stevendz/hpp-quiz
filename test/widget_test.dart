@@ -20,6 +20,8 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('HPP Prüfungstrainer'), findsOneWidget);
     expect(find.text('Prüfungstag simulieren'), findsOneWidget);
+    // Ohne Lernplan lädt die Karte zum Anlegen ein.
+    expect(find.text('Lernplan erstellen'), findsOneWidget);
     // Ohne Fehler und ohne gemerkte Fragen gibt es noch nichts zu wiederholen.
     expect(find.text('Fehler & Merkliste üben'), findsNothing);
   });

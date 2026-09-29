@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:ui' show PlatformDispatcher;
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -11,7 +12,9 @@ import 'data/flashcards_data.dart';
 import 'services/analytics.dart';
 import 'services/exam_modes.dart';
 import 'services/feedback_service.dart';
+import 'services/reminders.dart';
 import 'services/storage_service.dart';
+import 'services/study_plan.dart';
 import 'theme/app_theme.dart';
 import 'screens/home_screen.dart';
 import 'screens/bookmarks_screen.dart';
@@ -25,6 +28,7 @@ import 'screens/profile_screen.dart';
 import 'screens/glossary_screen.dart';
 import 'screens/feedback_sheet.dart';
 import 'screens/rate_app_dialog.dart';
+import 'screens/study_plan_sheet.dart';
 
 final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
@@ -54,6 +58,10 @@ class HppQuizApp extends StatelessWidget {
       title: 'HPP Prüfungstrainer',
       theme: AppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
+      // Deutsche Datums- und Zeitauswahl
+      locale: const Locale('de'),
+      supportedLocales: const [Locale('de')],
+      localizationsDelegates: GlobalMaterialLocalizations.delegates,
       home: const QuizController(),
     );
   }
@@ -136,15 +144,28 @@ class QuizController extends StatefulWidget {
 class _QuizControllerState extends State<QuizController> {
   static const _feedbackPromptDelay = Duration(seconds: 1);
 
+  static const _reminderRefreshDelay = Duration(seconds: 5);
+
   QuizState? _state;
+  StudyPlan? _studyPlan;
+  StudyLog _studyLog = const StudyLog();
   bool _loading = true;
   String _view = 'home';
   Set<String> _selectedTags = {};
   Timer? _feedbackPromptTimer;
+  Timer? _reminderRefreshTimer;
+  late final AppLifecycleListener _lifecycle;
 
   @override
   void initState() {
     super.initState();
+    _lifecycle = AppLifecycleListener(
+      onResume: _onResume,
+      // Ausstehende Neuplanung erledigen, bevor das System die App anhält.
+      onHide: () {
+        if (_reminderRefreshTimer?.isActive ?? false) _rescheduleReminders();
+      },
+    );
     _loadState();
     _scheduleFeedbackPrompt();
   }
@@ -152,6 +173,8 @@ class _QuizControllerState extends State<QuizController> {
   @override
   void dispose() {
     _feedbackPromptTimer?.cancel();
+    _reminderRefreshTimer?.cancel();
+    _lifecycle.dispose();
     super.dispose();
   }
 
@@ -189,17 +212,112 @@ class _QuizControllerState extends State<QuizController> {
 
   Future<void> _loadState() async {
     final state = await StorageService.loadState();
+    final plan = await StudyPlanStorage.loadPlan();
+    final log = await StudyPlanStorage.loadLog();
     setState(() {
       _state = state;
+      _studyPlan = plan;
+      _studyLog = log;
       _loading = false;
     });
+    await _updateDaySnapshot();
+    await _rescheduleReminders();
   }
 
   Future<void> _persist(QuizState newState) async {
+    final before = _state!;
     setState(() {
       _state = newState;
     });
     await StorageService.saveState(newState);
+    final answered = totalAttempts(newState) - totalAttempts(before);
+    if (answered > 0) await _recordAnswers(answered, before);
+  }
+
+  int _remaining(QuizState state) => totalQuestionCount() - masteredQuestionCount(state);
+
+  /// Neuer Tag seit dem letzten Öffnen: Tagesziel neu festhalten, Karte aktualisieren und zugestellte Erinnerungen entfernen.
+  Future<void> _onResume() async {
+    if (_state == null) return;
+    await _updateDaySnapshot();
+    if (mounted) setState(() {});
+    await _rescheduleReminders();
+  }
+
+  /// Hält die offenen Fragen zu Tagesbeginn fest – daraus ergibt sich das Tagesziel für den ganzen Tag.
+  Future<void> _updateDaySnapshot({bool force = false}) async {
+    final log = _studyLog.withSnapshot(DateTime.now(), _remaining(_state!), force: force);
+    if (identical(log, _studyLog)) return;
+    _studyLog = log;
+    await StudyPlanStorage.saveLog(log);
+  }
+
+  /// Zählt beantwortete Fragen für Tagesziel und Lernserie.
+  Future<void> _recordAnswers(int count, QuizState before) async {
+    final now = DateTime.now();
+    final plan = _studyPlan;
+    final wasReached = plan != null && StudyStatus.of(plan, _studyLog, before, now).goalReached;
+    final log = _studyLog.withSnapshot(now, _remaining(before)).addAnswers(now, count);
+    setState(() => _studyLog = log);
+    await StudyPlanStorage.saveLog(log);
+    _reminderRefreshTimer?.cancel();
+    _reminderRefreshTimer = Timer(_reminderRefreshDelay, _rescheduleReminders);
+
+    if (plan == null || wasReached || !mounted) return;
+    final status = StudyStatus.of(plan, log, _state!, now);
+    if (!status.goalReached) return;
+    logEvent('daily_goal_reached', {'goal': status.goal, 'days_until_exam': status.daysLeft});
+    // Am Prüfungstag würde die Snackbar die Navigationsleiste verdecken.
+    if (_view == 'exam' && _state!.currentExam?.mode == ExamMode.examDay) return;
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text('🎯 Tagesziel erreicht – ${questionsLabel(status.answeredToday)} heute. Stark!')));
+  }
+
+  /// Plant die Erinnerungen mit dem aktuellen Lernstand neu. Ohne Lernplan bleibt das Mitteilungs-Plugin unberührt.
+  Future<void> _rescheduleReminders() async {
+    _reminderRefreshTimer?.cancel();
+    final plan = _studyPlan;
+    final state = _state;
+    if (plan == null || state == null) return;
+    await ReminderService.schedule(planReminders(
+      plan: plan,
+      log: _studyLog,
+      now: DateTime.now(),
+      total: totalQuestionCount(),
+      mastered: masteredQuestionCount(state),
+      reviewCount: reviewCandidateIds(state).length,
+    ));
+  }
+
+  Future<void> _editStudyPlan() async {
+    final edit = await StudyPlanSheet.show(context, plan: _studyPlan, remaining: _remaining(_state!));
+    if (edit == null || !mounted) return;
+    final plan = edit.plan;
+    setState(() => _studyPlan = plan);
+    await StudyPlanStorage.savePlan(plan);
+
+    if (plan == null) {
+      logEvent('study_plan_deleted', {});
+      await ReminderService.schedule(const []);
+      return;
+    }
+    logEvent('study_plan_saved', {
+      'days_until_exam': plan.daysLeft(DateTime.now()),
+      'reminders': plan.remindersEnabled.toString(),
+      'reminder_hour': plan.reminderMinutes ~/ 60,
+    });
+    if (plan.remindersEnabled) {
+      final granted = await ReminderService.requestPermission();
+      logEvent('notification_permission', {'granted': granted.toString()});
+      if (!granted && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Mitteilungen sind ausgeschaltet. Erlaube sie in den Einstellungen, damit die Erinnerung ankommt.'),
+          duration: Duration(seconds: 5),
+        ));
+      }
+    }
+    await _rescheduleReminders();
   }
 
   /// Fragt nach, falls noch eine Prüfung läuft. true = eine neue Sitzung darf starten.
@@ -293,6 +411,8 @@ class _QuizControllerState extends State<QuizController> {
   Future<void> _handleReset() async {
     // Die Merkliste ist eine bewusste Auswahl, kein Lernstand – sie bleibt erhalten.
     await _persist(QuizState.defaultState().copyWith(bookmarks: _state!.bookmarks));
+    await _updateDaySnapshot(force: true);
+    await _rescheduleReminders();
     setState(() => _view = 'profile');
   }
 
@@ -458,6 +578,9 @@ class _QuizControllerState extends State<QuizController> {
         return Scaffold(
           body: HomeScreen(
             state: _state!,
+            studyPlan: _studyPlan,
+            studyLog: _studyLog,
+            onEditStudyPlan: _editStudyPlan,
             onStartExam: _startExam,
             onStartExamDay: _startExamDay,
             onStartReview: _startReview,
