@@ -11,8 +11,7 @@ Inputs (read only):
     lib/data/questions_YYYY.dart     Question(id, exam, q, options, correct, explanation)
     lib/data/flashcards_data.dart    Flashcard(text, tags)
     lib/data/glossary_data.dart      glossary + glossaryAliases (Map<String, String>)
-    lib/main.dart                    examSize (questions per practice exam)
-    lib/services/exam_modes.dart     examDaySeconds, passRatio
+    lib/services/exam_modes.dart     examSize (questions per practice exam), examDaySeconds, passRatio
     promo-video/curation.json        which content the promo shows (see the "_about" entry there)
 
 Everything that can be derived is derived (counts, flashcard positions, tag counts, glossary
@@ -499,7 +498,6 @@ def _const_int_expr(src: Source, name: str) -> int:
 
 
 def load_constants(root: Path) -> Dict[str, Any]:
-    main = Source(root / 'lib/main.dart')
     modes = Source(root / 'lib/services/exam_modes.dart')
     m = re.search(r'\bconst\s+double\s+passRatio\s*=\s*([0-9.]+)\s*;', modes.text)
     if not m:
@@ -507,7 +505,7 @@ def load_constants(root: Path) -> Dict[str, Any]:
     seconds = _const_int_expr(modes, 'examDaySeconds')
     if seconds % 60:
         raise GenError(f'{modes.path}: examDaySeconds = {seconds} is not a whole number of minutes')
-    return {'examSize': _const_int_expr(main, 'examSize'), 'examDayMinutes': seconds // 60, 'passRatio': Fraction(m.group(1))}
+    return {'examSize': _const_int_expr(modes, 'examSize'), 'examDayMinutes': seconds // 60, 'passRatio': Fraction(m.group(1))}
 
 
 def pass_mark(total: int, ratio: Fraction) -> int:
@@ -714,7 +712,7 @@ def build(content: Content, cur: Dict[str, Any]) -> Tuple[str, Dict[str, Any]]:
         f'window.DATA.topicCounts = {js(topic_counts)};\n'
         f'window.DATA.appstore = {js(appstore)};\n'
         f'window.DATA.glossList = {js(gloss_list)};\n'
-        '// App totals and constants (lib/main.dart examSize, lib/services/exam_modes.dart) – use these instead of fixed numbers.\n'
+        '// App totals and constants (lib/services/exam_modes.dart) – use these instead of fixed numbers.\n'
         f'window.DATA.counts = {js(counts)};\n'
         '\n'
         f'// Prüfungstag ({label}) – generated from lib/data/questions_{year}.dart; "pick" = the answer shown in the preview.\n'

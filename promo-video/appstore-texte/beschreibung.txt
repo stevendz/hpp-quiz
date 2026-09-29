@@ -2,6 +2,11 @@ Bereite dich gezielt auf die schriftliche Überprüfung zum Heilpraktiker für P
 
 Lernen. Verstehen. Bestehen.
 
+DEIN LERNPLAN BIS ZUR PRÜFUNG
+• Trag dein Prüfungsdatum ein – die App rechnet aus, wie viele Übungsprüfungen pro Tag reichen, damit bis dahin alle Fragen sitzen
+• Countdown, Tagesziel und Lernserie auf einen Blick
+• Tägliche Erinnerung zu deiner Wunschzeit, mit deinem aktuellen Stand
+
 PRÜFUNGSTAG SIMULIEREN
 • Wähle eine der {{PRUEFUNGEN}} vergangenen Prüfungen und bearbeite sie unter Prüfungsbedingungen: 28 Fragen in Originalreihenfolge, 55 Minuten Zeit
 • Richtig oder falsch erfährst du erst nach dem Abgeben – wie in der echten Prüfung
@@ -10,7 +15,7 @@ PRÜFUNGSTAG SIMULIEREN
 • Dein letztes Ergebnis zu jeder Prüfung auf einen Blick
 
 ÜBUNGSPRÜFUNGEN
-• 30 Fragen pro Prüfung, mit Timer und der Bestehensgrenze von 75 %
+• 28 Fragen pro Prüfung wie in der echten Prüfung, mit Timer und der Bestehensgrenze von 75 %
 • Alle Fragetypen: Einfachauswahl, Mehrfachauswahl und Aussagenkombinationen
 • Ausführliche Auswertung: jede Frage mit deiner Antwort, der richtigen Lösung und der Erklärung
 • Prüfung jederzeit unterbrechen und später genau dort weitermachen
@@ -25,7 +30,7 @@ GEZIELT WIEDERHOLEN
 • Fehler & Merkliste üben: Alle Fragen, die noch nicht sitzen, und alle gemerkten Fragen in einer Runde
 • Neue Prüfungen setzen zuerst auf Fragen, die du noch nicht kennst, dann auf die, die du falsch beantwortet hast
 • Eine falsch beantwortete Frage gilt erst wieder als sicher, wenn du sie zweimal hintereinander richtig beantwortest
-• Hast du alle {{FRAGEN}} Fragen gesehen, startet der Wiederholungsmodus: bis zu 25 Fragen, die noch nicht sitzen, ergänzt um sichere Fragen zur Auffrischung
+• Hast du alle {{FRAGEN}} Fragen gesehen, startet der Wiederholungsmodus: bis zu 23 Fragen, die noch nicht sitzen, ergänzt um sichere Fragen zur Auffrischung
 
 {{LERNKARTEN}} LERNKARTEN
 • Das Prüfungswissen kompakt auf den Punkt: von den ICD-10-Grundlagen über F0 bis F9 bis zu Psychopathologie, Differentialdiagnosen, Therapieverfahren sowie Recht und Berufskunde

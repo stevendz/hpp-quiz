@@ -76,17 +76,17 @@ List<Reminder> planReminders({
     if (!at.isAfter(now)) continue;
 
     final isToday = i == 0;
-    final goal = isToday
-        ? dailyGoal(log.remainingAtDayStart(now, remaining), daysLeft)
-        : dailyGoal(remaining, daysLeft);
+    final exams = isToday
+        ? dailyExams(log.remainingAtDayStart(now, remaining), daysLeft)
+        : dailyExams(remaining, daysLeft);
     final answered = isToday ? log.answersOn(now) : 0;
-    if (answered >= goal) continue; // Tagesziel schon erreicht – heute nicht mehr stören
+    if (answered >= exams * examSize) continue; // Tagesziel schon erreicht – heute nicht mehr stören
 
     final message = reminderMessage(
       day: day,
       examDate: plan.examDate,
       daysLeft: daysLeft,
-      goal: goal,
+      exams: exams,
       answeredToday: answered,
       streak: isToday ? log.streak(now) : 0,
       inactiveDays: lastActive == null ? null : daysBetween(lastActive, day),
@@ -100,11 +100,12 @@ List<Reminder> planReminders({
 }
 
 /// Text einer Erinnerung: Meilensteine zuerst, dann Tagesstand, Serie und Pause, sonst abwechselnd nach Datum.
+/// Kern jeder Nachricht: wie viele Übungsprüfungen am Tag reichen, damit bis zur Prüfung alle Fragen sitzen.
 ({String title, String body, String kind}) reminderMessage({
   required DateTime day,
   required DateTime examDate,
   required int daysLeft,
-  required int goal,
+  required int exams,
   required int answeredToday,
   required int streak,
   required int? inactiveDays,
@@ -114,69 +115,73 @@ List<Reminder> planReminders({
 }) {
   final remaining = total - mastered;
   final left = 'noch ${daysLabel(daysLeft)} bis zur Prüfung';
+  final until = 'bis zum ${formatDayMonth(examDate)}';
+  final enough = examsPerDayEnough(exams);
 
   if (daysLeft == 1) {
     return (
       title: 'Morgen ist Prüfung 🍀',
       body: reviewCount > 0
           ? 'Geh heute noch einmal „Fehler & Merkliste“ durch (${questionsLabel(reviewCount)}) – und dann früh schlafen.'
-          : 'Ein kurzer Durchgang zum Aufwärmen – und dann früh schlafen. Du schaffst das!',
+          : 'Eine Prüfung zum Aufwärmen – und dann früh schlafen. Du schaffst das!',
       kind: 'day_before',
     );
   }
   if (daysLeft == 7) {
     return (
       title: 'Noch eine Woche bis zur Prüfung',
-      body: 'Zeit für den Ernstfall: Simuliere einen Prüfungstag – 28 Fragen in ${examDaySeconds ~/ 60} Minuten.',
+      body: 'Zeit für den Ernstfall: Simuliere heute einen Prüfungstag – 28 Fragen in ${examDaySeconds ~/ 60} Minuten.',
       kind: 'week_before',
     );
   }
   if (remaining == 0) {
     return (
       title: 'Alle $total Fragen sitzen 🎉',
-      body: 'Halte dein Wissen frisch: ${questionsLabel(goal)} heute, $left.',
+      body: '$enough, um dein Wissen frisch zu halten – $left.',
       kind: 'all_mastered',
     );
   }
   if (answeredToday > 0) {
-    final open = goal - answeredToday;
+    final goal = exams * examSize;
     return (
-      title: 'Noch ${questionsLabel(open)} bis zum Tagesziel',
-      body: '$answeredToday von $goal hast du heute schon geschafft. Den Rest packst du auch!',
+      title: 'Noch ${questionsLabel(goal - answeredToday)} bis zum Tagesziel',
+      body: 'Heute ${exams == 1 ? 'ist 1 Prüfung' : 'sind ${examsLabel(exams)}'} dran, $answeredToday von $goal Fragen '
+          'hast du schon. Den Rest packst du auch!',
       kind: 'goal_open',
     );
   }
   if (streak >= 2) {
     return (
       title: '🔥 $streak Tage in Folge',
-      body: 'Halte deine Serie: ${questionsLabel(goal)} heute, $left.',
+      body: 'Halte deine Serie: $enough, damit du $until alle Fragen sicher kannst.',
       kind: 'streak',
     );
   }
   if (inactiveDays != null && inactiveDays >= 3) {
     return (
-      title: 'Lust auf eine Lernrunde?',
-      body: 'Seit $inactiveDays Tagen Pause – mit ${questionsLabel(goal)} heute bist du wieder im Plan.',
+      title: 'Lust auf eine Übungsprüfung?',
+      body: 'Seit $inactiveDays Tagen Pause – $enough, und du bist wieder im Plan.',
       kind: 'comeback',
     );
   }
   final pct = (mastered * 100 / total).round();
+  final perExam = (examSize * masteredShareNumerator / masteredShareDenominator).round();
   return switch (daysBetween(DateTime(2000), day) % 3) {
     0 => (
         title: 'Noch ${daysLabel(daysLeft)} bis zur Prüfung',
-        body: 'Mit ${questionsLabel(goal)} am Tag sitzen alle $remaining offenen Fragen bis zum ${formatDayMonth(examDate)}.',
+        body: '$enough, damit du $until alle $remaining offenen Fragen sicher kannst.',
         kind: 'countdown',
       ),
     1 => (
-        title: 'Dein Tagesziel: ${questionsLabel(goal)}',
+        title: 'Dein Tagesziel: ${examsLabel(exams)}',
         body: mastered > 0
-            ? '$mastered von $total Fragen sitzen schon ($pct %). Weiter so – $left.'
-            : 'Fang heute an – $left.',
+            ? '$mastered von $total Fragen sitzen schon ($pct %). $enough $until.'
+            : 'Fang heute an: $enough, damit du $until alle Fragen sicher kannst.',
         kind: 'goal',
       ),
     _ => (
-        title: 'Zeit für deine Lernrunde',
-        body: 'Noch $remaining Fragen offen – mit ${questionsLabel(goal)} heute wird es jeden Tag weniger.',
+        title: exams == 1 ? 'Zeit für deine Übungsprüfung' : 'Zeit für deine Übungsprüfungen',
+        body: 'Noch $remaining Fragen offen. Jede Prüfung bringt dich rund $perExam Fragen weiter – $enough.',
         kind: 'remaining',
       ),
   };

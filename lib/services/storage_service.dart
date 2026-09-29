@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 /// Art einer Prüfungssitzung.
 class ExamMode {
-  /// 30 gemischte Fragen mit Feedback nach jeder Antwort.
+  /// 28 gemischte Fragen mit Feedback nach jeder Antwort (vor Version 1.1.3: 30).
   static const practice = 'practice';
 
   /// Eine vergangene Prüfung unter Prüfungsbedingungen: Zeitlimit, Auswertung erst am Ende.

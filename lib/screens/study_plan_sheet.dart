@@ -1,27 +1,36 @@
 import 'package:flutter/material.dart';
+import '../services/exam_modes.dart';
 import '../services/study_plan.dart';
 import '../theme/app_theme.dart';
 
-/// Ergebnis des Lernplan-Dialogs: [plan] ist null, wenn der Lernplan gelöscht wurde.
-class StudyPlanEdit {
-  final StudyPlan? plan;
-  const StudyPlanEdit(this.plan);
-}
-
-/// Prüfungsdatum und tägliche Erinnerung festlegen. Liefert null bei Abbruch.
+/// Prüfungsdatum und tägliche Erinnerung festlegen. Liefert den neuen Lernplan, null bei Abbruch.
+///
+/// [mandatory]: Ohne gültigen Termin (erster Start, Prüfung vorbei) lässt sich das Formular nicht schließen,
+/// bevor ein Datum gewählt ist.
 class StudyPlanSheet extends StatefulWidget {
   final StudyPlan? plan;
   final int remaining;
+  final bool mandatory;
 
-  const StudyPlanSheet({super.key, required this.plan, required this.remaining});
+  const StudyPlanSheet({super.key, required this.plan, required this.remaining, this.mandatory = false});
 
-  static Future<StudyPlanEdit?> show(BuildContext context, {required StudyPlan? plan, required int remaining}) {
-    return showModalBottomSheet<StudyPlanEdit>(
+  static Future<StudyPlan?> show(
+    BuildContext context, {
+    required StudyPlan? plan,
+    required int remaining,
+    bool mandatory = false,
+  }) {
+    return showModalBottomSheet<StudyPlan>(
       context: context,
       isScrollControlled: true,
+      isDismissible: !mandatory,
+      enableDrag: !mandatory,
       backgroundColor: AppColors.bgMid,
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-      builder: (_) => StudyPlanSheet(plan: plan, remaining: remaining),
+      builder: (_) => PopScope(
+        canPop: !mandatory,
+        child: StudyPlanSheet(plan: plan, remaining: remaining, mandatory: mandatory),
+      ),
     );
   }
 
@@ -90,7 +99,7 @@ class _StudyPlanSheetState extends State<StudyPlanSheet> {
   void _save() {
     Navigator.pop(
       context,
-      StudyPlanEdit(StudyPlan(examDate: _examDate!, remindersEnabled: _reminders, reminderMinutes: _reminderMinutes)),
+      StudyPlan(examDate: _examDate!, remindersEnabled: _reminders, reminderMinutes: _reminderMinutes),
     );
   }
 
@@ -98,6 +107,7 @@ class _StudyPlanSheetState extends State<StudyPlanSheet> {
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
     final examDate = _examDate;
+    final expired = widget.plan != null && widget.plan!.daysLeft(DateTime.now()) < 0;
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -106,10 +116,19 @@ class _StudyPlanSheetState extends State<StudyPlanSheet> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('Lernplan', style: tt.headlineMedium, textAlign: TextAlign.center),
+            Text(
+              widget.plan == null
+                  ? 'Wann ist deine Prüfung?'
+                  : expired
+                      ? 'Wann ist deine nächste Prüfung?'
+                      : 'Lernplan',
+              style: tt.headlineMedium,
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: AppSpacing.md),
             Text(
-              'Trag dein Prüfungsdatum ein. Die App berechnet dein Tagesziel und erinnert dich täglich ans Üben.',
+              'Trag dein Prüfungsdatum ein. Die App rechnet aus, wie viele Übungsprüfungen pro Tag reichen, '
+              'und erinnert dich täglich ans Üben.',
               style: tt.bodySmall!.copyWith(fontSize: 13, height: 1.5, color: AppColors.textMuted),
               textAlign: TextAlign.center,
             ),
@@ -156,19 +175,14 @@ class _StudyPlanSheetState extends State<StudyPlanSheet> {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSpacing.lg)),
               ),
               child: Text(
-                widget.plan == null ? 'Lernplan starten' : 'Speichern',
+                widget.mandatory ? 'Lernplan starten' : 'Speichern',
                 style: tt.labelLarge!.copyWith(color: examDate == null ? AppColors.textDim : null),
               ),
             ),
-            if (widget.plan != null)
-              TextButton(
-                onPressed: () => Navigator.pop(context, const StudyPlanEdit(null)),
-                child: Text('Lernplan löschen', style: tt.bodyMedium?.copyWith(color: AppColors.redLight)),
-              )
-            else
+            if (!widget.mandatory)
               TextButton(
                 onPressed: () => Navigator.pop(context),
-                child: Text('Jetzt nicht', style: tt.bodyMedium?.copyWith(color: AppColors.textMuted)),
+                child: Text('Abbrechen', style: tt.bodyMedium?.copyWith(color: AppColors.textMuted)),
               ),
           ],
         ),
@@ -245,8 +259,8 @@ class _Preview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
-    final daysLeft = daysBetween(DateTime.now(), examDate);
-    final goal = dailyGoal(remaining, daysLeft);
+    final exams = dailyExams(remaining, daysBetween(DateTime.now(), examDate));
+    final note = tt.bodySmall!.copyWith(fontSize: 13, height: 1.5, color: AppColors.textSecondary);
     return Container(
       padding: const EdgeInsets.all(AppSpacing.lg + 4),
       decoration: BoxDecoration(
@@ -258,19 +272,20 @@ class _Preview extends StatelessWidget {
         children: [
           Text('Dein Tagesziel', style: tt.bodySmall!.copyWith(color: AppColors.textMuted)),
           const SizedBox(height: AppSpacing.xs),
-          Text(questionsLabel(goal), style: tt.headlineMedium!.copyWith(color: AppColors.tealLighter)),
+          Text('${examsLabel(exams)} am Tag', style: tt.headlineMedium!.copyWith(color: AppColors.tealLighter)),
           const SizedBox(height: AppSpacing.sm),
           Text(
             remaining > 0
-                ? 'Noch $remaining Fragen offen und ${daysLabel(daysLeft)} Zeit – so sitzen bis zur Prüfung alle.'
-                : 'Alle Fragen sitzen – mit täglichem Wiederholen bleibt es so.',
-            style: tt.bodySmall!.copyWith(fontSize: 13, height: 1.5, color: AppColors.textSecondary),
+                ? 'Je $examSize Fragen – so kannst du bis zum ${formatDayMonth(examDate)} alle $remaining offenen '
+                    'Fragen sicher. Gerechnet mit 2 von 3 richtigen Antworten pro Prüfung.'
+                : 'Alle Fragen sitzen – mit täglichem Üben bleibt es so.',
+            style: note,
             textAlign: TextAlign.center,
           ),
-          if (goal > 60) ...[
+          if (exams >= 4) ...[
             const SizedBox(height: AppSpacing.sm),
             Text(
-              'Sportlich! Verteile das auf mehrere Lernrunden am Tag.',
+              'Sportlich! Verteile die Prüfungen über den Tag.',
               style: tt.bodySmall!.copyWith(fontSize: 13, color: AppColors.amberLight),
               textAlign: TextAlign.center,
             ),

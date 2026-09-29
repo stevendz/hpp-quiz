@@ -67,9 +67,6 @@ class HppQuizApp extends StatelessWidget {
   }
 }
 
-const int examSize = 30;
-const int reviewWrong = 25;
-const int reviewRight = 5;
 
 bool isQuestionMastered(QuestionStats? stats) {
   if (stats == null || stats.attempts == 0) return false;
@@ -118,7 +115,7 @@ List<int> generateExam(QuizState state) {
     return combined.map((q) => q.id).toList();
   }
 
-  // All answered → up to 25 wrong, fill rest with right to reach 30
+  // Alle Fragen beantwortet → bis zu 23 falsche, Rest mit richtigen auffüllen
   final wrong = questions
       .where((q) => !isQuestionMastered(questionStats[q.id]))
       .toList();
@@ -155,6 +152,11 @@ class _QuizControllerState extends State<QuizController> {
   Timer? _feedbackPromptTimer;
   Timer? _reminderRefreshTimer;
   late final AppLifecycleListener _lifecycle;
+
+  /// Abgeschlossen, sobald ein gültiger Prüfungstermin feststeht – Feedback- und Bewertungsdialoge warten darauf.
+  final _studyPlanReady = Completer<void>();
+  bool _studyPlanPrompted = false;
+  bool _studyPlanSheetOpen = false;
 
   @override
   void initState() {
@@ -194,6 +196,7 @@ class _QuizControllerState extends State<QuizController> {
       // In beiden Fällen direkt um Store-Bewertung bitten statt zusätzlich
       // noch die reguläre Feedback-Abfrage draufzusetzen.
       _feedbackPromptTimer = Timer(_feedbackPromptDelay, () async {
+        await _studyPlanReady.future;
         if (!mounted || _loading || _view != 'home') return;
         await showRateAppDialog(context);
       });
@@ -202,8 +205,10 @@ class _QuizControllerState extends State<QuizController> {
 
     if (!shouldPromptFeedback) return;
     _feedbackPromptTimer = Timer(_feedbackPromptDelay, () async {
-      // Nicht in eine laufende Prüfung hineinplatzen.
-      if (!mounted || _loading || _view != 'home') return;
+      await _studyPlanReady.future;
+      // Nicht in eine laufende Prüfung hineinplatzen und nicht direkt nach dem Lernplan-Formular –
+      // die Abfrage bleibt fällig und kommt beim nächsten Start.
+      if (!mounted || _loading || _view != 'home' || _studyPlanPrompted) return;
       await FeedbackService.markPromptShown();
       if (!mounted) return;
       await FeedbackSheet.show(context);
@@ -213,15 +218,37 @@ class _QuizControllerState extends State<QuizController> {
   Future<void> _loadState() async {
     final state = await StorageService.loadState();
     final plan = await StudyPlanStorage.loadPlan();
-    final log = await StudyPlanStorage.loadLog();
+    var log = await StudyPlanStorage.loadLog();
+    if (log == null) {
+      // Erster Start mit Lernplan: Tage mit abgeschlossenen Prüfungen zählen für die Lernserie mit.
+      log = StudyLog.fromHistory(state.examHistory);
+      await StudyPlanStorage.saveLog(log);
+    }
     setState(() {
       _state = state;
       _studyPlan = plan;
-      _studyLog = log;
+      _studyLog = log!;
       _loading = false;
     });
     await _updateDaySnapshot();
     await _rescheduleReminders();
+    _checkStudyPlan();
+  }
+
+  /// Ohne Termin oder nach der Prüfung: Ein neues Prüfungsdatum ist Pflicht.
+  bool get _needsStudyPlan => _studyPlan == null || _studyPlan!.daysLeft(DateTime.now()) < 0;
+
+  void _checkStudyPlan() {
+    if (!_needsStudyPlan) {
+      if (!_studyPlanReady.isCompleted) _studyPlanReady.complete();
+      return;
+    }
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      if (!mounted || _view != 'home') return;
+      _studyPlanPrompted = true;
+      await _editStudyPlan();
+      if (!_needsStudyPlan && !_studyPlanReady.isCompleted) _studyPlanReady.complete();
+    });
   }
 
   Future<void> _persist(QuizState newState) async {
@@ -242,6 +269,7 @@ class _QuizControllerState extends State<QuizController> {
     await _updateDaySnapshot();
     if (mounted) setState(() {});
     await _rescheduleReminders();
+    _checkStudyPlan(); // Prüfungstermin inzwischen vorbei?
   }
 
   /// Hält die offenen Fragen zu Tagesbeginn fest – daraus ergibt sich das Tagesziel für den ganzen Tag.
@@ -256,7 +284,7 @@ class _QuizControllerState extends State<QuizController> {
   Future<void> _recordAnswers(int count, QuizState before) async {
     final now = DateTime.now();
     final plan = _studyPlan;
-    final wasReached = plan != null && StudyStatus.of(plan, _studyLog, before, now).goalReached;
+    final wasReached = StudyStatus.of(plan, _studyLog, before, now).goalReached;
     final log = _studyLog.withSnapshot(now, _remaining(before)).addAnswers(now, count);
     setState(() => _studyLog = log);
     await StudyPlanStorage.saveLog(log);
@@ -266,12 +294,12 @@ class _QuizControllerState extends State<QuizController> {
     if (plan == null || wasReached || !mounted) return;
     final status = StudyStatus.of(plan, log, _state!, now);
     if (!status.goalReached) return;
-    logEvent('daily_goal_reached', {'goal': status.goal, 'days_until_exam': status.daysLeft});
+    logEvent('daily_goal_reached', {'exams_per_day': status.examsPerDay, 'days_until_exam': status.daysLeft ?? -1});
     // Am Prüfungstag würde die Snackbar die Navigationsleiste verdecken.
     if (_view == 'exam' && _state!.currentExam?.mode == ExamMode.examDay) return;
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text('🎯 Tagesziel erreicht – ${questionsLabel(status.answeredToday)} heute. Stark!')));
+      ..showSnackBar(SnackBar(content: Text('🎯 Tagesziel erreicht – ${examsLabel(status.examsPerDay)} geschafft. Stark!')));
   }
 
   /// Plant die Erinnerungen mit dem aktuellen Lernstand neu. Ohne Lernplan bleibt das Mitteilungs-Plugin unberührt.
@@ -290,19 +318,24 @@ class _QuizControllerState extends State<QuizController> {
     ));
   }
 
+  /// Lernplan anlegen oder ändern. Solange kein gültiger Termin feststeht, lässt sich das Formular nicht schließen.
   Future<void> _editStudyPlan() async {
-    final edit = await StudyPlanSheet.show(context, plan: _studyPlan, remaining: _remaining(_state!));
-    if (edit == null || !mounted) return;
-    final plan = edit.plan;
+    if (_studyPlanSheetOpen) return;
+    _studyPlanSheetOpen = true;
+    final isNew = _studyPlan == null;
+    final plan = await StudyPlanSheet.show(
+      context,
+      plan: _studyPlan,
+      remaining: _remaining(_state!),
+      mandatory: _needsStudyPlan,
+    );
+    _studyPlanSheetOpen = false;
+    if (plan == null || !mounted) return;
     setState(() => _studyPlan = plan);
     await StudyPlanStorage.savePlan(plan);
 
-    if (plan == null) {
-      logEvent('study_plan_deleted', {});
-      await ReminderService.schedule(const []);
-      return;
-    }
     logEvent('study_plan_saved', {
+      'first': isNew.toString(),
       'days_until_exam': plan.daysLeft(DateTime.now()),
       'reminders': plan.remindersEnabled.toString(),
       'reminder_hour': plan.reminderMinutes ~/ 60,

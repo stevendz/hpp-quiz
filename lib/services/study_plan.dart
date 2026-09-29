@@ -3,10 +3,12 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/all_questions.dart';
+import 'exam_modes.dart';
 import 'storage_service.dart';
 
-/// Mindestens so viele Fragen pro Tag – auch wenn kaum noch etwas offen ist, hält Wiederholen das Wissen frisch.
-const int minDailyGoal = 10;
+/// Annahme des Lernplans: Nach einer Übungsprüfung sitzen 2 von 3 Fragen.
+const int masteredShareNumerator = 2;
+const int masteredShareDenominator = 3;
 
 /// Kalendertag ohne Uhrzeit (lokale Mitternacht).
 DateTime dateOnly(DateTime t) => DateTime(t.year, t.month, t.day);
@@ -45,6 +47,12 @@ String questionsLabel(int n) => n == 1 ? '1 Frage' : '$n Fragen';
 
 /// „1 Tag“, „23 Tage“
 String daysLabel(int n) => n == 1 ? '1 Tag' : '$n Tage';
+
+/// „1 Prüfung“, „2 Prüfungen“
+String examsLabel(int n) => n == 1 ? '1 Prüfung' : '$n Prüfungen';
+
+/// „1 Prüfung am Tag reicht“, „2 Prüfungen am Tag reichen“
+String examsPerDayEnough(int n) => '${examsLabel(n)} am Tag ${n == 1 ? 'reicht' : 'reichen'}';
 
 /// Prüfungsdatum und tägliche Erinnerung.
 @immutable
@@ -134,6 +142,19 @@ class StudyLog {
     return StudyLog(answersByDay: answersByDay, snapshotDay: dayKey(now), snapshotRemaining: remaining);
   }
 
+  /// Erster Start mit Lernplan: Die Lernserie beginnt nicht bei null, sondern übernimmt die Tage mit
+  /// abgeschlossenen Prüfungen aus dem Verlauf älterer App-Versionen.
+  factory StudyLog.fromHistory(List<ExamRecord> history) {
+    final days = <String, int>{};
+    for (final r in history) {
+      final date = DateTime.tryParse(r.date);
+      if (date == null) continue;
+      final key = dayKey(date.toLocal());
+      days[key] = (days[key] ?? 0) + (r.answers.isNotEmpty ? r.answers.length : r.total);
+    }
+    return StudyLog(answersByDay: days);
+  }
+
   /// Zählt [count] Antworten für heute; Einträge älter als ein Jahr fallen weg.
   StudyLog addAnswers(DateTime now, int count) {
     final key = dayKey(now);
@@ -164,10 +185,14 @@ class StudyLog {
       );
 }
 
-/// Fragen pro Tag, damit bis zum Vortag der Prüfung alle offenen Fragen sitzen.
-int dailyGoal(int remaining, int daysLeft) {
+/// Übungsprüfungen pro Tag, damit bis zum Vortag der Prüfung alle offenen Fragen sitzen – mindestens eine.
+///
+/// Pro Prüfung mit 28 Fragen sitzen danach gerechnet 2/3, also gut 18 Fragen:
+/// 550 offen, 30 Tage → 1 Prüfung am Tag; 10 Tage → 3.
+int dailyExams(int remaining, int daysLeft) {
   if (daysLeft <= 0) return 0;
-  return max(minDailyGoal, (remaining / daysLeft).ceil());
+  final perDay = examSize * masteredShareNumerator * daysLeft;
+  return max(1, (remaining * masteredShareDenominator + perDay - 1) ~/ perDay);
 }
 
 int totalQuestionCount() => allQuestions.map((q) => q.id).toSet().length;
@@ -179,40 +204,55 @@ int masteredQuestionCount(QuizState state) => allQuestions
     .where((id) => (state.questionStats[id]?.attempts ?? 0) > 0 && state.questionStats[id]!.lastCorrect)
     .length;
 
+/// Fragen, die mindestens einmal beantwortet wurden.
+int seenQuestionCount(QuizState state) =>
+    allQuestions.map((q) => q.id).toSet().where((id) => (state.questionStats[id]?.attempts ?? 0) > 0).length;
+
 /// Summe aller Antworten – die Differenz zweier Stände ergibt, wie viele Fragen gerade beantwortet wurden.
 int totalAttempts(QuizState state) => state.questionStats.values.fold(0, (sum, s) => sum + s.attempts);
 
-/// Alles, was die Startseite zum Lernplan anzeigt.
+/// Alles, was die Startseite zu Fortschritt und Lernplan anzeigt.
 @immutable
 class StudyStatus {
-  final int daysLeft;
   final int total;
+  final int seen;
   final int mastered;
-  final int goal;
+
+  /// Tage bis zur Prüfung; null ohne Lernplan.
+  final int? daysLeft;
+
+  /// Tagesziel in Übungsprüfungen; 0 ohne Lernplan, am Prüfungstag und danach.
+  final int examsPerDay;
   final int answeredToday;
   final int streak;
 
   const StudyStatus({
-    required this.daysLeft,
     required this.total,
+    required this.seen,
     required this.mastered,
-    required this.goal,
+    required this.daysLeft,
+    required this.examsPerDay,
     required this.answeredToday,
     required this.streak,
   });
 
   int get remaining => total - mastered;
-  bool get goalReached => goal > 0 && answeredToday >= goal;
+  int get wrong => seen - mastered;
 
-  factory StudyStatus.of(StudyPlan plan, StudyLog log, QuizState state, DateTime now) {
+  /// Tagesziel in Fragen (je Prüfung 28).
+  int get goalQuestions => examsPerDay * examSize;
+  bool get goalReached => goalQuestions > 0 && answeredToday >= goalQuestions;
+
+  factory StudyStatus.of(StudyPlan? plan, StudyLog log, QuizState state, DateTime now) {
     final total = totalQuestionCount();
     final mastered = masteredQuestionCount(state);
-    final daysLeft = plan.daysLeft(now);
+    final daysLeft = plan?.daysLeft(now);
     return StudyStatus(
-      daysLeft: daysLeft,
       total: total,
+      seen: seenQuestionCount(state),
       mastered: mastered,
-      goal: dailyGoal(log.remainingAtDayStart(now, total - mastered), daysLeft),
+      daysLeft: daysLeft,
+      examsPerDay: daysLeft == null ? 0 : dailyExams(log.remainingAtDayStart(now, total - mastered), daysLeft),
       answeredToday: log.answersOn(now),
       streak: log.streak(now),
     );
@@ -246,14 +286,15 @@ class StudyPlanStorage {
     }
   }
 
-  static Future<StudyLog> loadLog() async {
+  /// Gespeicherter Lernverlauf; null, wenn es noch keinen gibt (erster Start dieser Version).
+  static Future<StudyLog?> loadLog() async {
     try {
       final raw = (await SharedPreferences.getInstance()).getString(_logKey);
       if (raw != null) return StudyLog.fromJson(jsonDecode(raw));
     } catch (e) {
       debugPrint('Lernverlauf konnte nicht geladen werden: $e');
     }
-    return const StudyLog();
+    return null;
   }
 
   static Future<void> saveLog(StudyLog log) async {

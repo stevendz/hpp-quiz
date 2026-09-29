@@ -37,7 +37,7 @@ sources and `curation.json`:
 - `lib/data/all_questions.dart` (order), `lib/data/questions_*.dart`, `lib/data/flashcards_data.dart`,
   `lib/data/glossary_data.dart` – parsed as Dart (escapes, adjacent/multi-line literals); any parse error or a curated key
   that no longer exists stops with exit code 1 and the file/line or the closest matches.
-- `lib/main.dart` (`examSize`) and `lib/services/exam_modes.dart` (`examDaySeconds`, `passRatio`) for the app rules.
+- `lib/services/exam_modes.dart` (`examSize`, `examDaySeconds`, `passRatio`) for the app rules.
 - `curation.json` holds only the *selection*: questions as `["<exam label>", <Question.id>]`, flashcards by title (first
   line), glossary terms by key, the exam day (`label`, the answer `pick` per question id, earlier scores in `last`).
   Everything else is derived: question texts/options/answer keys/explanations, the number within the exam, flashcard
@@ -51,11 +51,11 @@ sources and `curation.json`:
 | `questions`, `exams`, `firstYear`–`lastYear` | 560, 20, 2016–2026 | „560 Prüfungsfragen aus 20 (vergangenen) Prüfungen“, home subtitle, counter wheels |
 | `flashcards`, `topics` | 277, 13 | „277 Lernkarten“, flashcard counter `79 / 277` |
 | `glossary` | 359 | „359 Fachbegriffe“ |
-| `examSize` | 30 | practice exam „Frage 7/30“, „30 pro Prüfung“ |
+| `examSize` | 28 | practice exam „Frage 7/28“, „28 pro Prüfung“ |
 | `examDayQuestions`, `examDayMinutes`, `examDayPassMark`, `passPercent` | 28, 55, 21, 75 | exam day („28 Fragen · 55 Minuten“, „Bestanden ab 21“) |
 
 In HTML use `<span data-count="questions"></span>` (filled by the small script after `data.js`), in JS
-`window.DATA.counts`. The fictional progress (412 seen, 356 right, 56 wrong, 27 of 30) comes from `demoProgress()` in
+`window.DATA.counts`. The fictional progress (412 seen, 356 right, 56 wrong, 27 of 28) comes from `demoProgress()` in
 `lib.js` and is capped at the real totals. The same numbers are written to `../build/release/counts.json` for the store
 texts.
 

@@ -3,11 +3,18 @@ import '../data/all_questions.dart';
 import '../models/question.dart';
 import 'storage_service.dart';
 
+/// Übungsprüfung: 28 gemischte Fragen wie in der echten Prüfung.
+const int examSize = 28;
+
+/// Sind alle Fragen schon einmal beantwortet, besteht eine Übungsprüfung aus bis zu 23 offenen Fehlern,
+/// der Rest aus bereits sicheren Fragen.
+const int reviewWrong = 23;
+
 /// Prüfungstag: eine vergangene Prüfung mit 28 Fragen in 55 Minuten, bestanden ab 75 %.
 const int examDaySeconds = 55 * 60;
 const double passRatio = 0.75;
 
-/// Mindestanzahl richtiger Antworten zum Bestehen (28 Fragen → 21, 30 Fragen → 23).
+/// Mindestanzahl richtiger Antworten zum Bestehen (28 Fragen → 21; ältere Übungsprüfungen mit 30 Fragen → 23).
 int passMark(int total) => (total * passRatio).ceil();
 
 const _monthOrder = {'März': 3, 'Oktober': 10};

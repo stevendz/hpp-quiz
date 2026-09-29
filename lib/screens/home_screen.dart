@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../data/all_questions.dart';
 import '../services/exam_modes.dart';
 import '../services/storage_service.dart';
 import '../services/study_plan.dart';
@@ -50,18 +49,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final uniqueIds = allQuestions.map((q) => q.id).toSet();
-    final total = uniqueIds.length;
-    final answeredCount = uniqueIds.where((id) {
-      final s = state.questionStats[id];
-      return s != null && s.attempts > 0;
-    }).length;
-    final masteredCount = uniqueIds.where((id) {
-      final s = state.questionStats[id];
-      return s != null && _isQuestionMastered(s);
-    }).length;
-    final unansweredCount = total - answeredCount;
-    final allAnsweredNow = unansweredCount == 0 && answeredCount > 0;
+    final status = StudyStatus.of(studyPlan, studyLog, state, DateTime.now());
+    final total = status.total;
+    final allAnsweredNow = status.seen == total && total > 0;
     final reviewCount = reviewCandidateIds(state).length;
     final exam = state.currentExam;
     final tt = Theme.of(context).textTheme;
@@ -106,17 +96,11 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(height: AppSpacing.lg),
                       Text('HPP Prüfungstrainer', style: tt.headlineLarge!.copyWith(fontSize: 26, letterSpacing: -0.5)),
                       const SizedBox(height: AppSpacing.xs),
-                      Text('$total Fragen · 30 pro Prüfung', style: tt.bodySmall),
+                      Text('$total Fragen · $examSize pro Prüfung', style: tt.bodySmall),
                       const SizedBox(height: AppSpacing.lg),
                       const SizedBox(height: AppSpacing.lg),
-                      // Progress
-                      _ProgressSection(total: total, masteredCount: masteredCount, answeredCount: answeredCount),
-                      const SizedBox(height: AppSpacing.lg),
-                      StudyPlanCard(
-                        plan: studyPlan,
-                        status: studyPlan == null ? null : StudyStatus.of(studyPlan!, studyLog, state, DateTime.now()),
-                        onTap: onEditStudyPlan,
-                      ),
+                      // Prüfungstermin, Fortschritt und Tagesziel
+                      StudyPlanCard(plan: studyPlan, status: status, onTap: onEditStudyPlan),
                       const SizedBox(height: AppSpacing.lg),
                       const SizedBox(height: AppSpacing.lg),
                       // Review Banner
@@ -135,7 +119,8 @@ class HomeScreen extends StatelessWidget {
                               const SizedBox(width: AppSpacing.lg),
                               Expanded(
                                 child: Text(
-                                  'Alle Fragen beantwortet! Wiederholungsmodus aktiv (25 falsche + 5 richtige)',
+                                  'Alle Fragen beantwortet! Wiederholungsmodus aktiv '
+                                  '($reviewWrong falsche + ${examSize - reviewWrong} richtige)',
                                   style: tt.bodySmall!.copyWith(fontSize: 13, color: AppColors.amberLight),
                                 ),
                               ),
@@ -272,11 +257,6 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
-
-  bool _isQuestionMastered(QuestionStats stats) {
-    if (stats.attempts == 0) return false;
-    return stats.lastCorrect;
-  }
 }
 
 /// Menü-Knopf mit Untertitel, im Stil der Lernkarten-/Begriffe-Knöpfe; [prominent] in Gold.
@@ -327,90 +307,6 @@ class _MenuButton extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _ProgressSection extends StatelessWidget {
-  final int total;
-  final int masteredCount;
-  final int answeredCount;
-
-  const _ProgressSection({required this.total, required this.masteredCount, required this.answeredCount});
-
-  @override
-  Widget build(BuildContext context) {
-    final incorrectCount = answeredCount - masteredCount;
-    final correctPct = total > 0 ? masteredCount / total : 0.0;
-    final incorrectPct = total > 0 ? incorrectCount / total : 0.0;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.lg * 2),
-      decoration: BoxDecoration(color: AppColors.surfaceDark, borderRadius: BorderRadius.circular(AppSpacing.lg)),
-      child: Column(
-        children: [
-          // Stats row
-          Row(
-            children: [
-              _StatItem(label: 'Gesehen', value: '$answeredCount/$total', color: AppColors.tealLighter),
-              _StatItem(label: 'Korrekt', value: '$masteredCount', color: AppColors.green),
-              _StatItem(label: 'Falsch', value: '$incorrectCount', color: AppColors.red),
-            ],
-          ),
-          const SizedBox(height: AppSpacing.lg),
-          // Progress bar
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(AppSpacing.xs),
-              child: SizedBox(
-                height: 10,
-                child: Row(
-                  children: [
-                    if (correctPct > 0)
-                      Flexible(
-                        flex: (correctPct * 1000).round(),
-                        child: Container(color: AppColors.green),
-                      ),
-                    if (incorrectPct > 0)
-                      Flexible(
-                        flex: (incorrectPct * 1000).round(),
-                        child: Container(color: AppColors.red),
-                      ),
-                    if (correctPct + incorrectPct < 1)
-                      Flexible(
-                        flex: ((1 - correctPct - incorrectPct) * 1000).round(),
-                        child: Container(color: AppColors.surfaceDark.withValues(alpha: 0.5)),
-                      ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _StatItem extends StatelessWidget {
-  final String label;
-  final String value;
-  final Color color;
-
-  const _StatItem({required this.label, required this.value, required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    final tt = Theme.of(context).textTheme;
-    return Expanded(
-      child: Column(
-        children: [
-          Text(value, style: tt.headlineMedium!.copyWith(color: color)),
-          const SizedBox(height: 2),
-          Text(label, style: tt.bodySmall!.copyWith(fontSize: 11, color: AppColors.textDim)),
-        ],
       ),
     );
   }
