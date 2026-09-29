@@ -218,3 +218,11 @@ function css(el, props) {
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const f2 = (n) => n.toFixed(2);
+
+// Fictional learning progress on the home screen and in the practice exam: fixed numbers, but never above
+// the real totals from DATA.counts (412 of 560 seen, 356 right, 56 wrong; 27 of 30 in a practice exam).
+function demoProgress(N) {
+  const seen = Math.min(412, N.questions);
+  const right = Math.round((seen * 356) / 412);
+  return { seen, right, wrong: seen - right, score: Math.min(27, N.examSize) };
+}

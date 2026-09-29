@@ -43,3 +43,14 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Release-Automatisierung (make release)
+/vendor/bundle/
+__pycache__/
+/fastlane/metadata/
+/fastlane/screenshots/
+/fastlane/app_previews/
+/fastlane/report.xml
+/fastlane/Preview.html
+/fastlane/README.md
+/fastlane/test_output/

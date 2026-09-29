@@ -392,7 +392,7 @@ const List<Question> questions2026 = [
     ],
     correct: [1, 2],
     explanation:
-        'B ist richtig: Die Schweigepflicht ergibt sich aus dem Behandlungsvertrag (§§ 630a ff. BGB) und wird strafrechtlich durch § 203 StGB flankiert. C gilt laut Lösungsschlüssel als richtig: Für Heilpraktiker existiert keine staatliche Kammer; soweit sie einem Berufsverband angehören, gelten dessen Berufs- und Disziplinarordnung. A ist falsch: Das Zeugnisverweigerungsrecht nach § 53 StPO gilt für Ärzte und Psychotherapeuten, nicht für Heilpraktiker – ein prüfungsrelevanter Klassiker. E ist falsch: Auch ohne Zeugnisverweigerungsrecht kann im Einzelfall eine Entbindung von der Schweigepflicht erforderlich sein. D ist falsch: Die Dokumentationspflicht ist in § 630f BGB konkret geregelt.',
+        'B ist richtig: Die Schweigepflicht des Heilpraktikers ergibt sich zivilrechtlich aus dem Behandlungsvertrag (§§ 630a ff. BGB) und der Berufsordnung. § 203 StGB erfasst Heilberufe mit staatlich geregelter Ausbildung – der Heilpraktiker gehört nach herrschender Meinung nicht dazu. C gilt laut Lösungsschlüssel als richtig: Für Heilpraktiker existiert keine staatliche Kammer; soweit sie einem Berufsverband angehören, gelten dessen Berufs- und Disziplinarordnung. A ist falsch: Das Zeugnisverweigerungsrecht nach § 53 StPO gilt für Ärzte und Psychotherapeuten, nicht für Heilpraktiker – ein prüfungsrelevanter Klassiker. E ist falsch: Auch ohne Zeugnisverweigerungsrecht kann im Einzelfall eine Entbindung von der Schweigepflicht erforderlich sein. D ist falsch: Die Dokumentationspflicht ist in § 630f BGB konkret geregelt.',
   ),
   Question(
     id: 28,

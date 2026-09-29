@@ -36,7 +36,7 @@
 
   <!-- giant word behind the phone (Bestehen) -->
   <div id="bigB">Bestehen<span class="acc">.</span></div>
-  <div id="labelB" class="label"><span class="idx">03</span><span class="ln"></span><span>Prüfungssimulation</span><span class="ln"></span><span class="idx">30 Fragen · Timer · Auswertung</span></div>
+  <div id="labelB" class="label"><span class="idx">03</span><span class="ln"></span><span>Prüfungssimulation</span><span class="ln"></span><span class="idx"><span data-count="examSize"></span> Fragen · Timer · Auswertung</span></div>
 
   <canvas class="conf" id="confBack"></canvas>
 
@@ -59,10 +59,10 @@
               <div class="home-top"><svg class="ic"><use href="#i-person"/></svg></div>
               <div class="home-logo"><img src="assets/logo.png"></div>
               <div class="home-title">HPP Prüfungstrainer</div>
-              <div class="home-subtitle">560 Fragen · 30 pro Prüfung</div>
+              <div class="home-subtitle"><span data-count="questions"></span> Fragen · <span data-count="examSize"></span> pro Prüfung</div>
               <div class="progress-sec">
                 <div class="stats">
-                  <div class="stat"><div class="v" style="color:var(--tealLL)" id="hSeen">412/560</div><div class="l">Gesehen</div></div>
+                  <div class="stat"><div class="v" style="color:var(--tealLL)" id="hSeen"></div><div class="l">Gesehen</div></div>
                   <div class="stat"><div class="v" style="color:var(--green)" id="hOk">356</div><div class="l">Korrekt</div></div>
                   <div class="stat"><div class="v" style="color:var(--red)" id="hBad">56</div><div class="l">Falsch</div></div>
                 </div>
@@ -77,7 +77,7 @@
           <!-- FLASHCARDS -->
           <div class="scr" id="scrFlash">
             <div class="topbar"><div class="iconbtn"><svg class="ic"><use href="#i-back"/></svg></div><div class="title">Lernkarten</div><div style="width:48px"></div></div>
-            <div class="fc-prog"><div class="fc-count" id="fcCount">38 / 240</div><div class="fc-bar"><div class="fc-fill" id="fcFill"></div></div></div>
+            <div class="fc-prog"><div class="fc-count" id="fcCount"></div><div class="fc-bar"><div class="fc-fill" id="fcFill"></div></div></div>
             <div class="fc-area">
               <div class="fc-card" id="fcB"><div class="chips"><div class="wrap" id="fcBtags"></div><div class="gbtn"><svg><use href="#i-help"/></svg></div></div><div class="fc-text" id="fcBtext"></div></div>
               <div class="fc-card" id="fcA"><div class="chips"><div class="wrap" id="fcAtags"></div><div class="gbtn"><svg><use href="#i-help"/></svg></div></div><div class="fc-text" id="fcAtext"></div></div>
@@ -92,7 +92,7 @@
           <!-- EXAM -->
           <div class="scr" id="scrExam">
             <div class="ex-head"><div class="ex-menu">← Menü</div><div class="pill" id="exTimer">04:12</div><div class="pill teal" id="exScore">✓ 6/6</div></div>
-            <div class="ex-prog"><div class="ex-bar"><div class="ex-fill" id="exFill"></div></div><div class="ex-count" id="exCount">Frage 7/30</div></div>
+            <div class="ex-prog"><div class="ex-bar"><div class="ex-fill" id="exFill"></div></div><div class="ex-count" id="exCount"></div></div>
             <div class="ex-scroll"><div class="ex-content" id="exContent">
               <div class="q-card gcard" id="qCard">
                 <div class="q-row"><div class="q-label">FRAGE 7 · MEHRFACHAUSWAHL</div><div class="gbtn" id="gBtn"><svg><use href="#i-help"/></svg></div></div>
@@ -112,9 +112,9 @@
               <div class="rs-card gcard" id="rsCard">
                 <div class="rs-emoji" id="rsTrophy">🏆</div>
                 <div class="rs-title" id="rsTitle">Bestanden! 🎉</div>
-                <div class="rs-score" id="rsScore">27 / 30</div>
-                <div class="rs-pct" id="rsPct">90% richtig</div>
-                <div class="rs-msg" id="rsMsg">Hervorragend! Du hast diese Prüfung bestanden (≥75%).</div>
+                <div class="rs-score" id="rsScore"></div>
+                <div class="rs-pct" id="rsPct"></div>
+                <div class="rs-msg" id="rsMsg">Hervorragend! Du hast diese Prüfung bestanden (≥<span data-count="passPercent"></span>%).</div>
                 <div class="rs-btns" id="rsBtns"><div class="rs-new">Neue Prüfung</div><div class="rs-back">Zurück</div></div>
               </div>
               <div class="rs-h" id="rsH">Auswertung</div>
@@ -147,14 +147,14 @@
   <div id="typeL" class="tblock">
     <div class="label" id="lblL"><span class="idx">01</span><span class="ln"></span><span>Lernkarten</span></div>
     <div class="big" id="bigL">Lernen<span class="acc">.</span></div>
-    <div class="sub" id="subL"><span class="num" id="n240">240</span> Lernkarten</div>
+    <div class="sub" id="subL"><span class="num" id="nCards" data-count="flashcards"></span> Lernkarten</div>
     <div class="sub2" id="sub2L">zu <em class="s">allen</em> Prüfungsthemen</div>
   </div>
   <div id="typeV" class="tblock">
     <div class="label" id="lblV"><span class="idx">02</span><span class="ln"></span><span>Erklärungen &amp; Glossar</span></div>
     <div class="big" id="bigV">Verstehen<span class="acc">.</span></div>
     <div class="sub" id="subV">Jede Antwort <em class="s">erklärt.</em></div>
-    <div class="sub2" id="sub2V"><span class="num" id="nGloss">359</span> Fachbegriffe im Glossar</div>
+    <div class="sub2" id="sub2V"><span class="num" id="nGloss" data-count="glossary"></span> Fachbegriffe im Glossar</div>
   </div>
 
   <!-- ============ HOOK ============ -->
@@ -164,7 +164,7 @@
   <div id="counter">
     <div class="digits" id="digits"></div>
     <div class="cl" id="cl">Prüfungsfragen</div>
-    <div class="cs" id="cs">aus 20 Prüfungen · 2016 – 2026</div>
+    <div class="cs" id="cs">aus <span data-count="exams"></span> Prüfungen · <span data-count="firstYear"></span> – <span data-count="lastYear"></span></div>
   </div>
 
   <!-- ============ END CARD ============ -->
@@ -193,6 +193,14 @@
 </div>
 
 <script src="data.js"></script>
+<script>
+  // real totals from data.js (tool/release/gen_promo_data.py) – no fixed numbers in the markup
+  for (const el of document.querySelectorAll('[data-count]')) {
+    const v = window.DATA.counts[el.dataset.count];
+    if (v === undefined) throw new Error(`DATA.counts.${el.dataset.count} missing`);
+    el.textContent = v;
+  }
+</script>
 <script src="timeline.js"></script>
 <script src="lib.js"></script>
 <script src="main.js"></script>

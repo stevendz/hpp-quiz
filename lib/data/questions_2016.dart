@@ -218,7 +218,7 @@ const List<Question> questions2016 = [
     ],
     correct: 1,
     explanation:
-        'Die zivilrechtliche Unterbringung nach PsychKG/UBG erfolgt in einem psychiatrischen Krankenhaus bzw. einer psychiatrischen Fachabteilung. Sicherungsverwahrung und Maßregelvollzug sind strafrechtliche Institute (§§ 63, 64 StGB) und setzen eine Straftat voraus. Neurologische Intensivstation und psychosomatische Fachklinik sind keine Unterbringungsorte nach Unterbringungsrecht.',
+        'Die öffentlich-rechtliche Unterbringung nach PsychKG/UBG erfolgt in einem psychiatrischen Krankenhaus bzw. einer psychiatrischen Fachabteilung. Sicherungsverwahrung und Maßregelvollzug sind strafrechtliche Institute (§§ 63, 64 StGB) und setzen eine Straftat voraus. Neurologische Intensivstation und psychosomatische Fachklinik sind keine Unterbringungsorte nach Unterbringungsrecht.',
   ),
   Question(
     id: 16,

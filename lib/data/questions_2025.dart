@@ -347,7 +347,7 @@ const List<Question> questions2025 = [
     ],
     correct: 3,
     explanation:
-        'D ist richtig: In manischen Phasen treten häufig formale Denkstörungen wie Ideenflucht, Gedankenrasen und Zerfahrenheit auf. A ist falsch: Angststörungen zeigen eher Grübeln. B ist falsch: Ideenflucht ist typisch für Manie, bei Depression eher Denkhemmung. C ist falsch: Verfolgungswahn ist eine inhaltliche Denkstörung. E ist falsch: Formale Denkstörungen sind oft im Gespräch direkt beobachtbar.',
+        'D ist richtig: In manischen Phasen treten häufig formale Denkstörungen wie Ideenflucht und Gedankendrängen auf – der Zusammenhang ist gelockert, bleibt aber nachvollziehbar (Zerfahrenheit ist dagegen typisch für Schizophrenie). A ist falsch: Formale Denkstörungen sind kein typisches Symptom von Angststörungen; Grübeln findet man v. a. bei Depression. B ist falsch: Ideenflucht ist typisch für Manie, bei Depression eher Denkhemmung. C ist falsch: Verfolgungswahn ist eine inhaltliche Denkstörung. E ist falsch: Formale Denkstörungen sind oft im Gespräch direkt beobachtbar.',
   ),
   Question(
     id: 25,
@@ -644,7 +644,7 @@ const List<Question> questions2025 = [
     ],
     correct: [1, 4],
     explanation:
-        'B (Ich-Störungen) und E (inhaltliche und formale Denkstörungen) sind Erstrangsymptome bzw. charakteristische Merkmale der paranoiden Schizophrenie. Ich-Störungen (Gedankeneingebung, -entzug, -ausbreitung) und Denkstörungen (Wahn, Zerfahrenheit) sind pathognomonisch. Orientierungsstörungen (A) sprechen eher für organische Ursachen. Affektivitätsstörungen (C) und Impulskontrollstörungen (D) sind unspezifisch.',
+        'B (Ich-Störungen) und E (inhaltliche und formale Denkstörungen) sind Erstrangsymptome bzw. charakteristische Merkmale der paranoiden Schizophrenie. Ich-Störungen (Gedankeneingebung, -entzug, -ausbreitung) und Wahn haben nach ICD-10 hohes diagnostisches Gewicht – pathognomonisch im strengen Sinn ist aber kein einzelnes Symptom. Orientierungsstörungen (A) sprechen eher für organische Ursachen. Affektivitätsstörungen (C) und Impulskontrollstörungen (D) sind unspezifisch.',
   ),
   Question(
     id: 46,

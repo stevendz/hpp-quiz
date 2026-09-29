@@ -16,8 +16,9 @@ class FlashcardScreen extends StatefulWidget {
 
   static Future<void> resetRemovedCards() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('flashcard-removed');
-    await prefs.remove('flashcard-index');
+    await prefs.remove(_FlashcardScreenState._removedKey);
+    await prefs.remove(_FlashcardScreenState._legacyRemovedKey);
+    await prefs.remove(_FlashcardScreenState._indexKey);
   }
 
   @override
@@ -26,11 +27,15 @@ class FlashcardScreen extends StatefulWidget {
 
 class _FlashcardScreenState extends State<FlashcardScreen> {
   static const _indexKey = 'flashcard-index';
-  static const _removedKey = 'flashcard-removed';
+  // Entfernte Karten werden über ihren Titel gemerkt, damit Umsortierungen im Datensatz
+  // nicht die falschen Karten ausblenden.
+  static const _removedKey = 'flashcard-removed-titles';
+  // Früher positionsbasiert gespeichert – nach Umbau des Datensatzes nicht mehr zuordenbar.
+  static const _legacyRemovedKey = 'flashcard-removed';
 
   late List<Flashcard> _cards;
   List<int> _originalIndices = [];
-  Set<int> _removedIndices = {};
+  Set<String> _removedTitles = {};
   int _currentIndex = 0;
   DateTime _cardStartTime = DateTime.now();
 
@@ -43,14 +48,17 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
 
   Future<void> _loadState() async {
     final prefs = await SharedPreferences.getInstance();
-    final removedList = prefs.getStringList(_removedKey) ?? [];
-    _removedIndices = removedList.map((s) => int.parse(s)).toSet();
+    if (prefs.containsKey(_legacyRemovedKey)) {
+      await prefs.remove(_legacyRemovedKey);
+      await prefs.remove(_indexKey);
+    }
+    _removedTitles = (prefs.getStringList(_removedKey) ?? []).toSet();
 
     final filteredCards = <Flashcard>[];
     final filteredIndices = <int>[];
     for (int i = 0; i < allFlashcards.length; i++) {
-      if (_removedIndices.contains(i)) continue;
       final card = allFlashcards[i];
+      if (_removedTitles.contains(card.title)) continue;
       if (card.tags.any((t) => widget.selectedTags.contains(t))) {
         filteredCards.add(card);
         filteredIndices.add(i);
@@ -72,7 +80,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
 
   Future<void> _persistRemoved() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList(_removedKey, _removedIndices.map((i) => i.toString()).toList());
+    await prefs.setStringList(_removedKey, _removedTitles.toList());
   }
 
   void _logFlashcard(String action) {
@@ -106,8 +114,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
     if (_cards.isEmpty) return;
     _logFlashcard('removed');
 
-    final originalIdx = _originalIndices[_currentIndex];
-    _removedIndices.add(originalIdx);
+    _removedTitles.add(_cards[_currentIndex].title);
     await _persistRemoved();
 
     setState(() {

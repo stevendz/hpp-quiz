@@ -33,6 +33,19 @@ canvas#sconf { position: absolute; left: 0; top: 0; }
 .dev .island { position: absolute; background: #000; border-radius: 999px; z-index: 60; }
 .dev .btn { position: absolute; border-radius: 2px; background: linear-gradient(90deg, #2c3134, #8d969b 50%, #2c3134); }
 .dev .cam { position: absolute; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #3a4f66 0%, #0b1216 55%, #000 80%); }
+/* Android (Google Play): matte dark aluminium frame, punch-hole camera, Material system bars, Roboto */
+.dev.pixel .rim, .dev.tablet .rim { background: linear-gradient(140deg, #5b6266 0%, #2a2f32 16%, #1b1f21 46%, #3d4448 70%, #1d2123 88%, #4d5458 100%);
+  box-shadow: 0 50px 90px rgba(0, 0, 0, 0.55), 0 14px 34px rgba(0, 0, 0, 0.45), inset 0 0 0 0.6px rgba(255, 255, 255, 0.12); }
+.dev.pixel .btn, .dev.tablet .btn { border-radius: 1.5px; background: linear-gradient(90deg, #1b1f21, #4a5155 55%, #1b1f21); }
+.dev .punch { position: absolute; border-radius: 50%; z-index: 60; background: radial-gradient(circle at 40% 36%, #24333d 0%, #06090b 42%, #000 68%); }
+body.android { --sys: 'Roboto Android', 'Noto Color Emoji Android', sans-serif; }
+body.android #cap .subl { text-wrap: balance; } /* no orphaned last word in the narrower captions */
+.statusbar.abar { display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; }
+.abar .atime { font: 500 14px/1 'Roboto Android', sans-serif; letter-spacing: 0.1px; }
+.abar .aicons { display: flex; align-items: center; gap: 3px; }
+.abar .aicons svg { width: 16px; height: 16px; fill: #fff; }
+.abar .aicons svg.batt { width: 17px; height: 17px; margin-left: -2px; }
+.gesture { position: absolute; left: 50%; width: 108px; height: 4px; margin-left: -54px; border-radius: 2px; background: rgba(241, 245, 249, 0.86); z-index: 40; }
 .uiroot { position: absolute; left: 0; top: 0; transform-origin: 0 0; overflow: hidden; font-family: var(--sys); color: var(--tp); }
 
 /* screens that only the screenshots need */

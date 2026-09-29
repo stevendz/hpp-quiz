@@ -464,7 +464,7 @@ const List<Question> questions2017 = [
     ],
     correct: [2],
     explanation:
-        'Die Suizidgefahr steigt, je konkreter die Ideen sind. Depressive Patienten müssen direkt auf Suizidideen angesprochen werden. Menschen mit Psychosen oder Alkoholabhängige haben ein vielfach höheres Suizidrisiko als die Allgemeinbevölkerung. Bedingt durch die dreistufige Wirkung von Antidepressiva (1. sedierend 2. aktivierend 3. stimmungsaufhellend) können sich suizidale Tendenzen in der Anfangsphase verstärken.',
+        'Die Suizidgefahr steigt, je konkreter die Ideen sind. Depressive Patienten müssen direkt auf Suizidideen angesprochen werden. Menschen mit Psychosen oder Alkoholabhängige haben ein vielfach höheres Suizidrisiko als die Allgemeinbevölkerung. Zu Beginn einer antidepressiven Behandlung kann sich der Antrieb bessern, bevor sich die Stimmung aufhellt – dadurch können sich suizidale Tendenzen in der Anfangsphase verstärken (Merkhilfe v. a. für trizyklische Antidepressiva: erst Sedierung bzw. Nebenwirkungen, dann Antriebssteigerung, zuletzt Stimmungsaufhellung).',
   ),
   Question(
     id: 32,

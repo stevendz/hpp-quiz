@@ -718,7 +718,7 @@ const List<Question> questions2023 = [
   Question(
     id: 49,
     exam: 'Oktober 2023',
-    q: 'Welche der folgenden Aussagen zu Bindungsstörungen nach ICD-10 treffen zu?\n1. Die reaktive Bindungsstörung wird von anhaltenden und ausgeprägten kognitiven Defiziten, die denen des Autismus vergleichbar sind, begleitet\n2. Zur klinischen Leitsymptomatik der reaktiven Bindungsstörung gehören repetitive und stereotype Verhaltensmuster\n3. Wichtig ist die diagnostische Abgrenzung von tiefgreifenden Entwicklungsstörungen (nach ICD-10)\n4. Die reaktive Bindungsstörung tritt meistens im Kontext von Vernachlässigung oder Misshandlung auf\n5. Beginnt im Alter von 5 Jahren',
+    q: 'Welche der folgenden Aussagen zu Bindungsstörungen nach ICD-10 treffen zu?\n1. Die reaktive Bindungsstörung wird von anhaltenden und ausgeprägten kognitiven Defiziten, die denen des Autismus vergleichbar sind, begleitet\n2. Zur klinischen Leitsymptomatik der reaktiven Bindungsstörung gehören repetitive und stereotype Verhaltensmuster\n3. Wichtig ist die diagnostische Abgrenzung von tiefgreifenden Entwicklungsstörungen (nach ICD-10)\n4. Die reaktive Bindungsstörung tritt meistens im Kontext von Vernachlässigung oder Misshandlung auf\n5. Beginn vor dem Alter von 5 Jahren',
     options: [
       'Nur die Aussagen 1, 2 und 4 sind richtig',
       'Nur die Aussagen 1, 2 und 5 sind richtig',
@@ -726,9 +726,9 @@ const List<Question> questions2023 = [
       'Nur die Aussagen 2, 3 und 4 sind richtig',
       'Nur die Aussagen 3, 4 und 5 sind richtig',
     ],
-    correct: 3,
+    correct: 4,
     explanation:
-        'Aussagen 2, 3 und 4 sind richtig. Repetitive Verhaltensmuster können bei reaktiver Bindungsstörung auftreten. Die diagnostische Abgrenzung von Autismus-Spektrum-Störungen ist klinisch sehr wichtig. Die Störung tritt typischerweise im Kontext von Vernachlässigung, Misshandlung oder inadäquater Betreuung auf. Aussage 1 ist falsch: Bei der reaktiven Bindungsstörung bestehen keine autismusvergleichbaren kognitiven Defizite. Aussage 5 ist falsch: Die reaktive Bindungsstörung beginnt in den ersten 5 Lebensjahren, nicht erst mit 5 Jahren.',
+        'Aussagen 3, 4 und 5 sind richtig. Die reaktive Bindungsstörung muss von tiefgreifenden Entwicklungsstörungen (Autismus) abgegrenzt werden, tritt meist im Kontext von Vernachlässigung oder Misshandlung auf und beginnt vor dem Alter von 5 Jahren. Aussage 1 ist falsch: Autismusvergleichbare kognitive Defizite gehören nicht zum Bild. Aussage 2 ist falsch: Repetitive und stereotype Verhaltensmuster sind Leitsymptome des Autismus, nicht der Bindungsstörung. (Gleiche Frage wie Oktober 2017 und Oktober 2020.)',
   ),
   Question(
     id: 50,

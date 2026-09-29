@@ -74,7 +74,7 @@ const List<Question> questions2021 = [
     ],
     correct: 2,
     explanation:
-        'C ist richtig: Nach Betreuungsrecht kann eine Unterbringung auch zum Zwecke einer notwendigen ärztlichen Untersuchung erfolgen (§1906 BGB). A ist falsch: Das PsychKG ermöglicht die Unterbringung auch bei Fremdgefährdung. B ist falsch: Die Unterbringung nach Betreuungsrecht ist zeitlich befristet und muss regelmäßig überprüft werden. D ist falsch: Die Anordnung erfolgt durch das Betreuungsgericht. E ist falsch: Es gibt keine starre 4-Wochen-Grenze.',
+        'C ist richtig: Nach Betreuungsrecht kann eine Unterbringung auch zum Zwecke einer notwendigen ärztlichen Untersuchung erfolgen (§1831 BGB, bis 2022 §1906 BGB). A ist falsch: Das PsychKG ermöglicht die Unterbringung auch bei Fremdgefährdung. B ist falsch: Die Unterbringung nach Betreuungsrecht ist zeitlich befristet und muss regelmäßig überprüft werden. D ist falsch: Die Unterbringung nach Betreuungsrecht dient nur dem Wohl des Betreuten (Eigengefährdung, Behandlungsbedürftigkeit) – Fremdgefährdung ist kein Grund nach BGB, sondern nach PsychKG. Außerdem kann kein Psychiater sie anordnen: Der Betreuer beantragt, das Betreuungsgericht genehmigt. E ist falsch: Es gibt keine starre 4-Wochen-Grenze.',
   ),
   Question(
     id: 6,

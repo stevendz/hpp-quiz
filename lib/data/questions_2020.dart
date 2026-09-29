@@ -216,9 +216,9 @@ const List<Question> questions2020 = [
       'Bedürfnis nach übermäßiger Bewunderung',
       'Übermäßiger Zweifel und Vorsicht',
     ],
-    correct: [1, 4],
+    correct: [0, 1],
     explanation:
-        'B und E sind richtig. Emotionale Kühle und flache Affektivität sind Kernmerkmale der schizoiden PS. Übermäßiger Zweifel und Vorsicht sind ebenfalls typisch (Rückzug, Vermeidung). A beschreibt eher die dissoziale PS. C beschreibt eher die histrionische PS. D beschreibt eher die narzisstische PS.',
+        'A und B sind richtig. Beides sind ICD-10-Kriterien der schizoiden PS: Emotionale Kühle bzw. flache Affektivität und eine deutlich mangelnde Sensibilität im Erkennen und Befolgen gesellschaftlicher Regeln (die Regeln werden eher aus Gleichgültigkeit übergangen, nicht wie bei der dissozialen PS aus Missachtung). E beschreibt die anankastische (zwanghafte) PS. C beschreibt eher die histrionische PS. D beschreibt eher die narzisstische PS.',
   ),
   Question(
     id: 16,

@@ -1,9 +1,9 @@
-Bereite dich gezielt auf die schriftliche Überprüfung zum Heilpraktiker für Psychotherapie (HPP) vor: mit 560 Fragen aus 20 vergangenen Prüfungen, einem Prüfungstag wie in der echten Prüfung, einer Erklärung zu jeder Antwort, 240 Lernkarten und einem Glossar mit 359 Fachbegriffen.
+Bereite dich gezielt auf die schriftliche Überprüfung zum Heilpraktiker für Psychotherapie (HPP) vor: mit {{FRAGEN}} Fragen aus {{PRUEFUNGEN}} vergangenen Prüfungen, einem Prüfungstag wie in der echten Prüfung, einer Erklärung zu jeder Antwort, {{LERNKARTEN}} Lernkarten und einem Glossar mit {{BEGRIFFE}} Fachbegriffen.
 
 Lernen. Verstehen. Bestehen.
 
 PRÜFUNGSTAG SIMULIEREN
-• Wähle eine der 20 vergangenen Prüfungen und bearbeite sie unter Prüfungsbedingungen: 28 Fragen in Originalreihenfolge, 55 Minuten Zeit
+• Wähle eine der {{PRUEFUNGEN}} vergangenen Prüfungen und bearbeite sie unter Prüfungsbedingungen: 28 Fragen in Originalreihenfolge, 55 Minuten Zeit
 • Richtig oder falsch erfährst du erst nach dem Abgeben – wie in der echten Prüfung
 • Springe frei zwischen den Fragen und ändere deine Antworten bis zum Schluss
 • Bestanden ab 21 richtigen Antworten – läuft die Zeit ab, wird automatisch abgegeben
@@ -25,14 +25,14 @@ GEZIELT WIEDERHOLEN
 • Fehler & Merkliste üben: Alle Fragen, die noch nicht sitzen, und alle gemerkten Fragen in einer Runde
 • Neue Prüfungen setzen zuerst auf Fragen, die du noch nicht kennst, dann auf die, die du falsch beantwortet hast
 • Eine falsch beantwortete Frage gilt erst wieder als sicher, wenn du sie zweimal hintereinander richtig beantwortest
-• Hast du alle 560 Fragen gesehen, startet der Wiederholungsmodus: bis zu 25 Fragen, die noch nicht sitzen, ergänzt um sichere Fragen zur Auffrischung
+• Hast du alle {{FRAGEN}} Fragen gesehen, startet der Wiederholungsmodus: bis zu 25 Fragen, die noch nicht sitzen, ergänzt um sichere Fragen zur Auffrischung
 
-240 LERNKARTEN
+{{LERNKARTEN}} LERNKARTEN
 • Das Prüfungswissen kompakt auf den Punkt: von den ICD-10-Grundlagen über F0 bis F9 bis zu Psychopathologie, Differentialdiagnosen, Therapieverfahren sowie Recht und Berufskunde
 • Themen frei wählen und mit einem Wisch zur nächsten Karte
 • Karten, die du sicher beherrschst, einfach aussortieren
 
-GLOSSAR MIT 359 FACHBEGRIFFEN
+GLOSSAR MIT {{BEGRIFFE}} FACHBEGRIFFEN
 • Von Abhängigkeitssyndrom bis Zyklothymia – kurz und verständlich erklärt
 • Durchsuchbar nach Begriff und Inhalt
 
