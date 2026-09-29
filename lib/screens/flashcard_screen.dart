@@ -6,6 +6,7 @@ import '../models/flashcard.dart';
 import '../data/flashcards_data.dart';
 import '../services/glossary_lookup.dart';
 import 'glossary_terms_dialog.dart';
+import 'question_actions.dart';
 import '../theme/app_theme.dart';
 
 class FlashcardScreen extends StatefulWidget {
@@ -143,7 +144,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
         child: SafeArea(
           child: Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -172,6 +173,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
 
     final card = _cards[_currentIndex];
     final terms = findGlossaryTerms(card.text);
+    final facts = card.text.split('\n').skip(1).where((l) => l.trim().isNotEmpty).toList();
 
     return Container(
       decoration: const BoxDecoration(gradient: AppColors.gradientBg),
@@ -180,11 +182,12 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
           children: [
             // Top bar
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: AppSpacing.lg),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
               child: Row(
                 children: [
                   IconButton(
                     onPressed: _handleGoHome,
+                    tooltip: 'Zurück',
                     icon: const Icon(Icons.arrow_back_rounded, color: AppColors.textMuted),
                   ),
                   Expanded(
@@ -196,21 +199,24 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
             ),
             // Progress
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
               child: Column(
                 children: [
                   Text(
                     '${_currentIndex + 1} / ${_cards.length}',
+                    semanticsLabel: 'Karte ${_currentIndex + 1} von ${_cards.length}',
                     style: tt.titleSmall!.copyWith(color: AppColors.textMuted),
                   ),
                   const SizedBox(height: AppSpacing.md),
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(AppSpacing.xs),
-                    child: LinearProgressIndicator(
-                      value: (_currentIndex + 1) / _cards.length,
-                      backgroundColor: AppColors.surfaceDark,
-                      valueColor: const AlwaysStoppedAnimation<Color>(AppColors.amber),
-                      minHeight: 4,
+                  ExcludeSemantics(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(AppSpacing.xs),
+                      child: LinearProgressIndicator(
+                        value: (_currentIndex + 1) / _cards.length,
+                        backgroundColor: AppColors.surfaceDark,
+                        valueColor: const AlwaysStoppedAnimation<Color>(AppColors.amber),
+                        minHeight: 6,
+                      ),
                     ),
                   ),
                 ],
@@ -229,7 +235,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                   }
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(AppSpacing.lg),
                     child: BackdropFilter(
@@ -243,7 +249,7 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                           boxShadow: const [BoxShadow(color: Color(0x4D000000), blurRadius: 32, offset: Offset(0, 8))],
                         ),
                         child: SingleChildScrollView(
-                          padding: const EdgeInsets.all(AppSpacing.lg),
+                          padding: const EdgeInsets.all(AppSpacing.xl),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -268,13 +274,27 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
                                     ),
                                     if (terms.isNotEmpty) ...[
                                       const SizedBox(width: AppSpacing.md),
-                                      GlossaryTermsButton(terms: terms, title: 'Fachbegriffe auf dieser Karte'),
+                                      TrailingActions(
+                                        children: [GlossaryTermsButton(terms: terms, title: 'Fachbegriffe auf dieser Karte')],
+                                      ),
                                     ],
                                   ],
                                 ),
-                                const SizedBox(height: AppSpacing.md),
+                                const SizedBox(height: AppSpacing.lg),
                               ],
-                              Text(card.text, style: tt.bodyMedium),
+                              Semantics(
+                                header: true,
+                                child: Text(card.title, style: tt.titleLarge!.copyWith(height: 1.4)),
+                              ),
+                              const SizedBox(height: AppSpacing.md),
+                              for (final fact in facts)
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: AppSpacing.md),
+                                  child: Text(
+                                    fact,
+                                    style: tt.bodyLarge!.copyWith(fontWeight: FontWeight.w400, height: 1.55),
+                                  ),
+                                ),
                             ],
                           ),
                         ),
@@ -286,13 +306,21 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
             ),
             // Navigation buttons
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.lg),
+              padding: const EdgeInsets.all(AppSpacing.xl),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _NavButton(icon: Icons.chevron_left_rounded, onPressed: _currentIndex > 0 ? _goToPrevious : null),
-                  _NavButton(icon: Icons.delete_outline_rounded, onPressed: _removeCurrentCard),
-                  _NavButton(icon: Icons.chevron_right_rounded, onPressed: _goToNext),
+                  _NavButton(
+                    icon: Icons.chevron_left_rounded,
+                    tooltip: 'Vorherige Karte',
+                    onPressed: _currentIndex > 0 ? _goToPrevious : null,
+                  ),
+                  _NavButton(
+                    icon: Icons.delete_outline_rounded,
+                    tooltip: 'Karte aussortieren',
+                    onPressed: _removeCurrentCard,
+                  ),
+                  _NavButton(icon: Icons.chevron_right_rounded, tooltip: 'Nächste Karte', onPressed: _goToNext),
                 ],
               ),
             ),
@@ -305,9 +333,10 @@ class _FlashcardScreenState extends State<FlashcardScreen> {
 
 class _NavButton extends StatelessWidget {
   final IconData icon;
+  final String tooltip;
   final VoidCallback? onPressed;
 
-  const _NavButton({required this.icon, this.onPressed});
+  const _NavButton({required this.icon, required this.tooltip, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -319,6 +348,7 @@ class _NavButton extends StatelessWidget {
       decoration: BoxDecoration(color: bgColor, borderRadius: BorderRadius.circular(AppSpacing.lg)),
       child: IconButton(
         onPressed: onPressed,
+        tooltip: tooltip,
         icon: Icon(icon, color: color, size: 28),
       ),
     );

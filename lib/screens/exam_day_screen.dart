@@ -37,7 +37,7 @@ class ExamDayScreen extends StatefulWidget {
 
 class _ExamDayScreenState extends State<ExamDayScreen> {
   static const _autosaveEverySeconds = 30;
-  static const _navItemExtent = 40.0;
+  static const _navItemExtent = 44.0; // Tippfläche je Frage: 44 × 48 pt
 
   final _scrollController = ScrollController();
   final _navController = ScrollController();
@@ -240,70 +240,64 @@ class _ExamDayScreenState extends State<ExamDayScreen> {
       child: SafeArea(
         child: Column(
           children: [
-            // Header
-            Padding(
-              padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, AppSpacing.md),
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: _leave,
-                    child: Text('← Menü', style: tt.titleSmall!.copyWith(color: AppColors.tealLighter)),
-                  ),
-                  const Spacer(),
-                  RepaintBoundary(
-                    child: _Pill(
-                      icon: Icons.timer_outlined,
-                      color: timerColor,
-                      text: _format(remaining),
-                      semantics: 'Verbleibende Zeit ${remaining ~/ 60} Minuten',
-                    ),
-                  ),
-                  const Spacer(),
-                  _Pill(
-                    icon: Icons.checklist_rounded,
-                    color: AppColors.tealLighter,
-                    text: '${exam.answers.length}/$total',
-                    semantics: '${exam.answers.length} von $total beantwortet',
-                  ),
-                ],
+            ExamHeader(
+              onMenu: _leave,
+              center: RepaintBoundary(
+                child: StatusPill(
+                  icon: Icons.timer_outlined,
+                  color: timerColor,
+                  text: _format(remaining),
+                  semantics: 'Verbleibende Zeit ${remaining ~/ 60} Minuten',
+                ),
+              ),
+              trailing: StatusPill(
+                icon: Icons.checklist_rounded,
+                color: AppColors.tealLighter,
+                text: '${exam.answers.length}/$total',
+                semantics: '${exam.answers.length} von $total beantwortet',
               ),
             ),
             // Termin + Fragenübersicht
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+              padding: const EdgeInsets.fromLTRB(AppSpacing.xl, AppSpacing.sm, AppSpacing.xl, 0),
               child: Row(
                 children: [
                   Expanded(child: Text('PRÜFUNGSTAG · ${(exam.examLabel ?? '').toUpperCase()}', style: tt.labelSmall)),
-                  Text('Frage ${index + 1}/$total', style: tt.bodySmall!.copyWith(fontWeight: FontWeight.w500)),
+                  Text('Frage ${index + 1}/$total', style: tt.bodyMedium!.copyWith(color: AppColors.textMuted)),
                 ],
               ),
             ),
-            const SizedBox(height: AppSpacing.md),
+            const SizedBox(height: AppSpacing.xs),
+            // Die Nummern sind auch als „Frage x/28“ und für Screenreader beschriftet – hier nur begrenzt mitwachsen,
+            // damit die Leiste bedienbar bleibt.
             SizedBox(
-              height: 36,
-              child: ListView.builder(
-                controller: _navController,
-                scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-                itemExtent: _navItemExtent,
-                itemCount: total,
-                itemBuilder: (_, i) {
-                  final id = exam.questionIds[i];
-                  return _NavDot(
-                    number: i + 1,
-                    answered: exam.answers.containsKey(id),
-                    current: i == index,
-                    bookmarked: bookmarks.contains(id),
-                    onTap: () => _goTo(i),
-                  );
-                },
+              height: 48,
+              child: MediaQuery.withClampedTextScaling(
+                maxScaleFactor: 1.3,
+                child: ListView.builder(
+                  controller: _navController,
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+                  itemExtent: _navItemExtent,
+                  itemCount: total,
+                  itemBuilder: (_, i) {
+                    final id = exam.questionIds[i];
+                    return _NavDot(
+                      number: i + 1,
+                      answered: exam.answers.containsKey(id),
+                      current: i == index,
+                      bookmarked: bookmarks.contains(id),
+                      onTap: () => _goTo(i),
+                    );
+                  },
+                ),
               ),
             ),
             // Frage
             Expanded(
               child: SingleChildScrollView(
                 controller: _scrollController,
-                padding: const EdgeInsets.all(AppSpacing.lg),
+                padding: const EdgeInsets.fromLTRB(AppSpacing.xl, AppSpacing.md, AppSpacing.xl, AppSpacing.xl),
                 child: Center(
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 720),
@@ -318,31 +312,34 @@ class _ExamDayScreenState extends State<ExamDayScreen> {
                             border: Border.all(color: AppColors.indigoBorder.withValues(alpha: 0.15)),
                             boxShadow: const [BoxShadow(color: Color(0x4D000000), blurRadius: 32, offset: Offset(0, 8))],
                           ),
-                          padding: const EdgeInsets.all(AppSpacing.lg),
+                          padding: const EdgeInsets.all(AppSpacing.xl),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
                                 children: [
-                                  Expanded(
-                                    child: Text(
-                                      'FRAGE ${index + 1}${q.isMultiple ? ' · MEHRFACHAUSWAHL' : ''}',
-                                      style: tt.labelSmall,
-                                    ),
-                                  ),
-                                  QuestionActions(
-                                    question: q,
-                                    bookmarked: bookmarks.contains(q.id),
-                                    onToggleBookmark: () => widget.onToggleBookmark(q.id),
+                                  Expanded(child: Text('FRAGE ${index + 1}', style: tt.labelSmall)),
+                                  TrailingActions(
+                                    children: [
+                                      QuestionActions(
+                                        question: q,
+                                        bookmarked: bookmarks.contains(q.id),
+                                        onToggleBookmark: () => widget.onToggleBookmark(q.id),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
-                              const SizedBox(height: AppSpacing.lg),
+                              const SizedBox(height: AppSpacing.md),
                               QuestionText(q.q),
-                              const SizedBox(height: AppSpacing.lg),
+                              const SizedBox(height: AppSpacing.xl),
+                              if (q.isMultiple) ...[
+                                const MultipleChoiceHint(),
+                                const SizedBox(height: AppSpacing.md),
+                              ],
                               ...List.generate(q.options.length, (idx) {
                                 return Padding(
-                                  padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                                  padding: const EdgeInsets.only(bottom: AppSpacing.md),
                                   child: OptionButton(
                                     index: idx,
                                     text: q.options[idx],
@@ -366,7 +363,7 @@ class _ExamDayScreenState extends State<ExamDayScreen> {
             ),
             // Navigation + Abgeben
             Padding(
-              padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.xs, AppSpacing.lg, AppSpacing.lg),
+              padding: const EdgeInsets.fromLTRB(AppSpacing.xl, AppSpacing.xs, AppSpacing.xl, AppSpacing.lg),
               child: Row(
                 children: [
                   _NavButton(icon: Icons.chevron_left_rounded, tooltip: 'Vorherige Frage', onPressed: index > 0 ? () => _goTo(index - 1) : null),
@@ -381,40 +378,6 @@ class _ExamDayScreenState extends State<ExamDayScreen> {
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _Pill extends StatelessWidget {
-  final IconData icon;
-  final Color color;
-  final String text;
-  final String semantics;
-
-  const _Pill({required this.icon, required this.color, required this.text, required this.semantics});
-
-  @override
-  Widget build(BuildContext context) {
-    final tt = Theme.of(context).textTheme;
-    return Semantics(
-      label: semantics,
-      excludeSemantics: true,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
-        decoration: BoxDecoration(
-          color: AppColors.indigoSubtle,
-          border: Border.all(color: AppColors.indigoBorder),
-          borderRadius: BorderRadius.circular(AppSpacing.lg),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, size: 16, color: color),
-            const SizedBox(width: AppSpacing.sm),
-            Text(text, style: tt.titleSmall!.copyWith(color: color, fontFeatures: const [FontFeature.tabularFigures()])),
           ],
         ),
       ),
@@ -439,13 +402,14 @@ class _NavDot extends StatelessWidget {
       excludeSemantics: true,
       child: GestureDetector(
         onTap: onTap,
+        behavior: HitTestBehavior.opaque, // ganze Zelle antippbar, nicht nur der Kreis
         child: Center(
           child: Stack(
             clipBehavior: Clip.none,
             children: [
               Container(
-                width: 32,
-                height: 32,
+                width: 36,
+                height: 36,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
@@ -455,9 +419,9 @@ class _NavDot extends StatelessWidget {
                 child: Text(
                   '$number',
                   style: TextStyle(
-                    fontSize: 12,
+                    fontSize: 13,
                     fontWeight: FontWeight.w700,
-                    color: answered ? Colors.white : AppColors.textDim,
+                    color: answered ? Colors.white : AppColors.textMuted,
                   ),
                 ),
               ),
@@ -524,6 +488,7 @@ class _SubmitButton extends StatelessWidget {
       child: TextButton(
         onPressed: onTap,
         style: TextButton.styleFrom(
+          minimumSize: const Size.fromHeight(52),
           padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg + 2),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSpacing.lg)),
         ),

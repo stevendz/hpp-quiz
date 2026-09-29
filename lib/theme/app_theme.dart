@@ -33,6 +33,9 @@ class AppColors {
 
   static const textPrimary = Color(0xFFF1F5F9);
   static const textSecondary = Color(0xFFE2E8F0);
+  // Kontrast auf Karten und Flächen (WCAG AA verlangt 4,5:1 für Text, 3:1 für Bedienelemente):
+  // textMuted ≥ 4,8:1 – kleinste Farbe für Text; textDim ≈ 3:1 – nur große Zahlen, Symbole, Ränder;
+  // textDark < 2:1 – nur für deaktivierte Elemente.
   static const textMuted = Color(0xFF94A3B8);
   static const textDim = Color(0xFF64748B);
   static const textDark = Color(0xFF475569);
@@ -44,6 +47,10 @@ class AppColors {
   static const redSubtle = Color(0x14EF4444);
   static const amberSubtle = Color(0x1AF59E0B);
   static const amberBorder = Color(0x4DF59E0B);
+
+  // Ergebnis-Plaketten mit weißer Schrift (≥ 5:1)
+  static const greenStrong = Color(0xFF15803D);
+  static const redStrong = Color(0xFFB91C1C);
 
   static const gradientIndigo = LinearGradient(
     begin: Alignment.topLeft,
@@ -75,6 +82,9 @@ class AppSpacing {
   static const double sm = 6;
   static const double md = 8;
   static const double lg = 12;
+
+  /// Seitenrand und Innenabstand von Karten
+  static const double xl = 16;
 }
 
 class AppTheme {
@@ -107,10 +117,10 @@ class AppTheme {
       titleSmall: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
       labelLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: Colors.white),
       labelMedium: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.textPrimary),
-      labelSmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, letterSpacing: 0.8, color: AppColors.teal),
+      labelSmall: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, letterSpacing: 0.8, color: AppColors.tealLighter),
       bodyLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, height: 1.6, color: AppColors.textPrimary),
       bodyMedium: TextStyle(fontSize: 14, height: 1.6, color: AppColors.textPrimary),
-      bodySmall: TextStyle(fontSize: 12, color: AppColors.textDim),
+      bodySmall: TextStyle(fontSize: 12, color: AppColors.textMuted),
     ),
   );
 }

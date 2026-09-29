@@ -3,33 +3,36 @@ import '../models/question.dart';
 import '../theme/app_theme.dart';
 import 'report_sheet.dart';
 
-/// Kleiner Aktions-Knopf im Stil des Glossar-Knopfs.
+/// Kleiner Aktions-Knopf an der Frage: sichtbar 40 × 40, antippbar 48 × 48, mit Tooltip als Beschriftung.
 class QuestionIconButton extends StatelessWidget {
   final IconData icon;
   final String tooltip;
   final VoidCallback onTap;
   final Color color;
 
-  const QuestionIconButton({super.key, required this.icon, required this.tooltip, required this.onTap, this.color = AppColors.tealLighter});
+  const QuestionIconButton({
+    super.key,
+    required this.icon,
+    required this.tooltip,
+    required this.onTap,
+    this.color = AppColors.tealLighter,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Tooltip(
-      message: tooltip,
-      child: Semantics(
-        button: true,
-        label: tooltip,
-        child: GestureDetector(
-          onTap: onTap,
-          child: Container(
-            padding: const EdgeInsets.all(AppSpacing.sm),
-            decoration: BoxDecoration(
-              color: AppColors.indigoSubtle,
-              border: Border.all(color: AppColors.indigoBorder),
-              borderRadius: BorderRadius.circular(AppSpacing.md),
-            ),
-            child: Icon(icon, color: color, size: 20),
-          ),
+    return IconButton(
+      onPressed: onTap,
+      tooltip: tooltip,
+      icon: Icon(icon, color: color, size: 22),
+      style: IconButton.styleFrom(
+        backgroundColor: AppColors.indigoSubtle,
+        fixedSize: const Size(40, 40),
+        minimumSize: const Size(40, 40),
+        padding: EdgeInsets.zero,
+        tapTargetSize: MaterialTapTargetSize.padded,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSpacing.md),
+          side: const BorderSide(color: AppColors.indigoBorder),
         ),
       ),
     );
@@ -55,13 +58,28 @@ class QuestionActions extends StatelessWidget {
           color: bookmarked ? AppColors.amberLight : AppColors.tealLighter,
           onTap: onToggleBookmark,
         ),
-        const SizedBox(width: AppSpacing.sm),
         QuestionIconButton(
           icon: Icons.flag_outlined,
           tooltip: 'Frage melden',
           onTap: () => ReportSheet.show(context, question),
         ),
       ],
+    );
+  }
+}
+
+/// Die Knöpfe haben rundum 4 pt unsichtbare Tippfläche (48 statt 40). Am rechten Rand verschoben, schließt der
+/// letzte Knopf bündig mit dem Inhalt darunter ab.
+class TrailingActions extends StatelessWidget {
+  final List<Widget> children;
+
+  const TrailingActions({super.key, required this.children});
+
+  @override
+  Widget build(BuildContext context) {
+    return Transform.translate(
+      offset: const Offset(AppSpacing.xs, 0),
+      child: Row(mainAxisSize: MainAxisSize.min, children: children),
     );
   }
 }

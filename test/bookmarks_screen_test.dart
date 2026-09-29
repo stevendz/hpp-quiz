@@ -77,7 +77,7 @@ void main() {
     expect(find.text('Erklärung'), findsOneWidget);
     expect(find.textContaining('LSD und Ecstasy (MDMA) verursachen keine körperliche Abhängigkeit'), findsOneWidget);
     // richtige Antworten sind markiert
-    expect(find.text('✓'), findsNWidgets(2));
+    expect(find.byIcon(Icons.check_circle_rounded), findsNWidgets(2));
     expect(find.byTooltip('Frage melden'), findsOneWidget);
   });
 }

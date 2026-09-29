@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 
+/// Fragetext: erste Zeile als Frage, darunter ggf. die nummerierten Aussagen.
+/// Text.rich statt RichText, damit die Schriftgröße der Systemeinstellung folgt.
 class QuestionText extends StatelessWidget {
   final String text;
 
@@ -9,17 +11,37 @@ class QuestionText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tt = Theme.of(context).textTheme;
+    final stem = tt.titleLarge!.copyWith(height: 1.45);
     final idx = text.indexOf('\n');
-    if (idx == -1) {
-      return Text(text, style: tt.titleLarge);
-    }
-    return RichText(
-      text: TextSpan(
+    if (idx == -1) return Text(text, style: stem);
+    return Text.rich(
+      TextSpan(
         children: [
-          TextSpan(text: text.substring(0, idx), style: tt.titleMedium!.copyWith(height: 1.5)),
-          TextSpan(text: text.substring(idx), style: tt.bodyMedium!.copyWith(height: 1.5)),
+          TextSpan(text: text.substring(0, idx), style: stem),
+          TextSpan(text: text.substring(idx), style: tt.bodyLarge!.copyWith(fontWeight: FontWeight.w400, height: 1.6)),
         ],
       ),
+    );
+  }
+}
+
+/// Hinweis bei Mehrfachauswahl, damit klar ist, dass mehrere Antworten gewählt werden können.
+class MultipleChoiceHint extends StatelessWidget {
+  const MultipleChoiceHint({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const Icon(Icons.checklist_rounded, size: 18, color: AppColors.textMuted),
+        const SizedBox(width: AppSpacing.sm),
+        Expanded(
+          child: Text(
+            'Mehrere Antworten möglich',
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.textMuted),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -50,93 +72,87 @@ class OptionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color bgColor = AppColors.surfaceDark;
-    Color borderColor = const Color(0x26636AF1);
-    double opacity = 1.0;
+    final tt = Theme.of(context).textTheme;
+    var bgColor = AppColors.surfaceDark;
+    var borderColor = AppColors.indigoBorder;
+    var borderWidth = 1.0;
+    var opacity = 1.0;
 
     // Unbewertete Auswahl: Mehrfachauswahl vor dem Bestätigen oder jede Frage am Prüfungstag.
     if (!answered && isSelected) {
-      bgColor = const Color(0x266366F1);
-      borderColor = AppColors.indigo;
+      bgColor = AppColors.teal.withValues(alpha: 0.25);
+      borderColor = AppColors.tealLighter;
+      borderWidth = 2;
     }
     if (answered) {
       if (isCorrectOption) {
         bgColor = const Color(0x1F22C55E);
         borderColor = AppColors.green;
+        borderWidth = 2;
       } else if (isSelected) {
         bgColor = const Color(0x1FEF4444);
         borderColor = AppColors.red;
+        borderWidth = 2;
       } else {
-        opacity = 0.45;
+        // Abgeblendet, aber lesbar (≥ 4,5:1) – die Erklärung bezieht sich oft auf diese Antworten.
+        opacity = 0.6;
       }
     }
 
-    return Opacity(
-      opacity: opacity,
-      child: GestureDetector(
-        onTap: answered ? null : onTap,
-        child: Container(
-          padding: const EdgeInsets.all(AppSpacing.lg),
-          decoration: BoxDecoration(
-            color: bgColor,
-            border: Border.all(color: borderColor),
+    final String? result = !answered
+        ? null
+        : isCorrectOption
+            ? (isSelected ? 'richtig, gewählt' : 'richtige Antwort')
+            : (isSelected ? 'falsch, gewählt' : null);
+
+    return Semantics(
+      label: 'Antwort ${index + 1}: $text${result != null ? ', $result' : ''}',
+      button: !answered && !isMultiple && !showRadio,
+      checked: !answered && (isMultiple || showRadio) ? isSelected : null,
+      inMutuallyExclusiveGroup: showRadio && !isMultiple,
+      selected: isSelected,
+      excludeSemantics: true,
+      onTap: answered ? null : onTap,
+      child: Opacity(
+        opacity: opacity,
+        child: Material(
+          color: bgColor,
+          shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSpacing.lg),
+            side: BorderSide(color: borderColor, width: borderWidth),
           ),
-          child: Row(
-            children: [
-              // Checkbox for multiple
-              if (isMultiple && !answered)
-                Container(
-                  width: 22,
-                  height: 22,
-                  margin: const EdgeInsets.only(right: AppSpacing.lg),
-                  decoration: BoxDecoration(
-                    color: isSelected ? AppColors.indigo : Colors.transparent,
-                    border: Border.all(color: isSelected ? AppColors.indigo : AppColors.textDark, width: 2),
-                    borderRadius: BorderRadius.circular(AppSpacing.sm),
-                  ),
-                  child: isSelected
-                      ? const FittedBox(
-                          child: Text(
-                            '✓',
-                            style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700),
-                          ),
-                        )
-                      : null,
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: answered ? null : onTap,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(minHeight: 52),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl, vertical: AppSpacing.lg + 2),
+                child: Row(
+                  children: [
+                    if (isMultiple && !answered) ...[
+                      _Checkbox(checked: isSelected),
+                      const SizedBox(width: AppSpacing.lg),
+                    ],
+                    if (showRadio && !isMultiple && !answered) ...[
+                      _Radio(selected: isSelected),
+                      const SizedBox(width: AppSpacing.lg),
+                    ],
+                    Expanded(
+                      child: Text(text, style: tt.bodyLarge!.copyWith(fontWeight: FontWeight.w400, height: 1.45)),
+                    ),
+                    if (answered && isCorrectOption) ...[
+                      const SizedBox(width: AppSpacing.md),
+                      const Icon(Icons.check_circle_rounded, color: AppColors.green, size: 22),
+                    ],
+                    if (answered && isSelected && !isCorrectOption) ...[
+                      const SizedBox(width: AppSpacing.md),
+                      const Icon(Icons.cancel_rounded, color: AppColors.redLight, size: 22),
+                    ],
+                  ],
                 ),
-              if (showRadio && !isMultiple && !answered)
-                Container(
-                  width: 22,
-                  height: 22,
-                  margin: const EdgeInsets.only(right: AppSpacing.lg),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: isSelected ? AppColors.indigo : AppColors.textDark, width: 2),
-                  ),
-                  child: isSelected
-                      ? Center(
-                          child: Container(
-                            width: 10,
-                            height: 10,
-                            decoration: const BoxDecoration(color: AppColors.indigo, shape: BoxShape.circle),
-                          ),
-                        )
-                      : null,
-                ),
-              // Option text
-              Expanded(child: Text(text)),
-              // Correct/Wrong indicator
-              if (answered && isCorrectOption)
-                const Text(
-                  '✓',
-                  style: TextStyle(color: AppColors.green, fontWeight: FontWeight.w700, fontSize: 18),
-                ),
-              if (answered && isSelected && !isCorrectOption)
-                const Text(
-                  '✗',
-                  style: TextStyle(color: AppColors.red, fontWeight: FontWeight.w700, fontSize: 18),
-                ),
-            ],
+              ),
+            ),
           ),
         ),
       ),
@@ -144,6 +160,54 @@ class OptionButton extends StatelessWidget {
   }
 }
 
+class _Checkbox extends StatelessWidget {
+  final bool checked;
+
+  const _Checkbox({required this.checked});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 24,
+      height: 24,
+      decoration: BoxDecoration(
+        color: checked ? AppColors.tealLighter : Colors.transparent,
+        border: Border.all(color: checked ? AppColors.tealLighter : AppColors.textMuted, width: 2),
+        borderRadius: BorderRadius.circular(AppSpacing.sm),
+      ),
+      child: checked ? const Icon(Icons.check_rounded, size: 18, color: AppColors.bgDark) : null,
+    );
+  }
+}
+
+class _Radio extends StatelessWidget {
+  final bool selected;
+
+  const _Radio({required this.selected});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 24,
+      height: 24,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(color: selected ? AppColors.tealLighter : AppColors.textMuted, width: 2),
+      ),
+      child: selected
+          ? Center(
+              child: Container(
+                width: 12,
+                height: 12,
+                decoration: const BoxDecoration(color: AppColors.tealLighter, shape: BoxShape.circle),
+              ),
+            )
+          : null,
+    );
+  }
+}
+
+/// Auswertung nach dem Antworten. Screenreader lesen „Richtig“ bzw. „Falsch“ sofort vor.
 class FeedbackBox extends StatelessWidget {
   final bool isCorrect;
   final String explanation;
@@ -156,24 +220,128 @@ class FeedbackBox extends StatelessWidget {
     final bgColor = isCorrect ? const Color(0x1422C55E) : const Color(0x14EF4444);
     final tt = Theme.of(context).textTheme;
 
-    return Container(
-      margin: const EdgeInsets.only(top: AppSpacing.lg),
-      padding: const EdgeInsets.all(AppSpacing.lg),
-      decoration: BoxDecoration(
-        color: bgColor,
-        border: Border.all(color: color),
-        borderRadius: BorderRadius.circular(AppSpacing.lg),
+    return Semantics(
+      liveRegion: true,
+      container: true,
+      child: Container(
+        margin: const EdgeInsets.only(top: AppSpacing.lg),
+        padding: const EdgeInsets.all(AppSpacing.xl),
+        decoration: BoxDecoration(
+          color: bgColor,
+          border: Border.all(color: color),
+          borderRadius: BorderRadius.circular(AppSpacing.lg),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.xs),
+              decoration: BoxDecoration(
+                color: isCorrect ? AppColors.greenStrong : AppColors.redStrong,
+                borderRadius: BorderRadius.circular(AppSpacing.md),
+              ),
+              child: Text(
+                isCorrect ? '✓ Richtig!' : '✗ Falsch!',
+                semanticsLabel: isCorrect ? 'Richtig' : 'Falsch',
+                style: tt.labelMedium!.copyWith(color: Colors.white),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.lg),
+            Text(
+              explanation,
+              style: tt.bodyLarge!.copyWith(fontWeight: FontWeight.w400, height: 1.6, color: const Color(0xFFCBD5E1)),
+            ),
+          ],
+        ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    );
+  }
+}
+
+/// „Menü“ oben links in Prüfung und Prüfungstag – mit 48 pt hoher Tippfläche.
+class BackToMenuButton extends StatelessWidget {
+  final VoidCallback onPressed;
+
+  const BackToMenuButton({super.key, required this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton.icon(
+      onPressed: onPressed,
+      icon: const Icon(Icons.arrow_back_rounded, size: 20),
+      label: const Text('Menü'),
+      style: TextButton.styleFrom(
+        foregroundColor: AppColors.tealLighter,
+        textStyle: Theme.of(context).textTheme.titleSmall,
+        minimumSize: const Size(48, 48),
+        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+      ),
+    );
+  }
+}
+
+/// Anzeige in der Kopfzeile (Uhr, Punktestand). [semantics] ersetzt für Screenreader den Kurztext.
+class StatusPill extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String text;
+  final String semantics;
+
+  const StatusPill({super.key, required this.icon, required this.color, required this.text, required this.semantics});
+
+  @override
+  Widget build(BuildContext context) {
+    final tt = Theme.of(context).textTheme;
+    return Semantics(
+      label: semantics,
+      excludeSemantics: true,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
+        decoration: BoxDecoration(
+          color: AppColors.indigoSubtle,
+          border: Border.all(color: AppColors.indigoBorder),
+          borderRadius: BorderRadius.circular(AppSpacing.lg),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(icon, size: 16, color: color),
+            const SizedBox(width: AppSpacing.sm),
+            Text(text, style: tt.titleSmall!.copyWith(color: color, fontFeatures: const [FontFeature.tabularFigures()])),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Kopfzeile von Prüfung und Prüfungstag: Menü links, zwei Anzeigen. Bei sehr großer Schrift werden die
+/// Anzeigen verkleinert statt abgeschnitten.
+class ExamHeader extends StatelessWidget {
+  final VoidCallback onMenu;
+  final Widget center;
+  final Widget trailing;
+
+  const ExamHeader({super.key, required this.onMenu, required this.center, required this.trailing});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.xs, AppSpacing.xl, AppSpacing.xs),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.xs),
-            decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(AppSpacing.md)),
-            child: Text(isCorrect ? '✓ Richtig!' : '✗ Falsch!', style: tt.labelMedium!.copyWith(color: Colors.white)),
+          Flexible(
+            child: FittedBox(
+              fit: BoxFit.scaleDown,
+              alignment: Alignment.centerLeft,
+              child: BackToMenuButton(onPressed: onMenu),
+            ),
           ),
-          const SizedBox(height: AppSpacing.lg),
-          Text(explanation, style: tt.bodyMedium!.copyWith(height: 1.65, color: const Color(0xFFCBD5E1))),
+          Flexible(child: FittedBox(fit: BoxFit.scaleDown, child: center)),
+          Flexible(
+            child: FittedBox(fit: BoxFit.scaleDown, alignment: Alignment.centerRight, child: trailing),
+          ),
         ],
       ),
     );

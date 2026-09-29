@@ -330,7 +330,11 @@ class _ReviewTile extends StatelessWidget {
                         const SizedBox(height: AppSpacing.md),
                         Align(
                           alignment: Alignment.centerRight,
-                          child: QuestionActions(question: question, bookmarked: bookmarked, onToggleBookmark: onToggleBookmark),
+                          child: TrailingActions(
+                            children: [
+                              QuestionActions(question: question, bookmarked: bookmarked, onToggleBookmark: onToggleBookmark),
+                            ],
+                          ),
                         ),
                       ],
                     ),

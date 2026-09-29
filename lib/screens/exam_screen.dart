@@ -235,50 +235,24 @@ class _ExamScreenState extends State<ExamScreen> {
       child: SafeArea(
         child: Column(
           children: [
-            // Header
-            Padding(
-              padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, AppSpacing.md),
-              child: Row(
-                children: [
-                  GestureDetector(
-                    onTap: _handleGoHome,
-                    child: Text('← Menü', style: tt.titleSmall!.copyWith(color: AppColors.tealLighter)),
-                  ),
-                  const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
-                    decoration: BoxDecoration(
-                      color: AppColors.indigoSubtle,
-                      border: Border.all(color: AppColors.indigoBorder),
-                      borderRadius: BorderRadius.circular(AppSpacing.lg),
-                    ),
-                    child: Text(
-                      _formatTime(_elapsedSeconds),
-                      style: tt.titleSmall!.copyWith(
-                        color: AppColors.textMuted,
-                        fontFeatures: [const FontFeature.tabularFigures()],
-                      ),
-                    ),
-                  ),
-                  const Spacer(),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.sm),
-                    decoration: BoxDecoration(
-                      color: AppColors.indigoSubtle,
-                      border: Border.all(color: AppColors.indigoBorder),
-                      borderRadius: BorderRadius.circular(AppSpacing.lg),
-                    ),
-                    child: Text(
-                      '✓ $currentScore/$currentAnswered',
-                      style: tt.titleSmall!.copyWith(color: AppColors.tealLighter),
-                    ),
-                  ),
-                ],
+            ExamHeader(
+              onMenu: _handleGoHome,
+              center: StatusPill(
+                icon: Icons.timer_outlined,
+                color: AppColors.textMuted,
+                text: _formatTime(_elapsedSeconds),
+                semantics: 'Bearbeitungszeit ${_elapsedSeconds ~/ 60} Minuten',
+              ),
+              trailing: StatusPill(
+                icon: Icons.check_rounded,
+                color: AppColors.tealLighter,
+                text: '$currentScore/$currentAnswered',
+                semantics: '$currentScore von $currentAnswered richtig',
               ),
             ),
             // Progress
             Padding(
-              padding: const EdgeInsets.all(AppSpacing.lg),
+              padding: const EdgeInsets.fromLTRB(AppSpacing.xl, AppSpacing.sm, AppSpacing.xl, AppSpacing.xs),
               child: Row(
                 children: [
                   Expanded(
@@ -301,7 +275,7 @@ class _ExamScreenState extends State<ExamScreen> {
                     ),
                   ),
                   const SizedBox(width: AppSpacing.lg),
-                  Text('Frage $examProgress/$examTotal', style: tt.bodySmall!.copyWith(fontWeight: FontWeight.w500)),
+                  Text('Frage $examProgress/$examTotal', style: tt.bodyMedium!.copyWith(color: AppColors.textMuted)),
                 ],
               ),
             ),
@@ -309,7 +283,7 @@ class _ExamScreenState extends State<ExamScreen> {
             Expanded(
               child: SingleChildScrollView(
                 controller: _scrollController,
-                padding: const EdgeInsets.all(AppSpacing.lg),
+                padding: const EdgeInsets.fromLTRB(AppSpacing.xl, AppSpacing.lg, AppSpacing.xl, AppSpacing.xl * 1.5),
                 child: Center(
                   child: ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 720),
@@ -326,7 +300,7 @@ class _ExamScreenState extends State<ExamScreen> {
                               BoxShadow(color: Color(0x4D000000), blurRadius: 32, offset: Offset(0, 8)),
                             ],
                           ),
-                          padding: const EdgeInsets.all(AppSpacing.lg),
+                          padding: const EdgeInsets.all(AppSpacing.xl),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -334,31 +308,34 @@ class _ExamScreenState extends State<ExamScreen> {
                               Row(
                                 children: [
                                   Expanded(
-                                    child: Text(
-                                      'FRAGE $examProgress${isMultiple ? ' · MEHRFACHAUSWAHL' : ''}',
-                                      style: tt.labelSmall,
-                                    ),
+                                    child: Text('FRAGE $examProgress', style: tt.labelSmall),
                                   ),
-                                  QuestionActions(
-                                    question: question,
-                                    bookmarked: widget.state.bookmarks.contains(qId),
-                                    onToggleBookmark: () => widget.onToggleBookmark(qId),
+                                  TrailingActions(
+                                    children: [
+                                      QuestionActions(
+                                        question: question,
+                                        bookmarked: widget.state.bookmarks.contains(qId),
+                                        onToggleBookmark: () => widget.onToggleBookmark(qId),
+                                      ),
+                                      if (glossaryTerms.isNotEmpty)
+                                        GlossaryTermsButton(terms: glossaryTerms, title: 'Fachbegriffe in dieser Frage'),
+                                    ],
                                   ),
-                                  if (glossaryTerms.isNotEmpty) ...[
-                                    const SizedBox(width: AppSpacing.sm),
-                                    GlossaryTermsButton(terms: glossaryTerms, title: 'Fachbegriffe in dieser Frage'),
-                                  ],
                                 ],
                               ),
-                              const SizedBox(height: AppSpacing.lg),
+                              const SizedBox(height: AppSpacing.md),
                               // Question text
                               QuestionText(question.q),
-                              const SizedBox(height: AppSpacing.lg),
+                              const SizedBox(height: AppSpacing.xl),
+                              if (isMultiple && !answered) ...[
+                                const MultipleChoiceHint(),
+                                const SizedBox(height: AppSpacing.md),
+                              ],
                               // Options
                               ...List.generate(question.options.length, (idx) {
                                 final isSelected = selected.contains(idx);
                                 return Padding(
-                                  padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+                                  padding: const EdgeInsets.only(bottom: AppSpacing.md),
                                   child: OptionButton(
                                     index: idx,
                                     text: question.options[idx],
@@ -436,11 +413,10 @@ class _GradientButton extends StatelessWidget {
       width: double.infinity,
       child: Container(
         decoration: BoxDecoration(
-          gradient: enabled
-              ? AppColors.gradientIndigo
-              : const LinearGradient(colors: [Color(0x4D6366F1), Color(0x4D8B5CF6)]),
+          gradient: enabled ? AppColors.gradientIndigo : null,
+          color: enabled ? null : AppColors.surfaceDark,
           borderRadius: BorderRadius.circular(AppSpacing.lg),
-          boxShadow: enabled ? const [BoxShadow(color: Color(0x4D6366F1), blurRadius: 16, offset: Offset(0, 4))] : null,
+          boxShadow: enabled ? const [BoxShadow(color: AppColors.indigoBorder, blurRadius: 16, offset: Offset(0, 4))] : null,
         ),
         child: ElevatedButton(
           onPressed: enabled ? onTap : null,
@@ -448,10 +424,15 @@ class _GradientButton extends StatelessWidget {
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
             disabledBackgroundColor: Colors.transparent,
-            padding: const EdgeInsets.symmetric(vertical: 16),
+            minimumSize: const Size.fromHeight(52),
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl, vertical: AppSpacing.xl),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSpacing.lg)),
           ),
-          child: Text(text, style: tt.labelLarge),
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: tt.labelLarge!.copyWith(color: enabled ? null : AppColors.textMuted),
+          ),
         ),
       ),
     );

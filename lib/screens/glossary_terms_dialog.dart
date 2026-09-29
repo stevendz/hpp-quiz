@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
+import 'question_actions.dart';
 
 class GlossaryTermsButton extends StatelessWidget {
   final List<MapEntry<String, String>> terms;
@@ -9,17 +10,10 @@ class GlossaryTermsButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return QuestionIconButton(
+      icon: Icons.help_outline_rounded,
+      tooltip: 'Fachbegriffe erklären',
       onTap: () => showGlossaryTermsDialog(context, terms, title: title),
-      child: Container(
-        padding: const EdgeInsets.all(AppSpacing.sm),
-        decoration: BoxDecoration(
-          color: AppColors.indigoSubtle,
-          border: Border.all(color: AppColors.indigoBorder),
-          borderRadius: BorderRadius.circular(AppSpacing.md),
-        ),
-        child: const Icon(Icons.help_outline_rounded, color: AppColors.tealLighter, size: 20),
-      ),
     );
   }
 }
