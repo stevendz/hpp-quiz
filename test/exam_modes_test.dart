@@ -42,6 +42,13 @@ void main() {
       expect(examDaySeconds, 55 * 60);
     });
 
+    test('Merkliste: neueste Prüfung zuerst, Fragennummer im Termin', () {
+      final items = bookmarkedQuestions({20251, 202530, 20261, 20162});
+      expect(items.map((e) => e.question.id), [20261, 202530, 20251, 20162]);
+      expect(items.map((e) => '${e.question.exam} ${e.number}'), ['März 2026 1', 'Oktober 2025 2', 'März 2025 1', 'März 2016 2']);
+      expect(bookmarkedQuestions({}), isEmpty);
+    });
+
     test('letztes Ergebnis je Termin', () {
       ExamRecord record(String label, int score, {String mode = ExamMode.examDay}) =>
           ExamRecord(date: '2026-09-01T10:00:00', score: score, total: 28, mode: mode, examLabel: label);

@@ -11,6 +11,7 @@ import 'services/feedback_service.dart';
 import 'services/storage_service.dart';
 import 'theme/app_theme.dart';
 import 'screens/home_screen.dart';
+import 'screens/bookmarks_screen.dart';
 import 'screens/exam_day_dialog.dart';
 import 'screens/exam_day_screen.dart';
 import 'screens/exam_screen.dart';
@@ -260,8 +261,9 @@ class _QuizControllerState extends State<QuizController> {
     if (!added) bookmarks.remove(questionId);
     logEvent('question_bookmarked', {'question_id': questionId, 'bookmarked': added.toString()});
     await _persist(_state!.copyWith(bookmarks: bookmarks));
-    // Am Prüfungstag würde die Snackbar die Navigationsleiste verdecken; dort zeigen Lesezeichen und Fragenleiste den Status.
-    if (!mounted || (_view == 'exam' && _state!.currentExam?.mode == ExamMode.examDay)) return;
+    // Am Prüfungstag würde die Snackbar die Navigationsleiste verdecken, in der Merkliste zeigen die ausgegrauten
+    // Einträge den Status – dort reicht das Lesezeichen.
+    if (!mounted || _view == 'bookmarks' || (_view == 'exam' && _state!.currentExam?.mode == ExamMode.examDay)) return;
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
       ..showSnackBar(SnackBar(
@@ -419,11 +421,22 @@ class _QuizControllerState extends State<QuizController> {
           body: ProfileScreen(
             onGoHome: () => setState(() => _view = 'home'),
             onShowStats: () => setState(() => _view = 'stats'),
+            onShowBookmarks: () => setState(() => _view = 'bookmarks'),
             onShowFeedback: () => FeedbackSheet.show(context),
             onResetProgress: _handleReset,
             onResetFlashcards: _handleResetFlashcards,
             hasExamHistory: _state!.examHistory.isNotEmpty,
             hasQuizProgress: _state!.questionStats.values.any((s) => s.attempts > 0),
+            bookmarkCount: _state!.bookmarks.length,
+          ),
+        );
+
+      case 'bookmarks':
+        return Scaffold(
+          body: BookmarksScreen(
+            bookmarks: _state!.bookmarks,
+            onToggleBookmark: _toggleBookmark,
+            onGoBack: () => setState(() => _view = 'profile'),
           ),
         );
 

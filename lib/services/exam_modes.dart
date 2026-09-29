@@ -51,6 +51,16 @@ List<int> generateReview(QuizState state, {int limit = 30, Random? random}) {
   return ids.take(limit).toList();
 }
 
+/// Gemerkte Fragen mit ihrer Nummer im Prüfungstermin, neueste Prüfung zuerst, innerhalb eines Termins in Originalreihenfolge.
+List<({Question question, int number})> bookmarkedQuestions(Set<int> bookmarks) {
+  final byId = {for (final q in allQuestions) q.id: q};
+  return [
+    for (final label in pastExamLabels())
+      for (final (i, id) in examDayQuestionIds(label).indexed)
+        if (bookmarks.contains(id)) (question: byId[id]!, number: i + 1),
+  ];
+}
+
 /// Letztes Ergebnis eines Prüfungstermins im Prüfungstag-Modus.
 ExamRecord? lastExamDayRecord(QuizState state, String label) {
   for (final r in state.examHistory.reversed) {

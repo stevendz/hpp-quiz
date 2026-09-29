@@ -5,21 +5,25 @@ import '../theme/app_theme.dart';
 class ProfileScreen extends StatelessWidget {
   final VoidCallback onGoHome;
   final VoidCallback onShowStats;
+  final VoidCallback onShowBookmarks;
   final VoidCallback onShowFeedback;
   final VoidCallback onResetProgress;
   final VoidCallback onResetFlashcards;
   final bool hasExamHistory;
   final bool hasQuizProgress;
+  final int bookmarkCount;
 
   const ProfileScreen({
     super.key,
     required this.onGoHome,
     required this.onShowStats,
+    required this.onShowBookmarks,
     required this.onShowFeedback,
     required this.onResetProgress,
     required this.onResetFlashcards,
     required this.hasExamHistory,
     required this.hasQuizProgress,
+    required this.bookmarkCount,
   });
 
   @override
@@ -85,6 +89,25 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: AppSpacing.lg),
                       ],
+                      SizedBox(
+                        width: double.infinity,
+                        child: TextButton(
+                          onPressed: onShowBookmarks,
+                          style: TextButton.styleFrom(
+                            backgroundColor: AppColors.indigoSubtle,
+                            padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(AppSpacing.lg),
+                              side: const BorderSide(color: Color(0x33636AF1)),
+                            ),
+                          ),
+                          child: Text(
+                            bookmarkCount > 0 ? '🔖 Merkliste ($bookmarkCount)' : '🔖 Merkliste',
+                            style: tt.titleSmall!.copyWith(color: const Color(0xFFA5B4FC)),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: AppSpacing.lg),
                       SizedBox(
                         width: double.infinity,
                         child: TextButton(
