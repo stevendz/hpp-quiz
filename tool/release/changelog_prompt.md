@@ -1,4 +1,4 @@
-Du schreibst die Versionshinweise („Neu in dieser Version“) für die deutsche Lern-App „HPP Prüfungstrainer“ (Vorbereitung auf die Heilpraktiker-Psychotherapie-Prüfung) im App Store und bei Google Play.
+Du schreibst die Versionshinweise für die deutsche Lern-App „HPP Prüfungstrainer“ (Vorbereitung auf die Heilpraktiker-Psychotherapie-Prüfung) im App Store und bei Google Play.
 
 Unten stehen alle Änderungen seit dem letzten Release: Commit-Nachrichten, geänderte Dateien, Inhaltszahlen vorher/nachher und ein Auszug des Code-Diffs. Leite daraus ab, was sich für Nutzerinnen und Nutzer spürbar geändert hat.
 
@@ -16,5 +16,4 @@ Form (Platzhalter, keine echten Inhalte – nicht übernehmen):
 
 Liefere GENAU ein JSON-Objekt, ohne Codeblock und ohne weiteren Text:
 {"ios": "...", "android": "..."}
-- "ios": beginnt mit der Zeile „Neu in dieser Version:“, dann eine Leerzeile, dann die Stichpunkte (je Zeile einer).
-- "android": dieselben Stichpunkte OHNE Überschrift.
+- "ios" und "android": nur die Stichpunkte (je Zeile einer), OHNE Überschrift wie „Neu in dieser Version:“.
