@@ -1,0 +1,6 @@
+Neu in dieser Version:
+
+• Prüfungstag simulieren: Wähle eine der 20 vergangenen Prüfungen und bearbeite sie wie in der echten Prüfung – 28 Fragen in Originalreihenfolge, 55 Minuten, Auswertung erst nach dem Abgeben. Bestanden ab 21 richtigen Antworten.
+• Merkliste: Markiere Fragen mit dem Lesezeichen – beim Üben, am Prüfungstag und in der Auswertung.
+• Fehler & Merkliste üben: Wiederhole alle Fragen, die noch nicht sitzen, und alle gemerkten Fragen in einer Runde.
+• Frage melden: Fehler in einer Frage oder Erklärung entdeckt? Melde sie anonym direkt aus der App.

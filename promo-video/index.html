@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>HPP Prüfungstrainer – Promo</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <symbol id="i-person" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M19 11H7.83l4.88-4.88c.39-.39.39-1.03 0-1.42a.996.996 0 0 0-1.41 0l-6.59 6.59a.996.996 0 0 0 0 1.41l6.59 6.59a.996.996 0 1 0 1.41-1.41L7.83 13H19c.55 0 1-.45 1-1s-.45-1-1-1z"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M14.71 6.71a.996.996 0 0 0-1.41 0L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59a.996.996 0 1 0 1.41-1.41L10.83 12l3.88-3.88c.39-.39.38-1.03 0-1.41z"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M9.29 6.71a.996.996 0 0 0 0 1.41L13.17 12l-3.88 3.88a.996.996 0 1 0 1.41 1.41l4.59-4.59a.996.996 0 0 0 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01z"/></symbol>
+    <symbol id="i-del" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v10zM9 9h6c.55 0 1 .45 1 1v8c0 .55-.45 1-1 1H9c-.55 0-1-.45-1-1v-8c0-.55.45-1 1-1zm6.5-5l-.71-.71c-.18-.18-.44-.29-.7-.29H9.91c-.26 0-.52.11-.7.29L8.5 4H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1h-2.5z"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-4h2v2h-2zm1.61-9.96c-2.06-.3-3.88.97-4.43 2.79-.18.58.26 1.17.87 1.17h.2c.41 0 .74-.29.88-.67.32-.89 1.27-1.5 2.3-1.28.95.2 1.65 1.13 1.57 2.1-.1 1.34-1.62 1.63-2.45 2.88 0 .01-.01.01-.01.02-.01.02-.02.03-.03.05-.09.15-.18.32-.25.5-.01.03-.03.05-.04.08-.01.02-.01.04-.02.07-.12.34-.2.75-.2 1.25h2c0-.42.11-.77.28-1.07.02-.03.03-.06.05-.09.08-.14.18-.27.28-.39.01-.01.02-.03.03-.04.1-.12.21-.23.33-.34.96-.91 2.26-1.65 1.99-3.56-.24-1.74-1.61-3.21-3.35-3.47z"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><path d="M15.88 9.29L12 13.17 8.12 9.29a.996.996 0 1 0-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41c-.39-.38-1.03-.39-1.42 0z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM9 4h2v5l-1-.75L9 9V4zm9 16H6V4h1v9l3-2.25L13 13V4h5v16z"/></symbol>
+  </defs>
+</svg>
+
+<div id="stage"><div id="cam">
+
+  <!-- ============ BACKGROUND ============ -->
+  <div id="bg" class="layer">
+    <div class="base"></div>
+    <div class="blob" id="blobA"></div>
+    <div class="blob" id="blobB"></div>
+    <div class="blob" id="blobC"></div>
+    <div class="blob" id="blobD"></div>
+    <div id="rays"></div>
+    <div id="shapes"></div>
+    <div id="terms"></div>
+  </div>
+
+  <!-- giant word behind the phone (Bestehen) -->
+  <div id="bigB">Bestehen<span class="acc">.</span></div>
+  <div id="labelB" class="label"><span class="idx">03</span><span class="ln"></span><span>Prüfungssimulation</span><span class="ln"></span><span class="idx">30 Fragen · Timer · Auswertung</span></div>
+
+  <canvas class="conf" id="confBack"></canvas>
+
+  <!-- ============ 3D SCENE ============ -->
+  <div id="scene3d">
+    <div id="sats"></div>
+    <div id="phone" class="p3">
+      <div class="shadow"></div>
+      <div class="face back"><div class="backin">
+        <div class="blogo"><img src="assets/logo.png"></div>
+        <div class="cam"><i style="left:14px;top:14px"></i><i style="left:94px;top:54px"></i><i style="left:14px;top:94px"></i></div>
+      </div></div>
+      <div class="face front">
+        <div class="bezel"></div>
+        <div class="screen" id="screen">
+
+          <!-- HOME -->
+          <div class="scr" id="scrHome">
+            <div class="home-card gcard">
+              <div class="home-top"><svg class="ic"><use href="#i-person"/></svg></div>
+              <div class="home-logo"><img src="assets/logo.png"></div>
+              <div class="home-title">HPP Prüfungstrainer</div>
+              <div class="home-subtitle">560 Fragen · 30 pro Prüfung</div>
+              <div class="progress-sec">
+                <div class="stats">
+                  <div class="stat"><div class="v" style="color:var(--tealLL)" id="hSeen">412/560</div><div class="l">Gesehen</div></div>
+                  <div class="stat"><div class="v" style="color:var(--green)" id="hOk">356</div><div class="l">Korrekt</div></div>
+                  <div class="stat"><div class="v" style="color:var(--red)" id="hBad">56</div><div class="l">Falsch</div></div>
+                </div>
+                <div class="pbar"><div class="g" id="hBarG"></div><div class="r" id="hBarR"></div></div>
+              </div>
+              <div class="hbtn start">Prüfung starten</div>
+              <div class="hbtn sub" id="btnLern">Lernkarten</div>
+              <div class="hbtn sub">Begriffe</div>
+            </div>
+          </div>
+
+          <!-- FLASHCARDS -->
+          <div class="scr" id="scrFlash">
+            <div class="topbar"><div class="iconbtn"><svg class="ic"><use href="#i-back"/></svg></div><div class="title">Lernkarten</div><div style="width:48px"></div></div>
+            <div class="fc-prog"><div class="fc-count" id="fcCount">38 / 240</div><div class="fc-bar"><div class="fc-fill" id="fcFill"></div></div></div>
+            <div class="fc-area">
+              <div class="fc-card" id="fcB"><div class="chips"><div class="wrap" id="fcBtags"></div><div class="gbtn"><svg><use href="#i-help"/></svg></div></div><div class="fc-text" id="fcBtext"></div></div>
+              <div class="fc-card" id="fcA"><div class="chips"><div class="wrap" id="fcAtags"></div><div class="gbtn"><svg><use href="#i-help"/></svg></div></div><div class="fc-text" id="fcAtext"></div></div>
+            </div>
+            <div class="fc-nav">
+              <div class="navbtn" id="navPrev"><svg><use href="#i-left"/></svg></div>
+              <div class="navbtn"><svg><use href="#i-del"/></svg></div>
+              <div class="navbtn" id="navNext"><svg><use href="#i-right"/></svg></div>
+            </div>
+          </div>
+
+          <!-- EXAM -->
+          <div class="scr" id="scrExam">
+            <div class="ex-head"><div class="ex-menu">← Menü</div><div class="pill" id="exTimer">04:12</div><div class="pill teal" id="exScore">✓ 6/6</div></div>
+            <div class="ex-prog"><div class="ex-bar"><div class="ex-fill" id="exFill"></div></div><div class="ex-count" id="exCount">Frage 7/30</div></div>
+            <div class="ex-scroll"><div class="ex-content" id="exContent">
+              <div class="q-card gcard" id="qCard">
+                <div class="q-row"><div class="q-label">FRAGE 7 · MEHRFACHAUSWAHL</div><div class="gbtn" id="gBtn"><svg><use href="#i-help"/></svg></div></div>
+                <div class="q-text">Welche der folgenden Substanzen verursachen keine körperliche Abhängigkeit? (Wählen Sie zwei Antworten)</div>
+                <div class="opts" id="opts"></div>
+                <div class="confirm" id="exConfirm"><span id="confTxt">Antwort bestätigen (2 gewählt)</span><div class="dis" id="confDis">Antwort bestätigen (0 gewählt)</div></div>
+                <div class="fb-wrap" id="fbWrap"><div class="feedback" id="exFeedback"><div class="fb-badge">✓ Richtig!</div><div class="fb-text">LSD und Ecstasy (MDMA) verursachen keine körperliche Abhängigkeit, sondern allenfalls eine psychische. Opiate, Benzodiazepine und Nikotin hingegen führen zu einer ausgeprägten körperlichen Abhängigkeit mit Entzugssymptomatik.</div></div>
+                <div class="next" id="exNext">Nächste Frage →</div></div>
+              </div>
+              <div class="reel" id="reel"></div>
+            </div></div>
+          </div>
+
+          <!-- RESULT -->
+          <div class="scr" id="scrResult">
+            <div class="rs-wrap" id="rsWrap">
+              <div class="rs-card gcard" id="rsCard">
+                <div class="rs-emoji" id="rsTrophy">🏆</div>
+                <div class="rs-title" id="rsTitle">Bestanden! 🎉</div>
+                <div class="rs-score" id="rsScore">27 / 30</div>
+                <div class="rs-pct" id="rsPct">90% richtig</div>
+                <div class="rs-msg" id="rsMsg">Hervorragend! Du hast diese Prüfung bestanden (≥75%).</div>
+                <div class="rs-btns" id="rsBtns"><div class="rs-new">Neue Prüfung</div><div class="rs-back">Zurück</div></div>
+              </div>
+              <div class="rs-h" id="rsH">Auswertung</div>
+              <div class="rs-row" id="rsRow"><div>Alle aufklappen</div><div>Alle zuklappen</div></div>
+              <div id="rsTiles"></div>
+            </div>
+          </div>
+
+          <div class="statusbar" id="statusbar">
+            <div class="time">9:41</div>
+            <div class="icons">
+              <svg width="19" height="12" viewBox="0 0 19 12"><rect x="0" y="8" width="3.2" height="4" rx="1" fill="#fff"/><rect x="5" y="5.5" width="3.2" height="6.5" rx="1" fill="#fff"/><rect x="10" y="3" width="3.2" height="9" rx="1" fill="#fff"/><rect x="15" y="0" width="3.2" height="12" rx="1" fill="#fff"/></svg>
+              <svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2.6c2.3 0 4.4.9 6 2.4l1.2-1.2C13.8 2 11.3.9 8.5.9S3.2 2 1.3 3.8L2.5 5c1.6-1.5 3.7-2.4 6-2.4zm0 3.4c1.4 0 2.6.5 3.6 1.4l1.2-1.2C12 5 10.3 4.3 8.5 4.3S5 5 3.7 6.2l1.2 1.2c1-.9 2.2-1.4 3.6-1.4zm0 3.4c-.6 0-1.1.2-1.5.6l1.5 1.6L10 10c-.4-.4-.9-.6-1.5-.6z" fill="#fff"/></svg>
+              <svg width="27" height="13" viewBox="0 0 27 13"><rect x="0.5" y="0.5" width="23" height="12" rx="3.8" fill="none" stroke="rgba(255,255,255,.4)"/><rect x="2" y="2" width="20" height="9" rx="2.4" fill="#fff"/><path d="M25 4.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2z" fill="rgba(255,255,255,.45)"/></svg>
+            </div>
+          </div>
+          <div class="island"></div>
+          <div class="homebar"></div>
+          <div class="ripple" id="ripple"></div>
+          <div class="tap" id="tap"></div>
+          <div class="glare" id="glare"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <canvas class="conf" id="confFront"></canvas>
+
+  <!-- ============ TYPOGRAPHY ============ -->
+  <div id="typeL" class="tblock">
+    <div class="label" id="lblL"><span class="idx">01</span><span class="ln"></span><span>Lernkarten</span></div>
+    <div class="big" id="bigL">Lernen<span class="acc">.</span></div>
+    <div class="sub" id="subL"><span class="num" id="n240">240</span> Lernkarten</div>
+    <div class="sub2" id="sub2L">zu <em class="s">allen</em> Prüfungsthemen</div>
+  </div>
+  <div id="typeV" class="tblock">
+    <div class="label" id="lblV"><span class="idx">02</span><span class="ln"></span><span>Erklärungen &amp; Glossar</span></div>
+    <div class="big" id="bigV">Verstehen<span class="acc">.</span></div>
+    <div class="sub" id="subV">Jede Antwort <em class="s">erklärt.</em></div>
+    <div class="sub2" id="sub2V"><span class="num" id="nGloss">359</span> Fachbegriffe im Glossar</div>
+  </div>
+
+  <!-- ============ HOOK ============ -->
+  <div id="wallWrap"><div id="wall"></div></div>
+  <div id="scrim"></div>
+  <div id="phrase">Welche Aussage trifft zu<span class="q">?</span></div>
+  <div id="counter">
+    <div class="digits" id="digits"></div>
+    <div class="cl" id="cl">Prüfungsfragen</div>
+    <div class="cs" id="cs">aus 20 Prüfungen · 2016 – 2026</div>
+  </div>
+
+  <!-- ============ END CARD ============ -->
+  <div id="end">
+    <div id="drifts"></div>
+    <div id="logoWrap">
+      <div class="lglow" id="lglow"></div>
+      <svg id="orbit" viewBox="-200 -200 400 400"><circle id="orbitC" r="182" fill="none" stroke="rgba(197,216,218,0.28)" stroke-width="1.5"/><g id="orbitDots"><circle r="4.5" cx="182" cy="0" fill="#C5D8DA"/><circle r="3" cx="-182" cy="0" fill="#86EFAC"/></g></svg>
+      <div class="ring" id="ring1"></div>
+      <div class="ring" id="ring2"></div>
+      <div class="lg" id="lg"><img src="assets/logo.png"></div>
+    </div>
+    <div id="appname">HPP Prüfungstrainer</div>
+    <div id="appsub">Heilpraktiker für Psychotherapie</div>
+    <div id="tagline"><span class="w" id="tw1">Lernen<span class="acc">.</span></span><span class="w" id="tw2">Verstehen<span class="acc">.</span></span><span class="w" id="tw3">Bestehen<span class="acc">.</span></span></div>
+    <div id="pill">Jetzt für iOS &amp; Android</div>
+  </div>
+
+</div>
+<div id="fx">
+  <div id="flash"></div>
+  <div id="vignette"></div>
+  <div id="grain"></div>
+  <div id="fade"></div>
+</div>
+</div>
+
+<script src="data.js"></script>
+<script src="timeline.js"></script>
+<script src="lib.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

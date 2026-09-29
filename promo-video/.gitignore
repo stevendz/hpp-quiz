@@ -1,0 +1,3 @@
+node_modules/
+# rendered videos, stills, audio and screenshots – regenerate with the scripts (see README)
+out/

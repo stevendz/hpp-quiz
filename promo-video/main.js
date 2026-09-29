@@ -1,0 +1,1119 @@
+// HPP Prüfungstrainer – 15s promo. Every pixel is a pure function of t.
+(() => {
+  'use strict';
+  const D = window.DATA;
+  const DUR = 15;
+  const CX = 960, CY = 540;
+
+  // ------------------------------------------------------------------
+  // Timeline (seconds). 120 BPM grid: beats every 0.5s.
+  // ------------------------------------------------------------------
+  const T = window.TIMELINE;
+
+  // ------------------------------------------------------------------
+  // Phone choreography
+  // ------------------------------------------------------------------
+  const W0 = T.whip, W1 = T.whipEnd, WM = (T.whip + T.whipEnd) / 2;
+  const F0 = T.ff, F1 = T.result + 0.06;
+  const X0 = T.exit, X1 = T.logo;
+  const LAND = T.land + 0.16;
+  const PP = {
+    x: [[T.fly, 520], [LAND, 330, E.out], [W0, 316, E.inOutSine], [W1, -330, E.whip], [F0, -316, E.inOutSine], [F1, 0, E.inOut], [X0, 0], [X1, 0]],
+    y: [[T.fly, 900], [T.fly + 0.36, 300, E.inOutSine], [LAND, 4, E.out], [W0, 4], [WM, -46, E.outSine], [W1, 4, E.inSine], [F0, 4], [F1, 40, E.inOut], [X0, 30, E.inOutSine], [X1, 1400, E.in]],
+    z: [[T.fly, -3800], [T.fly + 0.36, -1100, E.inOutSine], [LAND, 0, E.out], [W0, 0], [WM, -420, E.outSine], [W1, 0, E.inSine], [F0, 0], [F1, -40, E.inOut], [X0, 60, E.inOutSine], [X1, -160, E.in]],
+    rx: [[T.fly, 50], [LAND, 5, E.out], [W0, 5], [F0, 4], [F1, 3, E.inOut], [X0, 2], [X1, -40, E.in]],
+    ry: [[T.fly, -110], [LAND, -20, E.out], [W0, -12, E.inOutSine], [W1, -341, E.whip], [F0, -348, E.inOutSine], [F1, -360, E.inOut], [X0, -360], [X1, -378, E.in]],
+    rz: [[T.fly, -24], [LAND, 0, E.out], [W0, 0], [WM, -8, E.outSine], [W1, 0, E.inSine], [X0, 0], [X1, 14, E.in]],
+    s: [[T.fly, 0.9], [W0, 0.9], [WM, 0.86], [W1, 0.9], [F0, 0.9], [F1, 0.84, E.inOut], [X0, 0.88, E.inOutSine], [X1, 0.8]],
+  };
+  function phoneBase(t) {
+    return { x: kf(t, PP.x), y: kf(t, PP.y), z: kf(t, PP.z), rx: kf(t, PP.rx), ry: kf(t, PP.ry), rz: kf(t, PP.rz), s: kf(t, PP.s) };
+  }
+  function phonePose(t) {
+    const p = phoneBase(t);
+    p.x += wobble(t, 0.11, 0.3) * 5;
+    p.y += wobble(t, 0.09, 1.1) * 7;
+    p.rx += wobble(t, 0.07, 2.2) * 1.3;
+    p.ry += wobble(t, 0.08, 0.7) * 1.8;
+    return p;
+  }
+  // moment the phone's back faces the camera during the whip -> switch screens
+  let T_SWITCH = 5.7;
+  {
+    let lo = T.whip, hi = T.whipEnd;
+    for (let i = 0; i < 40; i++) {
+      const m = (lo + hi) / 2;
+      if (phoneBase(m).ry > -180) lo = m; else hi = m;
+    }
+    T_SWITCH = (lo + hi) / 2;
+  }
+
+  // ------------------------------------------------------------------
+  // Refs + build
+  // ------------------------------------------------------------------
+  const R = {};
+  const S = {}; // measured screen-space points
+  let wallCards = [], shapes = [], terms = [], topics = [], glossCards = [], leaves = [], conf = [];
+  let splits = {};
+  const PH_W = 420, PH_H = 874;
+
+  function buildPhone() {
+    const phone = $('#phone');
+    const back = $('.back', phone);
+    const N = 22, DEPTH = 48;
+    for (let i = 1; i <= N; i++) {
+      const e = document.createElement('div');
+      e.className = 'edge';
+      const k = i / (N + 1);
+      const hl = Math.pow(Math.sin(k * Math.PI), 5);
+      const c = Math.round(40 + 130 * hl);
+      e.style.background = `rgb(${c},${c + 5},${c + 8})`;
+      e.style.transform = `translateZ(${(-k * DEPTH).toFixed(2)}px)`;
+      phone.insertBefore(e, back);
+    }
+    $('.shadow', phone).style.transform = 'translateZ(-170px) translateY(36px)';
+  }
+
+  function buildScreens() {
+    const OPTS = ['Opiate', 'Benzodiazepine', 'LSD (Lysergsäurediethylamid)', 'Nikotin', 'Ecstasy'];
+    $('#opts').innerHTML = OPTS.map(
+      (o, i) => `<div class="opt" id="opt${i}"><div class="hl"></div><div class="ok"></div><div class="cb"><div class="fill">✓</div></div><div class="ot">${o}</div><div class="mark">✓</div></div>`,
+    ).join('');
+
+    const fb = $('.fb-text');
+    fb.innerHTML = fb.textContent
+      .replace('LSD', '<span class="kw" id="kwLSD">LSD</span>')
+      .replace('Benzodiazepine', '<span class="kw" id="kwBenzo">Benzodiazepine</span>');
+
+    const [A, B] = D.flash;
+    const chips = (tags) => tags.map((t) => `<div class="chip">${t}</div>`).join('');
+    $('#fcAtags').innerHTML = chips(A.tags);
+    $('#fcAtext').textContent = A.text;
+    $('#fcBtags').innerHTML = chips(B.tags);
+    $('#fcBtext').textContent = B.text;
+
+    const tiles = [
+      [1, 'Welche Aussage zum operanten Konditionieren trifft zu?', true],
+      [2, 'Welche der folgenden Aussagen eines Patienten entspricht einem Wahn?', true],
+      [3, 'Welche der folgenden Aussagen zur bipolaren Störung nach ICD-10 treffen zu?', false],
+      [4, 'Welche der folgenden Substanzen verursachen keine körperliche Abhängigkeit?', true],
+    ];
+    $('#rsTiles').innerHTML = tiles
+      .map(
+        ([n, q, ok]) =>
+          `<div class="tile${ok ? '' : ' bad'}"><div class="tc">${ok ? '✓' : '✗'}</div><div class="tb"><div class="tl">FRAGE ${n}</div><div class="tt">${q}</div></div><svg><use href="#i-more"/></svg></div>`,
+      )
+      .join('');
+
+    const combos = [
+      'Nur die Aussagen 1 und 2 sind richtig',
+      'Nur die Aussagen 1, 3 und 5 sind richtig',
+      'Nur die Aussagen 2 und 4 sind richtig',
+      'Nur die Aussagen 3, 4 und 5 sind richtig',
+      'Alle Aussagen sind richtig',
+    ];
+    const reel = D.stems.filter((s) => s[2].length < 90).slice(3, 8);
+    $('#reel').innerHTML = reel
+      .map(
+        (s, k) =>
+          `<div class="q-card gcard"><div class="q-row"><div class="q-label">FRAGE ${9 + k * 5}</div></div><div class="q-text">${s[2]}</div><div class="opts">${combos
+            .map((c) => `<div class="opt"><div class="ot">${c}</div></div>`)
+            .join('')}</div></div>`,
+      )
+      .join('');
+  }
+
+  function buildWall() {
+    const wall = $('#wall');
+    const COLS = 13, ROWS = 11, PX = 452, PY = 178;
+    const rnd = rng(3);
+    let k = 0;
+    const hr = 5, hc = 6;
+    for (let r = 0; r < ROWS; r++) {
+      for (let c = 0; c < COLS; c++) {
+        const el = document.createElement('div');
+        const hero = r === hr && c === hc;
+        el.className = 'wcard' + (hero ? ' hero' : '');
+        const s = D.stems[k++ % D.stems.length];
+        const x = (c - (COLS - 1) / 2) * PX + (r % 2 ? PX / 4 : -PX / 4);
+        const y = (r - (ROWS - 1) / 2) * PY;
+        const z = hero ? 0 : (rnd() - 0.5) * 180;
+        const st = rnd();
+        const icon = hero ? '' : st < 0.13 ? '<i class="ok">✓</i>' : st < 0.2 ? '<i class="no">✗</i>' : '';
+        el.innerHTML = hero
+          ? `<div class="wl">HPP · PRÜFUNGSFRAGE</div><div class="wt">Welche Aussage trifft zu?</div>`
+          : `<div class="wl">${s[0]} · FRAGE ${s[1]}${icon}</div><div class="wt">${s[2]}</div>`;
+        const d = Math.hypot(x / 3000, y / 1150);
+        const base = hero ? 1 : clamp(1.2 - d * 1.05, 0.18, 1) * (0.72 + rnd() * 0.28);
+        el.style.transform = `translate3d(${x - 210}px,${y - 75}px,${z}px)`;
+        // opaque cards; the vignette lives in the content so the wall occludes what is behind it
+        const shade = Math.round(lerp(10, 22, base));
+        el.style.background = `rgb(${shade},${shade + 20},${shade + 22})`;
+        el.style.borderColor = `rgba(138,180,182,${(0.05 + base * 0.14).toFixed(3)})`;
+        el.querySelectorAll('.wl,.wt').forEach((n) => (n.style.opacity = (0.25 + base * 0.75).toFixed(3)));
+        wall.appendChild(el);
+        wallCards.push({ el, x, y, z, base });
+      }
+    }
+  }
+
+  function buildCounter() {
+    const wheels = [5, 16, 20];
+    $('#digits').innerHTML = wheels
+      .map(() => `<div class="wheel"><div class="strip">${Array.from({ length: 30 }, (_, i) => `<div>${i % 10}</div>`).join('')}</div></div>`)
+      .join('');
+    R.strips = $$('#digits .strip');
+    R.wheelTargets = wheels;
+    // Size the wheels to the real digit advance.
+    const probe = document.createElement('span');
+    probe.style.cssText = 'position:absolute;visibility:hidden;font:800 300px/1 "Plus Jakarta Sans";font-variant-numeric:tabular-nums;letter-spacing:-0.04em';
+    probe.textContent = '0';
+    document.body.appendChild(probe);
+    const w = probe.getBoundingClientRect().width;
+    probe.remove();
+    $$('#digits .wheel').forEach((wh) => (wh.style.width = `${w}px`));
+    $('#digits').style.fontVariantNumeric = 'tabular-nums';
+  }
+
+  const TOPICS = [
+    { code: 'F2', name: 'Schizophrenie', tag: 'F2 – Schizophrenie', col: '#86EFAC', p: [-350, -300, -110] },
+    { code: 'F3', name: 'Affektive Störungen', tag: 'F3 – Affektive Störungen', col: '#FBBF24', p: [350, -330, -40] },
+    { code: 'F4', name: 'Neurotische Störungen', tag: 'F4 – Neurotische Störungen', col: '#8AB4B6', p: [385, 10, 150] },
+    { code: 'F1', name: 'Substanz­störungen', tag: 'F1 – Substanzstörungen', col: '#C5D8DA', p: [-345, 300, 90] },
+    { code: '§', name: 'Recht & Berufskunde', tag: 'Recht & Berufskunde', col: '#DCE8E9', p: [340, 330, -30] },
+    { code: 'F0', name: 'Organische Störungen', tag: 'F0 – Organische Störungen', col: '#8AB4B6', p: [-160, -500, -320] },
+    { code: 'F6', name: 'Persönlichkeits­störungen', tag: 'F6 – Persönlichkeitsstörungen', col: '#C5D8DA', p: [170, 500, -300] },
+    { code: 'Ψ', name: 'Therapie­verfahren', tag: 'Therapieverfahren', col: '#86EFAC', p: [-395, 10, -330] },
+  ];
+
+  function buildSats() {
+    const sats = $('#sats');
+    TOPICS.forEach((tp, i) => {
+      const el = document.createElement('div');
+      el.className = 'topic';
+      el.innerHTML = `<div class="code" style="background:${tp.col}">${tp.code}</div><div><div class="tk">${D.topicCounts[tp.tag]} Karten</div><div class="tn">${tp.name}</div></div>`;
+      sats.appendChild(el);
+      topics.push({ el, ...tp, i });
+    });
+    const GL = [
+      { term: 'LSD', def: D.gloss.LSD, kw: '#kwLSD', p: [-680, -200, 150], t0: T.g1 },
+      { term: 'Benzodiazepine', def: D.gloss.Benzodiazepine, kw: '#kwBenzo', p: [-690, 212, 110], t0: T.g2 },
+    ];
+    GL.forEach((g) => {
+      const el = document.createElement('div');
+      el.className = 'gcard3';
+      el.innerHTML = `<div class="gk"><svg><use href="#i-book"/></svg>Glossar</div><div class="gt">${g.term}</div><div class="gd">${g.def}</div>`;
+      sats.appendChild(el);
+      glossCards.push({ el, ...g });
+    });
+    // center every satellite on the stage origin
+    [...topics, ...glossCards].forEach((o) => {
+      const r = o.el.getBoundingClientRect();
+      o.w = r.width;
+      o.h = r.height;
+      o.el.style.left = `${CX - r.width / 2}px`;
+      o.el.style.top = `${CY - r.height / 2}px`;
+    });
+  }
+
+  const SHAPES = {
+    circle: '<circle cx="50" cy="50" r="38"/>',
+    square: '<rect x="15" y="15" width="70" height="70" rx="8"/>',
+    triangle: '<path d="M50 14 L88 82 L12 82 Z"/>',
+    diamond: '<path d="M50 10 L90 50 L50 90 L10 50 Z"/>',
+    zig: '<path d="M10 30 H42 V70 H90"/>',
+    cross: '<path d="M22 22 L78 78 M78 22 L22 78"/>',
+  };
+  function buildShapes() {
+    const host = $('#shapes');
+    const rnd = rng(19);
+    const types = Object.keys(SHAPES);
+    for (let i = 0; i < 46; i++) {
+      const type = types[i % types.length];
+      const d = 0.25 + rnd() * 0.75;
+      const size = (26 + rnd() * 30) * (0.7 + d * 0.6);
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('viewBox', '0 0 100 100');
+      svg.setAttribute('width', size);
+      svg.setAttribute('height', size);
+      svg.innerHTML = `<g fill="none" stroke="#8AB4B6" stroke-width="${(7 / (0.7 + d * 0.6)).toFixed(2)}" stroke-linecap="round" stroke-linejoin="round">${SHAPES[type]}</g>`;
+      host.appendChild(svg);
+      shapes.push({ el: svg, x: -500 + rnd() * 2920, y: -260 + rnd() * 1600, d, size, rot: rnd() * 360, vr: (rnd() - 0.5) * 40, ph: rnd() * 6, a: 0.07 + d * 0.13 });
+    }
+  }
+
+  function buildTerms() {
+    const host = $('#terms');
+    const P = [
+      ['Anhedonie', 1500, 130, 0.9], ['Ambivalenz', 1160, 70, 0.45], ['Konfabulationen', 1730, 250, 0.4],
+      ['Ideenflucht', 1290, 960, 0.85], ['Parathymie', 1680, 1000, 0.5], ['Perseveration', 990, 1030, 0.35],
+      ['Echolalie', 170, 90, 0.5], ['Mutismus', 520, 50, 0.3], ['Wahn', 150, 990, 0.75],
+      ['Korsakow-Syndrom', 520, 1040, 0.3], ['Derealisation', 1820, 620, 0.3], ['Stupor', 900, 60, 0.3],
+    ];
+    P.forEach(([w, x, y, d], i) => {
+      const el = document.createElement('div');
+      el.className = 'term';
+      el.textContent = w;
+      host.appendChild(el);
+      const r = el.getBoundingClientRect();
+      terms.push({ el, x: x - r.width / 2, y: y - r.height / 2, d, i });
+    });
+  }
+
+  const LEAF = 'M0 -62 C 30 -36 36 18 4 62 C -26 34 -32 -22 0 -62 Z';
+  function buildLeaves() {
+    const host = $('#logoWrap');
+    const cols = ['#8AB4B6', '#C5D8DA', '#6A9A9C', '#DCE8E9', '#4E7A7C', '#8AB4B6', '#C5D8DA'];
+    const rnd = rng(8);
+    for (let i = 0; i < 7; i++) {
+      const el = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      el.setAttribute('class', 'leaf');
+      el.setAttribute('width', '140');
+      el.setAttribute('height', '140');
+      el.setAttribute('viewBox', '-70 -70 140 140');
+      el.style.overflow = 'visible';
+      el.innerHTML = `<path d="${LEAF}" fill="${cols[i]}"/><path d="M2 -48 C 8 -10 8 20 3 54" stroke="rgba(15,31,32,.45)" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+      host.insertBefore(el, $('#lg'));
+      leaves.push({ el, a0: (i / 7) * Math.PI * 2 + rnd() * 0.5, r0: 620 + rnd() * 360, spin: 1.6 + rnd() * 1.2, s: 0.55 + rnd() * 0.5, delay: rnd() * 0.12 });
+    }
+  }
+
+  let drifts = [];
+  function buildDrifts() {
+    const host = $('#drifts');
+    const rnd = rng(23);
+    const P = [[300, 240], [1640, 300], [220, 820], [1720, 860], [560, 980], [1380, 1000], [1500, 120], [420, 520]];
+    P.forEach(([x, y], i) => {
+      const el = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      el.setAttribute('class', 'drift');
+      el.setAttribute('viewBox', '-70 -70 140 140');
+      el.innerHTML = `<path d="${LEAF}" fill="${['#8AB4B6', '#C5D8DA', '#6A9A9C'][i % 3]}"/>`;
+      host.appendChild(el);
+      drifts.push({ el, x, y, s: 0.5 + rnd() * 0.6, r0: rnd() * 360, vr: (rnd() - 0.5) * 30, ph: rnd() * 6, a: 0.1 + rnd() * 0.12 });
+    });
+  }
+
+  function buildConfetti() {
+    const rnd = rng(42);
+    const PAL = ['#22C55E', '#86EFAC', '#86EFAC', '#8AB4B6', '#C5D8DA', '#FBBF24', '#F1F5F9', '#6A9A9C', '#DCE8E9'];
+    const add = (n, fn) => {
+      for (let i = 0; i < n; i++) conf.push(fn(i));
+    };
+    const make = (x0, y0, ang, spread, v0, v1, t0) => () => {
+      const a = (ang + (rnd() - 0.5) * spread) * D2R;
+      const v = v0 + rnd() * (v1 - v0);
+      const kind = rnd();
+      return {
+        x0: x0 + (rnd() - 0.5) * 60, y0, t0: t0 + rnd() * rnd() * 0.16,
+        vx: Math.cos(a) * v, vy: Math.sin(a) * v,
+        w: kind < 0.72 ? 10 + rnd() * 9 : kind < 0.9 ? 9 + rnd() * 4 : 4,
+        h: kind < 0.72 ? 6 + rnd() * 5 : kind < 0.9 ? 9 + rnd() * 4 : 20 + rnd() * 10,
+        round: kind >= 0.72 && kind < 0.9,
+        col: PAL[Math.floor(rnd() * PAL.length)],
+        rot: rnd() * 6.28, vrot: (rnd() - 0.5) * 14,
+        flip: rnd() * 6.28, vflip: 6 + rnd() * 10,
+        z: rnd() * 2 - 1,
+        fa: 18 + rnd() * 34, ff: 1.2 + rnd() * 1.6, fph: rnd() * 6.28,
+        k: 1.9 + rnd() * 0.9,
+      };
+    };
+    add(100, make(250, 1130, -64, 40, 1700, 3700, T.confetti));
+    add(100, make(1670, 1130, -116, 40, 1700, 3700, T.confetti));
+    add(70, make(960, 360, -90, 150, 900, 2100, T.confetti + 0.02));
+  }
+
+  function makeGrain() {
+    const c = document.createElement('canvas');
+    c.width = c.height = 256;
+    const g = c.getContext('2d');
+    const img = g.createImageData(256, 256);
+    const rnd = rng(77);
+    for (let i = 0; i < img.data.length; i += 4) {
+      const v = Math.floor(rnd() * 255);
+      img.data[i] = img.data[i + 1] = img.data[i + 2] = v;
+      img.data[i + 3] = 255;
+    }
+    g.putImageData(img, 0, 0);
+    const gr = $('#grain');
+    gr.style.backgroundImage = `url(${c.toDataURL()})`;
+    gr.style.backgroundSize = '256px 256px';
+  }
+
+  // Position helpers (layout-time, no transforms applied yet)
+  function centerAt(el, x, y) {
+    const r = el.getBoundingClientRect();
+    el.style.left = `${x - r.width / 2}px`;
+    el.style.top = `${y - r.height / 2}px`;
+    return r;
+  }
+  function screenPoint(el, fx = 0.5, fy = 0.5) {
+    const s = $('#screen').getBoundingClientRect();
+    const r = el.getBoundingClientRect();
+    return [r.left - s.left + r.width * fx, r.top - s.top + r.height * fy];
+  }
+  // screen-space (390x844) -> phone-local 3D (origin at phone centre)
+  const screenToLocal = (sx, sy) => [15 + sx - PH_W / 2, 15 + sy - PH_H / 2, 1];
+
+  function layout() {
+    // Typography sizes
+    const bigL = $('#bigL'), bigV = $('#bigV');
+    const wV = bigV.getBoundingClientRect().width;
+    const fs = Math.min(172, (172 * 820) / wV);
+    bigL.style.fontSize = bigV.style.fontSize = `${fs}px`;
+    // fix number widths
+    for (const [id, v] of [['#n240', '240'], ['#nGloss', String(D.appstore.glossCount)]]) {
+      const n = $(id);
+      n.textContent = v;
+      n.style.width = `${n.getBoundingClientRect().width + 2}px`;
+    }
+    const tl = $('#typeL');
+    tl.style.left = '150px';
+    tl.style.top = `${CY - tl.getBoundingClientRect().height / 2}px`;
+    const tv = $('#typeV');
+    const rv = tv.getBoundingClientRect();
+    tv.style.left = `${Math.max(1000, 1920 - 130 - rv.width)}px`;
+    tv.style.top = `${CY - rv.height / 2}px`;
+
+    const bigB = $('#bigB');
+    const wb = bigB.getBoundingClientRect().width;
+    if (wb > 1780) bigB.style.fontSize = `${(330 * 1780) / wb}px`;
+    centerAt(bigB, CX, CY + 10);
+    centerAt($('#labelB'), CX, 88);
+
+    centerAt($('#phrase'), CX, CY);
+    centerAt($('#counter'), CX, CY + 10);
+
+    centerAt($('#appname'), CX, 548);
+    const shine = $('#appname').cloneNode(true);
+    shine.id = 'appshine';
+    $('#end').appendChild(shine);
+    const an = $('#appname');
+    Object.assign(shine.style, { left: an.style.left, top: an.style.top });
+    R.appshine = shine;
+    centerAt($('#appsub'), CX, 638);
+    centerAt($('#tagline'), CX, 752);
+    centerAt($('#pill'), CX, 852);
+
+    // Screen-space anchors for taps / pop-outs
+    S.btnLern = screenPoint($('#btnLern'));
+    S.fcCard = screenPoint($('#fcA'), 0.8, 0.45);
+    S.opt = [0, 1, 2, 3, 4].map((i) => screenPoint($(`#opt${i}`), 0.5, 0.5));
+    S.confirm = screenPoint($('#exConfirm'));
+    const cr = $('#exConfirm').getBoundingClientRect();
+    S.confirmH = cr.height + 12;
+    S.fbH = $('#fbWrap').getBoundingClientRect().height;
+    S.next = screenPoint($('#exNext'));
+    S.kwLSD = screenPoint($('#kwLSD'));
+    S.kwBenzo = screenPoint($('#kwBenzo'));
+    S.cbW = 34;
+    // how far to scroll so the whole feedback + next button is visible
+    const nextBottom = $('#exNext').getBoundingClientRect().bottom - $('#screen').getBoundingClientRect().top;
+    S.scroll = Math.max(0, nextBottom - S.confirmH - (844 - 40));
+    S.reelH = $('#reel').getBoundingClientRect().height;
+    // tagline target for the "Bestehen." morph
+    S.tw3 = $('#tw3').getBoundingClientRect();
+    S.bigB = bigB.getBoundingClientRect();
+  }
+
+  function splitAll() {
+    splits.phrase = splitText($('#phrase'), { by: 'words', pad: [0.15, 0.3, 0.3, 0.25] });
+    splits.bigL = splitText($('#bigL'), { by: 'chars' });
+    splits.bigV = splitText($('#bigV'), { by: 'chars' });
+    splits.bigB = splitText($('#bigB'), { by: 'chars', mask: false });
+    splits.name = splitText($('#appname'), { by: 'chars' });
+    splits.appsub = splitText($('#appsub'), { by: 'words', mask: false, pad: [0.15, 0.35, 0.3, 0.3] });
+    splits.cl = splitText($('#cl'), { by: 'chars' });
+    splits.tw1 = splitText($('#tw1'), { by: 'chars' });
+    splits.tw2 = splitText($('#tw2'), { by: 'chars' });
+    const grad = (units, a = '#FFFFFF', b = '#BFD5D7') =>
+      units.forEach((u) => {
+        if (u.host.classList.contains('acc')) return;
+        Object.assign(u.el.style, { backgroundImage: `linear-gradient(180deg, ${a} 35%, ${b} 100%)`, webkitBackgroundClip: 'text', backgroundClip: 'text', webkitTextFillColor: 'transparent' });
+      });
+    grad(splits.bigL);
+    grad(splits.bigV);
+    grad(splits.bigB);
+    grad(splits.name);
+  }
+
+  // ------------------------------------------------------------------
+  // Render
+  // ------------------------------------------------------------------
+  const tf = (x, y, extra = '') => `translate(${f2(x)}px,${f2(y)}px) ${extra}`;
+  // Toggle whole subtrees (visibility would be overridden by children that set it explicitly)
+  const show = (el, on) => css(el, { display: on ? '' : 'none' });
+
+  function renderCamera(t) {
+    const shakes = [shake(t, T.land + 0.02, 5, 0.3, 13), shake(t, T.whipEnd, 2.5, 0.3, 13), shake(t, T.confetti, 5.5, 0.35, 12), shake(t, T.logo + 0.04, 4, 0.3, 12)];
+    let x = wobble(t, 0.19, 0.5) * 2.2, y = wobble(t, 0.16, 2.1) * 2.2, r = 0;
+    for (const s of shakes) {
+      x += s[0];
+      y += s[1];
+      r += s[2];
+    }
+    css(R.cam, { transform: `translate(${f2(x)}px,${f2(y)}px) rotate(${r.toFixed(3)}deg)` });
+  }
+
+  function panX(t) {
+    return kf(t, [[T.fly, 0], [LAND, 0], [W0, -40, E.inOutSine], [W1, -560, E.whip], [F0, -600], [F1, -900, E.inOut], [X0, -940], [X1 + 0.04, -1250, E.inOut]]);
+  }
+  function zoomBG(t) {
+    return kf(t, [[0, 0.82], [0.98, 0.86], [1.55, 0.72, E.out], [2.06, 0.74], [2.62, 1.0, E.out], [15, 1.06]]);
+  }
+
+  function renderBG(t) {
+    const px = panX(t), zm = zoomBG(t);
+    const pb = phoneBase(t);
+    // blobs
+    const phX = CX + pb.x, phY = CY + pb.y;
+    const endP = range(t, T.exit, T.logo);
+    const sceneOn = range(t, T.fly, T.land);
+    css(R.blobA, {
+      transform: tf(lerp(lerp(CX, phX, sceneOn), CX, endP) + wobble(t, 0.05) * 60, lerp(phY, 330, endP) + wobble(t, 0.04, 1) * 40, `scale(${f2(0.75 + 0.15 * Math.sin(t * 0.7))})`),
+      opacity: f2(kf(t, [[0, 0.22], [2.2, 0.26], [2.7, 0.55], [T.result - 0.08, 0.5], [T.result + 0.22, 0.25], [X0 + 0.3, 0.2], [X1 + 0.14, 0.6], [15, 0.5]])),
+    });
+    css(R.blobB, {
+      transform: tf(260 + px * 0.15 + Math.sin(t * 0.3) * 80, 160 + Math.cos(t * 0.25) * 60, 'scale(0.9)'),
+      opacity: f2(kf(t, [[0, 0.1], [2.5, 0.2], [12, 0.16], [13, 0.22]])),
+    });
+    css(R.blobC, {
+      transform: tf(CX, 560, `scale(${f2(0.8 + 0.25 * E.out(range(t, T.result, T.result + 1.2)))})`),
+      opacity: f2(kf(t, [[T.ff + 0.26, 0], [T.result + 0.28, 0.42, E.out], [X0, 0.36], [X0 + 0.5, 0, E.inOut]])),
+    });
+    css(R.blobD, {
+      transform: tf(1700 + px * 0.2 + Math.sin(t * 0.2) * 90, 900 + Math.cos(t * 0.33) * 70, 'scale(1.05)'),
+      opacity: f2(kf(t, [[0, 0.3], [2.5, 0.42], [12.5, 0.35], [15, 0.42]])),
+    });
+    // rays
+    css(R.rays, {
+      opacity: f2(kf(t, [[T.result - 0.08, 0], [T.result + 0.32, 0.85, E.out], [X0 - 0.1, 0.7], [X0 + 0.4, 0]])),
+      transform: `rotate(${(t * 7).toFixed(2)}deg) scale(${f2(0.9 + 0.1 * E.out(range(t, T.result - 0.08, T.result + 1.1)))})`,
+    });
+    // brand shapes (parallax field)
+    const shA = kf(t, [[0, 0.35], [0.98, 0.45], [2.06, 0.5], [2.66, 1], [12.2, 1], [12.8, 0.8]]);
+    for (const s of shapes) {
+      const k = 1 + (zm - 1) * s.d * 1.4;
+      let x = s.x + px * s.d * 0.9;
+      let y = s.y + Math.sin(t * 0.35 + s.ph) * 14 * s.d - t * 10 * s.d;
+      x = CX + (x - CX) * k;
+      y = CY + (y - CY) * k;
+      css(s.el, {
+        transform: `translate(${f2(x - s.size / 2)}px,${f2(y - s.size / 2)}px) rotate(${f2(s.rot + s.vr * t)}deg) scale(${f2(k)})`,
+        opacity: f2(s.a * shA),
+      });
+    }
+    // floating glossary terms (Verstehen)
+    for (const w of terms) {
+      const a = E.out(range(t, W1 + w.i * 0.06, W1 + 0.6 + w.i * 0.06)) * (1 - E.inOut(range(t, F0 - 0.14, F0 + 0.36)));
+      const y = w.y - (t - W1) * 22 * w.d + (1 - a) * 30;
+      const x = w.x + (panX(t) + 580) * w.d * 0.6;
+      css(w.el, {
+        transform: `translate(${f2(x)}px,${f2(y)}px) scale(${f2(0.72 + w.d * 0.4)})`,
+        opacity: f2(a * (0.18 + 0.4 * w.d)),
+        filter: `blur(${f2((1 - w.d) * 5)}px)`,
+      });
+    }
+  }
+
+  function renderHook(t) {
+    // phrase
+    const pr = t - T.pull;
+    const shrink = E.inOutCubic(range(t, T.pull, T.pull + 0.4));
+    const ps = lerp(lerp(1, 1.045, E.inOutSine(range(t, 0, T.pull))), 0.16, shrink);
+    show(R.phrase, t < T.pull + 0.5);
+    css(R.phrase, {
+      transform: `scale(${ps.toFixed(4)})`,
+      opacity: f2(1 - E.inOutCubic(range(t, T.pull + 0.08, T.pull + 0.34))),
+      filter: `blur(${f2(shrink * 5)}px)`,
+    });
+    splits.phrase.forEach((u, i) => {
+      const k = Math.min(i, 3);
+      const p = E.out(range(t, T.phraseIn + k * 0.09 + (i === 4 ? 0.07 : 0), T.phraseIn + k * 0.09 + 0.95));
+      css(u.el, { transform: `translateY(${f2((1 - p) * 118)}%) rotate(${f2((1 - p) * 4)}deg)` });
+    });
+
+    // wall
+    const wz = kf(t, [[T.pull, 760], [T.pull + 0.62, -1500, E.out], [T.fly, -1680, E.linear], [T.fly + 0.38, 2400, E.inCubic]]);
+    const wrx = kf(t, [[T.pull, 2], [T.pull + 0.62, 15, E.out], [T.fly, 17], [T.fly + 0.36, 6, E.in]]);
+    const wry = kf(t, [[T.pull, 4], [T.pull + 0.62, -12, E.out], [T.fly, -15, E.linear], [T.fly + 0.36, -4, E.in]]);
+    const wrz = kf(t, [[T.pull, 8], [T.pull + 0.62, -3, E.out], [T.fly, -4.5], [T.fly + 0.36, -1]]);
+    const wo = kf(t, [[T.pull - 0.02, 0], [T.pull + 0.22, 1, E.out]]);
+    const wallOn = t > T.pull - 0.05 && t < T.fly + 0.4;
+    show(R.wallWrap, wallOn);
+    if (wallOn) {
+      css(R.wall, { transform: `translateZ(${f2(wz)}px) rotateX(${f2(wrx)}deg) rotateY(${f2(wry)}deg) rotateZ(${f2(wrz)}deg)` });
+      const wp = { x: 0, y: 0, z: wz, rx: wrx, ry: wry, rz: wrz, s: 1 };
+      for (const c of wallCards) {
+        // each card fades as it approaches the lens, so the wall streams past
+        const zw = applyPose([c.x, c.y, c.z], wp)[2];
+        const near = clamp((zw - 350) / 550);
+        css(c.el, { opacity: f2(wo * (1 - near)), visibility: near >= 1 ? 'hidden' : 'visible' });
+      }
+    }
+
+    // counter
+    const cOn = t > T.counter - 0.05 && t < T.fly + 0.45;
+    show(R.counter, cOn);
+    css(R.scrim, { opacity: f2(kf(t, [[T.counter - 0.1, 0], [T.counter + 0.35, 1, E.out], [T.fly, 1], [T.fly + 0.3, 0]])) });
+    if (cOn) {
+      const cs = kf(t, [[T.counter, 1.22], [T.counter + 0.75, 1, E.out], [T.fly, 0.985, E.linear], [T.fly + 0.36, 3.4, E.in]]);
+      css(R.counter, {
+        transform: `scale(${cs.toFixed(4)})`,
+        opacity: f2(kf(t, [[T.counter, 0], [T.counter + 0.16, 1, E.out], [T.fly + 0.12, 1], [T.fly + 0.32, 0, E.linear]])),
+        filter: `blur(${f2(E.in(range(t, T.fly, T.fly + 0.34)) * 16)}px)`,
+      });
+      R.strips.forEach((s, i) => {
+        const p = E.out(range(t, T.counter, T.counter + 0.55 + i * 0.08));
+        css(s, { transform: `translateY(${f2(-p * R.wheelTargets[i] * 300)}px)` });
+      });
+      splits.cl.forEach((u, i) => {
+        const p = E.out(range(t, T.counter + 0.2 + i * 0.018, T.counter + 0.85 + i * 0.018));
+        css(u.el, { transform: `translateY(${f2((1 - p) * 110)}%)` });
+      });
+      const ps2 = E.out(range(t, T.counter + 0.38, T.counter + 1.1));
+      css(R.cs, { opacity: f2(ps2), letterSpacing: `${(0.3 + (1 - ps2) * 0.25).toFixed(3)}em` });
+    }
+  }
+
+  function renderPhone(t) {
+    const on = t > T.fly - 0.02 && t < T.logo + 0.1;
+    show(R.phone, on);
+    if (!on) return null;
+    const p = phonePose(t);
+    css(R.phone, { transform: poseCSS(p) });
+    // the soft shadow sits behind the body; hide it whenever the back faces us
+    css(R.phoneShadow, { opacity: f2(clamp(Math.cos(p.ry * D2R) * 1.6)) });
+    // screen glare follows the rotation
+    const g = ((p.ry % 360) + 360) % 360;
+    const gx = 50 + (g > 180 ? g - 360 : g) * 2.2;
+    css(R.glare, {
+      background: `linear-gradient(118deg, rgba(255,255,255,0) ${f2(gx - 22)}%, rgba(255,255,255,0.075) ${f2(gx)}%, rgba(255,255,255,0) ${f2(gx + 20)}%)`,
+    });
+    return p;
+  }
+
+  function tapFx(t, t0, [x, y], dragTo = null) {
+    const d = t - t0;
+    if (d < -0.08 || d > 0.55) return false;
+    const inP = E.out(range(d, -0.08, 0.02));
+    const outP = E.outCubic(range(d, 0.14, 0.36));
+    let tx = x, ty = y;
+    if (dragTo) {
+      const m = E.inOutCubic(range(d, 0.0, 0.26));
+      tx = lerp(x, dragTo[0], m);
+      ty = lerp(y, dragTo[1], m);
+    }
+    css(R.tap, { transform: `translate(${f2(tx)}px,${f2(ty)}px) scale(${f2(lerp(1.35, 1, inP) + outP * 0.25)})`, opacity: f2(inP * (1 - outP) * 0.9) });
+    const rp = E.outCubic(range(d, 0.05, 0.36));
+    css(R.ripple, { transform: `translate(${f2(tx)}px,${f2(ty)}px) scale(${f2(0.6 + rp * 1.5)})`, opacity: f2((d > 0.05 ? 1 : 0) * (1 - rp) * 0.55) });
+    return true;
+  }
+
+  function renderScreens(t) {
+    if (t < T.fly - 0.05 || t > T.logo + 0.1) return;
+    // ---- which screens are visible
+    const pushP = E.out(range(t, T.push, T.push + 0.46));
+    const showHome = t < T.push + 0.5;
+    const showFlash = t >= T.push - 0.01 && t < T_SWITCH;
+    const showExam = t >= T_SWITCH && t < T.result + 0.45;
+    const showRes = t >= T.result - 0.02;
+    css(R.scrHome, { visibility: showHome ? 'visible' : 'hidden', transform: `translateX(${f2(-pushP * 117)}px)`, filter: `brightness(${f2(1 - pushP * 0.45)})` });
+    css(R.scrFlash, { visibility: showFlash ? 'visible' : 'hidden', transform: `translateX(${f2((1 - pushP) * 390)}px)`, boxShadow: `-20px 0 40px rgba(0,0,0,${f2(0.5 * (1 - pushP))})` });
+    css(R.scrExam, { visibility: showExam ? 'visible' : 'hidden' });
+    const resP = E.out(range(t, T.result, T.result + 0.5));
+    css(R.scrResult, { visibility: showRes ? 'visible' : 'hidden', opacity: f2(resP), transform: `scale(${f2(lerp(1.06, 1, resP))})` });
+
+    // ---- HOME
+    if (showHome) {
+      const hp = E.out(range(t, T.fly + 0.2, T.land + 0.35));
+      R.hSeen.textContent = `${Math.round(412 * hp)}/560`;
+      R.hOk.textContent = `${Math.round(356 * hp)}`;
+      R.hBad.textContent = `${Math.round(56 * hp)}`;
+      css(R.hBarG, { width: `${f2((356 / 560) * 100 * hp)}%` });
+      css(R.hBarR, { width: `${f2((56 / 560) * 100 * hp)}%` });
+      const press = kf(t, [[T.tapLern - 0.02, 1], [T.tapLern + 0.06, 0.96, E.outCubic], [T.tapLern + 0.24, 1, E.outCubic]]);
+      css(R.btnLern, { transform: `scale(${f2(press)})`, background: t > T.tapLern ? 'linear-gradient(135deg, rgba(78,122,124,0.22), rgba(78,122,124,0.32))' : '' });
+    }
+
+    // ---- FLASHCARDS
+    if (showFlash) {
+      const sw = range(t, T.swipe, T.swipe + 0.4);
+      const swE = E.inOutCubic(sw);
+      css(R.fcA, { transform: `translateX(${f2(-swE * 470)}px) rotate(${f2(-swE * 9)}deg)`, opacity: f2(1 - E.inCubic(sw) * 0.6) });
+      const bp = E.out(range(t, T.swipe + 0.12, T.swipe + 0.6));
+      css(R.fcB, { transform: `scale(${f2(lerp(0.94, 1, bp))})`, opacity: f2(lerp(0.0, 1, bp)) });
+      const n = t < T.swipe + 0.2 ? 38 : 39;
+      if (R.fcCount.__n !== n) {
+        R.fcCount.textContent = `${n} / 240`;
+        R.fcCount.__n = n;
+      }
+      css(R.fcFill, { width: `${f2((lerp(38, 39, E.out(range(t, T.swipe + 0.2, T.swipe + 0.6))) / 240) * 100)}%` });
+    }
+
+    // ---- EXAM
+    if (showExam) {
+      const sel1 = E.out(range(t, T.tap1, T.tap1 + 0.2));
+      const sel2 = E.out(range(t, T.tap2, T.tap2 + 0.2));
+      const rev = range(t, T.reveal, T.reveal + 0.3);
+      const revE = E.out(rev);
+      const nSel = t >= T.tap2 ? 2 : t >= T.tap1 ? 1 : 0;
+      if (R.confTxt.__n !== nSel) {
+        R.confTxt.textContent = `Antwort bestätigen (${nSel} gewählt)`;
+        R.confTxt.__n = nSel;
+      }
+      css(R.confDis, { opacity: nSel === 0 ? '1' : '0' });
+      const press = kf(t, [[T.tapC - 0.02, 1], [T.tapC + 0.06, 0.96, E.outCubic], [T.tapC + 0.2, 1, E.outCubic]]);
+      const cCol = E.inOut(range(t, T.reveal, T.reveal + 0.3));
+      css(R.exConfirm, {
+        transform: `scale(${f2(press)})`,
+        height: `${f2((1 - cCol) * 51)}px`,
+        marginTop: `${f2((1 - cCol) * 12)}px`,
+        opacity: f2(1 - E.out(range(t, T.reveal, T.reveal + 0.15))),
+        padding: '0',
+        lineHeight: '51px',
+      });
+      // options
+      for (let i = 0; i < 5; i++) {
+        const o = R.opts[i];
+        const selP = i === 2 ? sel1 : i === 4 ? sel2 : 0;
+        const correct = i === 2 || i === 4;
+        css(o.hl, { opacity: f2(selP * (1 - revE)) });
+        css(o.ok, { opacity: f2(correct ? revE : 0) });
+        const pop = selP > 0 ? 0.6 + 0.4 * spring(t - (i === 2 ? T.tap1 : T.tap2), 380, 14) : 0;
+        css(o.fill, { opacity: f2(selP), transform: `scale(${f2(pop)})` });
+        css(o.cb, { width: `${f2(22 * (1 - E.inOut(rev)))}px`, marginRight: `${f2(12 * (1 - E.inOut(rev)))}px`, opacity: f2(1 - revE) });
+        const mk = correct ? spring(t - T.reveal - 0.08 - (i === 4 ? 0.05 : 0), 320, 13) : 0;
+        css(o.mark, { opacity: f2(clamp(mk)), transform: `scale(${f2(mk)})` });
+        css(o.el, { opacity: f2(correct ? 1 : lerp(1, 0.45, revE)) });
+      }
+      // feedback reveal + scroll
+      const fbP = E.out(range(t, T.reveal + 0.06, T.reveal + 0.55));
+      css(R.fbWrap, { height: `${f2(fbP * S.fbH)}px`, opacity: f2(E.out(range(t, T.reveal + 0.06, T.reveal + 0.3))) });
+      const scr = E.inOut(range(t, T.scroll, T.scroll + 0.6)) * S.scroll;
+      const ffP = range(t, T.ff, T.result);
+      const ffE = E.inOutCubic(ffP);
+      const reelY = ffE * (S.reelH + 120);
+      css(R.exContent, { transform: `translateY(${f2(-scr - reelY)}px)` });
+      css(R.reel, { visibility: t > T.ff - 0.05 ? 'visible' : 'hidden' });
+      // keyword highlight in the explanation
+      for (const [el, t0] of [[R.kwLSD, T.g1], [R.kwBenzo, T.g2]]) {
+        const h = E.out(range(t, t0 - 0.2, t0)) * (1 - E.inOut(range(t, F0 - 0.26, F0 + 0.04)));
+        css(el, { background: `rgba(138,180,182,${f2(h * 0.32)})`, boxShadow: `0 0 0 1.5px rgba(138,180,182,${f2(h * 0.7)})`, color: h > 0.5 ? '#ffffff' : '' });
+      }
+      // header: timer, score, progress
+      const secs = 252 + Math.floor(Math.max(0, t - T_SWITCH)) + Math.floor(ffE * (2327 - 255));
+      const tt = `${String(Math.floor(secs / 60)).padStart(2, '0')}:${String(secs % 60).padStart(2, '0')}`;
+      if (R.exTimer.__v !== tt) {
+        R.exTimer.textContent = tt;
+        R.exTimer.__v = tt;
+      }
+      const q = Math.round(lerp(7, 30, ffE));
+      const sc = t >= T.reveal ? (ffP > 0 ? `✓ ${Math.round(lerp(7, 27, ffE))}/${Math.round(lerp(7, 30, ffE))}` : '✓ 7/7') : '✓ 6/6';
+      if (R.exScore.__v !== sc) {
+        R.exScore.textContent = sc;
+        R.exScore.__v = sc;
+      }
+      const sp = spring(t - T.reveal, 400, 16);
+      css(R.exScore, { transform: `scale(${f2(t > T.reveal ? 1 + (1 - sp) * 0.25 : 1)})`, color: t > T.reveal && t < T.reveal + 0.6 ? '#86EFAC' : '' });
+      const qt = `Frage ${q}/30`;
+      if (R.exCount.__v !== qt) {
+        R.exCount.textContent = qt;
+        R.exCount.__v = qt;
+      }
+      css(R.exFill, { width: `${f2((lerp(7, 30, ffE) / 30) * 100)}%` });
+    }
+
+    // ---- RESULT
+    if (showRes) {
+      const tr = spring(t - T.trophy, 260, 12);
+      css(R.rsTrophy, { transform: `scale(${f2(tr)}) rotate(${f2((1 - tr) * -24)}deg)` });
+      const up = (t0, el, dy = 18) => {
+        const p = E.out(range(t, t0, t0 + 0.5));
+        css(el, { opacity: f2(p), transform: `translateY(${f2((1 - p) * dy)}px)` });
+      };
+      up(T.trophy + 0.1, R.rsTitle);
+      const cp = E.out(range(t, T.count, T.count + 0.8));
+      const n = Math.round(27 * cp);
+      if (R.rsScore.__n !== n) {
+        R.rsScore.textContent = `${n} / 30`;
+        R.rsPct.textContent = `${Math.round((n / 30) * 100)}% richtig`;
+        R.rsScore.__n = n;
+      }
+      up(T.count - 0.05, R.rsScore, 12);
+      up(T.count + 0.05, R.rsPct, 12);
+      up(T.count + 0.35, R.rsMsg);
+      up(T.count + 0.45, R.rsBtns);
+      up(T.count + 0.55, R.rsH);
+      up(T.count + 0.62, R.rsRow);
+      R.tiles.forEach((el, i) => up(T.count + 0.7 + i * 0.08, el, 26));
+    }
+
+    // ---- touch indicator
+    const taps = [
+      [T.tapLern, S.btnLern],
+      [T.swipe - 0.02, S.fcCard, [S.fcCard[0] - 230, S.fcCard[1] + 10]],
+      [T.tap1, S.opt[2]],
+      [T.tap2, S.opt[4]],
+      [T.tapC, S.confirm],
+      [T.ff - 0.1, [S.next[0], S.next[1] - S.confirmH - S.scroll]],
+    ];
+    let any = false;
+    for (const [t0, pt, drag] of taps) {
+      if (tapFx(t, t0, pt, drag)) {
+        any = true;
+        break;
+      }
+    }
+    if (!any) {
+      css(R.tap, { opacity: '0' });
+      css(R.ripple, { opacity: '0' });
+    }
+  }
+
+  function renderSats(t, pose) {
+    const pb = phoneBase(t);
+    // topic cards (Lernen)
+    for (const c of topics) {
+      const t0 = T.sats + c.i * 0.045;
+      const sp = spring(t - t0, 120, 15);
+      const exitP = E.in(range(t, T.whip - 0.12 + c.i * 0.015, T.whip + 0.3 + c.i * 0.015));
+      const vis = t > t0 && exitP < 1;
+      css(c.el, { visibility: vis ? 'visible' : 'hidden' });
+      if (!vis) continue;
+      const fx = Math.sin(t * 0.9 + c.i * 1.7) * 10;
+      const fy = Math.cos(t * 0.8 + c.i * 1.3) * 12;
+      const x = pb.x + lerp(0, c.p[0], sp) + fx - exitP * 1300;
+      const y = pb.y + lerp(0, c.p[1], sp) + fy;
+      const z = lerp(-120, c.p[2], sp) + exitP * 200;
+      const ry = -c.p[0] / 30 + Math.sin(t * 0.7 + c.i) * 4 - 6;
+      const rx = c.p[1] / 40 + Math.cos(t * 0.6 + c.i) * 3;
+      const s = lerp(0.35, 1, clamp(sp, 0, 1.2));
+      css(c.el, {
+        transform: `translate3d(${f2(x)}px,${f2(y)}px,${f2(z)}px) rotateX(${f2(rx)}deg) rotateY(${f2(ry)}deg) rotateZ(${f2((1 - sp) * 20 * (c.i % 2 ? 1 : -1))}deg) scale(${f2(s)})`,
+        opacity: f2(clamp(sp * 1.6) * (1 - exitP)),
+        filter: `blur(${f2(clamp((-z - 140) / 60, 0, 3.2))}px) brightness(${f2(z < -150 ? 0.82 : 1)})`,
+      });
+    }
+    // glossary cards (Verstehen) – they lift off the explanation text
+    for (const g of glossCards) {
+      const d = t - g.t0;
+      const exitP = E.in(range(t, T.ff - 0.1 + (g.term === 'LSD' ? 0 : 0.05), T.ff + 0.35));
+      const vis = d > -0.02 && exitP < 1 && pose;
+      css(g.el, { visibility: vis ? 'visible' : 'hidden' });
+      if (!vis) continue;
+      const kw = g.term === 'LSD' ? S.kwLSD : S.kwBenzo;
+      const collapse = E.inOut(range(t, T.reveal, T.reveal + 0.3)) * S.confirmH;
+      const scr = E.inOut(range(t, T.scroll, T.scroll + 0.6)) * S.scroll;
+      const origin = applyPose(screenToLocal(kw[0], kw[1] - collapse - scr), pose);
+      const sp = spring(d, 150, 16);
+      const tp = [pb.x + g.p[0] + 330, pb.y + g.p[1], g.p[2]];
+      const x = lerp(origin[0], tp[0], sp) + Math.sin(t * 0.9 + g.p[1]) * 8 - exitP * 900;
+      const y = lerp(origin[1], tp[1], sp) + Math.cos(t * 0.7 + g.p[0]) * 8 - Math.sin(clamp(sp) * Math.PI) * 60;
+      const z = lerp(origin[2], tp[2], sp) + Math.sin(clamp(sp) * Math.PI) * 160;
+      const s = lerp(0.18, 1, clamp(sp, 0, 1.15));
+      const ry = lerp(pose.ry + 360 * 1, 16, clamp(sp)) + Math.sin(t * 0.8) * 3;
+      css(g.el, {
+        transform: `translate3d(${f2(x)}px,${f2(y)}px,${f2(z)}px) rotateY(${f2(ry)}deg) rotateX(${f2(Math.cos(t * 0.6) * 4)}deg) scale(${f2(s)})`,
+        opacity: f2(clamp(sp * 2) * (1 - exitP)),
+      });
+    }
+  }
+
+  function renderType(t) {
+    // ---- Lernen
+    const onL = t > T.land - 0.1 && t < T.whip + 0.4;
+    show(R.typeL, onL);
+    if (onL) {
+      const ex = E.in(range(t, T.whip - 0.06, T.whip + 0.3));
+      css(R.typeL, { transform: `translateX(${f2(-ex * 760)}px) skewX(${f2(ex * 10)}deg)`, opacity: f2(1 - ex) });
+      splits.bigL.forEach((u, i) => {
+        const p = E.out(range(t, T.land - 0.04 + i * 0.032, T.land + 0.7 + i * 0.032));
+        css(u.el, { transform: `translateY(${f2((1 - p) * 112)}%) rotate(${f2((1 - p) * 10)}deg)` });
+      });
+      const lp = E.out(range(t, T.land + 0.05, T.land + 0.7));
+      css(R.lblL, { opacity: f2(lp), transform: `translateX(${f2((1 - lp) * -30)}px)` });
+      const sp = E.out(range(t, T.land + 0.28, T.land + 0.95));
+      css(R.subL, { opacity: f2(sp), transform: `translateY(${f2((1 - sp) * 30)}px)` });
+      const sp2 = E.out(range(t, T.land + 0.4, T.land + 1.05));
+      css(R.sub2L, { opacity: f2(sp2), transform: `translateY(${f2((1 - sp2) * 30)}px)` });
+      const n = Math.round(240 * E.outCubic(range(t, T.land + 0.28, T.land + 1.3)));
+      if (R.n240.__n !== n) {
+        R.n240.textContent = n;
+        R.n240.__n = n;
+      }
+    }
+    // ---- Verstehen
+    const onV = t > T.whipEnd - 0.25 && t < T.ff + 0.5;
+    show(R.typeV, onV);
+    if (onV) {
+      const ex = E.in(range(t, T.ff - 0.02, T.ff + 0.36));
+      const en = E.out(range(t, T.whipEnd - 0.25, T.whipEnd + 0.35));
+      css(R.typeV, { transform: `translateX(${f2(ex * 760 + (1 - en) * 260)}px) skewX(${f2(-ex * 10 - (1 - en) * 8)}deg)`, opacity: f2((1 - ex) * clamp(en * 2)) });
+      splits.bigV.forEach((u, i) => {
+        const p = E.out(range(t, T.whipEnd - 0.16 + i * 0.03, T.whipEnd + 0.58 + i * 0.03));
+        css(u.el, { transform: `translateY(${f2((1 - p) * 112)}%) rotate(${f2((1 - p) * 10)}deg)` });
+      });
+      const lp = E.out(range(t, T.whipEnd, T.whipEnd + 0.6));
+      css(R.lblV, { opacity: f2(lp), transform: `translateX(${f2((1 - lp) * 30)}px)` });
+      const sp = E.out(range(t, T.whipEnd + 0.22, T.whipEnd + 0.9));
+      css(R.subV, { opacity: f2(sp), transform: `translateY(${f2((1 - sp) * 30)}px)` });
+      const sp2 = E.out(range(t, T.whipEnd + 0.36, T.whipEnd + 1.05));
+      css(R.sub2V, { opacity: f2(sp2), transform: `translateY(${f2((1 - sp2) * 30)}px)` });
+      const n = Math.round(D.appstore.glossCount * E.outCubic(range(t, T.whipEnd + 0.36, T.whipEnd + 1.5)));
+      if (R.nGloss.__n !== n) {
+        R.nGloss.textContent = n;
+        R.nGloss.__n = n;
+      }
+    }
+  }
+
+  function renderBestehen(t) {
+    const on = t > T.ff + 0.2 && t < T.tag + 0.3;
+    show(R.bigB, on);
+    show(R.labelB, t > T.ff + 0.34 && t < X0 + 0.4);
+    if (!on) return;
+    const t0 = T.ff + 0.32;
+    splits.bigB.forEach((u, i) => {
+      const k = i - (splits.bigB.length - 1) / 2;
+      const p = E.out(range(t, t0 + Math.abs(k) * 0.035, t0 + 0.8 + Math.abs(k) * 0.035));
+      css(u.el, { transform: `translateY(${f2((1 - p) * 40)}px) scale(${f2(lerp(0.6, 1, p))})`, opacity: f2(p), filter: `blur(${f2((1 - p) * 14)}px)` });
+    });
+    // idle scale + morph into tagline slot
+    const m = E.inOut(range(t, T.exit + 0.02, T.tag + 0.02));
+    const idle = lerp(1.08, 1, E.out(range(t, t0, t0 + 1.4))) + E.inOutSine(range(t, T.result + 0.6, X0)) * 0.03;
+    const b = S.bigB, tw = S.tw3;
+    const sc = lerp(idle, tw.height / b.height, m);
+    const cxB = b.left + b.width / 2, cyB = b.top + b.height / 2;
+    const tx = lerp(0, tw.left + tw.width / 2 - cxB, m);
+    const ty = lerp(0, tw.top + tw.height / 2 - cyB, m);
+    css(R.bigB, {
+      transformOrigin: '50% 50%',
+      transform: `translate(${f2(tx)}px,${f2(ty)}px) scale(${sc.toFixed(4)})`,
+      opacity: f2(1 - range(t, T.tag + 0.12, T.tag + 0.25)),
+    });
+    const lp = E.out(range(t, T.result + 0.17, T.result + 0.82)) * (1 - E.inOut(range(t, X0, X0 + 0.3)));
+    css(R.labelB, { opacity: f2(lp), transform: `translateY(${f2((1 - lp) * -16)}px)` });
+  }
+
+  function renderConfetti(t) {
+    const ctxB = R.cB, ctxF = R.cF;
+    const dpr = R.dpr;
+    const draw = t > T.confetti - 0.05 && t < 13.2;
+    for (const [ctx] of [[ctxB], [ctxF]]) {
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, 1920 * dpr, 1080 * dpr);
+    }
+    if (!draw) return;
+    const g = 1250;
+    for (const c of conf) {
+      const a = t - c.t0;
+      if (a <= 0) continue;
+      const e = Math.exp(-c.k * a);
+      const vt = g / c.k;
+      let x = c.x0 + (c.vx * (1 - e)) / c.k;
+      let y = c.y0 + vt * a + ((c.vy - vt) * (1 - e)) / c.k;
+      x += Math.sin(a * c.ff * 6.28 + c.fph) * c.fa * clamp(a * 1.5);
+      if (y > 1200 || y < -200) continue;
+      const fade = 1 - clamp((a - 2.4) / 0.6);
+      if (fade <= 0) continue;
+      const ctx = c.z > 0 ? ctxF : ctxB;
+      const sz = 1 + c.z * 0.35;
+      const flip = Math.cos(c.flip + c.vflip * a);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.translate(x, y);
+      ctx.rotate(c.rot + c.vrot * a);
+      ctx.scale(sz, sz * (c.round ? 1 : Math.abs(flip) * 0.9 + 0.1));
+      ctx.globalAlpha = fade * (c.z < -0.4 ? 0.75 : 1);
+      ctx.fillStyle = c.col;
+      if (c.round) {
+        ctx.beginPath();
+        ctx.arc(0, 0, c.w / 2, 0, 6.2832);
+        ctx.fill();
+      } else {
+        ctx.fillRect(-c.w / 2, -c.h / 2, c.w, c.h);
+        if (flip < 0) {
+          ctx.fillStyle = 'rgba(0,0,0,0.22)';
+          ctx.fillRect(-c.w / 2, -c.h / 2, c.w, c.h);
+        }
+      }
+    }
+    ctxB.globalAlpha = ctxF.globalAlpha = 1;
+  }
+
+  function renderEnd(t) {
+    const on = t > T.exit;
+    show(R.end, on);
+    if (!on) return;
+    // gentle push-in on the whole end card
+    const push = 1 + E.inOutSine(range(t, T.logo, 15)) * 0.035;
+    css(R.end, { transform: `scale(${push.toFixed(4)})`, transformOrigin: '960px 520px' });
+    // leaves spiral into the logo
+    for (const l of leaves) {
+      const p = range(t, T.exit + 0.12 + l.delay, T.logo + 0.02);
+      const vis = p > 0 && p < 1;
+      css(l.el, { visibility: vis ? 'visible' : 'hidden' });
+      if (!vis) continue;
+      const e = E.inOutCubic(p);
+      const r = l.r0 * (1 - e);
+      const a = l.a0 + e * l.spin * Math.PI;
+      const x = Math.cos(a) * r, y = Math.sin(a) * r * 0.8;
+      const rot = (a * 180) / Math.PI + 90 + e * 120;
+      css(l.el, {
+        transform: `translate(${f2(x - 70)}px,${f2(y - 70)}px) rotate(${f2(rot)}deg) scale(${f2(l.s * lerp(1.3, 0.25, e))})`,
+        opacity: f2(clamp(p * 5) * (1 - clamp((p - 0.85) / 0.15))),
+      });
+    }
+    // logo
+    const lp = spring(t - T.logo, 210, 13);
+    css(R.lg, { transform: `scale(${f2(Math.max(0, lp))}) rotate(${f2((1 - lp) * -40)}deg)`, opacity: t > T.logo ? '1' : '0' });
+    css(R.lglow, { opacity: f2(kf(t, [[T.logo - 0.1, 0], [T.logo + 0.12, 1, E.out], [T.logo + 1.2, 0.55, E.inOut], [15, 0.6]])), transform: `scale(${f2(0.7 + 0.3 * E.out(range(t, T.logo, T.logo + 1)) + Math.sin(t * 2) * 0.02)})` });
+    [[R.ring1, 0], [R.ring2, 0.14]].forEach(([el, dl]) => {
+      const p = range(t, T.logo + 0.04 + dl, T.logo + 1.1 + dl);
+      css(el, { opacity: f2(p > 0 ? (1 - E.out(p)) * 0.8 : 0), transform: `scale(${f2(1 + E.out(p) * 1.25)})` });
+    });
+    // app name
+    splits.name.forEach((u, i) => {
+      const p = E.out(range(t, T.name + i * 0.022, T.name + 0.75 + i * 0.022));
+      css(u.el, { transform: `translateY(${f2((1 - p) * 110)}%) rotate(${f2((1 - p) * 8)}deg)` });
+    });
+    splits.appsub.forEach((u, i) => {
+      const p = E.out(range(t, T.sub + i * 0.07, T.sub + 0.8 + i * 0.07));
+      css(u.el, { opacity: f2(p), transform: `translateY(${f2((1 - p) * 26)}px)`, filter: `blur(${f2((1 - p) * 10)}px)` });
+    });
+    // tagline (word 3 arrives via the morph)
+    css(R.tw3, { opacity: t > T.tag + 0.12 ? '1' : '0' });
+    [[splits.tw1, T.tag + 0.02], [splits.tw2, T.tag + 0.12]].forEach(([units, t0]) =>
+      units.forEach((u, i) => {
+        const p = E.out(range(t, t0 + i * 0.02, t0 + 0.6 + i * 0.02));
+        css(u.el, { transform: `translateY(${f2((1 - p) * 110)}%)` });
+      }),
+    );
+    // orbit ring draws on around the logo
+    const oc = 2 * Math.PI * 182;
+    const od = E.inOut(range(t, T.logo + 0.12, T.logo + 1.15));
+    R.orbitC.setAttribute('stroke-dasharray', `${oc.toFixed(1)}`);
+    R.orbitC.setAttribute('stroke-dashoffset', `${((1 - od) * oc).toFixed(1)}`);
+    css(R.orbit, { transform: `rotate(${f2(-90 + (t - T.logo) * 14)}deg)`, opacity: t > T.logo ? '1' : '0' });
+    css(R.orbitDots, { transform: `rotate(${f2(od * 200 + (t - T.logo) * 26)}deg)`, opacity: f2(E.out(range(t, T.logo + 0.6, T.logo + 1.1))) });
+    // drifting leaves
+    for (const d of drifts) {
+      const a = E.out(range(t, T.logo + 0.1, T.logo + 1.2));
+      css(d.el, {
+        transform: `translate(${f2(d.x - 30 + Math.sin(t * 0.6 + d.ph) * 18)}px,${f2(d.y - 30 - (t - T.logo) * 16 + (1 - a) * 40)}px) rotate(${f2(d.r0 + d.vr * t)}deg) scale(${f2(d.s)})`,
+        opacity: f2(a * d.a),
+      });
+    }
+    const pp = spring(t - T.pill, 170, 16);
+    css(R.pill, { opacity: f2(clamp(pp * 1.4)), transform: `scale(${f2(lerp(0.85, 1, clamp(pp, 0, 1.1)))})` });
+    const sw = range(t, T.sweep, T.sweep + 0.85);
+    css(R.appshine, { opacity: sw > 0 && sw < 1 ? '1' : '0', backgroundPosition: `${f2(lerp(120, -20, E.inOutSine(sw)))}% 0` });
+  }
+
+  function renderFX(t) {
+    const fl = Math.max(
+      kf(t, [[T.land - 0.03, 0], [T.land + 0.02, 0.28, E.outCubic], [T.land + 0.45, 0, E.outCubic]]),
+      kf(t, [[T.result - 0.02, 0], [T.result + 0.05, 0.22, E.outCubic], [T.result + 0.5, 0, E.outCubic]]),
+      kf(t, [[T.logo - 0.02, 0], [T.logo + 0.05, 0.5, E.outCubic], [T.logo + 0.7, 0, E.outCubic]]),
+      kf(t, [[T.whipEnd - 0.1, 0], [T.whipEnd, 0.1, E.outCubic], [T.whipEnd + 0.35, 0, E.outCubic]]),
+    );
+    css(R.flash, { opacity: f2(fl) });
+    const fr = Math.round(t * 60);
+    const rnd = rng(fr * 7919 + 13);
+    css(R.grain, { transform: `translate(${Math.floor(rnd() * 256)}px,${Math.floor(rnd() * 256)}px)` });
+    css(R.fade, { opacity: f2(kf(t, [[0, 1], [0.12, 0, E.outCubic], [14.78, 0], [15, 0.0]])) });
+  }
+
+  function render(t) {
+    renderCamera(t);
+    renderBG(t);
+    renderHook(t);
+    const pose = renderPhone(t);
+    renderScreens(t);
+    renderSats(t, pose);
+    renderType(t);
+    renderBestehen(t);
+    renderConfetti(t);
+    renderEnd(t);
+    renderFX(t);
+  }
+
+  // ------------------------------------------------------------------
+  // Boot
+  // ------------------------------------------------------------------
+  function refs() {
+    const ids = [
+      'cam', 'phrase', 'wallWrap', 'wall', 'scrim', 'counter', 'cs', 'phone', 'glare', 'tap', 'ripple',
+      'scrHome', 'scrFlash', 'scrExam', 'scrResult', 'hSeen', 'hOk', 'hBad', 'hBarG', 'hBarR', 'btnLern',
+      'fcA', 'fcB', 'fcCount', 'fcFill', 'exConfirm', 'confTxt', 'confDis', 'fbWrap', 'exContent', 'exTimer', 'exScore',
+      'exCount', 'exFill', 'kwLSD', 'kwBenzo', 'rsTrophy', 'rsTitle', 'rsScore', 'rsPct', 'rsMsg', 'rsBtns', 'rsH', 'rsRow',
+      'typeL', 'typeV', 'lblL', 'lblV', 'subL', 'subV', 'sub2L', 'sub2V', 'n240', 'nGloss', 'bigB', 'labelB',
+      'end', 'lg', 'lglow', 'ring1', 'ring2', 'tw3', 'pill', 'sweep', 'flash', 'grain', 'fade', 'rays',
+      'blobA', 'blobB', 'blobC', 'blobD', 'reel', 'orbit', 'orbitC', 'orbitDots',
+    ];
+    for (const id of ids) R[id] = document.getElementById(id);
+    R.opts = [0, 1, 2, 3, 4].map((i) => {
+      const el = $(`#opt${i}`);
+      return { el, hl: $('.hl', el), ok: $('.ok', el), cb: $('.cb', el), fill: $('.fill', el), mark: $('.mark', el) };
+    });
+    R.tiles = $$('#rsTiles .tile');
+    R.phoneShadow = $('#phone .shadow');
+    const blobCol = { blobA: '78,122,124', blobB: '138,180,182', blobC: '34,197,94', blobD: '46,90,92' };
+    for (const [k, c] of Object.entries(blobCol)) {
+      R[k].style.background = `radial-gradient(circle closest-side, rgba(${c},1) 0%, rgba(${c},0.45) 42%, rgba(${c},0) 100%)`;
+    }
+    R.dpr = window.devicePixelRatio || 1;
+    for (const [id, key] of [['confBack', 'cB'], ['confFront', 'cF']]) {
+      const c = document.getElementById(id);
+      c.width = 1920 * R.dpr;
+      c.height = 1080 * R.dpr;
+      R[key] = c.getContext('2d');
+    }
+  }
+
+  window.ready = (async () => {
+    await Promise.all([
+      document.fonts.load('800 100px "Plus Jakarta Sans"'),
+      document.fonts.load('700 100px "Plus Jakarta Sans"'),
+      document.fonts.load('600 100px "Plus Jakarta Sans"'),
+      document.fonts.load('500 100px "Plus Jakarta Sans"'),
+      document.fonts.load('italic 400 100px "Instrument Serif"'),
+    ]);
+    await document.fonts.ready;
+    await Promise.all([...document.images].map((im) => im.decode().catch(() => {})));
+    buildPhone();
+    buildScreens();
+    buildWall();
+    buildCounter();
+    buildShapes();
+    buildTerms();
+    buildLeaves();
+    buildDrifts();
+    buildConfetti();
+    makeGrain();
+    refs();
+    buildSats();
+    layout();
+    splitAll();
+    render(0);
+    return true;
+  })();
+
+  window.renderFrame = async (t) => {
+    render(clamp(t, 0, DUR));
+    await new Promise((r) => requestAnimationFrame(() => r()));
+  };
+
+  // Browser preview: index.html?play  or  index.html?t=7.2
+  const q = new URLSearchParams(location.search);
+  if (q.has('play') || q.has('t')) {
+    window.ready.then(() => {
+      if (q.has('t')) return render(Number(q.get('t')));
+      const t0 = performance.now();
+      const loop = () => {
+        render(((performance.now() - t0) / 1000) % DUR);
+        requestAnimationFrame(loop);
+      };
+      loop();
+    });
+  }
+})();

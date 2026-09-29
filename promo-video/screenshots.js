@@ -1,0 +1,406 @@
+// App Store screenshots: 5 motifs × iPhone 6.9" (1320×2868) / iPad 13" (2064×2752).
+// screenshots.html?device=iphone|ipad&shot=1..5 – every screen shows real app UI and real content.
+(() => {
+  'use strict';
+  const D = window.DATA;
+  const A = D.appstore;
+  const q = new URLSearchParams(location.search);
+  const DEVICE = q.get('device') || 'iphone';
+  const SHOT = Number(q.get('shot') || 1);
+  const px = (v) => `${v}px`;
+  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  // canvas in CSS px (× deviceScaleFactor = App Store pixels); ui = emulated screen in points
+  const CFG = {
+    iphone: {
+      W: 440, H: 956,
+      ui: { W: 440, H: 956, safeTop: 59, safeBot: 34, grad: 167, ipad: false },
+      dev: { w: 330, top: 298 },
+      cap: { x: 36, y: 62, w: 368, num: 104, h: 44, ph: 50, sub: 17, gapNum: 4, gapSub: 16 },
+      topic: 0.74, shape: 1, conf: 0.55,
+    },
+    ipad: {
+      W: 1032, H: 1376,
+      ui: { W: 768, H: 1024, safeTop: 24, safeBot: 20, grad: 159, ipad: true },
+      dev: { w: 740, top: 398 },
+      cap: { x: 86, y: 92, w: 860, num: 150, h: 66, ph: 76, sub: 26, gapNum: 6, gapSub: 20 },
+      topic: 1.2, shape: 1.9, conf: 1.05,
+    },
+  };
+  const C = CFG[DEVICE];
+  const W = C.W, H = C.H, u = C.ui;
+
+  const SHOTS = {
+    1: {
+      slug: 'pruefungsfragen', num: '560', h: 'Prüfungsfragen',
+      sub: 'aus 20 vergangenen Prüfungen – jede Antwort <em>erklärt.</em>',
+      screen: 'exam', pop: 'feedback',
+      at: { iphone: { anchor: '.feedback', grow: 1.3, dx: -8, dy: 26, r: -3 }, ipad: { anchor: '.feedback', grow: 1.26, dx: -70, dy: 40, r: -2 } },
+    },
+    2: {
+      slug: 'pruefungstag', h: 'Prüfungstag<br>simulieren<span class="acc">.</span>',
+      sub: '20 vergangene Prüfungen – 28&nbsp;Fragen in 55&nbsp;Minuten, wie im <em>Ernstfall.</em>',
+      screen: 'dayResult', pop: 'dayHeader', green: true,
+      at: { iphone: { x: 14, y: 692, s: 1.0, r: -3, w: 416 }, ipad: { x: 40, y: 996, s: 1.36, r: -2, w: 536 } },
+    },
+    3: {
+      slug: 'lernkarten', num: '240', h: 'Lernkarten',
+      sub: 'zu <em>allen</em> Prüfungsthemen – von F0 bis F9, Recht und Therapie.',
+      screen: 'flash', pop: 'topics',
+    },
+    4: {
+      slug: 'glossar', num: String(A.glossCount), h: 'Fachbegriffe',
+      sub: 'verständlich erklärt – durchsuchbar und <em>direkt</em> in der Frage.',
+      screen: 'gloss', pop: 'term',
+      at: { iphone: { x: 20, y: 700, s: 0.84, r: -2.5, w: 416 }, ipad: { x: 44, y: 1010, s: 1.36, r: -2, w: 520 } },
+    },
+    5: {
+      slug: 'wiederholen', h: 'Gezielt<br>wiederholen<span class="acc">.</span>',
+      sub: 'Fehler und gemerkte Fragen üben – bis&nbsp;sie&nbsp;<em>sitzen.</em>',
+      screen: 'home', pop: 'review',
+      at: { iphone: { anchor: '.mbtn.rev', grow: 1.3, dx: 0, dy: 0, r: -2.5 }, ipad: { anchor: '.mbtn.rev', grow: 1.45, dx: 0, dy: 0, r: -2 } },
+    },
+  };
+  const S = SHOTS[SHOT];
+
+  // ------------------------------------------------------------------
+  // App screens (same components as the app; see lib/screens/*.dart)
+  // ------------------------------------------------------------------
+  const icon = (id, cls = 'ic') => `<svg class="${cls}"><use href="#${id}"/></svg>`;
+  const gradBg = `linear-gradient(${u.grad}deg, #0f1f20 0%, #1a2f31 50%, #0f1f20 100%)`;
+  const CELL = '<svg width="19" height="12" viewBox="0 0 19 12"><rect x="0" y="8" width="3.2" height="4" rx="1" fill="#fff"/><rect x="5" y="5.5" width="3.2" height="6.5" rx="1" fill="#fff"/><rect x="10" y="3" width="3.2" height="9" rx="1" fill="#fff"/><rect x="15" y="0" width="3.2" height="12" rx="1" fill="#fff"/></svg>';
+  const WIFI = '<svg width="17" height="12" viewBox="0 0 17 12"><path d="M8.5 2.6c2.3 0 4.4.9 6 2.4l1.2-1.2C13.8 2 11.3.9 8.5.9S3.2 2 1.3 3.8L2.5 5c1.6-1.5 3.7-2.4 6-2.4zm0 3.4c1.4 0 2.6.5 3.6 1.4l1.2-1.2C12 5 10.3 4.3 8.5 4.3S5 5 3.7 6.2l1.2 1.2c1-.9 2.2-1.4 3.6-1.4zm0 3.4c-.6 0-1.1.2-1.5.6l1.5 1.6L10 10c-.4-.4-.9-.6-1.5-.6z" fill="#fff"/></svg>';
+  const BATT = '<svg width="27" height="13" viewBox="0 0 27 13"><rect x="0.5" y="0.5" width="23" height="12" rx="3.8" fill="none" stroke="rgba(255,255,255,.4)"/><rect x="2" y="2" width="20" height="9" rx="2.4" fill="#fff"/><path d="M25 4.5v4c.8-.3 1.3-1.1 1.3-2s-.5-1.7-1.3-2z" fill="rgba(255,255,255,.45)"/></svg>';
+  const EXPL =
+    'LSD und Ecstasy (MDMA) verursachen keine körperliche Abhängigkeit, sondern allenfalls eine psychische. Opiate, Benzodiazepine und Nikotin hingegen führen zu einer ausgeprägten körperlichen Abhängigkeit mit Entzugssymptomatik.';
+  const FEEDBACK = `<div class="feedback"><div class="fb-badge">✓ Richtig!</div><div class="fb-text">${EXPL}</div></div>`;
+  const SUBG = 'rgba(78, 122, 124, 0.59), rgba(78, 122, 124, 0.15)';
+  const GOLD = '#f3d27a, #d9a441, #b47f25';
+  const X = D.examDay;
+  // bookmark, report and (in practice mode) glossary – question_actions.dart
+  const qActs = (marked, help) =>
+    `<div class="q-acts"><div class="gbtn${marked ? ' on' : ''}">${icon(marked ? 'i-bookmark' : 'i-bookmark-o', '')}</div><div class="gbtn">${icon('i-flag', '')}</div>${help ? `<div class="gbtn">${icon('i-help', '')}</div>` : ''}</div>`;
+  // Flutter LinearGradient(topLeft -> bottomRight): the CSS angle depends on the box ratio
+  const tlbr = (el) => {
+    // layout size (transforms such as the device scale or a tilted pop-out don't change the ratio)
+    el.style.backgroundImage = `linear-gradient(${((Math.atan2(el.offsetWidth, -el.offsetHeight) * 180) / Math.PI).toFixed(2)}deg, ${el.dataset.tlbr})`;
+  };
+
+  function statusBar() {
+    if (u.ipad) {
+      return `<div class="statusbar" style="height:${px(u.safeTop)}"><div class="time" style="left:20px;top:5px;text-align:left;font-size:13px;line-height:14px">9:41</div>
+        <div class="icons" style="right:20px;top:7px;transform:scale(0.8);transform-origin:100% 0">${WIFI}${BATT}</div></div>`;
+    }
+    return `<div class="statusbar" style="height:${px(u.safeTop - 5)}"><div class="time" style="left:${px(Math.round(u.W * 0.152) - 40)};width:80px;top:17px">9:41</div>
+      <div class="icons" style="right:26px;top:21px">${CELL}${WIFI}${BATT}</div></div>`;
+  }
+
+  const SCREENS = {
+    home: () => `<div class="scr a-home" style="background:${gradBg}"><div class="safe" style="top:${px(u.safeTop)};bottom:${px(u.safeBot)}">
+      <div class="home-card gcard">
+        <div class="home-top">${icon('i-person')}</div>
+        <div class="home-logo"><img src="assets/logo.png"></div>
+        <div class="home-title">HPP Prüfungstrainer</div>
+        <div class="home-subtitle">560 Fragen · 30 pro Prüfung</div>
+        <div class="progress-sec">
+          <div class="stats">
+            <div class="stat"><div class="v" style="color:var(--tealLL)">412/560</div><div class="l">Gesehen</div></div>
+            <div class="stat"><div class="v" style="color:var(--green)">356</div><div class="l">Korrekt</div></div>
+            <div class="stat"><div class="v" style="color:var(--red)">56</div><div class="l">Falsch</div></div>
+          </div>
+          <div class="pbar"><div class="g" style="width:${((356 / 560) * 100).toFixed(2)}%"></div><div class="r" style="width:${((56 / 560) * 100).toFixed(2)}%"></div></div>
+        </div>
+        <div class="hbtn start">Prüfung starten</div>
+        <div class="mbtn gold" data-tlbr="${GOLD}"><div class="mt">Prüfungstag simulieren</div><div class="ms">Vergangene Prüfung · 28 Fragen · 55 Min.</div></div>
+        <div class="mbtn rev" data-tlbr="${SUBG}"><div class="mt">Fehler &amp; Merkliste üben</div><div class="ms">59 Fragen</div></div>
+        <div class="hbtn sub" data-tlbr="${SUBG}">Lernkarten</div>
+        <div class="hbtn sub" data-tlbr="${SUBG}">Begriffe</div>
+      </div></div></div>`,
+
+    exam: () => {
+      const opts = ['Opiate', 'Benzodiazepine', 'LSD (Lysergsäurediethylamid)', 'Nikotin', 'Ecstasy'];
+      return `<div class="scr a-exam" style="padding-top:${px(u.safeTop)};background:${gradBg}">
+        <div class="ex-head"><div class="ex-menu">← Menü</div><div class="pill">08:41</div><div class="pill teal">✓ 7/7</div></div>
+        <div class="ex-prog"><div class="ex-bar"><div class="ex-fill" style="width:23.33%"></div></div><div class="ex-count">Frage 7/30</div></div>
+        <div class="ex-scroll"><div class="ex-content"><div class="q-card gcard answered">
+          <div class="q-row"><div class="q-label">FRAGE 7 · MEHRFACHAUSWAHL</div>${qActs(true, true)}</div>
+          <div class="q-text">Welche der folgenden Substanzen verursachen keine körperliche Abhängigkeit? (Wählen Sie zwei Antworten)</div>
+          <div class="opts">${opts
+            .map((o, i) => {
+              const ok = i === 2 || i === 4;
+              return `<div class="opt ${ok ? 'ok' : 'dim'}"><div class="cb"></div><div class="ot">${o}</div><div class="mark">${ok ? '✓' : ''}</div></div>`;
+            })
+            .join('')}</div>
+          <div class="confirm">Antwort bestätigen (2 gewählt)</div>
+          ${FEEDBACK}
+          <div class="next">Nächste Frage →</div>
+        </div></div></div></div>`;
+    },
+
+    dayResult: () => {
+      const tiles = X.questions.slice(0, 6).map((q) => `<div class="tile${q.ok ? '' : ' bad'}"><div class="tc">${q.ok ? '✓' : '✗'}</div><div class="tb"><div class="tl">FRAGE ${q.n}</div><div class="tt">${esc(q.q.split('\n')[0])}</div></div>${icon('i-more', '')}</div>`);
+      return `<div class="scr a-result" style="background:${gradBg}"><div class="rs-wrap" style="top:${px(u.safeTop + 12)}">
+        <div class="rs-card gcard">
+          <div class="rs-emoji">🏆</div>
+          <div class="rs-title">Bestanden! 🎉</div>
+          <div class="rs-score">${X.score} / 28</div>
+          <div class="rs-pct">${Math.round((X.score / 28) * 100)}% richtig</div>
+          <div class="rs-meta">Prüfungstag ${X.label} · 47:12 min</div>
+          <div class="rs-msg">Hervorragend! Mit ${X.score} von 28 richtigen Antworten hast du diese Prüfung bestanden.</div>
+          <div class="rs-btns"><div class="rs-new">Weitere Prüfung</div><div class="rs-back">Zurück</div></div>
+        </div>
+        <div class="rs-h">Auswertung</div>
+        <div class="rs-row"><div>Alle aufklappen</div><div>Alle zuklappen</div></div>
+        ${tiles.join('')}
+      </div></div>`;
+    },
+
+    flash: () => {
+      const c = D.flash[1];
+      return `<div class="scr a-flash" style="padding-top:${px(u.safeTop)};padding-bottom:${px(u.safeBot)};background:${gradBg}">
+        <div class="topbar"><div class="iconbtn">${icon('i-back')}</div><div class="title">Lernkarten</div><div style="width:48px"></div></div>
+        <div class="fc-prog"><div class="fc-count">39 / 240</div><div class="fc-bar"><div class="fc-fill" style="width:${((39 / 240) * 100).toFixed(2)}%"></div></div></div>
+        <div class="fc-area"><div class="fc-card"><div class="chips"><div class="wrap">${c.tags.map((t) => `<div class="chip">${esc(t)}</div>`).join('')}</div><div class="gbtn">${icon('i-help', '')}</div></div><div class="fc-text">${esc(c.text)}</div></div></div>
+        <div class="fc-nav"><div class="navbtn">${icon('i-left', '')}</div><div class="navbtn">${icon('i-del', '')}</div><div class="navbtn">${icon('i-right', '')}</div></div>
+      </div>`;
+    },
+
+    gloss: () => `<div class="scr a-gloss" style="padding-top:${px(u.safeTop)};background:${gradBg}">
+      <div class="topbar"><div class="iconbtn">${icon('i-back')}</div><div class="title">Glossar</div><div style="width:48px"></div></div>
+      <div class="gsearch">${icon('i-search', '')}<span>Begriff suchen…</span></div>
+      <div class="gcount">${A.glossCount} Begriffe</div>
+      <div class="glist">${D.glossList.head.map(([k, v]) => `<div class="glitem"><div class="k">${esc(k)}</div><div class="v">${esc(v)}</div></div>`).join('')}</div>
+    </div>`,
+  };
+
+  // Pop-outs: the same components, lifted out of the screen at natural (point) size
+  const cardInner = Math.min(720, u.W - 24) - 26; // exam card content width
+  const homeInner = Math.min(520, u.W - 32) - 24;
+  const POPS = {
+    feedback: () => `<div class="lift" style="width:${px(cardInner)};background:linear-gradient(rgba(34,197,94,.1),rgba(34,197,94,.1)),#172b2d">
+      ${FEEDBACK.replace('class="feedback"', 'class="feedback" style="margin:0"')}</div>`,
+    // the top of the exam-day screen right before handing in: 07:48 left, all 28 answered, 22 and 25 bookmarked
+    dayHeader: (w) => {
+      const dots = X.questions.map((q) => `<div class="ndot ans${q.n === 28 ? ' cur' : ''}${q.n === 22 || q.n === 25 ? ' mk' : ''}"><i>${q.n}</i></div>`).join('');
+      return `<div class="lift a-day" style="width:${px(w)};padding-bottom:10px;background:linear-gradient(167deg,#12282a,#183032)">
+        <div class="dy-head"><div class="ex-menu">← Menü</div><div class="sp"></div><div class="dpill warn">${icon('i-timer', '')}<span>07:48</span></div><div class="sp"></div><div class="dpill cnt">${icon('i-checklist', '')}<span>28/28</span></div></div>
+        <div class="dy-meta"><div class="l">PRÜFUNGSTAG · ${X.label.toUpperCase()}</div><div class="c">Frage 28/28</div></div>
+        <div class="dy-nav"><div class="dy-strip" style="transform:translateX(${px(w - (24 + 28 * 40))})">${dots}</div></div></div>`;
+    },
+    term: (w) => `<div class="glitem lift" style="margin:0;width:${px(w)};background:linear-gradient(rgba(78,122,124,.2),rgba(78,122,124,.2)),#162a2c">
+      <div class="k" style="font-size:16px">${D.glossList.anhedonie[0]}</div><div class="v">${D.glossList.anhedonie[1]}</div></div>`,
+    review: () => `<div class="mbtn lift" data-tlbr="${SUBG}" style="margin:0;width:${px(homeInner)};background-color:#172b2d"><div class="mt">Fehler &amp; Merkliste üben</div><div class="ms">59 Fragen</div></div>`,
+  };
+  const TOPICS = [
+    { code: 'F2', name: 'Schizophrenie', tag: 'F2 – Schizophrenie', col: '#86EFAC' },
+    { code: 'F3', name: 'Affektive Störungen', tag: 'F3 – Affektive Störungen', col: '#FBBF24' },
+    { code: '§', name: 'Recht &amp; Berufskunde', tag: 'Recht & Berufskunde', col: '#DCE8E9' },
+    { code: 'Ψ', name: 'Therapie­verfahren', tag: 'Therapieverfahren', col: '#86EFAC' },
+  ];
+  const TPOS = {
+    iphone: [[4, 598, -5], [242, 676, 4], [10, 806, 3], [236, 890, -4]],
+    ipad: [[26, 830, -4], [690, 930, 3], [44, 1130, 3], [700, 1222, -3]],
+  };
+
+  // ------------------------------------------------------------------
+  // Build
+  // ------------------------------------------------------------------
+  function buildCaption() {
+    const c = C.cap;
+    const el = $('#cap');
+    Object.assign(el.style, { left: px(c.x), top: px(c.y), width: px(c.w) });
+    el.innerHTML =
+      (S.num
+        ? `<div class="num" style="font-size:${px(c.num)}">${S.num}</div><div class="h" style="font-size:${px(c.h)};margin-top:${px(c.gapNum)}">${S.h}</div>`
+        : `<div class="h" style="font-size:${px(c.ph)}">${S.h}</div>`) + `<div class="subl" style="font-size:${px(c.sub)};margin-top:${px(c.gapSub)}">${S.sub}</div>`;
+    return el.getBoundingClientRect();
+  }
+
+  function buildDevice() {
+    const d = C.dev;
+    const pad = u.ipad;
+    const rim = pad ? d.w * 0.0055 : d.w * 0.011;
+    const bez = pad ? d.w * 0.024 : d.w * 0.03;
+    const inset = rim + bez;
+    const sw = d.w - 2 * inset;
+    const k = sw / u.W;
+    const sh = u.H * k;
+    const dh = sh + 2 * inset;
+    const left = (W - d.w) / 2;
+    const R = pad ? d.w * 0.05 : d.w * 0.16;
+    const sr = pad ? sw * 0.026 : sw * 0.125;
+    const btn = (x, y, w, h) => `<div class="btn" style="left:${px(x)};top:${px(y)};width:${px(w)};height:${px(h)}"></div>`;
+    const buttons = pad
+      ? btn(d.w * 0.78, -2.5, d.w * 0.08, 3) + btn(d.w - 0.5, dh * 0.07, 3, dh * 0.055) + btn(d.w - 0.5, dh * 0.135, 3, dh * 0.055)
+      : btn(-2.5, dh * 0.16, 3, dh * 0.035) + btn(-2.5, dh * 0.225, 3, dh * 0.065) + btn(-2.5, dh * 0.305, 3, dh * 0.065) + btn(d.w - 0.5, dh * 0.25, 3, dh * 0.1);
+    const el = document.createElement('div');
+    el.className = `dev ${pad ? 'ipad' : 'iphone'}`;
+    Object.assign(el.style, { left: px(left), top: px(d.top), width: px(d.w), height: px(dh) });
+    el.innerHTML = `${buttons}<div class="rim" style="border-radius:${px(R)}"></div>
+      <div class="bezel" style="inset:${px(rim)};border-radius:${px(R - rim)}"></div>
+      <div class="screen" style="left:${px(inset)};top:${px(inset)};width:${px(sw)};height:${px(sh)};border-radius:${px(sr)}">
+        <div class="uiroot" style="width:${px(u.W)};height:${px(u.H)};transform:scale(${k})">${SCREENS[S.screen]()}${statusBar()}</div>
+        <div class="glass"></div>
+      </div>
+      ${pad
+        ? `<div class="cam" style="left:${px(d.w / 2 - bez * 0.2)};top:${px(rim + bez * 0.3)};width:${px(bez * 0.4)};height:${px(bez * 0.4)}"></div>`
+        : `<div class="island" style="left:${px(d.w / 2 - sw * 0.143)};top:${px(inset + sw * 0.027)};width:${px(sw * 0.286)};height:${px(sw * 0.084)}"></div>`}`;
+    $('#devhost').appendChild(el);
+    return { left, top: d.top, width: d.w, height: dh, inset, sw, sh };
+  }
+
+  function buildPops() {
+    const host = $('#pops');
+    if (S.pop === 'topics') {
+      TOPICS.forEach((tp, i) => {
+        const [x, y, r] = TPOS[DEVICE][i];
+        const el = document.createElement('div');
+        el.className = 'topic';
+        el.innerHTML = `<div class="code" style="background:${tp.col}">${tp.code}</div><div><div class="tk">${D.topicCounts[tp.tag]} Karten</div><div class="tn">${tp.name}</div></div>`;
+        el.style.transform = `translate(${px(x)},${px(y)}) rotate(${r}deg) scale(${C.topic})`;
+        host.appendChild(el);
+      });
+      return;
+    }
+    const at = S.at[DEVICE];
+    const el = document.createElement('div');
+    el.className = 'pop';
+    el.innerHTML = POPS[S.pop](at.w);
+    host.appendChild(el);
+    if (!at.anchor) {
+      el.style.transform = `translate(${px(at.x)},${px(at.y)}) rotate(${at.r}deg) scale(${at.s})`;
+      return;
+    }
+    // lift the real element: same natural width (same line breaks), magnified over its origin
+    const src = $(`#devhost ${at.anchor}`).getBoundingClientRect();
+    const nw = el.offsetWidth, nh = el.offsetHeight;
+    const k = (src.width * at.grow) / nw;
+    let cx = src.left + src.width / 2 + at.dx;
+    const cy = src.top + src.height / 2 + at.dy;
+    const half = (nw * k) / 2;
+    cx = Math.min(W - 14 - half, Math.max(14 + half, cx));
+    Object.assign(el.style, { transformOrigin: '50% 50%', transform: `translate(${px(cx - nw / 2)},${px(cy - nh / 2)}) rotate(${at.r}deg) scale(${k.toFixed(4)})` });
+  }
+
+  // Background: one panorama across the five screenshots, so neighbours join seamlessly.
+  function buildBG(cap) {
+    const i = SHOT - 1;
+    const blobs = [
+      [0.5, 0.64, 1.05, '78,122,124', 0.55], [1.0, 0.2, 0.75, '138,180,182', 0.2], [1.5, 0.62, 0.95, '34,197,94', 0.34],
+      [2.0, 0.9, 0.85, '46,90,92', 0.45], [2.5, 0.64, 1.05, '78,122,124', 0.55], [3.0, 0.2, 0.75, '138,180,182', 0.2],
+      [3.5, 0.64, 1.05, '78,122,124', 0.5], [4.0, 0.9, 0.85, '46,90,92', 0.45], [4.5, 0.64, 1.05, '78,122,124', 0.55],
+      [0.0, 0.12, 0.7, '138,180,182', 0.16], [5.0, 0.12, 0.7, '138,180,182', 0.16], [0.98, 0.95, 0.7, '46,90,92', 0.4], [2.98, 0.95, 0.7, '46,90,92', 0.4],
+    ];
+    const host = $('#sblobs');
+    for (const [bx, by, br, c, a] of blobs) {
+      const x = (bx - i) * W, y = by * H, r = br * W;
+      if (x + r < 0 || x - r > W) continue;
+      const el = document.createElement('div');
+      el.className = 'sblob';
+      Object.assign(el.style, {
+        left: px(x - r), top: px(y - r), width: px(2 * r), height: px(2 * r), opacity: String(a),
+        background: `radial-gradient(circle closest-side, rgba(${c},1) 0%, rgba(${c},0.4) 45%, rgba(${c},0) 100%)`,
+      });
+      host.appendChild(el);
+    }
+    const SH = {
+      circle: '<circle cx="50" cy="50" r="38"/>', square: '<rect x="15" y="15" width="70" height="70" rx="8"/>',
+      triangle: '<path d="M50 14 L88 82 L12 82 Z"/>', diamond: '<path d="M50 10 L90 50 L50 90 L10 50 Z"/>',
+      zig: '<path d="M10 30 H42 V70 H90"/>', cross: '<path d="M22 22 L78 78 M78 22 L22 78"/>',
+    };
+    const types = Object.keys(SH);
+    const rnd = rng(5);
+    const sh = $('#sshapes');
+    for (let n = 0; n < 80; n++) {
+      const gx = rnd() * 5 * W, gy = rnd() * H, dd = 0.3 + rnd() * 0.7, rot = rnd() * 360, tp = types[n % 6];
+      const size = (13 + rnd() * 15) * (0.7 + dd * 0.6) * C.shape;
+      const x = gx - i * W;
+      if (x < -size || x > W + size) continue;
+      // keep the copy clean
+      if (gx - i * W > cap.left - 20 && gx - i * W < cap.right + 20 && gy > cap.top - 20 && gy < cap.bottom + 20) continue;
+      const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.setAttribute('viewBox', '0 0 100 100');
+      svg.setAttribute('width', size);
+      svg.setAttribute('height', size);
+      svg.innerHTML = `<g fill="none" stroke="#8AB4B6" stroke-width="${(7 / (0.7 + dd * 0.6)).toFixed(2)}" stroke-linecap="round" stroke-linejoin="round">${SH[tp]}</g>`;
+      Object.assign(svg.style, { left: px(x - size / 2), top: px(gy - size / 2), opacity: String(0.05 + dd * 0.1), transform: `rotate(${rot}deg)` });
+      sh.appendChild(svg);
+    }
+    // film grain, one noise pixel per output pixel
+    const g = document.createElement('canvas');
+    g.width = g.height = 256;
+    const gc = g.getContext('2d');
+    const img = gc.createImageData(256, 256);
+    const r2 = rng(77 + SHOT);
+    for (let k = 0; k < img.data.length; k += 4) {
+      const v = Math.floor(r2() * 255);
+      img.data[k] = img.data[k + 1] = img.data[k + 2] = v;
+      img.data[k + 3] = 255;
+    }
+    gc.putImageData(img, 0, 0);
+    const tile = 256 / (window.devicePixelRatio || 1);
+    Object.assign($('#sgrain').style, { backgroundImage: `url(${g.toDataURL()})`, backgroundSize: `${tile}px ${tile}px` });
+  }
+
+  function buildCelebration(dev, cap) {
+    const rays = $('#srays');
+    const rs = W * 2.4;
+    Object.assign(rays.style, { display: 'block', left: px(W / 2 - rs / 2), top: px(dev.top + dev.height * 0.16 - rs / 2), width: px(rs), height: px(rs) });
+    const cv = $('#sconf');
+    const dpr = window.devicePixelRatio || 1;
+    cv.width = W * dpr;
+    cv.height = H * dpr;
+    Object.assign(cv.style, { width: px(W), height: px(H) });
+    const ctx = cv.getContext('2d');
+    const rnd = rng(9);
+    const PAL = ['#22C55E', '#86EFAC', '#86EFAC', '#8AB4B6', '#C5D8DA', '#FBBF24', '#F1F5F9', '#6A9A9C', '#DCE8E9'];
+    const cx = W / 2, cy = dev.top + dev.height * 0.14;
+    const scr = { l: dev.left + dev.inset, r: dev.left + dev.width - dev.inset, t: dev.top + dev.inset, b: dev.top + dev.height - dev.inset };
+    for (let n = 0; n < 320; n++) {
+      const a = -Math.PI * (0.03 + 0.94 * rnd());
+      const rr = W * (0.14 + Math.pow(rnd(), 0.75) * 0.66);
+      const x = cx + Math.cos(a) * rr * 1.12;
+      const y = cy + Math.sin(a) * rr * 0.62 + (rr * rr) / (W * 1.6);
+      if (y < cap.bottom + 10 || y > H * 0.86) continue;
+      // celebrate around the device, never on top of the app UI
+      if (x > dev.left - 6 && x < dev.left + dev.width + 6 && y > dev.top - 10) continue;
+      const kind = rnd();
+      const s = C.conf;
+      const w = (kind < 0.72 ? 10 + rnd() * 9 : kind < 0.9 ? 9 + rnd() * 4 : 4) * s;
+      const h = (kind < 0.72 ? 6 + rnd() * 5 : kind < 0.9 ? 9 + rnd() * 4 : 20 + rnd() * 10) * s;
+      const flip = Math.cos(rnd() * 6.28);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.translate(x, y);
+      ctx.rotate(rnd() * 6.28);
+      ctx.scale(1, kind >= 0.72 && kind < 0.9 ? 1 : Math.abs(flip) * 0.9 + 0.1);
+      ctx.fillStyle = PAL[Math.floor(rnd() * PAL.length)];
+      if (kind >= 0.72 && kind < 0.9) {
+        ctx.beginPath();
+        ctx.arc(0, 0, w / 2, 0, 6.2832);
+        ctx.fill();
+      } else {
+        ctx.fillRect(-w / 2, -h / 2, w, h);
+        if (flip < 0) {
+          ctx.fillStyle = 'rgba(0,0,0,0.22)';
+          ctx.fillRect(-w / 2, -h / 2, w, h);
+        }
+      }
+    }
+  }
+
+  window.ready = (async () => {
+    await Promise.all(['800', '700', '600', '500'].map((w) => document.fonts.load(`${w} 100px "Plus Jakarta Sans"`)).concat(document.fonts.load('italic 400 100px "Instrument Serif"')));
+    await document.fonts.ready;
+    for (const el of [document.documentElement, document.body, $('#canvas')]) Object.assign(el.style, { width: px(W), height: px(H) });
+    const cap = buildCaption();
+    const dev = buildDevice();
+    buildPops();
+    for (const el of document.querySelectorAll('[data-tlbr]')) tlbr(el);
+    buildBG(cap);
+    if (S.green) buildCelebration(dev, cap);
+    await Promise.all([...document.images].map((im) => im.decode().catch(() => {})));
+    return true;
+  })();
+  window.renderFrame = async () => {};
+  window.SHOT_SLUG = S.slug;
+})();

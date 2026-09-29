@@ -1,0 +1,13 @@
+{
+  "name": "hpp-promo-video",
+  "private": true,
+  "type": "module",
+  "description": "15s motion graphics promo for HPP Prüfungstrainer – rendered frame-by-frame with headless Chromium + ffmpeg",
+  "scripts": {
+    "render": "node render.mjs",
+    "audio": "python3 audio.py"
+  },
+  "dependencies": {
+    "puppeteer-core": "^25.12.0"
+  }
+}

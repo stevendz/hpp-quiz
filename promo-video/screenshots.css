@@ -1,0 +1,61 @@
+/* App Store screenshots: caption + real app screen in a device frame + one pop-out detail.
+   App UI classes come from appstore.css; sizes that depend on the device are set in screenshots.js. */
+#canvas { position: absolute; left: 0; top: 0; overflow: hidden; background: #071314; }
+#sbg, #sbg .base, #sblobs, #sshapes { position: absolute; inset: 0; }
+#sbg .base { background: linear-gradient(180deg, #0c1d1f 0%, #0f2527 46%, #081516 100%); }
+.sblob { position: absolute; border-radius: 50%; mix-blend-mode: screen; }
+#srays { position: absolute; mix-blend-mode: screen; display: none;
+  background: repeating-conic-gradient(from 0deg, rgba(190, 255, 215, 0.12) 0deg 4deg, rgba(0, 0, 0, 0) 4deg 15deg);
+  -webkit-mask-image: radial-gradient(closest-side, #000 0%, rgba(0, 0, 0, 0.55) 35%, transparent 100%); }
+#sshapes svg { position: absolute; overflow: visible; }
+#sgrain { position: absolute; inset: 0; opacity: 0.05; mix-blend-mode: overlay; }
+canvas#sconf { position: absolute; left: 0; top: 0; }
+
+/* caption */
+#cap { position: absolute; }
+#cap .num { font-family: var(--jak); font-weight: 800; line-height: 0.92; letter-spacing: -0.05em;
+  background: linear-gradient(180deg, #ffffff 30%, #bfd5d7 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+#cap .h { font-family: var(--jak); font-weight: 800; line-height: 1.02; letter-spacing: -0.045em; color: var(--tp); }
+#cap .h .acc { color: var(--greenL); }
+#cap .subl { font-family: var(--jak); font-weight: 500; line-height: 1.42; color: rgba(226, 232, 240, 0.8); white-space: normal; }
+#cap .subl em { font: italic 400 1.18em/1 var(--ser); color: var(--sage); }
+
+/* devices (flat, front view) */
+.dev { position: absolute; }
+.dev .rim { position: absolute; inset: 0;
+  background: linear-gradient(140deg, #9aa3a8 0%, #50575b 18%, #2c3134 42%, #6f787c 64%, #2a2f32 84%, #8d969b 100%);
+  box-shadow: 0 50px 90px rgba(0, 0, 0, 0.55), 0 14px 34px rgba(0, 0, 0, 0.45); }
+.dev.ipad .rim { background: linear-gradient(140deg, #5d6569 0%, #2c3134 30%, #22272a 60%, #4a5155 100%); }
+.dev .bezel { position: absolute; background: #020303; }
+.dev .screen { position: absolute; overflow: hidden; background: #0f1f20; isolation: isolate; }
+.dev .glass { position: absolute; inset: 0; pointer-events: none; z-index: 50;
+  background: linear-gradient(118deg, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0.055) 44%, rgba(255, 255, 255, 0) 58%); }
+.dev .island { position: absolute; background: #000; border-radius: 999px; z-index: 60; }
+.dev .btn { position: absolute; border-radius: 2px; background: linear-gradient(90deg, #2c3134, #8d969b 50%, #2c3134); }
+.dev .cam { position: absolute; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #3a4f66 0%, #0b1216 55%, #000 80%); }
+.uiroot { position: absolute; left: 0; top: 0; transform-origin: 0 0; overflow: hidden; font-family: var(--sys); color: var(--tp); }
+
+/* screens that only the screenshots need */
+.a-gloss { display: flex; flex-direction: column; }
+.gsearch { margin: 0 12px; height: 48px; flex: none; display: flex; align-items: center; gap: 12px; padding: 0 12px; border-radius: 12px; background: var(--surf); font: 400 14px/1.6 var(--sys); color: var(--td); }
+.gsearch svg { width: 24px; height: 24px; fill: var(--td); }
+.gcount { margin: 12px 12px 8px; flex: none; font: 400 12px/1.4 var(--sys); color: var(--td); }
+.glist { flex: 1; overflow: hidden; padding: 0 12px; }
+.glitem { padding: 12px; margin-bottom: 8px; border-radius: 12px; background: var(--indS); border: 1px solid rgba(78, 122, 124, 0.09); }
+.glitem .k { font: 600 14px/1.3 var(--sys); }
+.glitem .v { margin-top: 2px; font: 400 14px/1.6 var(--sys); color: var(--tm); }
+.rbanner { width: 100%; margin: 24px 0 16px; padding: 12px; border-radius: 12px; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); display: flex; align-items: center; gap: 12px; }
+.rbanner .e { font: 400 16px/1.2 var(--sys); }
+.rbanner .t { font: 400 13px/1.4 var(--sys); color: #fbbf24; }
+.home-card.repeat .hbtn.start { margin-top: 0; }
+
+/* pop-outs: the same app components, lifted out of the screen */
+.pop { position: absolute; left: 0; top: 0; transform-origin: 0 0; font-family: var(--sys); color: var(--tp); }
+.lift { border-radius: 12px; box-shadow: 0 34px 80px rgba(0, 0, 0, 0.62), 0 10px 26px rgba(0, 0, 0, 0.4), 0 0 0 1.5px rgba(138, 180, 182, 0.3); }
+.topic { position: absolute; left: 0; top: 0; width: 262px; padding: 16px 18px; border-radius: 20px; transform-origin: 0 0;
+  background: linear-gradient(160deg, rgba(34, 60, 62, 0.97), rgba(20, 38, 40, 0.97)); border: 1.5px solid rgba(138, 180, 182, 0.26);
+  box-shadow: 0 26px 56px rgba(0, 0, 0, 0.55); display: flex; align-items: center; gap: 14px; }
+.topic .code { width: 50px; height: 50px; border-radius: 14px; flex: none; display: grid; place-items: center; font: 800 20px/1 var(--jak); color: #0d1c1d; letter-spacing: -0.02em; }
+.topic .tk { font: 600 12px/1 var(--jak); color: var(--tealLL); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 6px; }
+.topic .tn { font: 700 19px/1.2 var(--jak); color: var(--tp); letter-spacing: -0.01em; }
+.sleaf { position: absolute; overflow: visible; }
