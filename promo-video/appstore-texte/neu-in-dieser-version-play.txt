@@ -1,5 +1,3 @@
-Neu in dieser Version:
-
 • Prüfungstag simulieren
 • Merkliste für Fragen
 • Fehler gezielt wiederholen

@@ -97,10 +97,20 @@ def problems(cl):
     return [f'{k}: {len(cl[k])} Zeichen (max. {LIMITS[k]})' for k in LIMITS if len(cl[k]) > LIMITS[k]]
 
 
+def style_warnings(cl):
+    """Stilvorgabe: 2–4 Stichpunkte mit höchstens 5 Wörtern (nur Hinweis, blockiert nicht)."""
+    bullets = [l[1:].strip() for l in cl['android'].splitlines() if l.startswith('•')]
+    out = []
+    if not 2 <= len(bullets) <= 4:
+        out.append(f'{len(bullets)} Stichpunkte (Vorgabe: 2–4)')
+    out += [f'Stichpunkt mit {len(b.split())} Wörtern (max. 5): {b}' for b in bullets if len(b.split()) > 5]
+    return out
+
+
 def show(cl):
     for k, title in (('ios', 'App Store'), ('android', 'Google Play')):
         print(f'\n──── {title} ({len(cl[k])}/{LIMITS[k]} Zeichen) ────\n{cl[k]}')
-    for p in problems(cl):
+    for p in problems(cl) + style_warnings(cl):
         print(f'\n⚠ {p}')
 
 
