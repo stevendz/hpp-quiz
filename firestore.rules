@@ -16,6 +16,22 @@ service cloud.firestore {
       allow read, update, delete: if false;
     }
 
+    // Anonyme Meldungen zu fehlerhaften Fragen: ebenfalls nur anlegen.
+    // Die Gründe müssen zu ReportService.reasons passen.
+    match /question_reports/{docId} {
+      allow create: if request.resource.data.keys().hasOnly(['questionId', 'exam', 'reason', 'text', 'createdAt', 'appVersion'])
+        && request.resource.data.questionId is int
+        && request.resource.data.exam is string
+        && request.resource.data.exam.size() <= 20
+        && request.resource.data.reason in ['answer', 'explanation', 'typo', 'other']
+        && request.resource.data.text is string
+        && request.resource.data.text.size() <= 500
+        && request.resource.data.appVersion is string
+        && request.resource.data.appVersion.size() <= 20
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if false;
+    }
+
     match /{document=**} {
       allow read, write: if false;
     }

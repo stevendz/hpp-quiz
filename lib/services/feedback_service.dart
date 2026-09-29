@@ -119,7 +119,7 @@ class FeedbackService {
   static Future<bool> submitFeedback({required bool satisfied, required String text}) async {
     try {
       final packageInfo = await PackageInfo.fromPlatform();
-      final stored = await _write({
+      final stored = await writeBuffered(_collection, {
         'satisfied': satisfied,
         'text': text.trim(),
         'createdAt': FieldValue.serverTimestamp(),
@@ -143,8 +143,9 @@ class FeedbackService {
     }
   }
 
-  static Future<bool> _write(Map<String, dynamic> entry) async {
-    final write = FirebaseFirestore.instance.collection(_collection).add(entry);
+  /// Legt ein Dokument an. Auch für Fragen-Meldungen (siehe ReportService) genutzt.
+  static Future<bool> writeBuffered(String collection, Map<String, dynamic> entry) async {
+    final write = FirebaseFirestore.instance.collection(collection).add(entry);
     // Firestore puffert Schreibvorgänge lokal – offline kommt die Server-Bestätigung
     // erst beim nächsten Sync. Ohne Timeout würde der Sende-Button ewig laden.
     unawaited(write.then((_) {}, onError: (Object e) => debugPrint('Feedback-Sync fehlgeschlagen: $e')));

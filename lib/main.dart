@@ -5,10 +5,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'data/all_questions.dart';
 import 'data/flashcards_data.dart';
+import 'services/analytics.dart';
+import 'services/exam_modes.dart';
 import 'services/feedback_service.dart';
 import 'services/storage_service.dart';
 import 'theme/app_theme.dart';
 import 'screens/home_screen.dart';
+import 'screens/exam_day_dialog.dart';
+import 'screens/exam_day_screen.dart';
 import 'screens/exam_screen.dart';
 import 'screens/result_screen.dart';
 import 'screens/stats_screen.dart';
@@ -183,7 +187,8 @@ class _QuizControllerState extends State<QuizController> {
     await StorageService.saveState(newState);
   }
 
-  Future<void> _startExam() async {
+  /// Fragt nach, falls noch eine Prüfung läuft. true = eine neue Sitzung darf starten.
+  Future<bool> _confirmReplaceActiveExam() async {
     if (_state!.currentExam != null) {
       final confirmed = await showDialog<bool>(
         context: context,
@@ -207,22 +212,62 @@ class _QuizControllerState extends State<QuizController> {
           ],
         ),
       );
-      if (confirmed != true) return;
+      if (confirmed != true) return false;
     }
+    return true;
+  }
 
-    final ids = generateExam(_state!);
-    final newState = QuizState(
-      questionStats: _state!.questionStats,
-      currentExam: ExamState(
-        questionIds: ids,
-        currentIndex: 0,
-        answers: {},
-        score: 0,
-      ),
-      examHistory: _state!.examHistory,
-    );
-    await _persist(newState);
+  Future<void> _startSession(ExamState exam) async {
+    await _persist(_state!.copyWith(currentExam: exam));
     setState(() => _view = 'exam');
+  }
+
+  Future<void> _startExam() async {
+    if (!await _confirmReplaceActiveExam()) return;
+    await _startSession(ExamState(questionIds: generateExam(_state!), answers: {}));
+  }
+
+  Future<void> _startExamDay() async {
+    final label = await showExamDayPicker(context, _state!);
+    if (label == null || !mounted) return;
+    if (!await _confirmReplaceActiveExam()) return;
+    logEvent('exam_day_started', {'exam': label});
+    await _startSession(ExamState(
+      questionIds: examDayQuestionIds(label),
+      answers: {},
+      mode: ExamMode.examDay,
+      examLabel: label,
+      timeLimitSeconds: examDaySeconds,
+    ));
+  }
+
+  Future<void> _startReview() async {
+    final ids = generateReview(_state!, limit: examSize);
+    if (ids.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Keine offenen Fehler und keine gemerkten Fragen – stark!')),
+      );
+      return;
+    }
+    if (!await _confirmReplaceActiveExam()) return;
+    logEvent('review_started', {'count': ids.length});
+    await _startSession(ExamState(questionIds: ids, answers: {}, mode: ExamMode.review));
+  }
+
+  Future<void> _toggleBookmark(int questionId) async {
+    final bookmarks = {..._state!.bookmarks};
+    final added = bookmarks.add(questionId);
+    if (!added) bookmarks.remove(questionId);
+    logEvent('question_bookmarked', {'question_id': questionId, 'bookmarked': added.toString()});
+    await _persist(_state!.copyWith(bookmarks: bookmarks));
+    // Am Prüfungstag würde die Snackbar die Navigationsleiste verdecken; dort zeigen Lesezeichen und Fragenleiste den Status.
+    if (!mounted || (_view == 'exam' && _state!.currentExam?.mode == ExamMode.examDay)) return;
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(SnackBar(
+        content: Text(added ? 'Zur Merkliste hinzugefügt' : 'Aus der Merkliste entfernt'),
+        duration: const Duration(seconds: 2),
+      ));
   }
 
   void _resumeExam() {
@@ -230,7 +275,8 @@ class _QuizControllerState extends State<QuizController> {
   }
 
   Future<void> _handleReset() async {
-    await _persist(QuizState.defaultState());
+    // Die Merkliste ist eine bewusste Auswahl, kein Lernstand – sie bleibt erhalten.
+    await _persist(QuizState.defaultState().copyWith(bookmarks: _state!.bookmarks));
     setState(() => _view = 'profile');
   }
 
@@ -296,14 +342,24 @@ class _QuizControllerState extends State<QuizController> {
 
     switch (_view) {
       case 'exam':
-        if (_state!.currentExam != null) {
+        final exam = _state!.currentExam;
+        if (exam != null) {
           return Scaffold(
-            body: ExamScreen(
-              state: _state!,
-              onPersist: _persist,
-              onGoHome: () => setState(() => _view = 'home'),
-              onExamFinished: () => setState(() => _view = 'result'),
-            ),
+            body: exam.mode == ExamMode.examDay
+                ? ExamDayScreen(
+                    state: _state!,
+                    onPersist: _persist,
+                    onGoHome: () => setState(() => _view = 'home'),
+                    onExamFinished: () => setState(() => _view = 'result'),
+                    onToggleBookmark: _toggleBookmark,
+                  )
+                : ExamScreen(
+                    state: _state!,
+                    onPersist: _persist,
+                    onGoHome: () => setState(() => _view = 'home'),
+                    onExamFinished: () => setState(() => _view = 'result'),
+                    onToggleBookmark: _toggleBookmark,
+                  ),
           );
         }
         WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -324,8 +380,14 @@ class _QuizControllerState extends State<QuizController> {
         return Scaffold(
           body: ResultScreen(
             lastExam: lastExam,
-            onNewExam: _startExam,
+            onNewExam: switch (lastExam.mode) {
+              ExamMode.examDay => _startExamDay,
+              ExamMode.review => _startReview,
+              _ => _startExam,
+            },
             onGoHome: () => setState(() => _view = 'home'),
+            bookmarks: _state!.bookmarks,
+            onToggleBookmark: _toggleBookmark,
           ),
         );
 
@@ -370,6 +432,8 @@ class _QuizControllerState extends State<QuizController> {
           body: HomeScreen(
             state: _state!,
             onStartExam: _startExam,
+            onStartExamDay: _startExamDay,
+            onStartReview: _startReview,
             onResumeExam: _resumeExam,
             onShowFlashcards: _showTagFilterAndNavigate,
             onShowGlossary: () => setState(() => _view = 'glossary'),

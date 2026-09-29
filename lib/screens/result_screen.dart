@@ -2,8 +2,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../data/all_questions.dart';
 import '../models/question.dart';
+import '../services/exam_modes.dart';
 import '../services/storage_service.dart';
 import '../theme/app_theme.dart';
+import 'question_actions.dart';
 import 'question_widgets.dart';
 
 final _questionsById = {for (final q in allQuestions) q.id: q};
@@ -12,8 +14,17 @@ class ResultScreen extends StatefulWidget {
   final ExamRecord lastExam;
   final VoidCallback onNewExam;
   final VoidCallback onGoHome;
+  final Set<int> bookmarks;
+  final ValueChanged<int> onToggleBookmark;
 
-  const ResultScreen({super.key, required this.lastExam, required this.onNewExam, required this.onGoHome});
+  const ResultScreen({
+    super.key,
+    required this.lastExam,
+    required this.onNewExam,
+    required this.onGoHome,
+    required this.bookmarks,
+    required this.onToggleBookmark,
+  });
 
   @override
   State<ResultScreen> createState() => _ResultScreenState();
@@ -44,7 +55,30 @@ class _ResultScreenState extends State<ResultScreen> {
     final lastExam = widget.lastExam;
     final pct = (lastExam.score / lastExam.total * 100).round();
     final passed = pct >= 75;
+    final isReview = lastExam.mode == ExamMode.review;
+    final isExamDay = lastExam.mode == ExamMode.examDay;
     final tt = Theme.of(context).textTheme;
+
+    final String emoji = isReview ? '🔄' : (passed ? '🏆' : '📚');
+    final String title = isReview ? 'Wiederholung geschafft' : (passed ? 'Bestanden! 🎉' : 'Nicht bestanden');
+    final Color titleColor = isReview ? AppColors.tealLighter : (passed ? AppColors.green : AppColors.red);
+    final String message;
+    if (isReview) {
+      message = 'Fragen, die noch nicht sitzen, bleiben in deiner Fehlerliste – gemerkte Fragen, bis du sie entfernst.';
+    } else if (isExamDay) {
+      final timeout = lastExam.timedOut ? 'Die Zeit ist abgelaufen – deine Antworten wurden automatisch abgegeben. ' : '';
+      message = timeout +
+          (passed
+              ? 'Hervorragend! Mit ${lastExam.score} von ${lastExam.total} richtigen Antworten hast du diese Prüfung bestanden.'
+              : 'Zum Bestehen brauchst du mindestens ${passMark(lastExam.total)} von ${lastExam.total} richtigen Antworten. Weiter üben!');
+    } else {
+      message = passed
+          ? 'Hervorragend! Du hast diese Prüfung bestanden (≥75%).'
+          : 'Du brauchst mindestens 75% zum Bestehen. Weiter üben!';
+    }
+    final String newLabel = isExamDay ? 'Weitere Prüfung' : (isReview ? 'Weiter üben' : 'Neue Prüfung');
+    final minutes = lastExam.elapsedSeconds ~/ 60;
+    final seconds = (lastExam.elapsedSeconds % 60).toString().padLeft(2, '0');
 
     return Container(
       decoration: const BoxDecoration(gradient: AppColors.gradientBg),
@@ -71,21 +105,23 @@ class _ResultScreenState extends State<ResultScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: AppSpacing.lg),
                         child: Column(
                           children: [
-                            Text(passed ? '🏆' : '📚', style: const TextStyle(fontSize: 64)),
+                            Text(emoji, style: const TextStyle(fontSize: 64)),
                             const SizedBox(height: AppSpacing.lg),
-                            Text(
-                              passed ? 'Bestanden! 🎉' : 'Nicht bestanden',
-                              style: tt.headlineLarge!.copyWith(color: passed ? AppColors.green : AppColors.red),
-                            ),
+                            Text(title, textAlign: TextAlign.center, style: tt.headlineLarge!.copyWith(color: titleColor)),
                             const SizedBox(height: AppSpacing.lg),
                             Text('${lastExam.score} / ${lastExam.total}', style: tt.displayLarge),
                             const SizedBox(height: AppSpacing.xs),
                             Text('$pct% richtig', style: tt.headlineMedium!.copyWith(color: AppColors.textMuted)),
+                            if (isExamDay) ...[
+                              const SizedBox(height: AppSpacing.sm),
+                              Text(
+                                'Prüfungstag ${lastExam.examLabel ?? ''} · $minutes:$seconds min',
+                                style: tt.bodySmall!.copyWith(color: AppColors.textMuted),
+                              ),
+                            ],
                             const SizedBox(height: AppSpacing.lg),
                             Text(
-                              passed
-                                  ? 'Hervorragend! Du hast diese Prüfung bestanden (≥75%).'
-                                  : 'Du brauchst mindestens 75% zum Bestehen. Weiter üben!',
+                              message,
                               textAlign: TextAlign.center,
                               style: tt.bodyMedium!.copyWith(color: AppColors.textMuted),
                             ),
@@ -111,7 +147,7 @@ class _ResultScreenState extends State<ResultScreen> {
                                       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg, vertical: 16),
                                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSpacing.lg)),
                                     ),
-                                    child: Text('Neue Prüfung', style: tt.labelLarge),
+                                    child: Text(newLabel, style: tt.labelLarge),
                                   ),
                                 ),
                                 TextButton(
@@ -159,6 +195,8 @@ class _ResultScreenState extends State<ResultScreen> {
                           answer: lastExam.answers[_questions[i].id],
                           expanded: _expanded.contains(i),
                           onToggle: () => _toggle(i),
+                          bookmarked: widget.bookmarks.contains(_questions[i].id),
+                          onToggleBookmark: () => widget.onToggleBookmark(_questions[i].id),
                         ),
                       ),
                   ],
@@ -187,6 +225,8 @@ class _ReviewTile extends StatelessWidget {
   final AnswerRecord? answer;
   final bool expanded;
   final VoidCallback onToggle;
+  final bool bookmarked;
+  final VoidCallback onToggleBookmark;
 
   const _ReviewTile({
     required this.number,
@@ -194,6 +234,8 @@ class _ReviewTile extends StatelessWidget {
     required this.answer,
     required this.expanded,
     required this.onToggle,
+    required this.bookmarked,
+    required this.onToggleBookmark,
   });
 
   @override
@@ -285,6 +327,11 @@ class _ReviewTile extends StatelessWidget {
                             ),
                           ),
                         FeedbackBox(isCorrect: correct, explanation: question.explanation),
+                        const SizedBox(height: AppSpacing.md),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: QuestionActions(question: question, bookmarked: bookmarked, onToggleBookmark: onToggleBookmark),
+                        ),
                       ],
                     ),
                   ),

@@ -57,7 +57,15 @@ class StatsScreen extends StatelessWidget {
                           final ex = entry.value;
                           final p = (ex.score / ex.total * 100).round();
                           final pass = p >= 75;
-                          final examNum = examHistory.length - i;
+                          // Nummeriert werden nur die normalen Übungsprüfungen.
+                          final index = examHistory.length - 1 - i;
+                          final examNum = examHistory.take(index + 1).where((e) => e.mode == ExamMode.practice).length;
+                          final title = switch (ex.mode) {
+                            ExamMode.examDay => 'Prüfungstag ${ex.examLabel ?? ''}',
+                            ExamMode.review => 'Fehler & Merkliste',
+                            _ => 'Prüfung $examNum',
+                          };
+                          final accent = ex.mode == ExamMode.review ? AppColors.tealLighter : (pass ? AppColors.green : AppColors.red);
 
                           String dateStr = '';
                           try {
@@ -76,7 +84,7 @@ class StatsScreen extends StatelessWidget {
                                 color: const Color(0x66334155),
                                 borderRadius: BorderRadius.circular(AppSpacing.lg),
                                 border: Border(
-                                  left: BorderSide(color: pass ? AppColors.green : AppColors.red, width: 4),
+                                  left: BorderSide(color: accent, width: 4),
                                 ),
                               ),
                               child: Row(
@@ -85,7 +93,7 @@ class StatsScreen extends StatelessWidget {
                                   Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text('Prüfung $examNum', style: tt.titleSmall),
+                                      Text(title, style: tt.titleSmall),
                                       const SizedBox(height: 2),
                                       Text(dateStr, style: tt.bodySmall),
                                       if (ex.elapsedSeconds > 0) ...[
@@ -104,7 +112,7 @@ class StatsScreen extends StatelessWidget {
                                         '$p%',
                                         style: tt.titleMedium!.copyWith(
                                           fontWeight: FontWeight.w700,
-                                          color: pass ? AppColors.green : AppColors.red,
+                                          color: accent,
                                         ),
                                       ),
                                       Text(

@@ -8,6 +8,7 @@ import '../services/storage_service.dart';
 import '../theme/app_theme.dart';
 import '../services/glossary_lookup.dart';
 import 'glossary_terms_dialog.dart';
+import 'question_actions.dart';
 import 'question_widgets.dart';
 
 class ExamScreen extends StatefulWidget {
@@ -15,6 +16,7 @@ class ExamScreen extends StatefulWidget {
   final Future<void> Function(QuizState) onPersist;
   final VoidCallback onGoHome;
   final VoidCallback onExamFinished;
+  final ValueChanged<int> onToggleBookmark;
 
   const ExamScreen({
     super.key,
@@ -22,6 +24,7 @@ class ExamScreen extends StatefulWidget {
     required this.onPersist,
     required this.onGoHome,
     required this.onExamFinished,
+    required this.onToggleBookmark,
   });
 
   @override
@@ -60,18 +63,7 @@ class _ExamScreenState extends State<ExamScreen> {
   Future<void> _saveElapsed() async {
     final exam = widget.state.currentExam;
     if (exam == null) return;
-    final newState = QuizState(
-      questionStats: widget.state.questionStats,
-      currentExam: ExamState(
-        questionIds: exam.questionIds,
-        currentIndex: exam.currentIndex,
-        answers: exam.answers,
-        score: exam.score,
-        elapsedSeconds: _elapsedSeconds,
-      ),
-      examHistory: widget.state.examHistory,
-    );
-    await widget.onPersist(newState);
+    await widget.onPersist(widget.state.copyWith(currentExam: exam.copyWith(elapsedSeconds: _elapsedSeconds)));
   }
 
   void _syncAnswerState() {
@@ -131,37 +123,15 @@ class _ExamScreenState extends State<ExamScreen> {
 
     // Single choice — immediate evaluation
     final isCorrect = optIdx == question.correctIndex;
-    final prev = widget.state.questionStats[qId] ?? QuestionStats();
-    final newStreak = isCorrect ? prev.correctStreak + 1 : 0;
-    final bool newLastCorrect;
-    if (!isCorrect) {
-      newLastCorrect = false;
-    } else if (prev.attempts == 0 || prev.lastCorrect) {
-      newLastCorrect = true;
-    } else {
-      newLastCorrect = newStreak >= 2;
-    }
     final newStats = Map<int, QuestionStats>.from(widget.state.questionStats);
-    newStats[qId] = QuestionStats(
-      attempts: prev.attempts + 1,
-      correctCount: prev.correctCount + (isCorrect ? 1 : 0),
-      lastCorrect: newLastCorrect,
-      correctStreak: newStreak,
-    );
+    newStats[qId] = (widget.state.questionStats[qId] ?? QuestionStats()).afterAnswer(isCorrect);
     final newAnswers = Map<int, AnswerRecord>.from(exam.answers);
     newAnswers[qId] = AnswerRecord(selected: [optIdx], correct: isCorrect);
     final newScore = exam.score + (isCorrect ? 1 : 0);
 
-    final newState = QuizState(
+    final newState = widget.state.copyWith(
       questionStats: newStats,
-      currentExam: ExamState(
-        questionIds: exam.questionIds,
-        currentIndex: exam.currentIndex,
-        answers: newAnswers,
-        score: newScore,
-        elapsedSeconds: _elapsedSeconds,
-      ),
-      examHistory: widget.state.examHistory,
+      currentExam: exam.copyWith(answers: newAnswers, score: newScore, elapsedSeconds: _elapsedSeconds),
     );
 
     setState(() {
@@ -183,37 +153,15 @@ class _ExamScreenState extends State<ExamScreen> {
         selectedArr.length == correctArr.length &&
         List.generate(selectedArr.length, (i) => selectedArr[i] == correctArr[i]).every((v) => v);
 
-    final prev = widget.state.questionStats[qId] ?? QuestionStats();
-    final newStreak = isCorrect ? prev.correctStreak + 1 : 0;
-    final bool newLastCorrect;
-    if (!isCorrect) {
-      newLastCorrect = false;
-    } else if (prev.attempts == 0 || prev.lastCorrect) {
-      newLastCorrect = true;
-    } else {
-      newLastCorrect = newStreak >= 2;
-    }
     final newStats = Map<int, QuestionStats>.from(widget.state.questionStats);
-    newStats[qId] = QuestionStats(
-      attempts: prev.attempts + 1,
-      correctCount: prev.correctCount + (isCorrect ? 1 : 0),
-      lastCorrect: newLastCorrect,
-      correctStreak: newStreak,
-    );
+    newStats[qId] = (widget.state.questionStats[qId] ?? QuestionStats()).afterAnswer(isCorrect);
     final newAnswers = Map<int, AnswerRecord>.from(exam.answers);
     newAnswers[qId] = AnswerRecord(selected: selectedArr, correct: isCorrect);
     final newScore = exam.score + (isCorrect ? 1 : 0);
 
-    final newState = QuizState(
+    final newState = widget.state.copyWith(
       questionStats: newStats,
-      currentExam: ExamState(
-        questionIds: exam.questionIds,
-        currentIndex: exam.currentIndex,
-        answers: newAnswers,
-        score: newScore,
-        elapsedSeconds: _elapsedSeconds,
-      ),
-      examHistory: widget.state.examHistory,
+      currentExam: exam.copyWith(answers: newAnswers, score: newScore, elapsedSeconds: _elapsedSeconds),
     );
 
     setState(() {
@@ -226,17 +174,8 @@ class _ExamScreenState extends State<ExamScreen> {
   Future<void> _handleNext() async {
     final exam = widget.state.currentExam!;
     if (exam.currentIndex < exam.questionIds.length - 1) {
-      final newExam = ExamState(
-        questionIds: exam.questionIds,
-        currentIndex: exam.currentIndex + 1,
-        answers: exam.answers,
-        score: exam.score,
-        elapsedSeconds: _elapsedSeconds,
-      );
-      final newState = QuizState(
-        questionStats: widget.state.questionStats,
-        currentExam: newExam,
-        examHistory: widget.state.examHistory,
+      final newState = widget.state.copyWith(
+        currentExam: exam.copyWith(currentIndex: exam.currentIndex + 1, elapsedSeconds: _elapsedSeconds),
       );
       setState(() {
         answered = false;
@@ -257,10 +196,11 @@ class _ExamScreenState extends State<ExamScreen> {
             elapsedSeconds: _elapsedSeconds,
             questionIds: exam.questionIds,
             answers: exam.answers,
+            mode: exam.mode,
+            examLabel: exam.examLabel,
           ),
         );
-      final newState = QuizState(questionStats: widget.state.questionStats, currentExam: null, examHistory: newHistory);
-      await widget.onPersist(newState);
+      await widget.onPersist(widget.state.copyWith(clearCurrentExam: true, examHistory: newHistory));
       widget.onExamFinished();
     }
   }
@@ -390,16 +330,24 @@ class _ExamScreenState extends State<ExamScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Question number + glossary icon
+                              // Question number + bookmark, report, glossary
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'FRAGE $examProgress${isMultiple ? ' · MEHRFACHAUSWAHL' : ''}',
-                                    style: tt.labelSmall,
+                                  Expanded(
+                                    child: Text(
+                                      'FRAGE $examProgress${isMultiple ? ' · MEHRFACHAUSWAHL' : ''}',
+                                      style: tt.labelSmall,
+                                    ),
                                   ),
-                                  if (glossaryTerms.isNotEmpty)
+                                  QuestionActions(
+                                    question: question,
+                                    bookmarked: widget.state.bookmarks.contains(qId),
+                                    onToggleBookmark: () => widget.onToggleBookmark(qId),
+                                  ),
+                                  if (glossaryTerms.isNotEmpty) ...[
+                                    const SizedBox(width: AppSpacing.sm),
                                     GlossaryTermsButton(terms: glossaryTerms, title: 'Fachbegriffe in dieser Frage'),
+                                  ],
                                 ],
                               ),
                               const SizedBox(height: AppSpacing.lg),

@@ -33,6 +33,9 @@ class OptionButton extends StatelessWidget {
   final bool isCorrectOption;
   final VoidCallback onTap;
 
+  /// Einfachauswahl ohne sofortige Auswertung (Prüfungstag): Auswahl als Radio-Button zeigen.
+  final bool showRadio;
+
   const OptionButton({
     super.key,
     required this.index,
@@ -42,6 +45,7 @@ class OptionButton extends StatelessWidget {
     required this.answered,
     required this.isCorrectOption,
     required this.onTap,
+    this.showRadio = false,
   });
 
   @override
@@ -50,7 +54,8 @@ class OptionButton extends StatelessWidget {
     Color borderColor = const Color(0x26636AF1);
     double opacity = 1.0;
 
-    if (!answered && isMultiple && isSelected) {
+    // Unbewertete Auswahl: Mehrfachauswahl vor dem Bestätigen oder jede Frage am Prüfungstag.
+    if (!answered && isSelected) {
       bgColor = const Color(0x266366F1);
       borderColor = AppColors.indigo;
     }
@@ -95,6 +100,25 @@ class OptionButton extends StatelessWidget {
                           child: Text(
                             '✓',
                             style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w700),
+                          ),
+                        )
+                      : null,
+                ),
+              if (showRadio && !isMultiple && !answered)
+                Container(
+                  width: 22,
+                  height: 22,
+                  margin: const EdgeInsets.only(right: AppSpacing.lg),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: isSelected ? AppColors.indigo : AppColors.textDark, width: 2),
+                  ),
+                  child: isSelected
+                      ? Center(
+                          child: Container(
+                            width: 10,
+                            height: 10,
+                            decoration: const BoxDecoration(color: AppColors.indigo, shape: BoxShape.circle),
                           ),
                         )
                       : null,

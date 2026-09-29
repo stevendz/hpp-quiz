@@ -1,12 +1,16 @@
+import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../data/all_questions.dart';
+import '../services/exam_modes.dart';
 import '../services/storage_service.dart';
 import '../theme/app_theme.dart';
 
 class HomeScreen extends StatelessWidget {
   final QuizState state;
   final VoidCallback onStartExam;
+  final VoidCallback onStartExamDay;
+  final VoidCallback onStartReview;
   final VoidCallback onResumeExam;
   final VoidCallback onShowFlashcards;
   final VoidCallback onShowGlossary;
@@ -16,11 +20,25 @@ class HomeScreen extends StatelessWidget {
     super.key,
     required this.state,
     required this.onStartExam,
+    required this.onStartExamDay,
+    required this.onStartReview,
     required this.onResumeExam,
     required this.onShowFlashcards,
     required this.onShowGlossary,
     required this.onShowProfile,
   });
+
+  String _resumeLabel(ExamState exam) {
+    switch (exam.mode) {
+      case ExamMode.examDay:
+        final left = max(0, (exam.timeLimitSeconds ?? examDaySeconds) - exam.elapsedSeconds);
+        return 'Prüfungstag ${exam.examLabel ?? ''} fortsetzen (noch ${(left + 59) ~/ 60} Min.)';
+      case ExamMode.review:
+        return 'Wiederholung fortsetzen (Frage ${exam.currentIndex + 1}/${exam.questionIds.length})';
+      default:
+        return 'Prüfung fortsetzen (Frage ${exam.currentIndex + 1}/${exam.questionIds.length})';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +54,7 @@ class HomeScreen extends StatelessWidget {
     }).length;
     final unansweredCount = total - answeredCount;
     final allAnsweredNow = unansweredCount == 0 && answeredCount > 0;
+    final reviewCount = reviewCandidateIds(state).length;
     final exam = state.currentExam;
     final tt = Theme.of(context).textTheme;
     return Container(
@@ -126,7 +145,8 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                'Prüfung fortsetzen (Frage ${exam.currentIndex + 1}/${exam.questionIds.length})',
+                                _resumeLabel(exam),
+                                textAlign: TextAlign.center,
                                 style: tt.titleSmall!.copyWith(color: AppColors.greenLight),
                               ),
                             ),
@@ -159,6 +179,21 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                      const SizedBox(height: AppSpacing.lg),
+                      _MenuButton(
+                        title: 'Prüfungstag simulieren',
+                        subtitle: 'Vergangene Prüfung · 28 Fragen · ${examDaySeconds ~/ 60} Min.',
+                        prominent: true,
+                        onTap: onStartExamDay,
+                      ),
+                      if (reviewCount > 0) ...[
+                        const SizedBox(height: AppSpacing.lg),
+                        _MenuButton(
+                          title: 'Fehler & Merkliste üben',
+                          subtitle: '$reviewCount ${reviewCount == 1 ? 'Frage' : 'Fragen'}',
+                          onTap: onStartReview,
+                        ),
+                      ],
                       const SizedBox(height: AppSpacing.lg),
                       // Lernkarten Button
                       SizedBox(
@@ -227,6 +262,59 @@ class HomeScreen extends StatelessWidget {
   bool _isQuestionMastered(QuestionStats stats) {
     if (stats.attempts == 0) return false;
     return stats.lastCorrect;
+  }
+}
+
+/// Menü-Knopf mit Untertitel, im Stil der Lernkarten-/Begriffe-Knöpfe; [prominent] in Gold.
+class _MenuButton extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final VoidCallback onTap;
+  final bool prominent;
+
+  const _MenuButton({required this.title, required this.subtitle, required this.onTap, this.prominent = false});
+
+  @override
+  Widget build(BuildContext context) {
+    final tt = Theme.of(context).textTheme;
+    return SizedBox(
+      width: double.infinity,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: prominent
+              ? AppColors.gradientGold
+              : LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [AppColors.indigoSubtle.withAlpha(150), AppColors.indigoSubtle],
+                ),
+          borderRadius: BorderRadius.circular(AppSpacing.lg),
+          boxShadow: [
+            BoxShadow(
+              color: prominent ? AppColors.gold.withValues(alpha: 0.3) : AppColors.indigoSubtle,
+              blurRadius: 16,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: TextButton(
+          onPressed: onTap,
+          style: TextButton.styleFrom(
+            backgroundColor: Colors.transparent,
+            foregroundColor: prominent ? AppColors.onGold : null,
+            padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppSpacing.lg)),
+          ),
+          child: Column(
+            children: [
+              Text(title, style: tt.labelLarge!.copyWith(color: prominent ? AppColors.onGold : null)),
+              const SizedBox(height: 2),
+              Text(subtitle, style: tt.bodySmall!.copyWith(color: prominent ? AppColors.onGoldMuted : AppColors.textMuted)),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 

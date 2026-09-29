@@ -19,6 +19,13 @@ class AppColors {
   static const amber = Color(0xFFF59E0B);
   static const amberLight = Color(0xFFFBBF24);
 
+  // Gold (Prüfungstag) – dunkle Schrift, weil Weiß auf Gold kaum lesbar ist
+  static const goldLight = Color(0xFFF3D27A);
+  static const gold = Color(0xFFD9A441);
+  static const goldDark = Color(0xFFB47F25);
+  static const onGold = Color(0xFF2A1C06);
+  static const onGoldMuted = Color(0xFF4A3510);
+
   static const bgDark = Color(0xFF0F1F20);
   static const bgMid = Color(0xFF1A2F31);
   static const cardBg = Color(0xB31A2F31); // 70% opacity
@@ -42,6 +49,12 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [teal, tealLight],
+  );
+
+  static const gradientGold = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [goldLight, gold, goldDark],
   );
 
   static const gradientBg = LinearGradient(
@@ -74,6 +87,16 @@ class AppTheme {
       secondary: AppColors.tealLight,
       surface: AppColors.bgMid,
       error: AppColors.red,
+    ),
+    // Hinweise im Stil der App statt des hellen Material-Standards.
+    snackBarTheme: const SnackBarThemeData(
+      backgroundColor: Color(0xFF243D3F),
+      contentTextStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.textPrimary),
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(AppSpacing.lg)),
+        side: BorderSide(color: AppColors.indigoBorder),
+      ),
     ),
     textTheme: const TextTheme(
       displayLarge: TextStyle(fontSize: 48, fontWeight: FontWeight.w800, color: AppColors.textPrimary),

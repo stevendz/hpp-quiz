@@ -1,21 +1,50 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Art einer Prüfungssitzung.
+class ExamMode {
+  /// 30 gemischte Fragen mit Feedback nach jeder Antwort.
+  static const practice = 'practice';
+
+  /// Eine vergangene Prüfung unter Prüfungsbedingungen: Zeitlimit, Auswertung erst am Ende.
+  static const examDay = 'examDay';
+
+  /// Falsch beantwortete und gemerkte Fragen.
+  static const review = 'review';
+}
+
 class QuizState {
   Map<int, QuestionStats> questionStats;
   ExamState? currentExam;
   List<ExamRecord> examHistory;
+  Set<int> bookmarks;
 
   QuizState({
     required this.questionStats,
     this.currentExam,
     required this.examHistory,
+    required this.bookmarks,
   });
 
   factory QuizState.defaultState() => QuizState(
         questionStats: {},
         currentExam: null,
         examHistory: [],
+        bookmarks: {},
+      );
+
+  QuizState copyWith({
+    Map<int, QuestionStats>? questionStats,
+    ExamState? currentExam,
+    bool clearCurrentExam = false,
+    List<ExamRecord>? examHistory,
+    Set<int>? bookmarks,
+  }) =>
+      QuizState(
+        questionStats: questionStats ?? this.questionStats,
+        currentExam: clearCurrentExam ? null : (currentExam ?? this.currentExam),
+        examHistory: examHistory ?? this.examHistory,
+        bookmarks: bookmarks ?? this.bookmarks,
       );
 
   Map<String, dynamic> toJson() => {
@@ -24,6 +53,7 @@ class QuizState {
         ),
         'currentExam': currentExam?.toJson(),
         'examHistory': examHistory.map((e) => e.toJson()).toList(),
+        'bookmarks': bookmarks.toList()..sort(),
       };
 
   factory QuizState.fromJson(Map<String, dynamic> json) {
@@ -42,6 +72,7 @@ class QuizState {
               ?.map((e) => ExamRecord.fromJson(e))
               .toList() ??
           [],
+      bookmarks: {...?(json['bookmarks'] as List?)?.cast<int>()},
     );
   }
 }
@@ -53,6 +84,26 @@ class QuestionStats {
   int correctStreak;
 
   QuestionStats({this.attempts = 0, this.correctCount = 0, this.lastCorrect = false, this.correctStreak = 0});
+
+  /// Statistik nach einer weiteren Antwort. Eine zuvor falsch beantwortete Frage gilt erst
+  /// nach zwei richtigen Antworten in Folge wieder als sicher.
+  QuestionStats afterAnswer(bool isCorrect) {
+    final newStreak = isCorrect ? correctStreak + 1 : 0;
+    final bool newLastCorrect;
+    if (!isCorrect) {
+      newLastCorrect = false;
+    } else if (attempts == 0 || lastCorrect) {
+      newLastCorrect = true;
+    } else {
+      newLastCorrect = newStreak >= 2;
+    }
+    return QuestionStats(
+      attempts: attempts + 1,
+      correctCount: correctCount + (isCorrect ? 1 : 0),
+      lastCorrect: newLastCorrect,
+      correctStreak: newStreak,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'attempts': attempts,
@@ -98,6 +149,11 @@ class ExamState {
   Map<int, AnswerRecord> answers;
   int score;
   int elapsedSeconds;
+  String mode;
+
+  /// Prüfungstermin beim Prüfungstag, z. B. „März 2025“.
+  String? examLabel;
+  int? timeLimitSeconds;
 
   ExamState({
     required this.questionIds,
@@ -105,7 +161,27 @@ class ExamState {
     required this.answers,
     this.score = 0,
     this.elapsedSeconds = 0,
+    this.mode = ExamMode.practice,
+    this.examLabel,
+    this.timeLimitSeconds,
   });
+
+  ExamState copyWith({
+    int? currentIndex,
+    Map<int, AnswerRecord>? answers,
+    int? score,
+    int? elapsedSeconds,
+  }) =>
+      ExamState(
+        questionIds: questionIds,
+        currentIndex: currentIndex ?? this.currentIndex,
+        answers: answers ?? this.answers,
+        score: score ?? this.score,
+        elapsedSeconds: elapsedSeconds ?? this.elapsedSeconds,
+        mode: mode,
+        examLabel: examLabel,
+        timeLimitSeconds: timeLimitSeconds,
+      );
 
   Map<String, dynamic> toJson() => {
         'questionIds': questionIds,
@@ -114,6 +190,9 @@ class ExamState {
             answers.map((k, v) => MapEntry(k.toString(), v.toJson())),
         'score': score,
         'elapsedSeconds': elapsedSeconds,
+        'mode': mode,
+        if (examLabel != null) 'examLabel': examLabel,
+        if (timeLimitSeconds != null) 'timeLimitSeconds': timeLimitSeconds,
       };
 
   factory ExamState.fromJson(Map<String, dynamic> json) {
@@ -129,6 +208,9 @@ class ExamState {
       answers: answersMap,
       score: json['score'] ?? 0,
       elapsedSeconds: json['elapsedSeconds'] ?? 0,
+      mode: json['mode'] ?? ExamMode.practice,
+      examLabel: json['examLabel'],
+      timeLimitSeconds: json['timeLimitSeconds'],
     );
   }
 }
@@ -165,6 +247,11 @@ class ExamRecord {
   final int elapsedSeconds;
   final List<int> questionIds;
   final Map<int, AnswerRecord> answers;
+  final String mode;
+  final String? examLabel;
+
+  /// Prüfungstag: automatisch abgegeben, weil die Zeit abgelaufen ist.
+  final bool timedOut;
 
   ExamRecord({
     required this.date,
@@ -173,6 +260,9 @@ class ExamRecord {
     this.elapsedSeconds = 0,
     this.questionIds = const [],
     this.answers = const {},
+    this.mode = ExamMode.practice,
+    this.examLabel,
+    this.timedOut = false,
   });
 
   Map<String, dynamic> toJson() => {
@@ -182,6 +272,9 @@ class ExamRecord {
         'elapsedSeconds': elapsedSeconds,
         'questionIds': questionIds,
         'answers': answers.map((k, v) => MapEntry(k.toString(), v.toJson())),
+        'mode': mode,
+        if (examLabel != null) 'examLabel': examLabel,
+        if (timedOut) 'timedOut': true,
       };
 
   // Ältere Einträge (vor der Auswertungsansicht) haben keine Fragen/Antworten gespeichert.
@@ -195,6 +288,9 @@ class ExamRecord {
           for (final e in ((json['answers'] as Map<String, dynamic>?) ?? {}).entries)
             int.parse(e.key): AnswerRecord.fromJson(e.value),
         },
+        mode: json['mode'] ?? ExamMode.practice,
+        examLabel: json['examLabel'],
+        timedOut: json['timedOut'] ?? false,
       );
 }
 
