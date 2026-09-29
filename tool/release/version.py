@@ -20,7 +20,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 PUBSPEC = ROOT / 'pubspec.yaml'
-VERSION_RE = re.compile(r'^version:\s*(\d+)\.(\d+)\.(\d+)\+(\d+)\s*$', re.M)
+VERSION_RE = re.compile(r'^version:[ \t]*(\d+)\.(\d+)\.(\d+)\+(\d+)[ \t]*$', re.M)
 
 
 def parse(name):

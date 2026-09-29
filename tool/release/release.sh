@@ -115,9 +115,6 @@ else
   step "Screenshots (hochgeladen werden nur geänderte)"
   tool/release/media.sh
 fi
-if [[ -n $(ls fastlane/app_previews/*/*.mp4 2>/dev/null) ]]; then
-  info "App Previews: werden hochgeladen, falls seit dem letzten Upload mit \`make video\` neu erzeugt"
-fi
 
 # ---------------------------------------------------------------- Builds
 if build_android; then
@@ -143,6 +140,11 @@ fi
 if build_ios; then
   step "Upload App Store Connect"
   $FASTLANE ios upload
+fi
+if want ios && [[ $SKIP_MEDIA != 1 ]]; then
+  # Eigener Schritt, damit er auch nachgeholt wird, wenn der Build schon oben ist
+  step "App Previews (nur wenn mit make video neu erzeugt)"
+  $FASTLANE ios previews
 fi
 if build_android; then
   step "Upload Google Play (Production, Entwurf)"
