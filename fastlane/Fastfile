@@ -101,6 +101,14 @@ platform :ios do
       options.merge!(screenshots_path: root("fastlane/screenshots/ios"), sync_screenshots: true)
     end
     deliver(options)
+
+    # Debug-Symbole für Crashlytics, damit native iOS-Abstürze lesbar sind
+    upload_symbols_to_crashlytics(
+      dsym_path: root("build/ios/ipa/Runner.app.dSYM.zip"),
+      gsp_path: root("ios/Runner/GoogleService-Info.plist"),
+      binary_path: root("ios/Pods/FirebaseCrashlytics/upload-symbols"),
+      fail_on_error: false # ein fehlgeschlagener Symbol-Upload soll den Release nicht stoppen
+    )
   end
 
   desc "App Previews hochladen, falls seit dem letzten Upload neu gerendert (make video)"

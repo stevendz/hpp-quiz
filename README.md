@@ -10,7 +10,10 @@ Flutter-App (iOS, Android) zur Vorbereitung auf die schriftliche Heilpraktiker-P
 ## Entwicklung
 
 - Flutter 3.41.4 über fvm: `fvm flutter run`, `fvm flutter analyze`, `fvm flutter test`
-- Firebase: Analytics sowie Firestore für `feedback` und `question_reports` (Regeln: `firestore.rules`)
+- Firebase:
+  - Analytics
+  - Crashlytics: nur in Release-Builds; dSYMs lädt `make release` hoch
+  - Firestore für `feedback` und `question_reports` (Regeln: `firestore.rules`)
 
 ## Struktur
 

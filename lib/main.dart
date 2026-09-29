@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui' show PlatformDispatcher;
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'data/all_questions.dart';
 import 'data/flashcards_data.dart';
 import 'services/analytics.dart';
@@ -28,6 +31,17 @@ final FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  // Absturzberichte nur aus Release-Builds – im Debug-Modus bleiben Fehler in der Konsole.
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
+  // Unbehandelte Fehler im Flutter-Framework (Build, Layout, Rendering)
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  // Unbehandelte asynchrone Fehler außerhalb des Frameworks
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
   runApp(const HppQuizApp());
 }
 

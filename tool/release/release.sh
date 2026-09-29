@@ -15,11 +15,14 @@ SKIP_MEDIA=${SKIP_MEDIA:-0}
 DRY_RUN=${DRY_RUN:-0}
 SECRETS=${HPP_RELEASE_ENV:-$HOME/.config/hpp-release/env}
 
-export PATH="/opt/homebrew/opt/ruby@3.4/bin:$PATH"
+# Ruby 3.4 nur für fastlane/Bundler – Flutter/CocoaPods brauchen das System-Ruby
+# (Plugin-Skripte wie firebase_crashlytics setzen dessen Gems voraus).
+RUBY_PATH="/opt/homebrew/opt/ruby@3.4/bin:$PATH"
 export LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 export FASTLANE_SKIP_UPDATE_CHECK=1 FASTLANE_HIDE_CHANGELOG=1 FASTLANE_HIDE_TIMESTAMP=1 SKIP_MEDIA
 FLUTTER=(fvm flutter)
-FASTLANE=(bundle exec fastlane)
+BUNDLE=(env "PATH=$RUBY_PATH" bundle)
+FASTLANE=($BUNDLE exec fastlane)
 
 step() { print -P "\n%F{cyan}%B▶ $1%b%f" }
 info() { print -P "  $1" }
@@ -46,7 +49,7 @@ fi
 for tool in fvm node ffmpeg claude python3; do command -v $tool >/dev/null || fail "$tool nicht gefunden"; done
 python3 -c "import PIL" 2>/dev/null || fail "Python-Paket Pillow fehlt: pip3 install --user pillow"
 [[ -x /opt/homebrew/opt/ruby@3.4/bin/ruby ]] || fail "Ruby 3.4 fehlt: brew install ruby@3.4"
-bundle check >/dev/null 2>&1 || bundle install --quiet
+$BUNDLE check >/dev/null 2>&1 || $BUNDLE install --quiet
 $FLUTTER pub get >/dev/null
 $FLUTTER analyze --no-pub || fail "flutter analyze meldet Probleme"
 $FLUTTER test --no-pub >/dev/null || fail "Tests schlagen fehl (flutter test)"

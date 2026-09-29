@@ -34,6 +34,7 @@ video:
 
 setup:
 	@command -v /opt/homebrew/opt/ruby@3.4/bin/ruby >/dev/null || brew install ruby@3.4
+	@brew unlink ruby@3.4 >/dev/null 2>&1 || true # System-Ruby bleibt Standard (CocoaPods-Plugins brauchen es)
 	@PATH="/opt/homebrew/opt/ruby@3.4/bin:$$PATH" bundle config set --local path vendor/bundle >/dev/null
 	@PATH="/opt/homebrew/opt/ruby@3.4/bin:$$PATH" bundle install --quiet
 	@python3 -c "import PIL" 2>/dev/null || pip3 install --user --quiet pillow
