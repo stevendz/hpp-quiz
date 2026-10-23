@@ -361,7 +361,7 @@ const List<Question> questions2016 = [
   Question(
     id: 26,
     exam: 'März 2016',
-    q: 'Welche der folgenden Aussagen treffen zu Cannabiskonsum zu? (Wählen Sie zwei Antworten)',
+    q: 'Welche der folgenden Aussagen treffen für Cannabiskonsum zu? (Wählen Sie zwei Antworten)',
     options: [
       'Regelmäßiger Cannabiskonsum führt zu ausgeprägter körperlicher Abhängigkeit',
       'Cannabiskonsum verursacht eine Pupillenverengung (Miosis)',

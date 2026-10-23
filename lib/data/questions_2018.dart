@@ -154,13 +154,13 @@ const List<Question> questions2018 = [
   Question(
     id: 11,
     exam: 'Oktober 2018',
-    q: 'Unter welcher Bedingung ist die Unterbringung gemäß Unterbringungsrecht der Länger (z.B. Unterbringungsgesetzt bzw. Psychisch-Kranken-Gesetz) eines psychisch Kranken in einer psychiatrischen Klinik gegen dessen Willen zulässig?',
+    q: 'Unter welcher Bedingung ist die Unterbringung gemäß Unterbringungsrecht der Länder (z.B. Unterbringungsgesetz bzw. Psychisch-Kranken-Gesetz) eines psychisch Kranken in einer psychiatrischen Klinik gegen dessen Willen zulässig?',
     options: [
       'A) Der Patient ist nicht bereit, sich einer notwendigen Behandlung zu unterziehen',
       'B) Die betroffene Person hat gegen Gesetze verstoßen und ist nicht zur freiwilligen Behandlung bereit',
       'C) Vorherige ambulante Behandlungsversuche sind fehlgeschlagen',
       'D) Die Unterbringung ist zur Abwehr von akuten erheblichen Gefahren für Gesundheit oder Leben des Betroffenen oder besonders bedeutende Rechtsgüter anderer erforderlich',
-      'E) Ein Heilpraktiker hat die Notwenigkeit einer stationären Behandlung attestiert',
+      'E) Ein Heilpraktiker hat die Notwendigkeit einer stationären Behandlung attestiert',
     ],
     correct: [3],
     explanation:
@@ -259,7 +259,7 @@ const List<Question> questions2018 = [
   Question(
     id: 18,
     exam: 'Oktober 2018',
-    q: 'Welche der folgenden Merkmale lassen am ehesten an eine abhängige (asthenischE) Persönlichkeitsstörung (nach ICD-10) denken?\n1. Streitsüchtiges und beharrliches Bestehen auf eigenen Rechten\n2. Ausgeprägte Ängste vor dem Alleinsein bzw. Verlassen werden\n3. Eingeschränkte Fähigkeit beim Treffen von alltäglichen Entscheidungen ohne Ratschläge und Bestätigung von anderen\n4. Übermäßige Gewissenhaftigkeit bis hin zum Perfektionismus, um Fehler zu vermeiden\n5. Unterordnung der eigenen Bedürfnisse unter die anderen nahestehender Personen',
+    q: 'Welche der folgenden Merkmale lassen am ehesten an eine abhängige (asthenische) Persönlichkeitsstörung (nach ICD-10) denken?\n1. Streitsüchtiges und beharrliches Bestehen auf eigenen Rechten\n2. Ausgeprägte Ängste vor dem Alleinsein bzw. Verlassen werden\n3. Eingeschränkte Fähigkeit beim Treffen von alltäglichen Entscheidungen ohne Ratschläge und Bestätigung von anderen\n4. Übermäßige Gewissenhaftigkeit bis hin zum Perfektionismus, um Fehler zu vermeiden\n5. Unterordnung der eigenen Bedürfnisse unter die anderen nahestehender Personen',
     options: [
       'A) Nur die Aussagen 1, 2 und 4 sind richtig',
       'B) Nur die Aussagen 1, 2 und 5 sind richtig',
@@ -433,17 +433,17 @@ const List<Question> questions2018 = [
   Question(
     id: 30,
     exam: 'März 2018',
-    q: 'Welche der folgenden Aussagen zur Multiplen Sklerose treffen zu?\n1. Im Erkrankungsverlauf kommt es bei einem Teil der Patienten auch zu psychischen Veränderungen mit insbesondere affektiven Störungen\n2. Männer sind etwa doppelt so häufig betroffen wie Frauen\n3. Die Erkrankung wird durch Zecken übertragen\n4. Der Ersterkrankungsgipfel liegt zwischen dem\n20. und\n40. Lebensjahr\n5. In Spätstadien der Erkrankung ist eine dementielle Entwicklung möglich',
+    q: 'Welche der folgenden Aussagen zur Multiplen Sklerose treffen zu?\n1. Im Erkrankungsverlauf kommt es bei einem Teil der Patienten auch zu psychischen Veränderungen mit insbesondere affektiven Störungen\n2. Männer sind etwa doppelt so häufig betroffen wie Frauen\n3. Die Erkrankung wird durch Zecken übertragen\n4. Der Ersterkrankungsgipfel liegt zwischen dem 20. und 40. Lebensjahr\n5. In Spätstadien der Erkrankung ist eine dementielle Entwicklung möglich',
     options: [
-      'A) Nur die Aussagen 2 und 4 sind richtig',
-      'B) Nur die Aussagen 1, 3 und 5 sind richtig',
-      'C) Nur die Aussagen 2, 3 und 4 sind richtig',
-      'D) Nur die Aussagen 2, 3, 4 und 5 sind richtig',
-      'E) Alle Aussagen sind richtig',
+      'A) Nur die Aussagen 1 und 4 sind richtig',
+      'B) Nur die Aussagen 1, 2 und 5 sind richtig',
+      'C) Nur die Aussagen 1, 4 und 5 sind richtig',
+      'D) Nur die Aussagen 2, 3 und 4 sind richtig',
+      'E) Nur die Aussagen 1, 3, 4 und 5 sind richtig',
     ],
-    correct: [4],
+    correct: [2],
     explanation:
-        'Laut Lösungsschlüssel E (alle Aussagen richtig). Anmerkung: Diese Frage ist umstritten. MS führt bei vielen Patienten zu affektiven Störungen (1 richtig). Der Ersterkrankungsgipfel liegt zwischen 20-40 Jahren (4 richtig). Dementielle Entwicklung in Spätstadien ist möglich (5 richtig). Medizinisch sind die Aussagen 2 (Frauen sind häufiger betroffen) und 3 (MS ist eine Autoimmunerkrankung, keine Zeckenübertragung) falsch. Die offizielle Lösung lautet dennoch E.',
+        'Viele MS-Patienten entwickeln im Verlauf affektive Störungen, v.a. Depressionen – teils als Reaktion auf die Erkrankung, teils durch die Entmarkungsherde selbst (1 richtig). Der Ersterkrankungsgipfel liegt zwischen dem 20. und 40. Lebensjahr (4 richtig). In Spätstadien ist eine dementielle Entwicklung möglich (5 richtig) – C richtig. Frauen sind etwa zwei- bis dreimal häufiger betroffen als Männer (2 falsch). MS ist eine chronisch-entzündliche Autoimmunerkrankung des ZNS und wird nicht durch Zecken übertragen; durch Zecken übertragen werden z.B. Borreliose und FSME (3 falsch).',
   ),
   Question(
     id: 31,
@@ -638,7 +638,7 @@ const List<Question> questions2018 = [
     ],
     correct: [0],
     explanation:
-        'Bei der somatoformen Schmerzstörung (F45.4) steht ein andauernder Schmerz im Vordergrund (1 richtig). Die Störung tritt in Verbindung mit emotionalen Konflikten auf (2 richtig). Die Patienten weigern sich oft, psychische Ursachen zu akzeptieren (5 richtig) – A richtig. Willkürmotorik und Sinneswahrnehmung (3) sind bei Konversionsstörungen betroffen. Die Schmerzen sind anhaltend, nicht vorübergehend (4 falsch).',
+        'Bei der anhaltenden somatoformen Schmerzstörung (F45.4) steht ein andauernder, schwerer und quälender Schmerz im Vordergrund, der körperlich nicht hinreichend erklärt ist (1 richtig). Sie tritt in Verbindung mit emotionalen Konflikten oder psychosozialen Problemen auf (2 richtig), und die Patienten weigern sich oft hartnäckig zu akzeptieren, dass keine körperliche Ursache vorliegt (5 richtig) – A richtig. Aussage 3 beschreibt die dissoziativen (Konversions-)Störungen der Bewegung und Empfindung (F44.4–F44.6): Dort fallen Funktionen der Willkürmotorik oder der Sinneswahrnehmung aus, z.B. als Lähmung, Gangstörung, Taubheitsgefühl oder Sehverlust. Bei der Schmerzstörung fällt keine Funktion aus, Leitsymptom ist der Schmerz (3 falsch). Die Schmerzen bestehen anhaltend über mindestens 6 Monate, nicht vorübergehend oder stark fluktuierend (4 falsch).',
   ),
   Question(
     id: 44,

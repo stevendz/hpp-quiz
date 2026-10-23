@@ -134,7 +134,7 @@ const List<Question> questions2019 = [
     ],
     correct: [2],
     explanation:
-        'Die schizoide Persönlichkeitsstörung ist durch emotionale Kühle, Distanziertheit und eingeschränkte Fähigkeit, Gefühle auszudrücken, gekennzeichnet. Wenige Tätigkeiten bereiten Freude (1 richtig) und es besteht ein Mangel an engen Freunden (4 richtig). Theatralisches Verhalten (2) gehört zur histrionischen PS. Übersteigertes sexuelles Interesse (3) ist untypisch – eher Gleichgültigkeit. Bedürfnis nach Anerkennung (5) gehört zur narzisstischen PS.',
+        'Aussage 1 entspricht wörtlich einem ICD-10-Kriterium der schizoiden PS (F60.1): Wenige oder überhaupt keine Tätigkeiten bereiten Freude (Anhedonie). Auch der Mangel an engen Freunden oder vertrauensvollen Beziehungen ist ein ICD-10-Kriterium (4 richtig) – C richtig. Weitere Kriterien sind u.a. emotionale Kühle, eine eingeschränkte Fähigkeit, Gefühle auszudrücken, und eine Vorliebe für einzelgängerische Beschäftigungen. Theatralisches Verhalten und übertriebener Gefühlsausdruck (2) gehören zur histrionischen PS. Schizoide Menschen haben eher wenig Interesse an sexuellen Erfahrungen mit anderen (3 falsch). Ein übermäßiges Bedürfnis nach Anerkennung und Bewunderung (5) passt zur narzisstischen PS.',
   ),
   Question(
     id: 10,

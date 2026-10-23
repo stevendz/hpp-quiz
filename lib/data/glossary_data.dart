@@ -78,6 +78,8 @@ const Map<String, String> glossary = {
   'Bewusstseinsstörung':
       'Quantitativ (verminderte Wachheit): Benommenheit (verlangsamt, schwer besinnlich) → Somnolenz (schläfrig, durch Ansprache erweckbar) → Sopor (nur durch starke Reize kurz erweckbar) → Koma (nicht erweckbar). Qualitativ (veränderte Bewusstseinsklarheit): Bewusstseinstrübung (z. B. Delir), Bewusstseinseinengung (Erleben auf bestimmte Inhalte eingeengt, z. B. Dämmerzustand), Bewusstseinsverschiebung (gesteigerte Wachheit und Intensität, z. B. unter Drogen).',
   'BGB': 'Bürgerliches Gesetzbuch – regelt u.a. den Behandlungsvertrag (§§630a-h) und das Betreuungsrecht',
+  'Biologikum':
+      'Biotechnologisch mithilfe lebender Zellen hergestelltes Arzneimittel (Mehrzahl: Biologika), z. B. monoklonale Antikörper – nicht zu verwechseln mit pflanzlichen Mitteln (Phytopharmaka).',
   'Bindungsstörung':
       'Störung der sozialen Bindungsfähigkeit im Kindesalter als Folge schwerer Vernachlässigung oder Misshandlung (F94): reaktiv (ängstlich-gehemmt) oder enthemmt (distanzlos).',
   'Binge-Eating-Störung':
@@ -340,6 +342,8 @@ const Map<String, String> glossary = {
       'Anhaltende, unangemessene Angst vor bestimmten Objekten oder Situationen mit Vermeidungsverhalten. Agoraphobie: Angst vor Orten, aus denen Flucht schwierig ist (Menschenmengen, öffentliche Plätze, Reisen). Soziale Phobie: Angst vor prüfender Betrachtung und Bewertung durch andere (Erröten, Zittern). Spezifische Phobie: isolierte Angst z. B. vor Tieren, Höhe, Blut oder engen Räumen (Klaustrophobie).',
   'Phänomenologisch-deskriptiv': 'Beschreibend nach Symptomen, nicht nach Ursachen',
   'Phäochromozytom': 'Tumor des Nebennierenmarks mit Katecholaminausschüttung (Blutdruckkrisen)',
+  'Phytopharmakon':
+      'Pflanzliches Arzneimittel (Mehrzahl: Phytopharmaka), z. B. Johanniskraut, Baldrian, Lavendel – nicht frei von Nebenwirkungen und Wechselwirkungen.',
   'Pica': 'Essen nicht essbarer Substanzen (z. B. Erde, Papier)',
   'Poltern': 'Überhastetes, undeutliches Sprechen mit Verschlucken von Silben',
   'Polyurie': 'vermehrte Harnausscheidung – kann z.B. bei Lithiumtherapie auftreten',
@@ -607,4 +611,6 @@ const Map<String, String> glossaryAliases = {
   'Antipsychotikum': 'Neuroleptika',
   'Antidepressivum': 'Antidepressiva',
   'Benzodiazepin': 'Benzodiazepine',
+  'Biologika': 'Biologikum',
+  'Phytopharmaka': 'Phytopharmakon',
 };

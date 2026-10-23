@@ -77,7 +77,7 @@ class _FeedbackSheetState extends State<FeedbackSheet> {
     return Padding(
       padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       child: SafeArea(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(AppSpacing.lg * 2),
           child: Column(
             mainAxisSize: MainAxisSize.min,

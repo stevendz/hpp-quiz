@@ -314,7 +314,7 @@ const List<Question> questions2017 = [
     ],
     correct: [1],
     explanation:
-        'Tiefgreifende Entwicklungsstörungen, wie etwa Autismus, müssen von Bindungsstörungen differentialdiagnostisch abgegrenzt werden - diese beginnen vor dem Alter von 5 Jahren. Repetitive und stereotype Verhaltensmuster gehören zu den Symptomen des Autismus. Die reaktive Bindungsstörung tritt meist im Kontext von Vernachlässigung oder Misshandlung auf.',
+        'Die reaktive Bindungsstörung (F94.1) beginnt in den ersten fünf Lebensjahren (2 richtig) und tritt meist im Zusammenhang mit schwerer Vernachlässigung oder Misshandlung auf (5 richtig). Differenzialdiagnostisch wichtig ist die Abgrenzung von tiefgreifenden Entwicklungsstörungen wie dem Autismus (1 richtig) – B richtig. Gerade deshalb ist 3 falsch: Repetitive und stereotype Verhaltensmuster sind ein Leitsymptom des Autismus, nicht der Bindungsstörung – treten sie auf, spricht das eher für eine tiefgreifende Entwicklungsstörung. Anhaltende ausgeprägte kognitive Defizite gehören ebenfalls nicht zum Bild (4 falsch); die soziale Beziehungsfähigkeit ist grundsätzlich vorhanden und bessert sich in einer förderlichen Umgebung.',
   ),
   Question(
     id: 22,
@@ -602,7 +602,7 @@ const List<Question> questions2017 = [
     ],
     correct: [1],
     explanation:
-        'Die Schema- und Gestalttherapie sowie EMDR zählen zu den Verfahren der Psychotherapie. Die Lichttherapie ist ein von der wissenschaftlichen Medizin anerkanntes Verfahren zur Behandlung z.B. der saisonalen Depression. Die Schlafentzugstherapie (Wachtherapie) kann zur Schlafphasenverlagerung angewendet werden.',
+        'Schematherapie (Weiterentwicklung der kognitiven Verhaltenstherapie, v.a. bei Persönlichkeitsstörungen), Gestalttherapie (humanistisches Verfahren) und EMDR zählen zu den psychotherapeutischen Verfahren (1, 2 und 5 richtig) – B richtig. Hinweis: Der Wissenschaftliche Beirat Psychotherapie hat EMDR als Methode zur Behandlung der PTBS bei Erwachsenen anerkannt, nicht als eigenständiges Psychotherapieverfahren; im Sinne der Prüfungsfrage zählt EMDR dennoch zu den Psychotherapieverfahren. Lichttherapie (z.B. bei saisonaler Depression) und Schlafentzugstherapie (Wachtherapie bei Depression) sind biologische Behandlungsverfahren, keine Psychotherapie (3 und 4 falsch).',
   ),
   Question(
     id: 42,
@@ -632,7 +632,7 @@ const List<Question> questions2017 = [
     ],
     correct: [1],
     explanation:
-        'Nach dem Vulnerabilitäts-Stress-Modell gibt es für die Schizophrenie mehrere Ursachen (multifaktorielle Krankheitsentstehung), darunter genetische Disposition. Typische Symptome der paranoiden Schizophrenie sind Halluzinationen, Wahn und Ich-Störungen. Körperliche Wahrnehmungsstörungen (Zönästhesien) können zusätzlich bestehen. Das schizophrene Residuum ist vorwiegend durch Negativsymptome gekennzeichnet.',
+        'Nach dem Vulnerabilitäts-Stress-Modell entsteht die Schizophrenie multifaktoriell (1 richtig). Zönästhesien, also leibliche Missempfindungen, kommen bei manchen Patienten vor (4 richtig) – B richtig. Eine genetische Komponente ist gut belegt, das Erkrankungsrisiko steigt mit dem Verwandtschaftsgrad zu Erkrankten (2 falsch). Bei der akuten paranoiden Schizophrenie stehen Positivsymptome wie Wahn, Halluzinationen und Ich-Störungen im Vordergrund; Affektverflachung und Antriebsstörung sind dagegen Negativsymptome (3 falsch). Das schizophrene Residuum ist gerade durch Negativsymptome gekennzeichnet, nicht durch Positivsymptome (5 falsch).',
   ),
   Question(
     id: 44,
@@ -730,14 +730,14 @@ const List<Question> questions2017 = [
     q: 'Welche der folgenden Aussagen zur rechtlichen Betreuung treffen zu? Wählen Sie zwei Antworten!',
     options: [
       'A) Bei behandlungsuneinsichtigen psychisch Kranken kann das Gesundheitsamt eine Betreuung anordnen',
-      'B) Die Behandlung von Menschen mit Betreuung ist Heilpraktikern grundsätzlich gestattet',
+      'B) Die Behandlung von Menschen mit Betreuung ist Heilpraktikern grundsätzlich nicht gestattet',
       'C) Die Entscheidung über die Bestellung eines Betreuers trifft das Gericht',
       'D) Die Errichtung einer Betreuung gegen den Willen eines Betroffenen kann auch durch nahe Angehörige angeregt werden',
       'E) Eine Betreuung bleibt lebenslang bestehen',
     ],
     correct: [2, 3],
     explanation:
-        'Bei behandlungsuneinsichtigen psychisch Kranken kann nur das Gericht eine Betreuung anordnen. Heilpraktiker dürfen auch Menschen mit Betreuung behandeln - aber nicht grundsätzlich. Die Entscheidung über die Bestellung eines Betreuers trifft das Gericht. Die Errichtung einer Betreuung gegen den Willen eines Betroffenen kann auch durch nahe Angehörige angeregt werden. Eine Betreuung wird mindestens alle 7 Jahre überprüft.',
+        'Die Entscheidung über die Bestellung eines Betreuers trifft das Betreuungsgericht (C richtig). Eine Betreuung kann auch gegen den Willen des Betroffenen von nahen Angehörigen angeregt werden (D richtig). Das Gesundheitsamt kann eine Betreuung nur anregen, nicht anordnen (A falsch). Heilpraktiker dürfen Menschen mit Betreuung durchaus behandeln (B falsch); ist die Gesundheitssorge Aufgabe des Betreuers und der Betroffene nicht einwilligungsfähig, muss der Betreuer in die Behandlung einwilligen. Eine Betreuung besteht nicht lebenslang: Sie wird aufgehoben, wenn ihre Voraussetzungen entfallen, und spätestens nach 7 Jahren (gegen den Willen des Betroffenen nach 2 Jahren) gerichtlich überprüft (E falsch).',
   ),
   Question(
     id: 51,

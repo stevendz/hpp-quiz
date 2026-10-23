@@ -6,15 +6,15 @@ const List<Question> questions2020 = [
     exam: 'Oktober 2020',
     q: 'Welche der folgenden Aussagen zum Eye Movement Desensitization and Reprocessing (EMDR) treffen zu? (Wählen Sie zwei Antworten)',
     options: [
-      'EMDR wird vor allem in der Behandlung der Posttraumatischen Belastungsstörung eingesetzt',
-      'EMDR basiert auf der Annahme, dass traumatische Erlebnisse durch bilaterale Stimulation verarbeitet werden können',
-      'EMDR ist eine rein psychoanalytische Technik',
-      'EMDR wurde von Francine Shapiro entwickelt',
-      'EMDR ist bei Traumafolgestörungen kontraindiziert',
+      'Bei der Behandlung der posttraumatischen Belastungsstörung (PTBS) konzentriert sich der Patient auf eine traumatische Erinnerung und die damit verbundenen Gedanken und Körperempfindungen',
+      'EMDR funktioniert nur mit visueller Stimulierung',
+      'Bei EMDR wird grundsätzlich mit einer weniger Angst auslösenden Szene begonnen',
+      'Bei EMDR wird eine bilaterale zerebrale Stimulation eingesetzt',
+      'EMDR ist vor allem für Patienten mit schizophrenen Psychosen und schweren hirnorganischen Erkrankungen geeignet',
     ],
     correct: [0, 3],
     explanation:
-        'A und D sind richtig. EMDR ist ein evidenzbasiertes Verfahren zur Behandlung von PTBS, das von Francine Shapiro entwickelt wurde. Durch bilaterale Stimulation (z.B. Augenbewegungen) wird die Verarbeitung traumatischer Erinnerungen gefördert. EMDR ist keine rein psychoanalytische Technik und ist bei Traumafolgestörungen gerade indiziert, nicht kontraindiziert.',
+        'A und D sind richtig. Bei EMDR (entwickelt von Francine Shapiro) ruft der Patient eine belastende traumatische Erinnerung mit den dazugehörigen Gedanken und Körperempfindungen auf (A), während eine bilaterale Stimulation der beiden Hirnhälften erfolgt (D). B ist falsch: Neben Augenbewegungen werden auch taktile (z.B. abwechselndes Tippen auf die Knie) oder akustische Reize eingesetzt. C ist falsch: Ein stufenweises Vorgehen von leichten zu schweren Szenen ist typisch für die systematische Desensibilisierung, nicht für EMDR – dort wird die belastende Erinnerung direkt bearbeitet. E ist falsch: EMDR ist v.a. bei PTBS indiziert; bei Psychosen und schweren hirnorganischen Erkrankungen gilt es als ungeeignet.',
   ),
   Question(
     id: 2,

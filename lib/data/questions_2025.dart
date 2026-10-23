@@ -36,7 +36,7 @@ const List<Question> questions2025 = [
     exam: 'März 2025',
     q: 'Eine verzweifelte Mutter bittet Sie um die Behandlung ihres 9-jährigen Sohnes mit Trennungsängsten und depressiven Symptomen seit der elterlichen Scheidung. Ein gemeinsames Sorgerecht beider Elternteile besteht fort. Welche Aussage trifft zu?',
     options: [
-      'Aufgrund des hohen Leidendrucks der Mutter stimmen Sie der Behandlung zu. Die Einwilligung der Mutter als anwesende Sorgeberechtigte ist ausreichend.',
+      'Aufgrund des hohen Leidensdrucks der Mutter stimmen Sie der Behandlung zu. Die Einwilligung der Mutter als anwesende Sorgeberechtigte ist ausreichend.',
       'Aufgrund des hohen Leidensdrucks des Sohnes stimmen Sie der Behandlung zu. Die Einwilligung der Mutter als anwesende Sorgeberechtigte ist ausreichend.',
       'Sie lehnen die Behandlung ab, da der Kindsvater nicht der Behandlung zugestimmt hat und beide sorgeberechtigte Elternteile einer Behandlung zustimmen müssen.',
       'Sie sprechen mit dem Jungen alleine und attestieren die Einsicht- und Geschäftsfähigkeit des Jungen, daher darf er eigenständig einen Behandlungsvertrag abschließen.',
@@ -44,7 +44,7 @@ const List<Question> questions2025 = [
     ],
     correct: 2,
     explanation:
-        'Bei gemeinsamem Sorgerecht müssen beide Elternteile einer Behandlung des Kindes zustimmen. Ein 9-jähriges Kind ist nicht geschäftsfähig und kann keinen eigenen Behandlungsvertrag abschließen. Eine Schulbescheinigung ersetzt nicht die Einwilligung beider Sorgeberechtigten.',
+        'C ist richtig: Eine Psychotherapie des Kindes ist eine Angelegenheit von erheblicher Bedeutung. Bei gemeinsamem Sorgerecht müssen deshalb beide Elternteile einwilligen (§ 1687 BGB), erst dann darf die Behandlung beginnen. A und B sind falsch: Weder der Leidensdruck der Mutter noch der des Kindes ersetzt die fehlende Einwilligung des Vaters, die Zustimmung der anwesenden Mutter allein genügt nicht. D ist falsch: Ein 9-Jähriger ist nur beschränkt geschäftsfähig (§ 106 BGB) und kann ohne Zustimmung der Sorgeberechtigten keinen wirksamen Behandlungsvertrag schließen; eine Geschäftsfähigkeit kann ihm auch kein Therapeut attestieren. E ist falsch: Eine Bescheinigung der Schule ersetzt nicht die Einwilligung beider Sorgeberechtigten.',
   ),
   Question(
     id: 4,
@@ -535,7 +535,7 @@ const List<Question> questions2025 = [
   Question(
     id: 38,
     exam: 'Oktober 2025',
-    q: 'In welchen Situationen darf oder muss ein HP Psychotherapie seine Schweigepflicht brechen?\n1. Schriftliche Schweigepflichtentbindung durch Patienten für Facharzt.\n2. Patient hat Maserninfektión.\n3. Gericht fordert Zeugenaussage im Strafverfahren.\n4. Klient plant Geiselnahme.\n5. Patient ist akut suizidgefährdet mit konkreter Absicht.',
+    q: 'In welchen Situationen darf oder muss ein HP Psychotherapie seine Schweigepflicht brechen?\n1. Schriftliche Schweigepflichtentbindung durch Patienten für Facharzt.\n2. Patient hat Maserninfektion.\n3. Gericht fordert Zeugenaussage im Strafverfahren.\n4. Klient plant Geiselnahme.\n5. Patient ist akut suizidgefährdet mit konkreter Absicht.',
     options: [
       'Nur die Aussagen 1 und 2 sind richtig',
       'Nur die Aussagen 3, 4 und 5 sind richtig',
@@ -599,7 +599,7 @@ const List<Question> questions2025 = [
     ],
     correct: [0, 2],
     explanation:
-        'Die drei Stadien nach Pöldinger sind: 1. Erwägungsphase (E), 2. Ambivalenzphase (D), 3. Entschlussphase (B). Aggressionsumkehr (A) und Suizidfantasien (C) als eigenständige Stadien gehören nicht zum Pöldinger-Modell, auch wenn sie als Phänomene innerhalb der Stadien auftreten können.',
+        'Die drei Stadien der suizidalen Entwicklung nach Pöldinger sind: 1. Erwägungsphase (E), 2. Ambivalenzphase (D), 3. Entschlussphase (B). Aggressionsumkehr (A) und Suizidfantasien (C) gehören nicht dazu – sie sind zusammen mit der Einengung die drei Merkmale des präsuizidalen Syndroms nach Ringel. Zur Abgrenzung: Pöldinger beschreibt einen zeitlichen Ablauf in Stadien, Ringel ein Zustandsbild mit drei Merkmalen (Einengung, gehemmte und gegen die eigene Person gerichtete Aggression, Suizidfantasien).',
   ),
   Question(
     id: 43,
@@ -614,7 +614,7 @@ const List<Question> questions2025 = [
     ],
     correct: 1,
     explanation:
-        '2, 3 und 4 sind richtig. CBASP wurde speziell für chronische Depression entwickelt. KVT mit Sorgenkontrolle ist evidenzbasiert für GAS. Exposition mit Reaktionsmanagement ist Goldstandard bei Zwangsstörungen. 1 ist falsch: CBASP nutzt v.a. diszipliniert-persönliches Einlassen und Situationsanalysen. 5 ist falsch: Eine Retraumatisierung ist niemals ein therapeutisches Ziel – zunächst erfolgt Stabilisierung.',
+        '2, 3 und 4 sind richtig. CBASP (Cognitive Behavioral Analysis System of Psychotherapy, nach McCullough) wurde speziell für chronische Depressionen entwickelt (2). Eine KVT mit Fokus auf Sorgenkontrolle ist bei der generalisierten Angststörung (GAS) wirksam (3). KVT mit Exposition und Reaktionsmanagement (Reaktionsverhinderung) ist Methode der 1. Wahl bei Zwangsstörungen (4). 1 ist falsch: CBASP nutzt als zentrale Motivierungsstrategie die negative Verstärkung – der Patient erlebt in der Situationsanalyse, dass sein Leidensdruck nachlässt, wenn er sein Verhalten ändert. 5 ist falsch: Eine Retraumatisierung ist niemals ein therapeutisches Ziel – zunächst erfolgt Stabilisierung, eine Traumakonfrontation erst danach und dosiert.',
   ),
   Question(
     id: 44,
@@ -707,7 +707,7 @@ const List<Question> questions2025 = [
     ],
     correct: [1, 2],
     explanation:
-        'B ist falsch: Bei Schizophrenie und akuter PTBS sind Entspannungsverfahren mit Vorsicht einzusetzen und nicht als etabliert zu betrachten. C ist falsch: Die Beschreibung vermischt MBSR (achtsamkeitsbasiert) mit Autogenem Training (Schwere-/Wärmesuggestionen). MBSR ist kein autosuggestives Akutverfahren. A, D und E sind korrekte Aussagen.',
+        'Gesucht sind die nicht richtigen Aussagen: B und C. B ist nicht richtig: Bei Schizophrenie gelten imaginative Entspannungsverfahren als relativ kontraindiziert, weil sie psychotisches Erleben wie Halluzinationen oder Ich-Störungen verstärken können. Bei PTBS werden imaginative Übungen zwar zur Stabilisierung genutzt, sie können aber Intrusionen auslösen und gehören deshalb in ein traumatherapeutisches Gesamtkonzept. Als allgemein etabliertes Werkzeug für beide Störungen gelten sie daher nicht. C ist nicht richtig: Die Beschreibung vermischt MBSR (achtsamkeitsbasiertes, mehrwöchiges Programm) mit dem Autogenen Training (Schwere- und Wärmesuggestionen). MBSR ist kein autosuggestives Akutverfahren. A, D und E sind korrekte Aussagen.',
   ),
   Question(
     id: 51,

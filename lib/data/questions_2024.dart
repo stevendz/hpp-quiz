@@ -383,7 +383,7 @@ const List<Question> questions2024 = [
     ],
     correct: [1, 4],
     explanation:
-        'B und E sind falsch. B: Der Begriff \'Verhalten\' in der VT umfasst nicht nur beobachtbares Verhalten und körperliche Reaktionen, sondern auch Kognitionen (Gedanken) und Emotionen – das gesamte SORKC-Modell. E: Die VT ist nicht stets direktiv; insbesondere die kognitive VT arbeitet kooperativ und fördert Selbstmanagement. Das Problem wird gemeinsam mit dem Patienten erarbeitet, nicht einseitig vom Therapeuten. A, C und D sind korrekte Aussagen.',
+        'Gesucht sind die falschen Aussagen: B und E. B ist falsch: Der Begriff Verhalten umfasst in der VT nicht nur beobachtbares Verhalten und körperliche Reaktionen, sondern auch Gedanken (Kognitionen) und Gefühle (Emotionen), vgl. SORKC-Modell. E ist falsch: Die VT ist nicht stets direktiv – das Problem wird gemeinsam mit dem Patienten erarbeitet (z.B. im sokratischen Dialog), Ziel ist Hilfe zur Selbsthilfe nach dem Prinzip der minimalen Intervention. A, C und D sind richtige Aussagen und daher nicht anzukreuzen: Die VT basiert auf der Lerntheorie (A), die kognitive VT bezieht Denkmuster und Bewertungen ein (C), und bei Suchterkrankungen ist VT indiziert, z.B. zur Rückfallprophylaxe (D).',
   ),
   Question(
     id: 27,
@@ -771,9 +771,9 @@ const List<Question> questions2024 = [
       'Nur die Aussagen 2, 3 und 4 sind richtig',
       'Alle Aussagen sind richtig',
     ],
-    correct: 2,
+    correct: 0,
     explanation:
-        '1, 3 und 5 sind richtig und im HeilprG geregelt: Das Verbot der Geburtshilfe (außer Notfall), das Verbot der Behandlung von Mund-/Zahn-/Kiefererkrankungen und das Verbot der Heilkunde im Umherziehen. Aussage 2 ist falsch: Die Hilfeleistungspflicht im Notfall ergibt sich aus dem StGB (§323c unterlassene Hilfeleistung), nicht aus dem HeilprG. Aussage 4 ist falsch: Das Verbot von Heilversprechen steht im HWG (Heilmittelwerbegesetz), nicht im HeilprG.',
+        'Nur Aussage 5 ist richtig: Das Heilpraktikergesetz regelt in § 3 ausdrücklich, dass die Erlaubnis nicht zur Ausübung der Heilkunde im Umherziehen berechtigt. Die übrigen Verbote und Pflichten gibt es zwar, sie stehen aber in anderen Gesetzen: Geburtshilfe ist nach dem Hebammengesetz Ärzten und Hebammen vorbehalten (1). § 6 HeilprG stellt nur klar, dass die Zahnheilkunde nicht unter das Gesetz fällt; vorbehalten ist sie Zahnärzten nach dem Zahnheilkundegesetz (3). Die Pflicht zur Hilfe im Notfall ergibt sich aus § 323c StGB (unterlassene Hilfeleistung) (2), das Verbot von Heilversprechen aus dem Heilmittelwerbegesetz (HWG) (4).',
   ),
   Question(
     id: 53,

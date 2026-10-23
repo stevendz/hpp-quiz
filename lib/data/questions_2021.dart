@@ -539,7 +539,7 @@ const List<Question> questions2021 = [
     ],
     correct: 4,
     explanation:
-        '1, 2, 3 und 5 sind richtig. Langwirksame Benzodiazepine haben aktive Metaboliten mit Kumulationsgefahr. Sedierung und Benommenheit sind häufige Nebenwirkungen. Benzodiazepine sind Mittel der Wahl bei akuten Angstzuständen. Entzugssymptome können protrahiert über Wochen anhalten. Aussage 4 ist falsch: Bei Hochdosisabhängigkeit muss langsam ausschleichend abgesetzt werden – abruptes Absetzen kann lebensbedrohliche Entzugskrampfanfälle auslösen.',
+        '1, 2, 3 und 5 sind richtig. Viele Benzodiazepine werden in der Leber zu ebenfalls wirksamen Abbauprodukten (aktiven Metaboliten) umgewandelt, z.B. Diazepam zu Desmethyldiazepam mit einer Halbwertszeit von mehreren Tagen. Bei regelmäßiger Einnahme ist die vorige Dosis noch nicht abgebaut, wenn die nächste folgt, sodass sich der Wirkstoff im Körper anreichert (Kumulation) – besonders bei älteren Menschen mit verlangsamtem Stoffwechsel. Folgen sind z.B. Tagesmüdigkeit, Gangunsicherheit und Stürze (1). Sedierung und Benommenheit sind häufige Nebenwirkungen (2). Benzodiazepine sind Mittel der Wahl bei akuten Angstzuständen (3). Entzugssymptome können protrahiert über Wochen anhalten (5). Aussage 4 ist falsch: Bei Hochdosisabhängigkeit muss langsam ausschleichend abgesetzt werden – abruptes Absetzen kann lebensbedrohliche Entzugskrampfanfälle auslösen.',
   ),
   Question(
     id: 37,

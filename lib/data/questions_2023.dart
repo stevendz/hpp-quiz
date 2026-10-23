@@ -553,7 +553,7 @@ const List<Question> questions2023 = [
   Question(
     id: 38,
     exam: 'Oktober 2023',
-    q: 'Welche der folgenden Aussagen treffen zu? Für eine schizoide Persönlichkeitsstörung (nach ICD-10) sprechen am ehesten:\n1. Einige oder überhaupt keine Tätigkeiten bereiten Freude\n2. Starke Neigung zu theatralischem Verhalten\n3. Übersteigertes Interesse an sexuellen Erfahrungen mit anderen Menschen\n4. Mangel an engen Freunden oder vertrauensvollen Beziehungen\n5. Übermäßiges Bedürfnis nach Anerkennung und Bewunderung',
+    q: 'Welche der folgenden Aussagen treffen zu? Für eine schizoide Persönlichkeitsstörung (nach ICD-10) sprechen am ehesten:\n1. Wenige oder überhaupt keine Tätigkeiten bereiten Freude\n2. Starke Neigung zu theatralischem Verhalten und übertriebener Ausdruck von Gefühlen\n3. Übersteigertes Interesse an sexuellen Erfahrungen mit anderen Menschen\n4. Mangel an engen Freunden oder vertrauensvollen Beziehungen\n5. Übermäßiges Bedürfnis nach Anerkennung und Bewunderung',
     options: [
       'Nur die Aussage 4 ist richtig',
       'Nur die Aussagen 1 und 2 sind richtig',
@@ -593,7 +593,7 @@ const List<Question> questions2023 = [
     ],
     correct: 1,
     explanation:
-        'Nur Aussage 3 ist richtig: Johanniskraut (Hypericum perforatum) hat eine nachgewiesene antidepressive Wirkung bei leichten bis mittelschweren Depressionen. Aussage 1 ist falsch: Johanniskraut ist kein Biologikum, sondern ein Phytopharmakon. Aussage 2 ist falsch: Johanniskraut hat erhebliche Wechselwirkungen (CYP-Enzym-Induktion). Aussage 4 ist falsch: Johanniskraut ist kein Neuroleptikum. Aussage 5 ist falsch: Johanniskraut ist bei älteren Menschen nicht generell kontraindiziert.',
+        'Nur Aussage 3 ist richtig: Johanniskraut (Hypericum perforatum) hat eine nachgewiesene antidepressive Wirkung bei leichten bis mittelschweren Depressionen. Aussage 1 ist falsch: Johanniskraut ist ein Phytopharmakon, also ein Arzneimittel aus Pflanzen oder Pflanzenteilen. Ein Biologikum ist dagegen ein biotechnologisch mithilfe lebender Zellen hergestelltes Arzneimittel, z.B. ein monoklonaler Antikörper. Aussage 2 ist falsch: Johanniskraut hat erhebliche Wechselwirkungen, weil es Leberenzyme (CYP3A4) induziert und so z.B. die Wirkung der Antibabypille, von Gerinnungshemmern oder Immunsuppressiva abschwächt; zusammen mit SSRI droht ein Serotoninsyndrom. Aussage 4 ist falsch: Johanniskraut ist kein Neuroleptikum. Aussage 5 ist falsch: Johanniskraut ist bei älteren Menschen nicht generell kontraindiziert.',
   ),
   Question(
     id: 41,
