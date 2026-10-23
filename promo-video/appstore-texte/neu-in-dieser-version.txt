@@ -1,6 +1,4 @@
-Neu in dieser Version:
-
-• Prüfungstag simulieren
-• Merkliste für Fragen
-• Fehler gezielt wiederholen
-• 277 überarbeitete Lernkarten
+• Lernplan mit täglicher Erinnerung
+• Prüfungen mit 28 Fragen
+• Größere Schrift, bessere Bedienbarkeit
+• Fragen und Erklärungen korrigiert
